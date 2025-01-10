@@ -7,8 +7,28 @@ on:
   pull_request:
 
 jobs:
+  # JOB to run change detection
+  changes:
+    runs-on: ubuntu-latest
+    # Required permissions
+    permissions:
+      pull-requests: read
+    # Set job outputs to values from filter step
+    outputs:
+      rust: ${{ steps.filter.outputs.rust }}
+    steps:
+    # For pull requests it's not necessary to checkout the code
+    - uses: dorny/paths-filter@v3
+      id: filter
+      with:
+        filters: |
+          rust:
+            - 'crates/**'
+            - 'Cargo.toml'
 
   rustfmt:
+    needs: changes
+    if: ${{ needs.changes.outputs.rust == 'true' }}
     name: Rustfmt
     runs-on: ubuntu-latest
     steps:
@@ -23,6 +43,8 @@ jobs:
         run: cargo fmt --all --check
 
   clippy:
+    needs: changes
+    if: ${{ needs.changes.outputs.rust == 'true' }}
     name: Clippy
     runs-on: ubuntu-latest
     steps:
@@ -37,6 +59,8 @@ jobs:
         run: cargo clippy --all-targets --all-features --workspace -- -D warnings
 
   test:
+    needs: changes
+    if: ${{ needs.changes.outputs.rust == 'true' }}
     name: Test Suite
     runs-on: ubuntu-latest
     steps:
@@ -49,6 +73,8 @@ jobs:
         run: cargo test --all-features --workspace
 
   docs:
+    needs: changes
+    if: ${{ needs.changes.outputs.rust == 'true' }}
     name: Docs
     runs-on: ubuntu-latest
     steps:
