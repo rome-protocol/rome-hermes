@@ -17,7 +17,8 @@ jobs:
     outputs:
       rust: ${{ steps.filter.outputs.rust }}
     steps:
-    # For pull requests it's not necessary to checkout the code
+    - name: Checkout repository
+      uses: actions/checkout@v4
     - uses: dorny/paths-filter@v3
       id: filter
       with:
