@@ -6,6 +6,7 @@ version     = "0.2.1"
 authors.workspace      = true
 categories.workspace   = true
 edition.workspace      = true
+licence.workspace      = true
 license-file.workspace = true
 repository.workspace   = true
 
