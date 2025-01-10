@@ -1,6 +1,8 @@
 #![cfg_attr(all(doc, not(doctest)), feature(doc_auto_cfg))]
 
-//! Client for Pyth Hermes using [`reqwest`]. See [`PythClient`].
+//! Client for Pyth Hermes using [`reqwest`]. See [`PythClient`](crate::PythClient).
+//!
+//! [`reqwest`]: https://docs.rs/reqwest/latest/reqwest/
 use std::collections::HashMap;
 
 use eventsource_stream::{EventStreamError, Eventsource as _};
