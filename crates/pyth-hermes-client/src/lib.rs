@@ -1,7 +1,8 @@
 #![cfg_attr(all(doc, not(doctest)), feature(doc_auto_cfg))]
 
-//! Client for Pyth Hermes using [`reqwest`]. See [`PythClient`](crate::PythClient).
+//! Client for [Pyth Hermes] using [`reqwest`]. See [`PythClient`](crate::PythClient).
 //!
+//! [Pyth Hermes]: https://hermes-beta.pyth.network/docs/#/
 //! [`reqwest`]: https://docs.rs/reqwest/latest/reqwest/
 use std::collections::HashMap;
 
