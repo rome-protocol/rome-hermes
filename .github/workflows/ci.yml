@@ -101,7 +101,7 @@ jobs:
   readme:
     needs: changes
     if: ${{ needs.changes.outputs.rust == 'true' }}
-    name: Docs
+    name: READMEs
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
