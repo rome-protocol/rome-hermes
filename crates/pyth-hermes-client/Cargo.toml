@@ -6,6 +6,7 @@ version     = "0.2.3"
 authors.workspace    = true
 categories.workspace = true
 edition.workspace    = true
+licence.workspace    = true
 repository.workspace = true
 
 [package.metadata.docs.rs]
