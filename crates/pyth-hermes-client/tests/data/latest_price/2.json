@@ -1,0 +1,30 @@
+{
+  "binary": {
+    "encoding": "base64",
+    "data": [
+      "UE5BVQEAAAADuAEAAAAEDQC+KWN7ShCLRDXdKvsZGHArVOoydFu2PdJxfSvFRC/Z0RMAcd9VZMgtHjOQkkatvFKZBjlXbC8d8FeNc25Paw3cAQICURbDp2mWa5zS9kSe6u6gFYhEAD8B96JzM5Pn30kpJBpNQutKvV6ImXxj5vt76MQXVRlglHynjSFyR6hM/m0NAAOqkSd4GwfnrWg7P8GZD9N2SmSh/E0aTNv5lgRsoq2cgncQtpQSluq9MAfGQACm9ZRVuB14JeE4Fk1P3VOJd9NTAQRPKifbIDCLPY55OtLRzHSFxYqH4vwgwt8xwOt+GC1XbHArcR/UgVgZwFW2HYeFg9/YHHIXLayiE11+pW10NdSLAQZshfugtFrS0DlBvVi9RHSD+suHfZK3ePObo2p7vCKOQnriu4rLa7j7Tl5ZDDLp76IjF1qKQL3nfO/24XqHphAzAAqkW6pjD13ymzmE7rHm0v52JlekIYOSyFTOogImpQFiVRjPnTrarBxgYyJU0WLYZcBT+kNHlx/oNd2c56U4vfXgAAtlbdc4Q0ai2nBHostfrT9VGm4Fss4KQpgQTTM7z0MugRW4mpyV0ZI/87Rl/05P142TjZ0OY22xA0ALX5GUkJZ4AQzpk0UgOWbXzaZaSKJzhb8XsUJf+pTkNJYNJPz7ZLvB0wqoIcuCJT3+rNxtNsr33vJ9xwVKbPqLfUsUpEjTmymAAA06u30euYze+K1HhJ40kh1JQwX0s9kR5ryrLpsuf9lTqwxliNVIHHilAxDwuRWVPgMP0i3DXpDXjpphW+WADTh3AA7ikYl2MszUN/03jIExw/wC+KJFMH/tGrP90HARgF5SpwBjM4TQMxqgHlZDyjYJQqc/Wf3QB3M296aE7CmWMZ4LAQ+yxOmN6L73hVdCmiZ/ibHqQsH3nZ4j9Rpe3tL862e9ew4m7fc9kanRG9HG/DNjfkX40mx5IYNxgq4YTwrfZXLpABFW846TKvRbhTnWb4/bNGm/pSxSNPVLTZvveyqT3jHnnXCG0YyV10ptqvT2AmBH3BsBIzE+LaqjjGv12mHS3NOcARJI0c2aLKAuVNJ/yeATshxf5eQijbC2hWA+nauy7Pg6YgQ2/ktt5YNzh3XvwRJTFj13QmL0TbdYcRxUAvbBpeHlAWdgZ4QAAAAAABrhAfrtrFhR4yubI7X5QRqMK6xKrj7U3XuBHdGnLqSqcQAAAAAF+UhJAUFVV1YAAAAAAAsGKY0AACcQQNitCVOD0I+KlKM2y94rQN7BA20BAFUA5i32yLSoX+GmfbRNwS3l2zMPesZrctxliv7fD0pBW0MAAAm+mZy0twAAAAEnR46N////+AAAAABnYGeEAAAAAGdgZ4QAAAm0gRBqoAAAAAFBH400C7YiGPCtb6gXM3SwQfGvs429Vxq9qy9u2TaivD8IfrFkx2dDBUjlScMF3Gs/INtvMdALiA/XchARHrEwFNxeDw9tJeYZC4jlLEp4bXVLhFV+e+KT6n/BhG2fx3mBGJLXIVnEjST2w62sKUQbJi2/4uqPrgUUrJyf6A9XRDQh3CXDgqy/x56BZjwP8nkeF7S7TGdOvSuf4Q9zu7mqYdF3YsS6/zSD/NQ6FbckV2/HOca8etiSnhG1e/3EhcLeDi3QU6BNWa9GvJmtAprh39NOKLFU6GDJAKKpNO3CTzI="
+    ]
+  },
+  "parsed": [
+    {
+      "id": "e62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43",
+      "price": {
+        "price": "10714225620151",
+        "conf": "4953968269",
+        "expo": -8,
+        "publish_time": 1734371204
+      },
+      "ema_price": {
+        "price": "10670864100000",
+        "conf": "5387554100",
+        "expo": -8,
+        "publish_time": 1734371204
+      },
+      "metadata": {
+        "slot": 184953229,
+        "proof_available_time": 1734371205,
+        "prev_publish_time": 1734371204
+      }
+    }
+  ]
+}
