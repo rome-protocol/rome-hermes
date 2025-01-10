@@ -9,9 +9,6 @@ edition    = "2021"
 license    = "Apache-2.0"
 repository = "https://github.com/AftermathFinance/aftermath-sdk-rust"
 
-# relative to the workspace root
-license-file = "LICENSE"
-
 [workspace.lints.clippy]
 nursery     = { level = "warn", priority = 1 }
 todo        = "warn"

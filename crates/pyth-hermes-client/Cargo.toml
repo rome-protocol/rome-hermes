@@ -3,12 +3,11 @@ description = "Pyth Hermes client by AftermathFinance"
 name        = "pyth-hermes-client"
 version     = "0.2.2"
 
-authors.workspace      = true
-categories.workspace   = true
-edition.workspace      = true
-licence.workspace      = true
-license-file.workspace = true
-repository.workspace   = true
+authors.workspace    = true
+categories.workspace = true
+edition.workspace    = true
+licence.workspace    = true
+repository.workspace = true
 
 [package.metadata.docs.rs]
 # To build locally:
