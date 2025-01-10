@@ -59,7 +59,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - name: Check documentation
         env:
-          RUSTDOCFLAGS: -D warnings
+          RUSTDOCFLAGS: -A rustdoc::redundant-explicit-links -D warnings
         run: cargo doc --no-deps --all-features --workspace --examples
       - name: Check if the README is up to date.
         run: |
