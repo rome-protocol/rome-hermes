@@ -1,0 +1,71 @@
+[package]
+description = "Aftermath's extensions to `sui-sdk-types`"
+name        = "af-sui-types"
+version     = "0.6.0"
+
+authors.workspace    = true
+categories.workspace = true
+edition.workspace    = true
+license.workspace    = true
+repository.workspace = true
+
+[package.metadata.docs.rs]
+# To build locally:
+# RUSTDOCFLAGS="-Zunstable-options --generate-link-to-definition" RUSTC_BOOTSTRAP=1 cargo +nightly doc --all-features --no-deps --open
+all-features = true
+rustdoc-args = [
+  # Generate links to definition in rustdoc source code pages
+  # https://github.com/rust-lang/rust/pull/84176
+  "--generate-link-to-definition",
+  "-Zunstable-options",
+]
+
+[lints]
+workspace = true
+
+[features]
+fuzzing = ["dep:arbitrary", "dep:proptest"]
+hash    = ["sui-sdk-types/hash"]
+u256    = ["dep:ethnum", "dep:num", "dep:primitive-types", "dep:rand", "dep:uint"]
+
+[dependencies]
+base64        = "0.22"
+bcs           = "0.1"
+bs58          = "0.5"
+enum_dispatch = "0.3"
+hex           = "0.4"
+ref-cast      = "1"
+serde         = "1"
+# TODO(unmaykr-aftermath): remove `hex` feature
+serde_with    = { version = "3", features = ["base64", "hex"] }
+sui-sdk-types = { version = "0.0.1", features = ["serde"] }
+thiserror     = "2"
+
+# TODO(unmaykr-aftermath): remove every feature except `from_str`
+derive_more = { version = "1", features = [
+  "as_ref",
+  "deref",
+  "display",
+  "from",
+  "from_str",
+  "into",
+] }
+
+# for u256 (optional)
+primitive-types = { version = "0.12", features = ["fp-conversion"], optional = true }
+rand            = { version = "0.8", optional = true }
+uint            = { version = "0.9", optional = true }
+# TODO(unmaykr-aftermath): remove dependency on these 2
+ethnum = { version = "1", optional = true }
+num    = { version = "0.4", optional = true }
+
+# for fuzzing tests (optional)
+arbitrary = { version = "1", features = ["derive_arbitrary"], optional = true }
+proptest  = { version = "1", optional = true }
+
+[dev-dependencies]
+af-sui-types = { path = ".", features = ["hash", "u256"] }
+arbitrary    = { version = "1", features = ["derive_arbitrary"] }
+insta        = "1"
+proptest     = "1"
+serde_json   = "1"
