@@ -43,7 +43,7 @@ jobs:
           components: rustfmt
       - uses: Swatinem/rust-cache@v2
         with:
-          shared-key: "cargo"
+          shared-key: "nightly"
           save-if: "false"
       - name: Check formatting
         run: cargo fmt --all --check
@@ -62,7 +62,7 @@ jobs:
           components: clippy
       - uses: Swatinem/rust-cache@v2
         with:
-          shared-key: "cargo"
+          shared-key: "stable"
           save-if: "false"
       - name: Clippy check
         run: cargo clippy --all-targets --all-features --workspace -- -D warnings
@@ -79,10 +79,9 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
         with:
-          shared-key: "cargo"
-          save-if: "false"
+          shared-key: "stable"
       - name: Run tests
-        run: cargo test --all-features --workspace
+        run: cargo test --all-features --all-targets
 
   docs:
     needs: changes
@@ -96,8 +95,7 @@ jobs:
         uses: dtolnay/rust-toolchain@nightly
       - uses: Swatinem/rust-cache@v2
         with:
-          shared-key: "cargo"
-          save-if: "false"
+          shared-key: "nightly"
       - name: Check documentation
         env:
           RUSTDOCFLAGS: -A rustdoc::redundant-explicit-links -D warnings
@@ -112,11 +110,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@nightly
+        uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
         with:
-          shared-key: "cargo"
-          save-if: ${{ github.ref == 'refs/heads/main' }}
+          shared-key: "cargo-ws"
       - name: Check if the README is up to date.
         run: |
           cargo install --locked cargo-workspaces
