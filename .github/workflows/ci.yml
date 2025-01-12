@@ -22,7 +22,7 @@ jobs:
       pull-requests: read
     # Set job outputs to values from filter step
     outputs:
-      rust: ${{ steps.filter.outputs.rust || inputs.check-all }}
+      rust: ${{ steps.filter.outputs.rust == 'true' || inputs.check-all }}
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -36,7 +36,7 @@ jobs:
 
   rustfmt:
     needs: changes
-    if: ${{ needs.changes.outputs.rust == 'true' }}
+    if: ${{ needs.changes.outputs.rust }}
     name: Rustfmt
     runs-on: ubuntu-latest
     steps:
@@ -51,7 +51,7 @@ jobs:
 
   clippy:
     needs: changes
-    if: ${{ needs.changes.outputs.rust == 'true' }}
+    if: ${{ needs.changes.outputs.rust }}
     name: Clippy
     runs-on: ubuntu-latest
     steps:
@@ -70,7 +70,7 @@ jobs:
 
   test:
     needs: changes
-    if: ${{ needs.changes.outputs.rust == 'true' }}
+    if: ${{ needs.changes.outputs.rust }}
     name: Test Suite
     runs-on: ubuntu-latest
     steps:
@@ -86,7 +86,7 @@ jobs:
 
   docs:
     needs: changes
-    if: ${{ needs.changes.outputs.rust == 'true' }}
+    if: ${{ needs.changes.outputs.rust }}
     name: Docs
     runs-on: ubuntu-latest
     steps:
@@ -104,7 +104,7 @@ jobs:
 
   readme:
     needs: changes
-    if: ${{ needs.changes.outputs.rust == 'true' }}
+    if: ${{ needs.changes.outputs.rust }}
     name: READMEs
     runs-on: ubuntu-latest
     steps:
