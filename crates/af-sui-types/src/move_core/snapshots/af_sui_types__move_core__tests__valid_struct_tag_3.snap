@@ -1,0 +1,5 @@
+---
+source: crates/af-sui-types/src/move_core/mod.rs
+expression: "\"0x1::X_123::X32_\".parse()?"
+---
+0x0000000000000000000000000000000000000000000000000000000000000001::X_123::X32_
