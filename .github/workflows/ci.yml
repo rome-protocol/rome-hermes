@@ -52,7 +52,6 @@ jobs:
   clippy:
     needs: changes
     if: ${{ needs.changes.outputs.rust }}
-    name: Clippy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -62,16 +61,12 @@ jobs:
         with:
           components: clippy
       - uses: Swatinem/rust-cache@v2
-        with:
-          shared-key: "stable"
-          save-if: "false"
       - name: Clippy check
         run: cargo clippy --all-targets --all-features --workspace -- -D warnings
 
   test:
     needs: changes
     if: ${{ needs.changes.outputs.rust }}
-    name: Test Suite
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -79,8 +74,6 @@ jobs:
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
-        with:
-          shared-key: "stable"
       - name: Run tests
         run: cargo test --all-features --all-targets
 
