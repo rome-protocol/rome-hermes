@@ -46,10 +46,6 @@ jobs:
         uses: dtolnay/rust-toolchain@nightly
         with:
           components: rustfmt
-      - uses: Swatinem/rust-cache@v2
-        with:
-          shared-key: "nightly"
-          save-if: "false"
       - name: Check formatting
         run: cargo fmt --all --check
 
