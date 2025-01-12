@@ -29,15 +29,3 @@ are some types in that crate that don't expose all of the attributes/methods we 
 [`sui_sdk_types`]: https://docs.rs/sui-sdk-types/latest/sui_sdk_types/
 
 <!-- cargo-rdme end -->
-
-## Development
-
-Last synchronized at tag `testnet-v1.39.3` of [sui](https://github.com/MystenLabs/sui).
-
-**Where to check for updates**:
-- [ ] `move_core_types::identifier`
-- [ ] `sui_types::effects`
-- [ ] `sui_types::base_types`
-- [ ] `sui_types::move_package`
-- [ ] `sui_types::object`
-- [ ] `sui_types::transaction`
