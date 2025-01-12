@@ -24,7 +24,8 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with:
           shared-key: "cargo-ws"
-      - env:
+      - name: Publish
+        env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
         run: |
           cargo install --locked cargo-workspaces
