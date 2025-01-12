@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 #![cfg_attr(all(doc, not(doctest)), feature(doc_auto_cfg))]
 
+//! A fork of Mysten's `sui-json-rpc-api` and `sui-json-rpc-types` with minimal dependencies for client applications.
+
 #[cfg(feature = "client-api")]
 pub mod api;
 #[cfg(feature = "client")]
