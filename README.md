@@ -65,7 +65,7 @@ let transaction = af_sui_types::TransactionData::v1(
 );
 let signature: UserSignature = sender.sign(&transaction.signing_digest());
 
-// 7. Serialize transaction and signatures then send then to the RPC
+// 7. Serialize transaction and signatures, then send then to the RPC
 let resp = jrpc
     .http()
     .execute_transaction_block(
