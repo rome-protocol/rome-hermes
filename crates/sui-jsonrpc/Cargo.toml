@@ -1,0 +1,70 @@
+[package]
+description = "Light-weight Sui JSON-RPC client by Aftermath Finance"
+name        = "sui-jsonrpc"
+version     = "0.11.0"
+
+authors.workspace    = true
+categories.workspace = true
+edition.workspace    = true
+license.workspace    = true
+repository.workspace = true
+
+[package.metadata.docs.rs]
+# To build locally:
+# RUSTDOCFLAGS="-Zunstable-options --generate-link-to-definition" RUSTC_BOOTSTRAP=1 cargo +nightly doc --all-features --no-deps --open
+all-features = true
+rustdoc-args = [
+  # Generate links to definition in rustdoc source code pages
+  # https://github.com/rust-lang/rust/pull/84176
+  "--generate-link-to-definition",
+  "-Zunstable-options",
+]
+
+[lints]
+workspace = true
+
+[features]
+client     = ["client-api", "dep:http", "dep:jsonrpsee", "jsonrpsee/http-client", "jsonrpsee/ws-client"]
+client-api = ["dep:extension-traits", "jsonrpsee/client-core", "jsonrpsee/macros"]
+default    = ["client"]
+
+[dependencies]
+af-sui-types  = { version = "0.6", path = "../af-sui-types" }
+bcs           = "0.1"
+colored       = "2"
+derive_more   = { version = "1", features = ["from"] }
+enum_dispatch = "0.3"
+itertools     = "0.13"
+json_to_table = "0.6"
+regex         = "1"
+serde         = "1"
+serde_json    = "1"
+serde_with    = "3"
+sui-sdk-types = "0.0.1"
+tabled        = "0.12"
+thiserror     = "2"
+
+extension-traits = { version = "2", optional = true }
+http             = { version = "1", optional = true }
+jsonrpsee        = { version = "0.24", optional = true }
+
+[dev-dependencies]
+color-eyre = "0.6"
+futures    = "0.3"
+tokio      = { version = "1", features = ["full"] }
+
+[[example]]
+name = "jrpc-get-object"
+path = "examples/get_object.rs"
+
+[[example]]
+name = "jrpc-get-chain-id"
+path = "examples/get_chain_identifier.rs"
+
+[[example]]
+name = "jrpc-get-dfs"
+path = "examples/get_dynamic_fields.rs"
+
+[[example]]
+name = "jrpc-get-df"
+path = "examples/get_dynamic_field_object.rs"
