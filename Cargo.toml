@@ -1,5 +1,25 @@
 [workspace]
-members  = ["crates/*"]
+members = [
+  "crates/af-faucet",
+  "crates/af-iperps",
+  "crates/af-keys",
+  "crates/af-move-type",
+  "crates/af-move-type-derive",
+  "crates/af-oracle",
+  "crates/af-ptbuilder",
+  "crates/af-pyth-wrapper",
+  "crates/af-sui-pkg-sdk",
+  "crates/af-sui-types",
+  "crates/af-utilities",
+  "crates/move-stdlib-sdk",
+  "crates/pyth-hermes-client",
+  "crates/pyth-sui-sdk",
+  "crates/sui-framework-sdk",
+  "crates/sui-gql-client",
+  "crates/sui-gql-schema",
+  "crates/sui-jsonrpc",
+  "crates/wormhole-sui-sdk",
+]
 resolver = "2"
 
 [workspace.package]
