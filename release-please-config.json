@@ -1,0 +1,29 @@
+{
+  "bootstrap-sha": "5ac47c7688732149dab9976c6d5e9c62cb88d8db",
+  "packages": {
+    "crates/af-faucet": {},
+    "crates/af-iperps": {},
+    "crates/af-keys": {},
+    "crates/af-move-type": {},
+    "crates/af-move-type-derive": {},
+    "crates/af-oracle": {},
+    "crates/af-ptbuilder": {},
+    "crates/af-pyth-wrapper": {},
+    "crates/af-sui-pkg-sdk": {},
+    "crates/af-sui-types": {},
+    "crates/af-utilities": {},
+    "crates/move-stdlib-sdk": {},
+    "crates/pyth-hermes-client": {},
+    "crates/pyth-sui-sdk": {},
+    "crates/sui-framework-sdk": {},
+    "crates/sui-gql-client": {},
+    "crates/sui-gql-schema": {},
+    "crates/sui-jsonrpc": {},
+    "crates/wormhole-sui-sdk": {}
+  },
+  "plugins": ["cargo-workspace"],
+  "release-type": "rust",
+  "bump-minor-pre-major": true,
+  "bump-patch-for-minor-pre-major": true,
+  "separate-pull-requests": true
+}
