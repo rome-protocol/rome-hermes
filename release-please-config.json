@@ -1,5 +1,5 @@
 {
-  "bootstrap-sha": "5ac47c7688732149dab9976c6d5e9c62cb88d8db",
+  "bootstrap-sha": "304b95c18f2f98ff9751af28fcbc901a4b0028d7",
   "packages": {
     "crates/af-faucet": {},
     "crates/af-iperps": {},
