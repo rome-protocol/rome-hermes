@@ -45,6 +45,3 @@ thiserror     = "2"
 base64 = { version = "0.22", optional = true }
 bson   = { version = "2", optional = true }
 hex    = { version = "0.4", optional = true }
-
-[dev-dependencies]
-af-move-type = { path = ".", features = ["bson"] }

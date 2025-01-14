@@ -47,7 +47,3 @@ pyth-sdk         = { version = "0.8", optional = true }
 # Optional aftermath deps
 af-ptbuilder = { version = "3", optional = true, path = "../af-ptbuilder" }
 sui-jsonrpc  = { version = "0.11", path = "../sui-jsonrpc", default-features = false, optional = true }
-
-
-[dev-dependencies]
-pyth-sui-sdk = { path = ".", features = ["json-rpc", "ptb"] }

@@ -63,7 +63,3 @@ features         = ["move-type", "queries"]
 optional         = true
 path             = "../sui-gql-client"
 version          = "0.13"
-
-
-[dev-dependencies]
-af-pyth-wrapper = { path = ".", features = ["graphql", "ptb"] }

@@ -63,9 +63,8 @@ cynic-codegen = { version = "3", features = ["rkyv"], optional = true }
 
 
 [dev-dependencies]
-color-eyre     = "0.6"
-serde_json     = "1"
-sui-gql-schema = { path = ".", features = ["scalars", "unstable"] }
+color-eyre = "0.6"
+serde_json = "1"
 
 
 [build-dependencies]
