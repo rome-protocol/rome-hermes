@@ -24,6 +24,9 @@ use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
 use sui_sdk_types::Input;
 
+#[cfg(test)]
+mod tests;
+
 pub type Result<T> = ::std::result::Result<T, Error>;
 
 #[derive(thiserror::Error, Debug)]
@@ -53,7 +56,7 @@ pub struct MismatchedObjArgKindsError {
 }
 
 /// Builder for a [`ProgrammableTransaction`].
-#[derive(Default)]
+#[derive(Clone, Debug, Default)]
 pub struct ProgrammableTransactionBuilder {
     inputs: IndexMap<BuilderArg, Input>,
     commands: Vec<af_sui_types::Command>,
@@ -190,11 +193,56 @@ impl ProgrammableTransactionBuilder {
     }
 }
 
-#[derive(PartialEq, Eq, Hash)]
+#[derive(Clone, Debug, PartialEq, Eq, Hash)]
 enum BuilderArg {
     Object(ObjectId),
     Pure(Vec<u8>),
     ForcedNonUniquePure(usize),
+}
+
+impl From<ProgrammableTransactionBuilder> for ProgrammableTransaction {
+    fn from(value: ProgrammableTransactionBuilder) -> Self {
+        value.finish()
+    }
+}
+
+impl TryFrom<ProgrammableTransaction> for ProgrammableTransactionBuilder {
+    type Error = Error;
+
+    fn try_from(
+        ProgrammableTransaction { inputs, commands }: ProgrammableTransaction,
+    ) -> Result<Self> {
+        use Input::*;
+        let mut self_ = Self::new();
+        for input in inputs {
+            match input {
+                Pure { value } => {
+                    self_.pure_bytes(value, true);
+                }
+                ImmutableOrOwned(oref) => {
+                    self_.obj(ObjectArg::ImmOrOwnedObject(oref.into_parts()))?;
+                }
+                Shared {
+                    object_id,
+                    initial_shared_version,
+                    mutable,
+                } => {
+                    self_.obj(ObjectArg::SharedObject {
+                        id: object_id,
+                        initial_shared_version,
+                        mutable,
+                    })?;
+                }
+                Receiving(oref) => {
+                    self_.obj(ObjectArg::Receiving(oref.into_parts()))?;
+                }
+            }
+        }
+        for command in commands {
+            self_.command(command);
+        }
+        Ok(self_)
+    }
 }
 
 // =============================================================================

@@ -1,0 +1,7 @@
+# Seeds for failure cases proptest has generated in the past. It is
+# automatically read and these particular cases re-run before any
+# novel cases are generated.
+#
+# It is recommended to check this file in to source control so that
+# everyone who runs the test benefits from these saved cases.
+cc 89df0dc2fead116a126f6c8c6f223f2c55f78d8d6c1ec42e5b36ba2ca44ab3e0 # shrinks to input = _PtbConversionArgs { ptb: ProgrammableTransaction { inputs: [Pure { value: [] }], commands: [] } }
