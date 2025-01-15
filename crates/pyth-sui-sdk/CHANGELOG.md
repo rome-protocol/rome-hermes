@@ -1,5 +1,9 @@
 # Changelog
 
+* The following workspace dependencies were updated
+  * dependencies
+    * sui-jsonrpc bumped from 0.12.0 to 0.12.1
+
 ## [0.15.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/pyth-sui-sdk-v0.14.2...pyth-sui-sdk-v0.15.0) (2025-01-14)
 
 

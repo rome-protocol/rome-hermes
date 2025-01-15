@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-jsonrpc-v0.12.0...sui-jsonrpc-v0.12.1) (2025-01-15)
+
+
+### Features
+
+* add `SuiClient::builder` ([4958dd6](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/4958dd61277c0bc3e422be5a5edc70e0d3cdf2d7))
+
 ## [0.12.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-jsonrpc-v0.11.0...sui-jsonrpc-v0.12.0) (2025-01-14)
 
 
