@@ -18,6 +18,7 @@ jobs:
       - name: Fast forwarding
         uses: sequoia-pgp/fast-forward@v1
         with:
+          github_token: ${{ secrets.RELEASE_PLEASE }}
           merge: true
           # To reduce the workflow's verbosity, use 'on-error'
           # to only post a comment when an error occurs, or 'never' to
