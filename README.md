@@ -14,17 +14,6 @@ See the `description` in the manifest file (`Cargo.toml`) and the `README.md` of
 
 You'll quickly figure out that a lot of crates build on top of `af-sui-pkg-sdk` to generate Rust types corresponding to Move ones of their respective packages.
 
-## Api documentation
-
-It its recommended to check out the Rust documentation for the crates here. You can build it with
-```
-RUSTDOCFLAGS="-D warnings -Zunstable-options --generate-link-to-definition" cargo +nightly doc \
-  -Zunstable-options \
-  -Zrustdoc-map \
-  --no-deps \
-  --all-features
-```
-
 ## Quickstart for interacting with Move packages
 
 ### Executing a transaction on Sui
@@ -142,3 +131,14 @@ We recommend checking out:
 [`af-move-type`]: ./crates/af-move-type
 [`af-sui-pkg-sdk`]: ./crates/af-sui-pkg-sdk
 [`sui-gql-client`]: ./crates/sui-gql-client
+
+## Api documentation
+
+To build the documentation locally, use
+```
+RUSTDOCFLAGS="-D warnings -Zunstable-options --generate-link-to-definition" cargo +nightly doc \
+  -Zunstable-options \
+  -Zrustdoc-map \
+  --no-deps \
+  --all-features
+```
