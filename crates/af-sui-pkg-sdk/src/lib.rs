@@ -1,7 +1,7 @@
 #![cfg_attr(all(doc, not(doctest)), feature(doc_auto_cfg))]
 
-//! Exports the [`sui_pkg_sdk!`](crate::sui_pkg_sdk) macro for generating [`MoveStruct`]
-//! implementations from Move source code.
+//! Exports the [`sui_pkg_sdk!`](crate::sui_pkg_sdk) macro for generating Rust types from Move
+//! source code and implementing relevant [`af_move_type`] traits.
 //!
 //! Automates the conversion of Sui Move types to Rust. The goal is to extract as much information
 //! as possible at compile time about the Move types of a Sui package, generating equivalent Rust
