@@ -130,8 +130,15 @@ Check out `ptb!`'s API documentation for the full syntax.
 
 ### Reading objects
 
-There are helpers for fetching and parsing objects from Aftermath's packages on the Sui network. 
+The [`sui-gql-client`] crate provides pre-made queries for getting data from the Sui chain. Together with [`af-move-type`] and [`af-sui-pkg-sdk`], you can get full snapshots of the state of a package's objects as parsed Rust types.
 
-TODO: explain BCS deserialization and `sui_pkg_sdk!` macro.
+We recommend checking out:
+- The `clearing_house::Vault` declaration in [`af-iperps`] (`lib.rs`) for a simple example of how a Move type is transformed into Rust
+- The `graphql::ch_vault` module in `af-iperps` for an example of a GraphQL query using our client and transforming the unparsed response into an `af-move-type`
+- The [`clearing-house-vault`](./crates/af-iperps/examples/clearing_house_vault.rs) example for how it all comes together to display the on-chain Move state
 
-The examples for [af-iperps](./crates/af-iperps/examples) make usage of the GraphQL APIs to fetch the protocol state (objects).
+
+[`af-iperps`]: ./crates/af-iperps
+[`af-move-type`]: ./crates/af-move-type
+[`af-sui-pkg-sdk`]: ./crates/af-sui-pkg-sdk
+[`sui-gql-client`]: ./crates/sui-gql-client
