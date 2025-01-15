@@ -2,7 +2,7 @@
 
 # Sui GraphQL client
 
-This is a first version of Aftermath's Sui GraphQL client using `cynic`.
+First version of Aftermath's Sui GraphQL client using `cynic`.
 
 The main item here is the `GraphQlClient` trait, defining the common
 interface for clients interacting with an RPC. See the `reqwest` feature for a pre-made
