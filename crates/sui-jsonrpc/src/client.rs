@@ -302,6 +302,10 @@ struct ServerInfo {
 }
 
 impl SuiClient {
+    pub fn builder() -> SuiClientBuilder {
+        Default::default()
+    }
+
     /// Returns a list of RPC methods supported by the node the client is connected to.
     pub fn available_rpc_methods(&self) -> &Vec<String> {
         &self.info.rpc_methods
