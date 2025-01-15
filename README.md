@@ -2,17 +2,84 @@
 
 Crates for interacting with Aftermath's services and the Sui network. It aims to be light-weight and a complement to Sui's [sdk](https://github.com/MystenLabs/sui).
 
-## Crates summary
+## Crates
 
-See the `description` in the manifest file (`Cargo.toml`) and the `README.md` of each crate for a brief summary. For beginners, I recommend briefly checking out these crates in order:
-- `af-sui-types`
-- `af-move-type`
-- `af-sui-pkg-sdk`
-- `move-stdlib-sdk`
-- `sui-jsonrpc`
-- `sui-gql-client`
+- [`af-move-type-derive`](crate/af-move-type-derive)
+    [![package on crates.io](https://img.shields.io/crates/v/af-move-type-derive)](https://crates.io/crates/af-move-type-derive)
+    [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/af-move-type-derive)
 
-You'll quickly figure out that a lot of crates build on top of `af-sui-pkg-sdk` to generate Rust types corresponding to Move ones of their respective packages.
+- [`af-sui-types`](crate/af-sui-types)
+    [![package on crates.io](https://img.shields.io/crates/v/af-sui-types)](https://crates.io/crates/af-sui-types)
+    [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/af-sui-types)
+
+- [`af-move-type`](crate/af-move-type)
+    [![package on crates.io](https://img.shields.io/crates/v/af-move-type)](https://crates.io/crates/af-move-type)
+    [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/af-move-type)
+
+- [`af-sui-pkg-sdk`](crate/af-sui-pkg-sdk)
+    [![package on crates.io](https://img.shields.io/crates/v/af-sui-pkg-sdk)](https://crates.io/crates/af-sui-pkg-sdk)
+    [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/af-sui-pkg-sdk)
+
+- [`move-stdlib-sdk`](crate/move-stdlib-sdk)
+    [![package on crates.io](https://img.shields.io/crates/v/move-stdlib-sdk)](https://crates.io/crates/move-stdlib-sdk)
+    [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/move-stdlib-sdk)
+
+- [`sui-framework-sdk`](crate/sui-framework-sdk)
+    [![package on crates.io](https://img.shields.io/crates/v/sui-framework-sdk)](https://crates.io/crates/sui-framework-sdk)
+    [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/sui-framework-sdk)
+
+- [`af-faucet`](crate/af-faucet)
+    [![package on crates.io](https://img.shields.io/crates/v/af-faucet)](https://crates.io/crates/af-faucet)
+    [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/af-faucet)
+
+- [`af-utilities`](crate/af-utilities)
+    [![package on crates.io](https://img.shields.io/crates/v/af-utilities)](https://crates.io/crates/af-utilities)
+    [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/af-utilities)
+
+- [`sui-gql-schema`](crate/sui-gql-schema)
+    [![package on crates.io](https://img.shields.io/crates/v/sui-gql-schema)](https://crates.io/crates/sui-gql-schema)
+    [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/sui-gql-schema)
+
+- [`sui-gql-client`](crate/sui-gql-client)
+    [![package on crates.io](https://img.shields.io/crates/v/sui-gql-client)](https://crates.io/crates/sui-gql-client)
+    [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/sui-gql-client)
+
+- [`af-iperps`](crate/af-iperps)
+    [![package on crates.io](https://img.shields.io/crates/v/af-iperps)](https://crates.io/crates/af-iperps)
+    [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/af-iperps)
+
+- [`af-keys`](crate/af-keys)
+    [![package on crates.io](https://img.shields.io/crates/v/af-keys)](https://crates.io/crates/af-keys)
+    [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/af-keys)
+
+- [`af-oracle`](crate/af-oracle)
+    [![package on crates.io](https://img.shields.io/crates/v/af-oracle)](https://crates.io/crates/af-oracle)
+    [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/af-oracle)
+
+- [`af-ptbuilder`](crate/af-ptbuilder)
+    [![package on crates.io](https://img.shields.io/crates/v/af-ptbuilder)](https://crates.io/crates/af-ptbuilder)
+    [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/af-ptbuilder)
+
+- [`af-pyth-wrapper`](crate/af-pyth-wrapper)
+    [![package on crates.io](https://img.shields.io/crates/v/af-pyth-wrapper)](https://crates.io/crates/af-pyth-wrapper)
+    [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/af-pyth-wrapper)
+
+- [`pyth-hermes-client`](crate/pyth-hermes-client)
+    [![package on crates.io](https://img.shields.io/crates/v/pyth-hermes-client)](https://crates.io/crates/pyth-hermes-client)
+    [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/pyth-hermes-client)
+
+- [`sui-jsonrpc`](crate/sui-jsonrpc)
+    [![package on crates.io](https://img.shields.io/crates/v/sui-jsonrpc)](https://crates.io/crates/sui-jsonrpc)
+    [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/sui-jsonrpc)
+
+- [`wormhole-sui-sdk`](crate/wormhole-sui-sdk)
+    [![package on crates.io](https://img.shields.io/crates/v/wormhole-sui-sdk)](https://crates.io/crates/wormhole-sui-sdk)
+    [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/wormhole-sui-sdk)
+
+- [`pyth-sui-sdk`](crate/pyth-sui-sdk)
+    [![package on crates.io](https://img.shields.io/crates/v/pyth-sui-sdk)](https://crates.io/crates/pyth-sui-sdk)
+    [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/pyth-sui-sdk)
+
 
 ## Quickstart for interacting with Move packages
 
@@ -118,6 +185,8 @@ Check out `ptb!`'s API documentation for the full syntax.
 
 
 ### Reading objects
+
+You'll quickly figure out that a lot of crates build on top of [`af-sui-pkg-sdk`] to generate Rust types corresponding to Move ones of their respective packages.
 
 The [`sui-gql-client`] crate provides pre-made queries for getting data from the Sui chain. Together with [`af-move-type`] and [`af-sui-pkg-sdk`], you can get full snapshots of the state of a package's objects as parsed Rust types.
 
