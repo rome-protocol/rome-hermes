@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use af_sui_types::{Address, Object, ObjectId, TypeTag};
+use af_sui_types::{Address, Object, ObjectId};
 use futures::Stream;
 
 use super::fragments::{ObjectFilterV2, PageInfoForward};
@@ -10,13 +10,13 @@ use crate::{extract, missing_data, scalars, schema, GraphQlClient, GraphQlRespon
 pub(super) fn query<C: GraphQlClient>(
     client: &C,
     owner: Option<Address>,
-    type_: Option<TypeTag>,
+    type_: Option<String>,
     page_size: Option<u32>,
 ) -> impl Stream<Item = Result<(ObjectId, Object), Error<C::Error>>> + '_ {
     async_stream::try_stream! {
         let filter = ObjectFilterV2 {
             owner,
-            type_: type_.map(scalars::TypeTag),
+            type_,
             ..Default::default()
         };
         let mut vars = Variables {

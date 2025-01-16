@@ -48,7 +48,7 @@ pub(crate) struct ObjectFilterV2 {
     /// Generic types can be queried by either the generic type name, e.g. `0x2::coin::Coin`, or by
     /// the full type name, such as `0x2::coin::Coin<0x2::sui::SUI>`.
     #[cynic(rename = "type")]
-    pub(crate) type_: Option<scalars::TypeTag>,
+    pub(crate) type_: Option<String>,
     pub(crate) owner: Option<SuiAddress>,
     pub(crate) object_ids: Option<Vec<ObjectId>>,
 }

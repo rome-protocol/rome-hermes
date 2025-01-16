@@ -8,7 +8,6 @@ use af_sui_types::{
     ObjectRef,
     StructTag,
     TransactionData,
-    TypeTag,
 };
 // For `object_args!` macro only
 #[doc(hidden)]
@@ -89,7 +88,7 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
     fn filtered_full_objects(
         &self,
         owner: Option<SuiAddress>,
-        type_: Option<TypeTag>,
+        type_: Option<String>,
         page_size: Option<u32>,
     ) -> impl Stream<Item = Result<(ObjectId, Object), Error<Self::Error>>> + '_ {
         filtered_full_objects::query(self, owner, type_, page_size)

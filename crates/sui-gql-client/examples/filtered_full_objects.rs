@@ -1,7 +1,5 @@
-use std::str::FromStr;
 use std::time::Instant;
 
-use af_sui_types::TypeTag;
 use clap::Parser;
 use color_eyre::Result;
 use futures::TryStreamExt as _;
@@ -28,9 +26,9 @@ async fn main() -> Result<()> {
     let Args { rpc, summary } = Args::parse();
     let client = ReqwestClient::new(reqwest::Client::default(), rpc.to_owned());
     let owner = Some("0x62ddcde37c6321d8f4bf174c35aeff6bc50cdf490e74f6e6c66d74ca2fe9ac4e".parse()?);
-    let type_ = Some(TypeTag::from_str(
-        "0x9f992cc2430a1f442ca7a5ca7638169f5d5c00e0ebc3977a65e9ac6e497fe5ef::staked_wal::StakedWal",
-    )?);
+    let type_ = Some(
+        "0x9f992cc2430a1f442ca7a5ca7638169f5d5c00e0ebc3977a65e9ac6e497fe5ef::staked_wal".into(),
+    );
 
     tokio::pin!(
         let stream = client.filtered_full_objects(owner, type_, None);
