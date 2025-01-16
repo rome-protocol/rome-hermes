@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-pkg-sdk-v0.8.0...af-sui-pkg-sdk-v0.8.1) (2025-01-16)
+
+
+### Features
+
+* **af-sui-pkg-sdk:** improved docs ([738017d](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/738017de59667217987d9c9c40463ece45f5120d))
+
 ## [0.8.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-pkg-sdk-v0.7.2...af-sui-pkg-sdk-v0.8.0) (2025-01-14)
 
 

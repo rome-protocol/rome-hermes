@@ -1,5 +1,11 @@
 # Changelog
 
+* The following workspace dependencies were updated
+  * dependencies
+    * af-sui-pkg-sdk bumped from 0.8.0 to 0.8.1
+    * move-stdlib-sdk bumped from 0.9.0 to 0.9.1
+    * sui-framework-sdk bumped from 0.10.0 to 0.10.1
+
 ## [0.23.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.22.2...af-iperps-v0.23.0) (2025-01-14)
 
 

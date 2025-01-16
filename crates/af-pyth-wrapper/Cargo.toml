@@ -1,7 +1,7 @@
 [package]
 description = "Move types for Aftermath's `PythWrapper` package that extends `AfOracle`"
 name        = "af-pyth-wrapper"
-version     = "0.17.0"
+version     = "0.17.1"
 
 authors.workspace    = true
 categories.workspace = true
@@ -36,9 +36,9 @@ graphql = [
 ptb = ["dep:af-ptbuilder", "dep:extension-traits"]
 
 [dependencies]
-af-oracle         = { version = "0.15.0", path = "../af-oracle" }
-af-sui-pkg-sdk    = { version = "0.8.0", path = "../af-sui-pkg-sdk" }
-sui-framework-sdk = { version = "0.10.0", path = "../sui-framework-sdk" }
+af-oracle         = { version = "0.15.1", path = "../af-oracle" }
+af-sui-pkg-sdk    = { version = "0.8.1", path = "../af-sui-pkg-sdk" }
+sui-framework-sdk = { version = "0.10.1", path = "../sui-framework-sdk" }
 
 bcs              = { version = "0.1", optional = true }
 extension-traits = { version = "2", optional = true }
