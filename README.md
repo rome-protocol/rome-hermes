@@ -4,79 +4,79 @@ Crates for interacting with Aftermath's services and the Sui network. It aims to
 
 ## Crates
 
-- [`af-move-type-derive`](crate/af-move-type-derive)
+- [`af-move-type-derive`](crates/af-move-type-derive)
     [![package on crates.io](https://img.shields.io/crates/v/af-move-type-derive)](https://crates.io/crates/af-move-type-derive)
     [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/af-move-type-derive)
 
-- [`af-sui-types`](crate/af-sui-types)
+- [`af-sui-types`](crates/af-sui-types)
     [![package on crates.io](https://img.shields.io/crates/v/af-sui-types)](https://crates.io/crates/af-sui-types)
     [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/af-sui-types)
 
-- [`af-move-type`](crate/af-move-type)
+- [`af-move-type`](crates/af-move-type)
     [![package on crates.io](https://img.shields.io/crates/v/af-move-type)](https://crates.io/crates/af-move-type)
     [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/af-move-type)
 
-- [`af-sui-pkg-sdk`](crate/af-sui-pkg-sdk)
+- [`af-sui-pkg-sdk`](crates/af-sui-pkg-sdk)
     [![package on crates.io](https://img.shields.io/crates/v/af-sui-pkg-sdk)](https://crates.io/crates/af-sui-pkg-sdk)
     [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/af-sui-pkg-sdk)
 
-- [`move-stdlib-sdk`](crate/move-stdlib-sdk)
+- [`move-stdlib-sdk`](crates/move-stdlib-sdk)
     [![package on crates.io](https://img.shields.io/crates/v/move-stdlib-sdk)](https://crates.io/crates/move-stdlib-sdk)
     [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/move-stdlib-sdk)
 
-- [`sui-framework-sdk`](crate/sui-framework-sdk)
+- [`sui-framework-sdk`](crates/sui-framework-sdk)
     [![package on crates.io](https://img.shields.io/crates/v/sui-framework-sdk)](https://crates.io/crates/sui-framework-sdk)
     [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/sui-framework-sdk)
 
-- [`af-faucet`](crate/af-faucet)
+- [`af-faucet`](crates/af-faucet)
     [![package on crates.io](https://img.shields.io/crates/v/af-faucet)](https://crates.io/crates/af-faucet)
     [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/af-faucet)
 
-- [`af-utilities`](crate/af-utilities)
+- [`af-utilities`](crates/af-utilities)
     [![package on crates.io](https://img.shields.io/crates/v/af-utilities)](https://crates.io/crates/af-utilities)
     [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/af-utilities)
 
-- [`sui-gql-schema`](crate/sui-gql-schema)
+- [`sui-gql-schema`](crates/sui-gql-schema)
     [![package on crates.io](https://img.shields.io/crates/v/sui-gql-schema)](https://crates.io/crates/sui-gql-schema)
     [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/sui-gql-schema)
 
-- [`sui-gql-client`](crate/sui-gql-client)
+- [`sui-gql-client`](crates/sui-gql-client)
     [![package on crates.io](https://img.shields.io/crates/v/sui-gql-client)](https://crates.io/crates/sui-gql-client)
     [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/sui-gql-client)
 
-- [`af-iperps`](crate/af-iperps)
+- [`af-iperps`](crates/af-iperps)
     [![package on crates.io](https://img.shields.io/crates/v/af-iperps)](https://crates.io/crates/af-iperps)
     [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/af-iperps)
 
-- [`af-keys`](crate/af-keys)
+- [`af-keys`](crates/af-keys)
     [![package on crates.io](https://img.shields.io/crates/v/af-keys)](https://crates.io/crates/af-keys)
     [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/af-keys)
 
-- [`af-oracle`](crate/af-oracle)
+- [`af-oracle`](crates/af-oracle)
     [![package on crates.io](https://img.shields.io/crates/v/af-oracle)](https://crates.io/crates/af-oracle)
     [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/af-oracle)
 
-- [`af-ptbuilder`](crate/af-ptbuilder)
+- [`af-ptbuilder`](crates/af-ptbuilder)
     [![package on crates.io](https://img.shields.io/crates/v/af-ptbuilder)](https://crates.io/crates/af-ptbuilder)
     [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/af-ptbuilder)
 
-- [`af-pyth-wrapper`](crate/af-pyth-wrapper)
+- [`af-pyth-wrapper`](crates/af-pyth-wrapper)
     [![package on crates.io](https://img.shields.io/crates/v/af-pyth-wrapper)](https://crates.io/crates/af-pyth-wrapper)
     [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/af-pyth-wrapper)
 
-- [`pyth-hermes-client`](crate/pyth-hermes-client)
+- [`pyth-hermes-client`](crates/pyth-hermes-client)
     [![package on crates.io](https://img.shields.io/crates/v/pyth-hermes-client)](https://crates.io/crates/pyth-hermes-client)
     [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/pyth-hermes-client)
 
-- [`sui-jsonrpc`](crate/sui-jsonrpc)
+- [`sui-jsonrpc`](crates/sui-jsonrpc)
     [![package on crates.io](https://img.shields.io/crates/v/sui-jsonrpc)](https://crates.io/crates/sui-jsonrpc)
     [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/sui-jsonrpc)
 
-- [`wormhole-sui-sdk`](crate/wormhole-sui-sdk)
+- [`wormhole-sui-sdk`](crates/wormhole-sui-sdk)
     [![package on crates.io](https://img.shields.io/crates/v/wormhole-sui-sdk)](https://crates.io/crates/wormhole-sui-sdk)
     [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/wormhole-sui-sdk)
 
-- [`pyth-sui-sdk`](crate/pyth-sui-sdk)
+- [`pyth-sui-sdk`](crates/pyth-sui-sdk)
     [![package on crates.io](https://img.shields.io/crates/v/pyth-sui-sdk)](https://crates.io/crates/pyth-sui-sdk)
     [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/pyth-sui-sdk)
 
