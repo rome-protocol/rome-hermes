@@ -8,6 +8,7 @@ use af_sui_types::{
     ObjectRef,
     StructTag,
     TransactionData,
+    TypeTag,
 };
 // For `object_args!` macro only
 #[doc(hidden)]
@@ -19,6 +20,7 @@ use crate::{extract, GraphQlClient, GraphQlErrors};
 mod current_epoch_id;
 mod epoch_final_checkpoint_num;
 mod events_backward;
+mod filtered_full_objects;
 pub mod fragments;
 mod full_object;
 mod full_objects;
@@ -80,6 +82,16 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
         page_size: Option<u32>,
     ) -> QueryResult<(Vec<EventEdge>, bool), Self> {
         events_backward::query(self, filter, cursor, page_size)
+    }
+
+    /// The full [`Object`] contents with the possibility to filter by owner or object type.
+    async fn filtered_full_objects(
+        &self,
+        owner: Option<SuiAddress>,
+        type_: Option<TypeTag>,
+        page_size: Option<u32>,
+    ) -> QueryResult<HashMap<ObjectId, Object>, Self> {
+        filtered_full_objects::query(self, owner, type_, page_size)
     }
 
     /// The full [`Object`] contents at a certain version or the latest if not specified.

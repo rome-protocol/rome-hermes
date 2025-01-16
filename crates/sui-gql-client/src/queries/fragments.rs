@@ -39,6 +39,20 @@ pub struct ObjectKey {
     pub version: Version,
 }
 
+#[derive(cynic::InputObject, Clone, Debug, Default)]
+#[cynic(graphql_type = "ObjectFilter")]
+pub struct ObjectFilterV2 {
+    /// Filter objects by their type's `package`, `package::module`, or their fully qualified type
+    /// name.
+    ///
+    /// Generic types can be queried by either the generic type name, e.g. `0x2::coin::Coin`, or by
+    /// the full type name, such as `0x2::coin::Coin<0x2::sui::SUI>`.
+    #[cynic(rename = "type")]
+    pub type_: Option<scalars::TypeTag>,
+    pub owner: Option<SuiAddress>,
+    pub object_ids: Option<Vec<ObjectId>>,
+}
+
 #[derive(cynic::InputObject, Clone, Debug)]
 pub struct DynamicFieldName {
     /// The string type of the DynamicField's 'name' field.
