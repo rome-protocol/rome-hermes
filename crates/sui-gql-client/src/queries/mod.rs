@@ -13,6 +13,7 @@ use af_sui_types::{
 // For `object_args!` macro only
 #[doc(hidden)]
 pub use bimap::BiMap;
+use futures::Stream;
 use outputs::{DynamicField, ObjectKey, RawMoveStruct, RawMoveValue};
 
 use crate::{extract, GraphQlClient, GraphQlErrors};
@@ -85,12 +86,12 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
     }
 
     /// The full [`Object`] contents with the possibility to filter by owner or object type.
-    async fn filtered_full_objects(
+    fn filtered_full_objects(
         &self,
         owner: Option<SuiAddress>,
         type_: Option<TypeTag>,
         page_size: Option<u32>,
-    ) -> QueryResult<HashMap<ObjectId, Object>, Self> {
+    ) -> impl Stream<Item = Result<(ObjectId, Object), Error<Self::Error>>> + '_ {
         filtered_full_objects::query(self, owner, type_, page_size)
     }
 

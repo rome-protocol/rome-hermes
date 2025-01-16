@@ -1,44 +1,66 @@
 use std::collections::HashMap;
 
 use af_sui_types::{Address, Object, ObjectId, TypeTag};
+use futures::Stream;
 
 use super::fragments::{ObjectFilterV2, PageInfoForward};
 use crate::queries::Error;
-use crate::{missing_data, scalars, schema, GraphQlClient, Paged};
+use crate::{extract, missing_data, scalars, schema, GraphQlClient, GraphQlResponseExt, Paged};
 
-pub(super) async fn query<C: GraphQlClient>(
+pub(super) fn query<C: GraphQlClient>(
     client: &C,
     owner: Option<Address>,
     type_: Option<TypeTag>,
     page_size: Option<u32>,
-) -> Result<HashMap<ObjectId, Object>, Error<C::Error>> {
-    let filter = ObjectFilterV2 {
-        owner,
-        type_: type_.map(scalars::TypeTag),
-        ..Default::default()
-    };
-    let vars = Variables {
-        after: None,
-        first: page_size.map(|v| v.try_into().unwrap_or(i32::MAX)),
-        filter: Some(filter),
-    };
+) -> impl Stream<Item = Result<(ObjectId, Object), Error<C::Error>>> + '_ {
+    async_stream::try_stream! {
+        let filter = ObjectFilterV2 {
+            owner,
+            type_: type_.map(scalars::TypeTag),
+            ..Default::default()
+        };
+        let mut vars = Variables {
+            after: None,
+            first: page_size.map(|v| v.try_into().unwrap_or(i32::MAX)),
+            filter: Some(filter),
+        };
+        let mut has_next_page = true;
+        while has_next_page {
+            let (page_info, objects) = request(client, vars.clone()).await?;
 
-    let (init, pages) = client
-        .query_paged::<Query>(vars)
+            vars.after = page_info.end_cursor.clone();
+            has_next_page = page_info.has_next_page;
+
+            for value in objects {
+                yield value;
+            }
+        }
+    }
+}
+
+async fn request<C: GraphQlClient>(
+    client: &C,
+    vars: Variables,
+) -> Result<
+    (
+        PageInfoForward,
+        impl Iterator<Item = (ObjectId, Object)> + 'static,
+    ),
+    Error<C::Error>,
+> {
+    let response = client
+        .query::<Query, _>(vars)
         .await
-        .map_err(Error::Client)?
-        .try_into_data()?
-        .ok_or(missing_data!("Empty response data"))?;
+        .map_err(Error::Client)?;
+    let data = response.try_into_data()?;
 
+    let ObjectConnection { nodes, page_info } = extract!(data?.objects);
     let mut raw_objs = HashMap::new();
-    let init_nodes = init.objects.nodes;
-    let page_nodes = pages.into_iter().flat_map(|q| q.objects.nodes);
-    for ObjectGql { id, object } in init_nodes.into_iter().chain(page_nodes) {
+    for ObjectGql { id, object } in nodes.into_iter() {
         let wrapped = object.ok_or(missing_data!("Bcs for object {id}"))?;
         raw_objs.insert(id, wrapped.into_inner());
     }
-
-    Ok(raw_objs)
+    Ok((page_info, raw_objs.into_iter()))
 }
 
 #[derive(cynic::QueryVariables, Clone, Debug)]

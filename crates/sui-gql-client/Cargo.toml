@@ -36,11 +36,13 @@ scalars   = ["sui-gql-schema/scalars"]
 [dependencies]
 sui-gql-schema = { version = "0.8.0", path = "../sui-gql-schema", default-features = false }
 
+async-stream     = { version = "0.3" }
 bimap            = "0.6"
 clap             = { version = "4", features = ["derive"] }
 cynic            = "3"
 derive_more      = { version = "1", features = ["display"] }
 extension-traits = "2"
+futures          = { version = "0.3" }
 serde            = "1"
 tap              = "1"
 thiserror        = "2"
@@ -71,6 +73,7 @@ version          = "0.8.0"
 bcs        = "0.1"
 clap       = { version = "4", features = ["derive"] }
 color-eyre = "0.6"
+indicatif  = "0.17"
 insta      = "1"
 rand       = "0.8"
 serde_json = "1"
