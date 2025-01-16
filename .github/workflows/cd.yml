@@ -11,11 +11,13 @@ concurrency:
 
 jobs:
   tests:
+    if: github.repository == 'AftermathFinance/aftermath-sdk-rust'
     uses: ./.github/workflows/ci.yml
     with:
       check-all: true
 
   publish-cargo:
+    if: github.repository == 'AftermathFinance/aftermath-sdk-rust'
     name: Publishing to Cargo
     needs:
       - tests
