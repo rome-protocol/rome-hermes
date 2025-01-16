@@ -81,9 +81,9 @@ Crates for interacting with Aftermath's services and the Sui network. It aims to
     [![Documentation (latest release)](https://img.shields.io/badge/docs-latest-brightgreen)](https://docs.rs/pyth-sui-sdk)
 
 
-## Quickstart for interacting with Move packages
+## Using this SDK to read from/write to the Sui chain
 
-### Executing a transaction on Sui
+### Executing a transaction on Sui (writing to the chain)
 
 The flow for creating and submitting a PTB usually goes like this:
 ```rust
@@ -136,15 +136,15 @@ resp.check_execution_status()?;
 
 Over time, a lot of JSON-RPC methods used above will be available through GraphQL, so that you can use only one client.
 
-### Programmable Transaction Blocks (PTBs)
+#### Programmable Transaction Blocks (PTBs)
 
-This defines what actually will be executed onchain. The recommended way to build programmable transactions is using the [`ptb!`](./crates/af-ptbuilder/src/sui/lib.rs) macro. 
+PTBs define what actually will be executed onchain. The recommended way to build programmable transactions is using the [`ptb!`] macro. 
 
 ```rust
 use af_sui_types::ProgrammableTransaction;
 use sui_gql_client::GraphQlClient;
 
-/// In this example, we're interacting with a package `foo` which allows us to create and account
+/// In this example, we're interacting with a package `foo` which allows us to create an account
 /// object holding coins of a specific type. We want to create an account for `SUI` coins and
 /// transfer it back to the sender in one transaction.
 async fn build_ptb(client: &impl GraphQlClient, sender: &Address) -> Result<ProgrammableTransaction>
@@ -181,20 +181,22 @@ async fn build_ptb(client: &impl GraphQlClient, sender: &Address) -> Result<Prog
 }
 ```
 
-Check out `ptb!`'s API documentation for the full syntax.
+Check out [`ptb!`]'s API documentation for the full syntax.
 
+[`ptb!`]: https://docs.rs/af-ptbuilder/latest/af_ptbuilder/macro.ptb.html
 
-### Reading objects
-
-You'll quickly figure out that a lot of crates build on top of [`af-sui-pkg-sdk`] to generate Rust types corresponding to Move ones of their respective packages.
+### Reading from the chain
 
 The [`sui-gql-client`] crate provides pre-made queries for getting data from the Sui chain. Together with [`af-move-type`] and [`af-sui-pkg-sdk`], you can get full snapshots of the state of a package's objects as parsed Rust types.
+
+A lot of crates here build on top of [`af-sui-pkg-sdk`] to generate Rust types corresponding to Move ones of their respective packages. [`sui-gql-client`] has helpers for converting the raw GraphQL responses into those generated Rust types.
 
 We recommend checking out:
 - The `clearing_house::Vault` declaration in [`af-iperps`] (`lib.rs`) for a simple example of how a Move type is transformed into Rust
 - The `graphql::ch_vault` module in `af-iperps` for an example of a GraphQL query using our client and transforming the unparsed response into an `af-move-type`
 - The [`clearing-house-vault`](./crates/af-iperps/examples/clearing_house_vault.rs) example for how it all comes together to display the on-chain Move state
 
+Of course, displaying is just a toy example of what you can do with the converted Move types. At Aftermath we use these types to perform complex calculations that are too expensive to do onchain.
 
 [`af-iperps`]: ./crates/af-iperps
 [`af-move-type`]: ./crates/af-move-type
