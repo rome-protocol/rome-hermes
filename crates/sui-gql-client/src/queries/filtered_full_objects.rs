@@ -97,7 +97,6 @@ struct ObjectGql {
 }
 
 #[cfg(test)]
-#[allow(clippy::unwrap_used)]
 #[test]
 fn gql_output() -> color_eyre::Result<()> {
     use cynic::QueryBuilder as _;
