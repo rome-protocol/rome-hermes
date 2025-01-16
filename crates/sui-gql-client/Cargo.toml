@@ -172,3 +172,8 @@ required-features = ["queries", "reqwest"]
 name              = "gql-packages-from-original"
 path              = "examples/packages_from_original.rs"
 required-features = ["queries", "reqwest"]
+
+[[example]]
+name              = "gql-filtered-full-objects"
+path              = "examples/filtered_full_objects.rs"
+required-features = ["queries", "reqwest"]
