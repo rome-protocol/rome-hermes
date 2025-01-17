@@ -8,14 +8,14 @@
   "crates/af-faucet": "0.11.1",
   "crates/af-utilities": "0.7.0",
   "crates/sui-gql-schema": "0.8.0",
-  "crates/sui-gql-client": "0.14.0",
-  "crates/af-iperps": "0.23.1",
+  "crates/sui-gql-client": "0.14.1",
+  "crates/af-iperps": "0.23.2",
   "crates/af-keys": "0.6.0",
-  "crates/af-oracle": "0.15.1",
-  "crates/af-ptbuilder": "4.0.0",
-  "crates/af-pyth-wrapper": "0.17.1",
+  "crates/af-oracle": "0.15.2",
+  "crates/af-ptbuilder": "4.1.0",
+  "crates/af-pyth-wrapper": "0.17.2",
   "crates/pyth-hermes-client": "0.2.5",
   "crates/sui-jsonrpc": "0.12.1",
   "crates/wormhole-sui-sdk": "0.10.1",
-  "crates/pyth-sui-sdk": "0.15.2"
+  "crates/pyth-sui-sdk": "0.15.3"
 }

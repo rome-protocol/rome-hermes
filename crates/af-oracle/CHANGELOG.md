@@ -5,6 +5,10 @@
     * af-sui-pkg-sdk bumped from 0.8.0 to 0.8.1
     * sui-framework-sdk bumped from 0.10.0 to 0.10.1
 
+* The following workspace dependencies were updated
+  * dependencies
+    * sui-gql-client bumped from 0.14.0 to 0.14.1
+
 ## [0.15.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-oracle-v0.14.2...af-oracle-v0.15.0) (2025-01-14)
 
 

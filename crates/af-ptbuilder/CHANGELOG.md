@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-ptbuilder-v4.0.0...af-ptbuilder-v4.1.0) (2025-01-17)
+
+
+### Features
+
+* **af-ptbuilder:** conversions from/to a Sui PTB ([21c058b](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/21c058b81290189c158eb57182c5faf68b4d5016))
+
 ## [4.0.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-ptbuilder-v3.1.0...af-ptbuilder-v4.0.0) (2025-01-14)
 
 

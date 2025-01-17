@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.14.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.14.0...sui-gql-client-v0.14.1) (2025-01-17)
+
+
+### Features
+
+* add filtered_full_objects gql query ([8640b5a](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/8640b5a9b5d47f79bb354d9eadb5f04632ef4298))
+
+
+### Bug Fixes
+
+* add new query to example in cargo.toml ([41f8790](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/41f8790cd2199f7b329250e70d3bcce0da2ae0fb))
+* remove clippy unwrap_used ([37319ff](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/37319ffb84cdf69609106becf72e886330895e08))
+* undo bump version ([594b5f7](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/594b5f793e4a768cbba82d64c904063e8bb59718))
+
 ## [0.14.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.13.4...sui-gql-client-v0.14.0) (2025-01-14)
 
 

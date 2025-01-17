@@ -10,6 +10,10 @@
     * sui-framework-sdk bumped from 0.10.0 to 0.10.1
     * wormhole-sui-sdk bumped from 0.10.0 to 0.10.1
 
+* The following workspace dependencies were updated
+  * dependencies
+    * af-ptbuilder bumped from 4.0.0 to 4.1.0
+
 ## [0.15.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/pyth-sui-sdk-v0.14.2...pyth-sui-sdk-v0.15.0) (2025-01-14)
 
 
