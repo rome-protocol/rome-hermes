@@ -7,9 +7,6 @@ use indicatif::ProgressBar;
 use sui_gql_client::queries::GraphQlClientExt as _;
 use sui_gql_client::reqwest::ReqwestClient;
 
-// Execute with
-// cargo run --example filtered_full_objects
-
 #[derive(Parser)]
 struct Args {
     #[arg(long, default_value = "https://sui-testnet.mystenlabs.com/graphql")]
@@ -37,18 +34,18 @@ async fn main() -> Result<()> {
     let start = Instant::now();
     let spinner = spinner();
     let mut count = 0;
-    while let Some((id, obj)) = stream.try_next().await? {
+    while let Some(obj) = stream.try_next().await? {
         count += 1;
         if summary {
             spinner.tick();
         } else {
-            println!("Object ID: {id}");
-            println!("{obj:?}");
+            println!("Object ID: {:?}", obj.id());
+            println!("Object: {obj:?}");
         }
     }
     spinner.finish_using_style();
     println!("Elapsed: {:?}", Instant::now().duration_since(start));
-    println!("Orders: {count}");
+    println!("Objects count: {count}");
     Ok(())
 }
 
