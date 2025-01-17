@@ -1,18 +1,17 @@
-use std::collections::HashMap;
-
 use af_sui_types::{Address, Object, ObjectId};
 use futures::Stream;
+use sui_gql_schema::scalars::Base64Bcs;
 
 use super::fragments::{ObjectFilterV2, PageInfoForward};
 use crate::queries::Error;
-use crate::{extract, missing_data, scalars, schema, GraphQlClient, GraphQlResponseExt, Paged};
+use crate::{extract, missing_data, scalars, schema, GraphQlClient, GraphQlResponseExt};
 
 pub(super) fn query<C: GraphQlClient>(
     client: &C,
     owner: Option<Address>,
     type_: Option<String>,
     page_size: Option<u32>,
-) -> impl Stream<Item = Result<(ObjectId, Object), Error<C::Error>>> + '_ {
+) -> impl Stream<Item = Result<Object, Error<C::Error>>> + '_ {
     async_stream::try_stream! {
         let filter = ObjectFilterV2 {
             owner,
@@ -32,7 +31,7 @@ pub(super) fn query<C: GraphQlClient>(
             has_next_page = page_info.has_next_page;
 
             for value in objects {
-                yield value;
+                yield value?.into_inner();
             }
         }
     }
@@ -44,7 +43,7 @@ async fn request<C: GraphQlClient>(
 ) -> Result<
     (
         PageInfoForward,
-        impl Iterator<Item = (ObjectId, Object)> + 'static,
+        impl Iterator<Item = Result<Base64Bcs<Object>, Error<C::Error>>> + 'static,
     ),
     Error<C::Error>,
 > {
@@ -55,12 +54,11 @@ async fn request<C: GraphQlClient>(
     let data = response.try_into_data()?;
 
     let ObjectConnection { nodes, page_info } = extract!(data?.objects);
-    let mut raw_objs = HashMap::new();
-    for ObjectGql { id, object } in nodes.into_iter() {
-        let wrapped = object.ok_or(missing_data!("Bcs for object {id}"))?;
-        raw_objs.insert(id, wrapped.into_inner());
-    }
-    Ok((page_info, raw_objs.into_iter()))
+    let raw_objs = nodes
+        .into_iter()
+        .map(|ObjectGql { id, object }| object.ok_or(missing_data!("Bcs for object {id}")));
+
+    Ok((page_info, raw_objs))
 }
 
 #[derive(cynic::QueryVariables, Clone, Debug)]
@@ -75,27 +73,6 @@ struct Variables {
 struct Query {
     #[arguments(filter: $filter, first: $first, after: $after)]
     objects: ObjectConnection,
-}
-
-impl Paged for Query {
-    type Input = Variables;
-
-    type NextInput = Variables;
-
-    type NextPage = Self;
-
-    fn next_variables(&self, mut prev_vars: Self::Input) -> Option<Self::NextInput> {
-        let PageInfoForward {
-            has_next_page,
-            end_cursor,
-        } = &self.objects.page_info;
-        if *has_next_page {
-            prev_vars.after.clone_from(end_cursor);
-            Some(prev_vars)
-        } else {
-            None
-        }
-    }
 }
 
 // =============================================================================

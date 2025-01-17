@@ -90,7 +90,7 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
         owner: Option<SuiAddress>,
         type_: Option<String>,
         page_size: Option<u32>,
-    ) -> impl Stream<Item = Result<(ObjectId, Object), Error<Self::Error>>> + '_ {
+    ) -> impl Stream<Item = Result<Object, Error<Self::Error>>> + '_ {
         filtered_full_objects::query(self, owner, type_, page_size)
     }
 
