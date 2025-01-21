@@ -69,7 +69,9 @@ impl TransactionData {
         &self,
         value: impl AsRef<[u8]>,
     ) -> Result<Self, TransactionFromBase64Error> {
-        Ok(bcs::from_bytes(&decode_base64_default(value)?)?)
+        Ok(bcs::from_bytes(&decode_base64_default(value).map_err(
+            |e| TransactionFromBase64Error::Base64(e.to_string()),
+        )?)?)
     }
 }
 
@@ -108,8 +110,8 @@ impl From<Transaction> for TransactionData {
 pub enum TransactionFromBase64Error {
     #[error(transparent)]
     Bcs(#[from] bcs::Error),
-    #[error(transparent)]
-    Base64(#[from] base64::DecodeError),
+    #[error("Decoding base64 bytes: {0}")]
+    Base64(String),
 }
 
 // =================================================================================================
