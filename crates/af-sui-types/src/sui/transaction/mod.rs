@@ -7,6 +7,7 @@ pub use self::data::{
     TransactionData,
     TransactionDataAPI,
     TransactionDataV1,
+    TransactionFromBase64Error,
 };
 
 /// Temporarily here just to enable [`CheckpointTransaction`] serde.

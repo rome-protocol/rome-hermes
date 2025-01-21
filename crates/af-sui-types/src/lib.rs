@@ -114,6 +114,7 @@ pub use self::sui::transaction::{
     TransactionData,
     TransactionDataAPI,
     TransactionDataV1,
+    TransactionFromBase64Error,
 };
 
 // =============================================================================
