@@ -65,6 +65,7 @@ impl TransactionData {
     }
 
     /// Deserialize a transaction from base64 bytes.
+    #[deprecated = "Unnecessary &self; will be removed with the next breaking change"]
     pub fn decode_base64(
         &self,
         value: impl AsRef<[u8]>,
