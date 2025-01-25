@@ -93,8 +93,14 @@ sui_pkg_sdk!(perpetuals {
     }
 
     module clearing_house {
-        /// Used to dynamically load market objects as needed.
-        /// Used to dynamically load traders' position objects as needed.
+        /// The central object that owns the market state.
+        ///
+        /// Dynamic fields:
+        /// - [`position::Position`]
+        /// - [`Vault`]
+        ///
+        /// Dynamic objects:
+        /// - [`orderbook::Orderbook`]
         struct ClearingHouse<!phantom T> has key {
             id: UID,
             version: u64,
