@@ -1,8 +1,7 @@
 version: 2
 updates:
   - package-ecosystem: "cargo"
-    directories:
-      - "/crates/**/*"
+    directory: "/"
     # Check for updates every Monday
     schedule:
       interval: "weekly"
