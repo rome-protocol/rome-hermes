@@ -105,11 +105,9 @@ jobs:
         uses: actions/checkout@v4
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
-      - uses: Swatinem/rust-cache@v2
+      - uses: taiki-e/install-action@v2
         with:
-          shared-key: "cargo-ws"
+          tool: cargo-workspaces,cargo-rdme
       - name: Check if the README is up to date.
         run: |
-          cargo install --locked cargo-workspaces
-          cargo install --locked cargo-rdme
           cargo ws exec cargo rdme --check --intralinks-strip-links
