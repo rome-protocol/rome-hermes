@@ -1,5 +1,7 @@
 //! Defines [`extract!`](crate::extract!) and its [`Error`].
 
+pub(crate) type Result<T> = std::result::Result<T, Error>;
+
 /// Error for [`extract!`](crate::extract!).
 #[derive(thiserror::Error, Debug)]
 #[error("Missing data from response: {0}")]

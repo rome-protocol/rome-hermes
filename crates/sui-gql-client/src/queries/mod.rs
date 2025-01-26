@@ -53,7 +53,8 @@ pub use self::latest_version_at_checkpoint_v2::Error as LatestVersionAtCheckpoin
 pub use self::object_args::Error as ObjectArgsError;
 pub use self::object_args_and_content::Error as ObjectArgsAndContentError;
 
-type QueryResult<T, C> = Result<T, Error<<C as GraphQlClient>::Error>>;
+/// Standard query result type to aid in adding new queries.
+type Result<T, C> = std::result::Result<T, Error<<C as GraphQlClient>::Error>>;
 
 /// Extension trait to [`GraphQlClient`] collecting all defined queries in one place.
 #[trait_variant::make(Send)]
@@ -62,12 +63,12 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
     // method definitions removing their `async` prefixes
 
     /// The latest epoch id.
-    async fn current_epoch_id(&self) -> QueryResult<u64, Self> {
+    async fn current_epoch_id(&self) -> Result<u64, Self> {
         current_epoch_id::query(self)
     }
 
     /// The last checkpoint number of an epoch.
-    async fn epoch_final_checkpoint_num(&self, epoch_id: u64) -> QueryResult<u64, Self> {
+    async fn epoch_final_checkpoint_num(&self, epoch_id: u64) -> Result<u64, Self> {
         epoch_final_checkpoint_num::query(self, epoch_id)
     }
 
@@ -81,7 +82,7 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
         filter: Option<EventFilter>,
         cursor: Option<String>,
         page_size: Option<u32>,
-    ) -> QueryResult<(Vec<EventEdge>, bool), Self> {
+    ) -> Result<(Vec<EventEdge>, bool), Self> {
         events_backward::query(self, filter, cursor, page_size)
     }
 
@@ -91,16 +92,12 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
         owner: Option<SuiAddress>,
         type_: Option<String>,
         page_size: Option<u32>,
-    ) -> impl Stream<Item = Result<Object, Error<Self::Error>>> + '_ {
+    ) -> impl Stream<Item = Result<Object, Self>> + '_ {
         filtered_full_objects::query(self, owner, type_, page_size)
     }
 
     /// The full [`Object`] contents at a certain version or the latest if not specified.
-    async fn full_object(
-        &self,
-        object_id: ObjectId,
-        version: Option<u64>,
-    ) -> QueryResult<Object, Self> {
+    async fn full_object(&self, object_id: ObjectId, version: Option<u64>) -> Result<Object, Self> {
         full_object::query(self, object_id, version)
     }
 
@@ -119,22 +116,22 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
         &self,
         objects: impl IntoIterator<Item = (ObjectId, Option<u64>)> + Send,
         page_size: Option<u32>,
-    ) -> QueryResult<HashMap<ObjectId, Object>, Self> {
+    ) -> Result<HashMap<ObjectId, Object>, Self> {
         full_objects::query(self, objects, page_size)
     }
 
     /// Genesis transaction of the Sui network instance.
-    async fn genesis_tx(&self) -> QueryResult<TransactionData, Self> {
+    async fn genesis_tx(&self) -> Result<TransactionData, Self> {
         genesis_tx::query(self)
     }
 
     /// Latest checkpoint number.
-    async fn latest_checkpoint(&self) -> QueryResult<u64, Self> {
+    async fn latest_checkpoint(&self) -> Result<u64, Self> {
         latest_checkpoint::query(self)
     }
 
     /// The latest checkpoint number and object version of an object.
-    async fn latest_object_version(&self, object_id: ObjectId) -> QueryResult<(u64, u64), Self> {
+    async fn latest_object_version(&self, object_id: ObjectId) -> Result<(u64, u64), Self> {
         latest_object_version::query(self, object_id)
     }
 
@@ -145,7 +142,7 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
     async fn latest_objects_version(
         &self,
         object_ids: &[ObjectId],
-    ) -> QueryResult<(u64, HashMap<ObjectId, u64>), Self> {
+    ) -> Result<(u64, HashMap<ObjectId, u64>), Self> {
         latest_objects_version::query(self, object_ids)
     }
 
@@ -154,7 +151,7 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
         &self,
         id: ObjectId,
         ckpt_num: u64,
-    ) -> Result<u64, LatestVersionAtCheckpointError<Self::Error>> {
+    ) -> std::result::Result<u64, LatestVersionAtCheckpointError<Self::Error>> {
         latest_version_at_checkpoint_v2::query(self, id, ckpt_num)
     }
 
@@ -165,7 +162,7 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
         &self,
         names: BiMap<String, ObjectId>,
         page_size: Option<u32>,
-    ) -> Result<BiMap<String, ObjectArg>, ObjectArgsError<Self::Error>> {
+    ) -> std::result::Result<BiMap<String, ObjectArg>, ObjectArgsError<Self::Error>> {
         object_args::query(self, names, page_size)
     }
 
@@ -184,7 +181,8 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
         object_ids: impl IntoIterator<Item = ObjectId> + Send,
         mutable: bool,
         page_size: Option<u32>,
-    ) -> Result<Vec<(ObjectArg, RawMoveStruct)>, ObjectArgsAndContentError<Self::Error>> {
+    ) -> std::result::Result<Vec<(ObjectArg, RawMoveStruct)>, ObjectArgsAndContentError<Self::Error>>
+    {
         object_args_and_content::query(self, object_ids, mutable, page_size)
     }
 
@@ -193,14 +191,14 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
         &self,
         object_id: ObjectId,
         version: Option<u64>,
-    ) -> QueryResult<RawMoveStruct, Self> {
+    ) -> Result<RawMoveStruct, Self> {
         object_content::query(self, object_id, version)
     }
 
     async fn objects_content(
         &self,
         object_ids: Vec<ObjectId>,
-    ) -> QueryResult<HashMap<ObjectId, RawMoveStruct>, Self> {
+    ) -> Result<HashMap<ObjectId, RawMoveStruct>, Self> {
         objects_content::query(self, object_ids)
     }
 
@@ -210,7 +208,7 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
         address: SuiAddress,
         raw_move_value: RawMoveValue,
         root_version: Option<u64>,
-    ) -> QueryResult<RawMoveValue, Self> {
+    ) -> Result<RawMoveValue, Self> {
         owner_df_content::query(self, address, raw_move_value, root_version)
     }
 
@@ -221,7 +219,7 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
         root_version: Option<u64>,
         first: Option<i32>,
         after: Option<String>,
-    ) -> QueryResult<(HashMap<RawMoveValue, DynamicField>, Option<String>), Self> {
+    ) -> Result<(HashMap<RawMoveValue, DynamicField>, Option<String>), Self> {
         owner_df_contents::query(self, address, root_version, first, after)
     }
 
@@ -231,7 +229,7 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
         address: SuiAddress,
         raw_move_value: RawMoveValue,
         root_version: Option<u64>,
-    ) -> QueryResult<(ObjectKey, RawMoveStruct), Self> {
+    ) -> Result<(ObjectKey, RawMoveStruct), Self> {
         owner_dof_content::query(self, address, raw_move_value, root_version)
     }
 
@@ -239,7 +237,7 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
     async fn packages_from_original(
         &self,
         package_id: ObjectId,
-    ) -> QueryResult<impl Iterator<Item = (ObjectId, u64)>, Self> {
+    ) -> Result<impl Iterator<Item = (ObjectId, u64)>, Self> {
         packages_from_original::query(self, package_id)
     }
 
@@ -247,12 +245,12 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
     async fn packages_published_epoch(
         &self,
         package_ids: Vec<ObjectId>,
-    ) -> QueryResult<impl Iterator<Item = (ObjectId, u64, u64)>, Self> {
+    ) -> Result<impl Iterator<Item = (ObjectId, u64, u64)>, Self> {
         packages_published_epoch::query(self, package_ids)
     }
 
     /// The reference gas price for the latest epoch.
-    async fn reference_gas_price(&self) -> QueryResult<u64, Self> {
+    async fn reference_gas_price(&self) -> Result<u64, Self> {
         reference_gas_price::query(self)
     }
 
@@ -260,7 +258,7 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
     async fn transaction_blocks_status(
         &self,
         transaction_digests: Vec<String>,
-    ) -> QueryResult<impl Iterator<Item = Result<(String, bool), extract::Error>>, Self> {
+    ) -> Result<impl Iterator<Item = extract::Result<(String, bool)>>, Self> {
         transaction_blocks_status::query(self, transaction_digests)
     }
 
@@ -275,25 +273,22 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
         sponsor: SuiAddress,
         budget: u64,
         exclude: Vec<ObjectId>,
-    ) -> Result<Vec<ObjectRef>, GasPaymentError<Self::Error>> {
+    ) -> std::result::Result<Vec<ObjectRef>, GasPaymentError<Self::Error>> {
         gas_payment::query(self, sponsor, budget, exclude)
     }
 
     /// The maximum size for pagination allowed by the server.
-    async fn max_page_size(&self) -> QueryResult<i32, Self> {
+    async fn max_page_size(&self) -> Result<i32, Self> {
         max_page_size::query(self)
     }
 
     /// Struct type of an object given its ID.
-    async fn object_type(&self, id: ObjectId) -> QueryResult<StructTag, Self> {
+    async fn object_type(&self, id: ObjectId) -> Result<StructTag, Self> {
         object_type::query(self, id)
     }
 }
 
 impl<T: GraphQlClient> GraphQlClientExt for T {}
-
-/// Standard query result type to aid in adding new queries.
-pub(crate) type QResult<T, C> = std::result::Result<T, Error<<C as GraphQlClient>::Error>>;
 
 /// Generic error type for queries.
 #[derive(thiserror::Error, Clone, Debug)]

@@ -31,7 +31,13 @@ pub async fn query<C: GraphQlClient>(
 async fn request<C: GraphQlClient>(
     client: &C,
     vars: QueryVariables<'_>,
-) -> super::stream::PageResult<impl Iterator<Item = super::QResult<Item, C>>, C> {
+) -> super::Result<
+    (
+        PageInfoForward,
+        impl Iterator<Item = super::Result<Item, C>>,
+    ),
+    C,
+> {
     let query = client
         .query::<Query, _>(vars)
         .await
