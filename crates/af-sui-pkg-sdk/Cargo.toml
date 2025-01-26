@@ -27,7 +27,7 @@ workspace = true
 af-move-type = { version = "0.8.1", path = "../af-move-type" }
 af-sui-types = { version = "0.7.1", path = "../af-sui-types", features = ["u256"] }
 
-derive-new = "0.6.0"
+derive-new = "0.7.0"
 serde      = "1"
 tabled     = "0.16"
 
