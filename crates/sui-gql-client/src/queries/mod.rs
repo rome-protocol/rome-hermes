@@ -44,6 +44,7 @@ mod owner_dof_content;
 mod packages_from_original;
 mod packages_published_epoch;
 mod reference_gas_price;
+pub(crate) mod stream;
 mod transaction_blocks_status;
 
 pub use self::events_backward::{EventEdge, EventFilter};
@@ -290,6 +291,9 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
 }
 
 impl<T: GraphQlClient> GraphQlClientExt for T {}
+
+/// Standard query result type to aid in adding new queries.
+pub(crate) type QResult<T, C> = std::result::Result<T, Error<<C as GraphQlClient>::Error>>;
 
 /// Generic error type for queries.
 #[derive(thiserror::Error, Clone, Debug)]

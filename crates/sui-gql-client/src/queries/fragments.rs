@@ -41,7 +41,7 @@ pub struct ObjectKey {
 
 #[derive(cynic::InputObject, Clone, Debug, Default)]
 #[cynic(graphql_type = "ObjectFilter")]
-pub(crate) struct ObjectFilterV2 {
+pub(crate) struct ObjectFilterV2<'a> {
     /// Filter objects by their type's `package`, `package::module`, or their fully qualified type
     /// name.
     ///
@@ -50,7 +50,7 @@ pub(crate) struct ObjectFilterV2 {
     #[cynic(rename = "type")]
     pub(crate) type_: Option<String>,
     pub(crate) owner: Option<SuiAddress>,
-    pub(crate) object_ids: Option<Vec<ObjectId>>,
+    pub(crate) object_ids: Option<&'a [ObjectId]>,
 }
 
 #[derive(cynic::InputObject, Clone, Debug)]

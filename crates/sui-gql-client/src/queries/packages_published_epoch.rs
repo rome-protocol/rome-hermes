@@ -1,46 +1,51 @@
 use af_sui_types::{ObjectId, Version};
+use futures::TryStreamExt as _;
 
-use super::fragments::{ObjectFilter, PageInfoForward};
+use super::fragments::{ObjectFilterV2, PageInfoForward};
 use super::Error;
-use crate::{missing_data, schema, GraphQlClient, Paged, PagedResponse};
+use crate::{extract, schema, GraphQlClient};
+
+type Item = (ObjectId, u64, u64);
 
 pub async fn query<C: GraphQlClient>(
     client: &C,
     package_ids: Vec<ObjectId>,
-) -> Result<impl Iterator<Item = (ObjectId, u64, u64)>, Error<C::Error>> {
-    #[expect(
-        deprecated,
-        reason = "TODO: build query from scratch with new ObjectFilter"
-    )]
+) -> Result<impl Iterator<Item = Item>, Error<C::Error>> {
     let vars = QueryVariables {
-        filter: Some(ObjectFilter {
+        filter: Some(ObjectFilterV2 {
             type_: None,
             owner: None,
-            object_ids: Some(package_ids),
-            object_keys: None,
+            object_ids: Some(&package_ids),
         }),
         first: None,
         after: None,
     };
 
-    let response: PagedResponse<Query> = client.query_paged(vars).await.map_err(Error::Client)?;
-    let (init, pages) = response
-        .try_into_data()?
-        .ok_or_else(|| missing_data!("No data"))?;
+    let results: Vec<_> = super::stream::forward(client, vars, request)
+        .try_collect()
+        .await?;
 
-    Ok(init
-        .objects
-        .nodes
-        .into_iter()
-        .chain(pages.into_iter().flat_map(|p| p.objects.nodes))
-        .filter_map(|o| {
-            let effects = o.as_move_package?.previous_transaction_block?.effects?;
-            Some((
-                o.address,
-                effects.epoch?.epoch_id,
-                effects.checkpoint?.sequence_number,
-            ))
-        }))
+    Ok(results.into_iter())
+}
+
+async fn request<C: GraphQlClient>(
+    client: &C,
+    vars: QueryVariables<'_>,
+) -> super::stream::PageResult<impl Iterator<Item = super::QResult<Item, C>>, C> {
+    let query = client
+        .query::<Query, _>(vars)
+        .await
+        .map_err(Error::Client)?;
+    let ObjectConnection { nodes, page_info } = extract!(query.data?.objects);
+    Ok((
+        page_info,
+        nodes.into_iter().map(|node| {
+            let effects = extract!(node.as_move_package?.previous_transaction_block?.effects?);
+            let epoch_id = extract!(effects.epoch?.epoch_id);
+            let ckpt_seq = extract!(effects.checkpoint?.sequence_number);
+            Ok((node.address, epoch_id, ckpt_seq))
+        }),
+    ))
 }
 
 #[cfg(test)]
@@ -60,31 +65,18 @@ fn gql_output() {
 
 // ================================================================================
 
-impl Paged for Query {
-    type Input = QueryVariables;
-    type NextPage = Self;
-    type NextInput = QueryVariables;
-
-    fn next_variables(&self, mut prev_vars: Self::Input) -> Option<Self::NextInput> {
-        let PageInfoForward {
-            has_next_page,
-            end_cursor,
-        } = &self.objects.page_info;
-        if *has_next_page {
-            prev_vars.after.clone_from(end_cursor);
-            Some(prev_vars)
-        } else {
-            None
-        }
+impl super::stream::UpdatePageInfo for QueryVariables<'_> {
+    fn update_page_info(&mut self, info: &PageInfoForward) {
+        self.after.clone_from(&info.end_cursor)
     }
 }
 
 // ================================================================================
 
 #[derive(cynic::QueryVariables, Clone, Debug)]
-struct QueryVariables {
+struct QueryVariables<'a> {
     after: Option<String>,
-    filter: Option<ObjectFilter>,
+    filter: Option<ObjectFilterV2<'a>>,
     first: Option<i32>,
 }
 

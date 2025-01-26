@@ -1,5 +1,6 @@
 use af_sui_types::{Address, Object, ObjectId};
 use futures::Stream;
+use itertools::Itertools as _;
 use sui_gql_schema::scalars::Base64Bcs;
 
 use super::fragments::{ObjectFilterV2, PageInfoForward};
@@ -12,38 +13,26 @@ pub(super) fn query<C: GraphQlClient>(
     type_: Option<String>,
     page_size: Option<u32>,
 ) -> impl Stream<Item = Result<Object, Error<C::Error>>> + '_ {
-    async_stream::try_stream! {
-        let filter = ObjectFilterV2 {
-            owner,
-            type_,
-            ..Default::default()
-        };
-        let mut vars = Variables {
-            after: None,
-            first: page_size.map(|v| v.try_into().unwrap_or(i32::MAX)),
-            filter: Some(filter),
-        };
-        let mut has_next_page = true;
-        while has_next_page {
-            let (page_info, objects) = request(client, vars.clone()).await?;
-
-            vars.after = page_info.end_cursor.clone();
-            has_next_page = page_info.has_next_page;
-
-            for value in objects {
-                yield value?.into_inner();
-            }
-        }
-    }
+    let filter = ObjectFilterV2 {
+        owner,
+        type_,
+        ..Default::default()
+    };
+    let vars = Variables {
+        after: None,
+        first: page_size.map(|v| v.try_into().unwrap_or(i32::MAX)),
+        filter: Some(filter),
+    };
+    super::stream::forward(client, vars, request)
 }
 
 async fn request<C: GraphQlClient>(
     client: &C,
-    vars: Variables,
+    vars: Variables<'_>,
 ) -> Result<
     (
         PageInfoForward,
-        impl Iterator<Item = Result<Base64Bcs<Object>, Error<C::Error>>> + 'static,
+        impl Iterator<Item = Result<Object, Error<C::Error>>> + 'static,
     ),
     Error<C::Error>,
 > {
@@ -56,16 +45,23 @@ async fn request<C: GraphQlClient>(
     let ObjectConnection { nodes, page_info } = extract!(data?.objects);
     let raw_objs = nodes
         .into_iter()
-        .map(|ObjectGql { id, object }| object.ok_or(missing_data!("Bcs for object {id}")));
+        .map(|ObjectGql { id, object }| object.ok_or(missing_data!("Bcs for object {id}")))
+        .map_ok(Base64Bcs::into_inner);
 
     Ok((page_info, raw_objs))
 }
 
 #[derive(cynic::QueryVariables, Clone, Debug)]
-struct Variables {
-    filter: Option<ObjectFilterV2>,
+struct Variables<'a> {
+    filter: Option<ObjectFilterV2<'a>>,
     after: Option<String>,
     first: Option<i32>,
+}
+
+impl super::stream::UpdatePageInfo for Variables<'_> {
+    fn update_page_info(&mut self, info: &PageInfoForward) {
+        self.after.clone_from(&info.end_cursor)
+    }
 }
 
 #[derive(cynic::QueryFragment, Clone, Debug)]
