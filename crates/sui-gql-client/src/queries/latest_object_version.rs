@@ -58,5 +58,14 @@ fn gql_output() {
         object_id: ObjectId::new(rand::random()),
     };
     let operation = Query::build(vars);
-    insta::assert_snapshot!(operation.query);
+    insta::assert_snapshot!(operation.query, @r###"
+    query Query($objectId: SuiAddress!) {
+      checkpoint {
+        sequenceNumber
+      }
+      object(address: $objectId) {
+        version
+      }
+    }
+    "###);
 }

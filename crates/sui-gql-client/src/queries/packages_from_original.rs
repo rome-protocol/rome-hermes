@@ -84,5 +84,18 @@ fn gql_output() {
         after: None,
     };
     let operation = Query::build(vars);
-    insta::assert_snapshot!(operation.query);
+    insta::assert_snapshot!(operation.query, @r###"
+    query Query($address: SuiAddress!, $after: String, $first: Int) {
+      packageVersions(address: $address, first: $first, after: $after) {
+        nodes {
+          address
+          version
+        }
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+      }
+    }
+    "###);
 }

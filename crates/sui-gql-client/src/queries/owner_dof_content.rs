@@ -64,7 +64,27 @@ fn gql_output() {
         },
     };
     let operation = Query::build(vars);
-    insta::assert_snapshot!(operation.query);
+    insta::assert_snapshot!(operation.query, @r###"
+    query Query($address: SuiAddress!, $name: DynamicFieldName!, $rootVersion: UInt53) {
+      owner(address: $address, rootVersion: $rootVersion) {
+        dynamicField(name: $name) {
+          value {
+            __typename
+            ... on MoveObject {
+              address
+              version
+              contents {
+                type {
+                  repr
+                }
+                bcs
+              }
+            }
+          }
+        }
+      }
+    }
+    "###);
 }
 
 // ================================================================================

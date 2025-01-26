@@ -57,5 +57,15 @@ struct TransactionBlock {
 fn init_gql_output() {
     use cynic::QueryBuilder as _;
     let operation = Query::build(Variables { id: None });
-    insta::assert_snapshot!(operation.query);
+    insta::assert_snapshot!(operation.query, @r###"
+    query Query($id: UInt53) {
+      epoch(id: $id) {
+        transactionBlocks(first: 1) {
+          nodes {
+            bcs
+          }
+        }
+      }
+    }
+    "###);
 }

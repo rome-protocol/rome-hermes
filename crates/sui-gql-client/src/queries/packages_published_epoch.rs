@@ -66,7 +66,31 @@ fn gql_output() {
         after: None,
     };
     let operation = Query::build(vars);
-    insta::assert_snapshot!(operation.query);
+    insta::assert_snapshot!(operation.query, @r###"
+    query Query($after: String, $filter: ObjectFilter, $first: Int) {
+      objects(filter: $filter, first: $first, after: $after) {
+        nodes {
+          address
+          asMovePackage {
+            previousTransactionBlock {
+              effects {
+                epoch {
+                  epochId
+                }
+                checkpoint {
+                  sequenceNumber
+                }
+              }
+            }
+          }
+        }
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+      }
+    }
+    "###);
 }
 
 // ================================================================================

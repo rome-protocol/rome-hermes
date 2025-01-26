@@ -122,7 +122,27 @@ fn init_gql_output() {
         last: None,
     };
     let operation = Query::build(vars);
-    insta::assert_snapshot!(operation.query);
+    insta::assert_snapshot!(operation.query, @r###"
+    query Query($last: Int, $before: String, $filter: EventFilter) {
+      events(before: $before, filter: $filter, last: $last) {
+        edges {
+          node {
+            timestamp
+            contents {
+              type {
+                repr
+              }
+              bcs
+            }
+          }
+          cursor
+        }
+        pageInfo {
+          hasPreviousPage
+        }
+      }
+    }
+    "###);
 }
 
 // =============================================================================

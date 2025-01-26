@@ -25,7 +25,13 @@ fn gql_output() {
     use cynic::QueryBuilder as _;
 
     let operation = Query::build(());
-    insta::assert_snapshot!(operation.query);
+    insta::assert_snapshot!(operation.query, @r###"
+    query Query {
+      epoch {
+        referenceGasPrice
+      }
+    }
+    "###);
 }
 
 #[derive(cynic::QueryFragment, Clone, Debug)]

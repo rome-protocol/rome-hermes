@@ -77,7 +77,45 @@ fn gql_output() {
         after: None,
     };
     let operation = Query::build(vars);
-    insta::assert_snapshot!(operation.query);
+    insta::assert_snapshot!(operation.query, @r###"
+    query Query($address: SuiAddress!, $rootVersion: UInt53, $after: String, $first: Int) {
+      owner(address: $address, rootVersion: $rootVersion) {
+        dynamicFields(first: $first, after: $after) {
+          nodes {
+            name {
+              type {
+                repr
+              }
+              bcs
+            }
+            value {
+              __typename
+              ... on MoveObject {
+                address
+                version
+                contents {
+                  type {
+                    repr
+                  }
+                  bcs
+                }
+              }
+              ... on MoveValue {
+                type {
+                  repr
+                }
+                bcs
+              }
+            }
+          }
+          pageInfo {
+            hasNextPage
+            endCursor
+          }
+        }
+      }
+    }
+    "###);
 }
 
 // ================================================================================

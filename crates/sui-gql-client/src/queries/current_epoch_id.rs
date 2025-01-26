@@ -21,7 +21,13 @@ pub async fn query<C: GraphQlClient>(client: &C) -> Result<u64, Error<C::Error>>
 fn init_gql_output() {
     use cynic::QueryBuilder as _;
     let operation = Query::build(());
-    insta::assert_snapshot!(operation.query);
+    insta::assert_snapshot!(operation.query, @r###"
+    query Query {
+      epoch {
+        epochId
+      }
+    }
+    "###);
 }
 
 #[derive(QueryFragment, Clone, Debug)]

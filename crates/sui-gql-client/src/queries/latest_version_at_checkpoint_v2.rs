@@ -119,5 +119,18 @@ fn init_gql_output() {
         checkpoint_num: Some(54773328),
     };
     let operation = Query::build(vars);
-    insta::assert_snapshot!(operation.query);
+    insta::assert_snapshot!(operation.query, @r###"
+    query Query($checkpointNum: UInt53, $objectId: SuiAddress) {
+      checkpoint {
+        sequenceNumber
+      }
+      transactionBlocks(last: 1, filter: {beforeCheckpoint: $checkpointNum, changedObject: $objectId}) {
+        nodes {
+          effects {
+            lamportVersion
+          }
+        }
+      }
+    }
+    "###);
 }

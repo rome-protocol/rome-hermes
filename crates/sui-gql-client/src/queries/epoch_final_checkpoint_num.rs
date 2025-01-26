@@ -27,7 +27,17 @@ pub async fn query<C: GraphQlClient>(client: &C, epoch_id: u64) -> Result<u64, E
 fn init_gql_output() {
     use cynic::QueryBuilder as _;
     let operation = Query::build(Variables { id: None });
-    insta::assert_snapshot!(operation.query);
+    insta::assert_snapshot!(operation.query, @r###"
+    query Query($id: UInt53) {
+      epoch(id: $id) {
+        checkpoints(last: 1) {
+          nodes {
+            sequenceNumber
+          }
+        }
+      }
+    }
+    "###);
 }
 
 #[derive(cynic::QueryVariables, Clone, Debug)]

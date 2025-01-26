@@ -105,7 +105,24 @@ fn gql_output() {
         after: None,
     };
     let operation = Query::build(vars);
-    insta::assert_snapshot!(operation.query);
+    insta::assert_snapshot!(operation.query, @r###"
+    query Query($address: SuiAddress!, $first: Int, $after: String) {
+      address(address: $address) {
+        coins(type: "0x2::sui::SUI", first: $first, after: $after) {
+          nodes {
+            address
+            version
+            digest
+            coinBalance
+          }
+          pageInfo {
+            hasNextPage
+            endCursor
+          }
+        }
+      }
+    }
+    "###);
 }
 
 // =============================================================================

@@ -63,5 +63,11 @@ fn gql_output() {
         version: None,
     };
     let operation = Query::build(vars);
-    insta::assert_snapshot!(operation.query);
+    insta::assert_snapshot!(operation.query, @r###"
+    query Query($address: SuiAddress!, $version: UInt53) {
+      object(address: $address, version: $version) {
+        bcs
+      }
+    }
+    "###);
 }

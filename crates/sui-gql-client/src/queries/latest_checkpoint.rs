@@ -40,5 +40,11 @@ fn gql_output() {
 
     let vars = Variables {};
     let operation = Query::build(vars);
-    insta::assert_snapshot!(operation.query);
+    insta::assert_snapshot!(operation.query, @r###"
+    query Query {
+      checkpoint {
+        sequenceNumber
+      }
+    }
+    "###);
 }

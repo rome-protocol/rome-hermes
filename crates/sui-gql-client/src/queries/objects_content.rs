@@ -58,7 +58,27 @@ fn gql_output() {
         after: None,
     };
     let operation = Query::build(vars);
-    insta::assert_snapshot!(operation.query);
+    insta::assert_snapshot!(operation.query, @r###"
+    query Query($filter: ObjectFilter, $after: String, $first: Int) {
+      objects(filter: $filter, first: $first, after: $after) {
+        nodes {
+          address
+          asMoveObject {
+            contents {
+              type {
+                repr
+              }
+              bcs
+            }
+          }
+        }
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+      }
+    }
+    "###);
 }
 
 #[derive(cynic::QueryFragment, Clone, Debug)]

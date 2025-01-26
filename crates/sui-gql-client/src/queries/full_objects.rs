@@ -141,6 +141,19 @@ fn gql_output() -> color_eyre::Result<()> {
     };
 
     let operation = Query::build(vars);
-    insta::assert_snapshot!(operation.query);
+    insta::assert_snapshot!(operation.query, @r###"
+    query Query($filter: ObjectFilter, $after: String, $first: Int) {
+      objects(filter: $filter, first: $first, after: $after) {
+        nodes {
+          address
+          bcs
+        }
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+      }
+    }
+    "###);
     Ok(())
 }

@@ -170,7 +170,23 @@ fn gql_output() {
     };
 
     let operation = Query::build(vars);
-    insta::assert_snapshot!(operation.query);
+    insta::assert_snapshot!(operation.query, @r###"
+    query Query($filter: ObjectFilter, $after: String, $first: Int) {
+      checkpoint {
+        sequenceNumber
+      }
+      objects(filter: $filter, first: $first, after: $after) {
+        nodes {
+          version
+          address
+        }
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+      }
+    }
+    "###);
 }
 
 #[cfg(test)]
@@ -195,5 +211,18 @@ fn page_gql_output() {
         first: None,
     };
     let operation = QueryPage::build(vars);
-    insta::assert_snapshot!(operation.query);
+    insta::assert_snapshot!(operation.query, @r###"
+    query QueryPage($filter: ObjectFilter, $after: String, $first: Int) {
+      objects(filter: $filter, first: $first, after: $after) {
+        nodes {
+          version
+          address
+        }
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+      }
+    }
+    "###);
 }
