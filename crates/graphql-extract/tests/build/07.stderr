@@ -1,0 +1,32 @@
+error: Only a single '... on Variant' match is supported within the same braces
+  --> tests/build/07.rs:38:24
+   |
+38 |                   value? {
+   |  ________________________^
+39 | |                     ... on MoveValue {
+40 | |                         type_
+41 | |                         bcs
+42 | |                     }
+43 | |                     node
+44 | |                 }
+   | |_________________^
+
+error[E0425]: cannot find value `version` in this scope
+  --> tests/build/07.rs:48:9
+   |
+48 |     Ok((version, nodes))
+   |         ^^^^^^^ not found in this scope
+
+error[E0425]: cannot find value `nodes` in this scope
+  --> tests/build/07.rs:48:18
+   |
+48 |     Ok((version, nodes))
+   |                  ^^^^^ not found in this scope
+
+warning: unused import: `DynamicFieldValue::MoveValue`
+  --> tests/build/07.rs:32:9
+   |
+32 |     use DynamicFieldValue::MoveValue;
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` on by default

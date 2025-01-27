@@ -1,0 +1,36 @@
+error: Empty braces; must have at least one node
+  --> tests/build/05.rs:15:22
+   |
+15 |       extract!(data => {
+   |  ______________________^
+16 | |     });
+   | |_____^
+
+error[E0432]: unresolved import `DynamicFieldValue`
+  --> tests/build/05.rs:13:9
+   |
+13 |     use DynamicFieldValue::MoveValue;
+   |         ^^^^^^^^^^^^^^^^^ use of undeclared type `DynamicFieldValue`
+
+error[E0412]: cannot find type `MoveType` in this scope
+ --> tests/build/05.rs:9:21
+  |
+9 | type Item = Result<(MoveType, String), &'static str>;
+  |                     ^^^^^^^^ not found in this scope
+  |
+help: you might be missing a type parameter
+  |
+9 | type Item<MoveType> = Result<(MoveType, String), &'static str>;
+  |          ++++++++++
+
+error[E0425]: cannot find value `version` in this scope
+  --> tests/build/05.rs:17:9
+   |
+17 |     Ok((version, nodes))
+   |         ^^^^^^^ not found in this scope
+
+error[E0425]: cannot find value `nodes` in this scope
+  --> tests/build/05.rs:17:18
+   |
+17 |     Ok((version, nodes))
+   |                  ^^^^^ not found in this scope

@@ -1,0 +1,47 @@
+[package]
+autotests   = false
+description = "Macro to extract data from deeply nested types representing GraphQL results"
+name        = "graphql-extract"
+version     = "0.0.1"
+
+authors.workspace    = true
+categories.workspace = true
+edition.workspace    = true
+license.workspace    = true
+repository.workspace = true
+
+[package.metadata.docs.rs]
+# To build locally:
+# RUSTDOCFLAGS="-Zunstable-options --generate-link-to-definition" RUSTC_BOOTSTRAP=1 cargo +nightly doc --all-features --no-deps --open
+all-features = true
+rustdoc-args = [
+  # Generate links to definition in rustdoc source code pages
+  # https://github.com/rust-lang/rust/pull/84176
+  "--generate-link-to-definition",
+  "-Zunstable-options",
+]
+
+[lib]
+proc-macro = true
+
+[lints]
+workspace = true
+
+[dependencies]
+derive-syn-parse = "0.2"
+proc-macro2      = "1"
+quote            = "1"
+syn              = { version = "2", features = ["full"] }
+
+[dev-dependencies]
+insta    = "1"
+trybuild = { version = "1", features = ["diff"] }
+
+[[test]]
+name = "trybuild"
+path = "tests/trybuild.rs"
+
+[[test]]
+name = "errors"
+path = "tests/errors.rs"
+

@@ -1,0 +1,34 @@
+error: Can't have two `?` for the same node
+  --> tests/build/03.rs:16:17
+   |
+16 |         address??
+   |                 ^
+
+error[E0432]: unresolved import `DynamicFieldValue`
+  --> tests/build/03.rs:13:9
+   |
+13 |     use DynamicFieldValue::MoveValue;
+   |         ^^^^^^^^^^^^^^^^^ use of undeclared type `DynamicFieldValue`
+
+error[E0412]: cannot find type `MoveType` in this scope
+ --> tests/build/03.rs:9:21
+  |
+9 | type Item = Result<(MoveType, String), &'static str>;
+  |                     ^^^^^^^^ not found in this scope
+  |
+help: you might be missing a type parameter
+  |
+9 | type Item<MoveType> = Result<(MoveType, String), &'static str>;
+  |          ++++++++++
+
+error[E0425]: cannot find value `version` in this scope
+  --> tests/build/03.rs:18:9
+   |
+18 |     Ok((version, nodes))
+   |         ^^^^^^^ not found in this scope
+
+error[E0425]: cannot find value `nodes` in this scope
+  --> tests/build/03.rs:18:18
+   |
+18 |     Ok((version, nodes))
+   |                  ^^^^^ not found in this scope

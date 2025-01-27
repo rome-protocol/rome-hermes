@@ -1,0 +1,25 @@
+error: Can't have two `[]` for the same node
+  --> tests/build/02.rs:48:24
+   |
+48 |                 nodes[][] {
+   |                        ^^
+
+error[E0425]: cannot find value `version` in this scope
+  --> tests/build/02.rs:59:9
+   |
+59 |     Ok((version, nodes))
+   |         ^^^^^^^ not found in this scope
+
+error[E0425]: cannot find value `nodes` in this scope
+  --> tests/build/02.rs:59:18
+   |
+59 |     Ok((version, nodes))
+   |                  ^^^^^ not found in this scope
+
+warning: unused import: `DynamicFieldValue::MoveValue`
+  --> tests/build/02.rs:42:9
+   |
+42 |     use DynamicFieldValue::MoveValue;
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` on by default

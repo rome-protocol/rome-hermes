@@ -1,0 +1,25 @@
+error: expected one of: identifier, `?`, square brackets, curly braces
+  --> tests/build/06.rs:40:21
+   |
+40 |                     ... on MoveValue {
+   |                     ^
+
+error[E0425]: cannot find value `version` in this scope
+  --> tests/build/06.rs:48:9
+   |
+48 |     Ok((version, nodes))
+   |         ^^^^^^^ not found in this scope
+
+error[E0425]: cannot find value `nodes` in this scope
+  --> tests/build/06.rs:48:18
+   |
+48 |     Ok((version, nodes))
+   |                  ^^^^^ not found in this scope
+
+warning: unused import: `DynamicFieldValue::MoveValue`
+  --> tests/build/06.rs:32:9
+   |
+32 |     use DynamicFieldValue::MoveValue;
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` on by default
