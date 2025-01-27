@@ -1,8 +1,14 @@
 # Changelog
 
 * The following workspace dependencies were updated
-  * dependencies
-    * af-sui-types bumped from 0.7.0 to 0.7.1
+* dependencies
+* af-sui-types bumped from 0.7.0 to 0.7.1
+
+## [0.12.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-jsonrpc-v0.12.2...sui-jsonrpc-v0.12.3) - 2025-01-27
+
+### Other
+
+- *(deps)* update colored requirement from 2 to 3
 
 ## [0.12.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-jsonrpc-v0.12.0...sui-jsonrpc-v0.12.1) (2025-01-15)
 

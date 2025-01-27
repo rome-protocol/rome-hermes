@@ -1,15 +1,21 @@
 # Changelog
 
 * The following workspace dependencies were updated
-  * dependencies
-    * af-sui-pkg-sdk bumped from 0.8.0 to 0.8.1
-    * sui-framework-sdk bumped from 0.10.0 to 0.10.1
+* dependencies
+* af-sui-pkg-sdk bumped from 0.8.0 to 0.8.1
+* sui-framework-sdk bumped from 0.10.0 to 0.10.1
 
 * The following workspace dependencies were updated
-  * dependencies
-    * af-sui-pkg-sdk bumped from 0.8.1 to 0.8.2
-    * af-sui-types bumped from 0.7.0 to 0.7.1
-    * sui-framework-sdk bumped from 0.10.1 to 0.10.2
+* dependencies
+* af-sui-pkg-sdk bumped from 0.8.1 to 0.8.2
+* af-sui-types bumped from 0.7.0 to 0.7.1
+* sui-framework-sdk bumped from 0.10.1 to 0.10.2
+
+## [0.10.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/wormhole-sui-sdk-v0.10.2...wormhole-sui-sdk-v0.10.3) - 2025-01-27
+
+### Other
+
+- updated the following local packages: af-sui-pkg-sdk, sui-framework-sdk
 
 ## [0.10.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/wormhole-sui-sdk-v0.9.2...wormhole-sui-sdk-v0.10.0) (2025-01-14)
 

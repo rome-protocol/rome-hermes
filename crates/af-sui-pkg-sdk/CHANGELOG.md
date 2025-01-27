@@ -1,9 +1,21 @@
 # Changelog
 
 * The following workspace dependencies were updated
-  * dependencies
-    * af-move-type bumped from 0.8.0 to 0.8.1
-    * af-sui-types bumped from 0.7.0 to 0.7.1
+* dependencies
+* af-move-type bumped from 0.8.0 to 0.8.1
+* af-sui-types bumped from 0.7.0 to 0.7.1
+
+## [0.8.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-pkg-sdk-v0.8.2...af-sui-pkg-sdk-v0.8.3) - 2025-01-27
+
+### Added
+
+- convert Move tuple structs to Rust types
+
+### Other
+
+- remove generated code section
+- use `trybuild` for macro tests
+- *(deps)* update derive-new requirement from 0.6.0 to 0.7.0
 
 ## [0.8.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-pkg-sdk-v0.8.0...af-sui-pkg-sdk-v0.8.1) (2025-01-16)
 

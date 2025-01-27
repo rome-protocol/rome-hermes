@@ -1,26 +1,32 @@
 # Changelog
 
 * The following workspace dependencies were updated
-  * dependencies
-    * af-oracle bumped from 0.15.0 to 0.15.1
-    * af-sui-pkg-sdk bumped from 0.8.0 to 0.8.1
-    * sui-framework-sdk bumped from 0.10.0 to 0.10.1
+* dependencies
+* af-oracle bumped from 0.15.0 to 0.15.1
+* af-sui-pkg-sdk bumped from 0.8.0 to 0.8.1
+* sui-framework-sdk bumped from 0.10.0 to 0.10.1
 
 * The following workspace dependencies were updated
-  * dependencies
-    * af-oracle bumped from 0.15.1 to 0.15.2
-    * af-ptbuilder bumped from 4.0.0 to 4.1.0
-    * sui-gql-client bumped from 0.14.0 to 0.14.1
+* dependencies
+* af-oracle bumped from 0.15.1 to 0.15.2
+* af-ptbuilder bumped from 4.0.0 to 4.1.0
+* sui-gql-client bumped from 0.14.0 to 0.14.1
 
 * The following workspace dependencies were updated
-  * dependencies
-    * af-oracle bumped from 0.15.2 to 0.15.3
-    * af-sui-pkg-sdk bumped from 0.8.1 to 0.8.2
-    * sui-framework-sdk bumped from 0.10.1 to 0.10.2
-    * af-ptbuilder bumped from 4.1.0 to 4.1.1
-    * af-sui-types bumped from 0.7.0 to 0.7.1
-    * af-move-type bumped from 0.8.0 to 0.8.1
-    * sui-gql-client bumped from 0.14.1 to 0.14.2
+* dependencies
+* af-oracle bumped from 0.15.2 to 0.15.3
+* af-sui-pkg-sdk bumped from 0.8.1 to 0.8.2
+* sui-framework-sdk bumped from 0.10.1 to 0.10.2
+* af-ptbuilder bumped from 4.1.0 to 4.1.1
+* af-sui-types bumped from 0.7.0 to 0.7.1
+* af-move-type bumped from 0.8.0 to 0.8.1
+* sui-gql-client bumped from 0.14.1 to 0.14.2
+
+## [0.17.4](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-pyth-wrapper-v0.17.3...af-pyth-wrapper-v0.17.4) - 2025-01-27
+
+### Other
+
+- updated the following local packages: af-sui-pkg-sdk, sui-framework-sdk, sui-gql-client
 
 ## [0.17.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-pyth-wrapper-v0.16.2...af-pyth-wrapper-v0.17.0) (2025-01-14)
 
