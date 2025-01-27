@@ -70,8 +70,10 @@ fn ensure_nonempty_struct(ast: &DeriveInput) -> deluxe::Result<()> {
     if let syn::Data::Struct(data) = &ast.data {
         if data.fields.is_empty() {
             return Err(syn::Error::new(
-                ast.ident.span(),
-                "Structs in Move have at least a (hidden) `dummy_field: bool` field.",
+                data.fields.span(),
+                "Structs can't be empty. If a Move struct is empty, then in the Rust equivalent it \
+                must have a single field of type `bool`. This is because the BCS of an empty Move \
+                struct encodes a single boolean dummy field.",
             ));
         }
     } else {
