@@ -1,4 +1,5 @@
 [package]
+autotests   = false
 description = "Derive macros for traits defined in af-move-type."
 name        = "af-move-type-derive"
 version     = "0.2.1"
@@ -8,6 +9,9 @@ categories.workspace = true
 edition.workspace    = true
 license.workspace    = true
 repository.workspace = true
+
+[lib]
+proc-macro = true
 
 [package.metadata.docs.rs]
 # To build locally:
@@ -30,5 +34,11 @@ proc-macro2  = "1.0.70"
 quote        = "1.0.33"
 syn          = { version = "2.0.39", features = ["full"] }
 
-[lib]
-proc-macro = true
+[dev-dependencies]
+af-move-type = { path = "../af-move-type" }
+serde        = { version = "1", features = ["derive"] }
+trybuild     = { version = "1", features = ["diff"] }
+
+[[test]]
+name = "tests"
+path = "tests/tests.rs"
