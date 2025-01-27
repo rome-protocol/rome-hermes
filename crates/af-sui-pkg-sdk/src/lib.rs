@@ -430,27 +430,33 @@ macro_rules! sui_pkg_sdk {
     (@ModuleMembers $($address:literal::)?$module:ident { }) => { };
 
     // =========================================================================
-    //  General structs:
+    //  Braced structs (i.e., with named fields):
     //  - derive new
     //  - impl HasKey if 'key' ability present
     // =========================================================================
     (@ModuleMembers $($address:literal::)?$module:ident {
-        $(#[$meta:meta])*
-        struct $Struct:ident$(<$($(!$phantom:ident)? $T:ident$(: $_:ident $(+ $__:ident)*)?),*>)?
-        $(has $($ability:ident),+)? {
+        $(#[$meta:meta])* // attributes (forwarded)
+        $(public $( ($_scope:ident) )? )? // visibility (ignored)
+        struct $Struct:ident
+        $(<$($(!$phantom:ident)? $T:ident$(: $_:ident $(+ $__:ident)*)?),*>)? // type params
+        $(has $($ability:ident),+)? // abilities (transformed into traits)
+        {
             $($struct_content:tt)+
         }
 
         $($rest:tt)*
     }) => {
         $crate::sui_pkg_sdk!(@Struct
+            // added attributes
             #[derive($crate::derive_new::new)]
             #[move_(module=$module)]
             $(#[move_(address=$address)])?
-            $(#[$meta])*
-            $Struct$(<$($T),*>)?
-            [$($($($phantom)? $T,)*)?]
-            ($($struct_content)+)
+
+            $(#[$meta])* // forwarded attributes
+
+            $Struct$(<$($T),*>)? // ident and type params for struct declaration
+            [$($($($phantom)? $T,)*)?] // type params for potentially PhantomData
+            ($($struct_content)+) // contents
             -> {}
         );
 
@@ -471,8 +477,11 @@ macro_rules! sui_pkg_sdk {
     //  - skip ability parsing since empty structs can't have the 'key' ability
     // =========================================================================
     (@ModuleMembers $($address:literal::)?$module:ident {
-        $(#[$meta:meta])*
-        struct $Struct:ident$(<$(!phantom $T:ident),*>)? $(has $($ability:ident),+)? {}
+        $(#[$meta:meta])* // attributes (forwarded)
+        $(public $( ($_scope:ident) )? )? // visibility (ignored)
+        struct $Struct:ident$(<$(!phantom $T:ident),*>)?
+        $(has $($ability:ident),+)? // abilities, ignored for now
+        {}
 
         $($rest:tt)*
     }) => {
@@ -554,7 +563,7 @@ macro_rules! sui_pkg_sdk {
     };
 
     // -------------------------------------------------------------------------
-    // phantom type parameter
+    // phantom type parameter: a `PhantomData` field is added to the struct
     // -------------------------------------------------------------------------
     (@Struct
         $(#[$meta:meta])*
@@ -579,12 +588,12 @@ macro_rules! sui_pkg_sdk {
     };
 
     // -------------------------------------------------------------------------
-    // generic type parameter
+    // generic type parameter: no influence in struct contents
     // -------------------------------------------------------------------------
     (@Struct
         $(#[$meta:meta])*
         $Struct:ident$(<$($G:ident),*>)?
-        [$T:ident, $($rest:tt)*]
+        [$_T:ident, $($rest:tt)*]
         ($($fields:tt)*)
         -> { $($result:tt)* }
     ) => {
