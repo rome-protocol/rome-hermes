@@ -470,7 +470,42 @@ macro_rules! sui_pkg_sdk {
     };
 
     // =========================================================================
-    //  Empty struct:
+    //  Tuple structs:
+    //  - derive new
+    //  - impl HasKey if 'key' ability present
+    // =========================================================================
+    (@ModuleMembers $($address:literal::)?$module:ident {
+        $(#[$meta:meta])* // attributes (forwarded)
+        $(public $( ($_scope:ident) )? )? // visibility (ignored)
+        struct $Struct:ident
+        $(<$($(!$phantom:ident)? $T:ident$(: $_:ident $(+ $__:ident)*)?),*>)? // type params
+        ($( $struct_content:tt )+) // contents
+        $(has $($ability:ident),+)?; // abilities
+
+        $($rest:tt)*
+    }) => {
+        $crate::sui_pkg_sdk!(@Struct
+            #[derive($crate::derive_new::new)]
+            #[move_(module=$module)]
+            $(#[move_(address=$address)])?
+            $(#[$meta])*
+            $Struct$(<$($T),*>)?
+            [$($($($phantom)? $T,)*)?]
+            ($($struct_content)+)
+            -> ()
+        );
+
+        $crate::sui_pkg_sdk!(@abilities
+            $Struct$(<$($T),*>)? [$($($ability,)+)?]
+        );
+
+        $crate::sui_pkg_sdk!(@ModuleMembers $($address::)?$module {
+            $($rest)*
+        });
+    };
+
+    // =========================================================================
+    //  Empty braced struct:
     //  - add dummy field
     //  - custom new
     //  - impl Default
@@ -519,7 +554,57 @@ macro_rules! sui_pkg_sdk {
     };
 
     // =========================================================================
-    //  Struct builder
+    //  Empty tuple struct:
+    //  - add dummy field
+    //  - custom new
+    //  - impl Default
+    //  - skip ability parsing since empty structs can't have the 'key' ability
+    // =========================================================================
+    (@ModuleMembers $($address:literal::)?$module:ident {
+        $(#[$meta:meta])* // attributes (forwarded)
+        $(public $( ($_scope:ident) )? )? // visibility (ignored)
+        struct $Struct:ident$(<$(!phantom $T:ident),*>)?
+        ()
+        $(has $($ability:ident),+)? // abilities, ignored for now
+        ;
+
+        $($rest:tt)*
+    }) => {
+        $crate::sui_pkg_sdk!(@Struct
+            #[move_(module=$module)]
+            $(#[move_(address=$address)])?
+            $(#[$meta])*
+            $Struct$(<$($T),*>)?
+            [$($(phantom $T,)*)?]
+            ()
+            -> ( bool, )
+        );
+
+        impl$(<$($T: $crate::MoveType),*>)? $Struct$(<$($T),*>)? {
+            pub fn new() -> Self {
+                Self(
+                    false,
+                    $( $( // Any type parameter in an empty struct must be a phantom one
+                        ::std::marker::PhantomData::<$T>,
+                    )* )?
+                )
+            }
+        }
+
+        // To address `clippy::new_without_default`
+        impl$(<$($T: $crate::MoveType),*>)? ::std::default::Default for $Struct$(<$($T),*>)? {
+            fn default() -> Self {
+                Self::new()
+            }
+        }
+
+        $crate::sui_pkg_sdk!(@ModuleMembers $($address::)?$module {
+            $($rest)*
+        });
+    };
+
+    // =========================================================================
+    //  Braced struct builder
     //
     //  God bless this StackOverflow response:
     //  https://stackoverflow.com/a/53582890
@@ -625,6 +710,113 @@ macro_rules! sui_pkg_sdk {
                 $($result)*
                 $(#[$fmeta])* pub $field: $type,
             }
+        );
+    };
+
+    // =========================================================================
+    //  Tuple struct builder
+    // =========================================================================
+    (@Struct
+        $(#[$meta:meta])*
+        $Struct:ident$(<$($G:ident),*>)?
+        []
+        ()
+        -> ( $($result:tt)* )
+    ) => {
+        #[derive(
+            $crate::MoveStruct,
+            $crate::serde::Deserialize,
+            $crate::serde::Serialize,
+            $crate::Tabled,
+            Clone,
+            Debug,
+            PartialEq,
+            Eq,
+            Hash,
+        )]
+        $(#[$meta])*
+        #[move_(crate = ::af_sui_pkg_sdk::af_move_type)]
+        #[serde(crate = "::af_sui_pkg_sdk::serde")]
+        #[serde(bound(deserialize = ""))]
+        #[tabled(crate = "::af_sui_pkg_sdk::tabled")]
+        #[allow(non_snake_case)]
+        pub struct $Struct$(<$($G: $crate::MoveType),*>)? (
+            $($result)*
+        );
+
+        impl$(<$($G: $crate::MoveType),*>)? ::std::fmt::Display for $Struct$(<$($G),*>)? {
+            fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+                let settings = $crate::move_struct_table_option(stringify!($Struct));
+                let mut table = $crate::Table::new([self]);
+                table.with(settings);
+                write!(f, "{}", table)
+            }
+        }
+    };
+
+    // -------------------------------------------------------------------------
+    // phantom type parameter: a `PhantomData` field is added to the struct
+    // -------------------------------------------------------------------------
+    (@Struct
+        $(#[$meta:meta])*
+        $Struct:ident$(<$($G:ident),*>)?
+        [phantom $T:ident, $($rest:tt)*]
+        ($($fields:tt)*)
+        -> ( $($result:tt)* )
+    ) => {
+        $crate::sui_pkg_sdk!(@Struct
+            $(#[$meta])*
+            $Struct$(<$($G),*>)?
+            [$($rest)*]
+            ($($fields)*)
+            -> (
+                $($result)*
+
+                #[tabled(skip)]
+                #[serde(skip_deserializing, skip_serializing, default)]
+                ::std::marker::PhantomData<$T>,
+            )
+        );
+    };
+
+    // -------------------------------------------------------------------------
+    // generic type parameter: no influence in struct contents
+    // -------------------------------------------------------------------------
+    (@Struct
+        $(#[$meta:meta])*
+        $Struct:ident$(<$($G:ident),*>)?
+        [$_T:ident, $($rest:tt)*]
+        ($($fields:tt)*)
+        -> ( $($result:tt)* )
+    ) => {
+        $crate::sui_pkg_sdk!(@Struct
+            $(#[$meta])*
+            $Struct$(<$($G),*>)?
+            [$($rest)*]
+            ($($fields)*)
+            -> ( $($result)* )
+        );
+    };
+
+    // -------------------------------------------------------------------------
+    // generic field type
+    // -------------------------------------------------------------------------
+    (@Struct
+        $(#[$meta:meta])*
+        $Struct:ident$(<$($G:ident),*>)?
+        []
+        ($(#[$fmeta:meta])* $type:ty $(, $($rest:tt)*)?)
+        -> ( $($result:tt)* )
+    ) => {
+        $crate::sui_pkg_sdk!(@Struct
+            $(#[$meta])*
+            $Struct$(<$($G),*>)?
+            []
+            ($($($rest)*)?)
+            -> (
+                $($result)*
+                $(#[$fmeta])* pub $type,
+            )
         );
     };
 
