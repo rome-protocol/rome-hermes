@@ -18,6 +18,12 @@
 * sui-framework-sdk bumped from 0.10.1 to 0.10.2
 * sui-gql-client bumped from 0.14.1 to 0.14.2
 
+## [0.15.5](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-oracle-v0.15.4...af-oracle-v0.15.5) - 2025-01-28
+
+### Other
+
+- updated the following local packages: sui-gql-client
+
 ## [0.15.4](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-oracle-v0.15.3...af-oracle-v0.15.4) - 2025-01-27
 
 ### Other

@@ -8,6 +8,12 @@
 * build-dependencies
 * sui-gql-schema bumped from 0.8.0 to 0.8.1
 
+## [0.14.4](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.14.3...sui-gql-client-v0.14.4) - 2025-01-28
+
+### Other
+
+- use `graphql-extract` as much as possible
+
 ## [0.14.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.14.2...sui-gql-client-v0.14.3) - 2025-01-27
 
 ### Other

@@ -22,6 +22,12 @@
 * af-move-type bumped from 0.8.0 to 0.8.1
 * sui-gql-client bumped from 0.14.1 to 0.14.2
 
+## [0.17.5](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-pyth-wrapper-v0.17.4...af-pyth-wrapper-v0.17.5) - 2025-01-28
+
+### Other
+
+- updated the following local packages: sui-gql-client
+
 ## [0.17.4](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-pyth-wrapper-v0.17.3...af-pyth-wrapper-v0.17.4) - 2025-01-27
 
 ### Other

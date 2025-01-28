@@ -22,6 +22,12 @@
 * build-dependencies
 * sui-gql-schema bumped from 0.8.0 to 0.8.1
 
+## [0.23.6](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.23.5...af-iperps-v0.23.6) - 2025-01-28
+
+### Other
+
+- updated the following local packages: sui-gql-client
+
 ## [0.23.5](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.23.4...af-iperps-v0.23.5) - 2025-01-27
 
 ### Other
