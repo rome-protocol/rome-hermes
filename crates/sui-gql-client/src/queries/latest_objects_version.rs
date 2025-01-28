@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 
 use af_sui_types::{Address, ObjectId, Version};
+use graphql_extract::extract;
 
 use super::fragments::PageInfoForward;
 use crate::queries::Error;
@@ -46,7 +47,7 @@ struct ObjectKey<'a> {
 pub async fn query<C: GraphQlClient>(
     client: &C,
     object_ids: &[ObjectId],
-) -> Result<(u64, HashMap<ObjectId, u64>), Error<C::Error>> {
+) -> super::Result<(u64, HashMap<ObjectId, u64>), C> {
     let vars = Variables {
         after: None,
         first: None,
@@ -59,10 +60,21 @@ pub async fn query<C: GraphQlClient>(
         .query::<Query, _>(vars.clone())
         .await
         .map_err(Error::Client)?
-        .try_into_data()?
-        .ok_or(missing_data!("Initial page"))?;
+        .try_into_data()?;
 
-    let mut next_vars = vars.next_variables(&init.objects.page_info);
+    extract!(init => {
+        checkpoint? {
+            sequence_number
+        }
+        objects {
+            nodes
+            page_info
+        }
+    });
+    let ckpt_num = sequence_number;
+    let init_nodes = nodes;
+
+    let mut next_vars = vars.next_variables(&page_info);
     let mut pages = vec![];
     while let Some(vars) = next_vars {
         let Some(next_page) = client
@@ -77,13 +89,7 @@ pub async fn query<C: GraphQlClient>(
         pages.push(next_page);
     }
 
-    let ckpt_num = init
-        .checkpoint
-        .ok_or(missing_data!("Missing checkpoint"))?
-        .sequence_number;
-
     let mut raw_objs = HashMap::new();
-    let init_nodes = init.objects.nodes;
     let page_nodes = pages.into_iter().flat_map(|q| q.objects.nodes);
     for object in init_nodes.into_iter().chain(page_nodes) {
         let object_id = object.object_id;

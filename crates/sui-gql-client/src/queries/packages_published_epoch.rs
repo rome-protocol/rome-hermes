@@ -1,9 +1,9 @@
 use af_sui_types::{ObjectId, Version};
 use futures::TryStreamExt as _;
 
-use super::fragments::{ObjectFilterV2, PageInfoForward};
-use super::Error;
-use crate::{extract, schema, GraphQlClient};
+use super::fragments::{ObjectFilterV2, PageInfo, PageInfoForward};
+use super::{stream, Error};
+use crate::{schema, GraphQlClient, GraphQlResponseExt as _};
 
 type Item = (ObjectId, u64, u64);
 
@@ -21,9 +21,7 @@ pub async fn query<C: GraphQlClient>(
         after: None,
     };
 
-    let results: Vec<_> = super::stream::forward(client, vars, request)
-        .try_collect()
-        .await?;
+    let results: Vec<_> = stream::forward(client, vars, request).try_collect().await?;
 
     Ok(results.into_iter())
 }
@@ -31,25 +29,37 @@ pub async fn query<C: GraphQlClient>(
 async fn request<C: GraphQlClient>(
     client: &C,
     vars: QueryVariables<'_>,
-) -> super::Result<
-    (
-        PageInfoForward,
-        impl Iterator<Item = super::Result<Item, C>>,
-    ),
-    C,
-> {
-    let query = client
+) -> super::Result<stream::Page<impl Iterator<Item = super::Result<Item, C>>>, C> {
+    let data = client
         .query::<Query, _>(vars)
         .await
-        .map_err(Error::Client)?;
-    let ObjectConnection { nodes, page_info } = extract!(query.data?.objects);
-    Ok((
+        .map_err(Error::Client)?
+        .try_into_data()?;
+    graphql_extract::extract!(data => {
+        objects {
+            page_info
+            nodes[] {
+                address
+                as_move_package? {
+                    previous_transaction_block? {
+                        effects? {
+                            epoch? {
+                                epoch_id
+                            }
+                            checkpoint? {
+                                sequence_number
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+    Ok(stream::Page::new(
         page_info,
-        nodes.into_iter().map(|node| {
-            let effects = extract!(node.as_move_package?.previous_transaction_block?.effects?);
-            let epoch_id = extract!(effects.epoch?.epoch_id);
-            let ckpt_seq = extract!(effects.checkpoint?.sequence_number);
-            Ok((node.address, epoch_id, ckpt_seq))
+        nodes.map(|r| -> super::Result<_, C> {
+            let (address, (epoch_id, ckpt_seq)) = r?;
+            Ok((address, epoch_id, ckpt_seq))
         }),
     ))
 }
@@ -95,8 +105,8 @@ fn gql_output() {
 
 // ================================================================================
 
-impl super::stream::UpdatePageInfo for QueryVariables<'_> {
-    fn update_page_info(&mut self, info: &PageInfoForward) {
+impl stream::UpdatePageInfo for QueryVariables<'_> {
+    fn update_page_info(&mut self, info: &PageInfo) {
         self.after.clone_from(&info.end_cursor)
     }
 }

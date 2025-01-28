@@ -1,7 +1,8 @@
 use af_sui_types::{ObjectId, StructTag, TypeTag};
+use graphql_extract::extract;
 
 use super::Error;
-use crate::{missing_data, schema, GraphQlClient, GraphQlResponseExt};
+use crate::{schema, GraphQlClient, GraphQlResponseExt};
 
 pub(super) async fn query<C: GraphQlClient>(
     client: &C,
@@ -11,19 +12,17 @@ pub(super) async fn query<C: GraphQlClient>(
         .query::<ObjectType, _>(Variables { object_id: id })
         .await
         .map_err(Error::Client)?
-        .try_into_data()?
-        .ok_or(missing_data!("Any data"))?;
-    let TypeTag::Struct(tag) = data
-        .object
-        .ok_or(missing_data!("Top-level object"))?
-        .as_move_object
-        // HACK: this is actually a conversion error; the object is a package
-        .ok_or(missing_data!("As Move object"))?
-        .contents
-        .ok_or(missing_data!("Contents"))?
-        .type_
-        .into()
-    else {
+        .try_into_data()?;
+    extract!(data => {
+        object? {
+            as_move_object? {
+                contents? {
+                    type_
+                }
+            }
+        }
+    });
+    let TypeTag::Struct(tag) = type_.into() else {
         unreachable!("Top-level objects are always structs");
     };
 

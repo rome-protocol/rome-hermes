@@ -1,9 +1,10 @@
 use af_sui_types::{ObjectId, Version};
+use graphql_extract::extract;
 
 use super::fragments::{MoveObjectContent, MoveValueRaw};
 use super::outputs::RawMoveStruct;
 use super::Error;
-use crate::{missing_data, schema, GraphQlClient, GraphQlResponseExt};
+use crate::{schema, GraphQlClient, GraphQlResponseExt};
 
 pub async fn query<C: GraphQlClient>(
     client: &C,
@@ -12,24 +13,23 @@ pub async fn query<C: GraphQlClient>(
 ) -> Result<RawMoveStruct, Error<C::Error>> {
     let vars = Variables {
         address: object_id,
-        version: version.map(From::from),
+        version,
     };
     let data = client
         .query::<Query, Variables>(vars)
         .await
         .map_err(Error::Client)?
         .try_into_data()?;
-    let out = data
-        .ok_or(missing_data!("No data in response"))?
-        .object
-        .ok_or(missing_data!("Object not found"))?
-        .as_move_object
-        .ok_or(missing_data!("Not a Move object"))?
-        .contents
-        .ok_or(missing_data!("Object contents"))?
+    extract!(data => {
+        object? {
+            as_move_object? {
+                contents?
+            }
+        }
+    });
+    Ok(contents
         .try_into()
-        .expect("Only structs can be top-level objects");
-    Ok(out)
+        .expect("Only structs can be top-level objects"))
 }
 
 #[derive(cynic::QueryVariables, Debug)]

@@ -307,6 +307,12 @@ impl<C: std::error::Error> From<crate::extract::Error> for Error<C> {
     }
 }
 
+impl<C: std::error::Error> From<&'static str> for Error<C> {
+    fn from(value: &'static str) -> Self {
+        Self::MissingData(value.into())
+    }
+}
+
 /// Helper to generate [`Error::MissingData`].
 ///
 /// Works very much like an `anyhow!`/`eyre!` macro, but intended for the case when trying to

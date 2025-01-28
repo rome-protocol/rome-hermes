@@ -1,11 +1,17 @@
+use futures::StreamExt as _;
+
+use self::stream::UpdatePageInfo;
 use super::fragments::{PageInfoForward, TransactionBlockFilter};
+use super::stream;
 use crate::queries::Error;
-use crate::{extract, missing_data, schema, GraphQlClient, Paged, PagedResponse};
+use crate::{extract, schema, GraphQlClient, GraphQlResponseExt as _};
+
+type Item = (String, bool);
 
 pub(super) async fn query<C: GraphQlClient>(
     client: &C,
     transaction_digests: Vec<String>,
-) -> Result<impl Iterator<Item = Result<(String, bool), extract::Error>>, Error<C::Error>> {
+) -> super::Result<impl Iterator<Item = Result<Item, extract::Error>>, C> {
     let vars = Variables {
         filter: Some(TransactionBlockFilter {
             transaction_ids: Some(transaction_digests),
@@ -15,26 +21,45 @@ pub(super) async fn query<C: GraphQlClient>(
         after: None,
     };
 
-    let response: PagedResponse<Query> = client.query_paged(vars).await.map_err(Error::Client)?;
-    let (init, pages) = response
-        .try_into_data()?
-        .ok_or_else(|| missing_data!("No data"))?;
+    let mut vec = vec![];
+    let mut stream = std::pin::pin!(stream::forward(client, vars, request));
+    while let Some(res) = stream.next().await {
+        match res {
+            Ok(item) => vec.push(Ok(item)),
+            Err(Error::MissingData(err)) => vec.push(Err(extract::Error::new(err))),
+            Err(other) => return Err(other),
+        }
+    }
 
-    Ok(init
-        .transaction_blocks
-        .nodes
-        .into_iter()
-        .chain(pages.into_iter().flat_map(|p| p.transaction_blocks.nodes))
-        .map(digest_and_status))
+    Ok(vec.into_iter())
 }
 
-fn digest_and_status(tx_block: TransactionBlock) -> Result<(String, bool), extract::Error> {
-    let d = extract!(tx_block.digest?);
-    let success = match extract!(tx_block.effects?.status?) {
-        ExecutionStatus::Success => true,
-        ExecutionStatus::Failure => false,
-    };
-    Ok((d, success))
+async fn request<C: GraphQlClient>(
+    client: &C,
+    vars: Variables,
+) -> super::Result<stream::Page<impl Iterator<Item = super::Result<Item, C>>>, C> {
+    let data = client
+        .query::<Query, _>(vars)
+        .await
+        .map_err(Error::Client)?
+        .try_into_data()?;
+
+    graphql_extract::extract!(data => {
+        transaction_blocks {
+            page_info
+            nodes[] {
+                digest?
+                effects? {
+                    status?
+                }
+            }
+        }
+    });
+
+    Ok(stream::Page::new(
+        page_info,
+        nodes.map(|r| r.map(|(d, s)| (d, s.into())).map_err(super::Error::from)),
+    ))
 }
 
 #[derive(cynic::QueryVariables, Debug, Clone)]
@@ -44,31 +69,18 @@ pub struct Variables {
     first: Option<i32>,
 }
 
+impl UpdatePageInfo for Variables {
+    fn update_page_info(&mut self, info: &super::fragments::PageInfo) {
+        self.after.clone_from(&info.end_cursor)
+    }
+}
+
 #[derive(cynic::QueryFragment, Debug)]
 #[cynic(graphql_type = "Query")]
 #[cynic(variables = "Variables")]
 pub struct Query {
     #[arguments(filter: $filter, first: $first, after: $after)]
     pub transaction_blocks: TransactionBlockConnection,
-}
-
-impl Paged for Query {
-    type Input = Variables;
-    type NextPage = Self;
-    type NextInput = Variables;
-
-    fn next_variables(&self, mut prev_vars: Self::Input) -> Option<Self::NextInput> {
-        let PageInfoForward {
-            has_next_page,
-            end_cursor,
-        } = &self.transaction_blocks.page_info;
-        if *has_next_page {
-            prev_vars.after.clone_from(end_cursor);
-            Some(prev_vars)
-        } else {
-            None
-        }
-    }
 }
 
 #[derive(cynic::QueryFragment, Debug)]
@@ -92,6 +104,15 @@ struct TransactionBlockEffects {
 pub enum ExecutionStatus {
     Success,
     Failure,
+}
+
+impl From<ExecutionStatus> for bool {
+    fn from(value: ExecutionStatus) -> Self {
+        match value {
+            ExecutionStatus::Success => true,
+            ExecutionStatus::Failure => false,
+        }
+    }
 }
 
 #[cfg(test)]

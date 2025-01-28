@@ -24,17 +24,25 @@ rustdoc-args = [
 workspace = true
 
 [features]
-default   = ["move-type", "mutations", "queries", "reqwest"]
+default = ["move-type", "mutations", "queries", "reqwest"]
 move-type = ["dep:af-move-type", "dep:bcs", "queries"]
 mutations = ["dep:af-sui-types", "scalars"]
-queries   = ["dep:af-sui-types", "dep:async-stream", "dep:futures", "dep:itertools", "scalars"]
-raw       = ["dep:serde_json"]
-reqwest   = ["cynic/http-reqwest", "dep:reqwest", "raw"]
-scalars   = ["sui-gql-schema/scalars"]
+queries = [
+  "dep:af-sui-types",
+  "dep:async-stream",
+  "dep:futures",
+  "dep:graphql-extract",
+  "dep:itertools",
+  "scalars",
+]
+raw = ["dep:serde_json"]
+reqwest = ["cynic/http-reqwest", "dep:reqwest", "raw"]
+scalars = ["sui-gql-schema/scalars"]
 
 
 [dependencies]
-sui-gql-schema = { version = "0.8.1", path = "../sui-gql-schema", default-features = false }
+graphql-extract = { version = "0.0.1", path = "../graphql-extract", optional = true }
+sui-gql-schema  = { version = "0.8.1", path = "../sui-gql-schema", default-features = false }
 
 bimap            = "0.6"
 clap             = { version = "4", features = ["derive"] }

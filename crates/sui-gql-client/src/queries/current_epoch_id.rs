@@ -1,18 +1,22 @@
 use af_sui_types::Version;
-use cynic::{GraphQlResponse, QueryFragment};
+use cynic::QueryFragment;
+use graphql_extract::extract;
 
 use super::Error;
-use crate::{missing_data, schema, GraphQlClient, GraphQlResponseExt as _};
+use crate::{schema, GraphQlClient, GraphQlResponseExt as _};
 
 pub async fn query<C: GraphQlClient>(client: &C) -> Result<u64, Error<C::Error>> {
-    let curr: GraphQlResponse<Query> = client.query(()).await.map_err(Error::Client)?;
-    let curr_epoch_id = curr
-        .try_into_data()?
-        .ok_or_else(|| missing_data!("No data"))?
-        .epoch
-        .ok_or_else(|| missing_data!("epoch"))?
-        .epoch_id;
-    Ok(curr_epoch_id)
+    let data = client
+        .query::<Query, _>(())
+        .await
+        .map_err(Error::Client)?
+        .try_into_data()?;
+    extract!(data => {
+        epoch? {
+            epoch_id
+        }
+    });
+    Ok(epoch_id)
 }
 
 #[cfg(test)]

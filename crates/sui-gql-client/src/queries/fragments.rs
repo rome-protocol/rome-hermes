@@ -100,6 +100,46 @@ pub(crate) enum TransactionBlockKindInput {
 //  Simple fragments
 // ====================================================================================================
 
+#[derive(cynic::QueryFragment, Clone, Debug, Default)]
+pub(crate) struct PageInfo {
+    pub(crate) has_next_page: bool,
+    pub(crate) end_cursor: Option<String>,
+    #[expect(dead_code, reason = "For generality")]
+    pub(crate) has_previous_page: bool,
+    #[expect(dead_code, reason = "For generality")]
+    pub(crate) start_cursor: Option<String>,
+}
+
+impl From<PageInfoForward> for PageInfo {
+    fn from(
+        PageInfoForward {
+            has_next_page,
+            end_cursor,
+        }: PageInfoForward,
+    ) -> Self {
+        Self {
+            has_next_page,
+            end_cursor,
+            ..Default::default()
+        }
+    }
+}
+
+impl From<PageInfoBackward> for PageInfo {
+    fn from(
+        PageInfoBackward {
+            has_previous_page,
+            start_cursor,
+        }: PageInfoBackward,
+    ) -> Self {
+        Self {
+            has_previous_page,
+            start_cursor,
+            ..Default::default()
+        }
+    }
+}
+
 #[derive(cynic::QueryFragment, Clone, Debug)]
 #[cynic(graphql_type = "PageInfo")]
 pub struct PageInfoForward {

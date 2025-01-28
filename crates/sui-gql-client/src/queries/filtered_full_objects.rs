@@ -1,18 +1,18 @@
 use af_sui_types::{Address, Object, ObjectId};
 use futures::Stream;
-use itertools::Itertools as _;
 use sui_gql_schema::scalars::Base64Bcs;
 
-use super::fragments::{ObjectFilterV2, PageInfoForward};
+use super::fragments::{ObjectFilterV2, PageInfo, PageInfoForward};
+use super::stream;
 use crate::queries::Error;
-use crate::{extract, missing_data, scalars, schema, GraphQlClient, GraphQlResponseExt};
+use crate::{scalars, schema, GraphQlClient, GraphQlResponseExt};
 
 pub(super) fn query<C: GraphQlClient>(
     client: &C,
     owner: Option<Address>,
     type_: Option<String>,
     page_size: Option<u32>,
-) -> impl Stream<Item = Result<Object, Error<C::Error>>> + '_ {
+) -> impl Stream<Item = super::Result<Object, C>> + '_ {
     let filter = ObjectFilterV2 {
         owner,
         type_,
@@ -23,32 +23,46 @@ pub(super) fn query<C: GraphQlClient>(
         first: page_size.map(|v| v.try_into().unwrap_or(i32::MAX)),
         filter: Some(filter),
     };
-    super::stream::forward(client, vars, request)
+    stream::forward(client, vars, request)
 }
 
 async fn request<C: GraphQlClient>(
     client: &C,
     vars: Variables<'_>,
-) -> Result<
-    (
-        PageInfoForward,
-        impl Iterator<Item = Result<Object, Error<C::Error>>> + 'static,
-    ),
-    Error<C::Error>,
-> {
-    let response = client
+) -> super::Result<stream::Page<impl Iterator<Item = super::Result<Object, C>> + 'static>, C> {
+    let data = client
         .query::<Query, _>(vars)
         .await
-        .map_err(Error::Client)?;
-    let data = response.try_into_data()?;
+        .map_err(Error::Client)?
+        .try_into_data()?;
 
-    let ObjectConnection { nodes, page_info } = extract!(data?.objects);
-    let raw_objs = nodes
+    let stream::Page { info, data } = extract(data)?;
+    Ok(stream::Page::new(
+        info,
+        data.map(|r| r.map_err(Error::MissingData)),
+    ))
+}
+
+fn extract(
+    data: Option<Query>,
+) -> Result<stream::Page<impl Iterator<Item = Result<Object, String>>>, &'static str> {
+    graphql_extract::extract!(data => {
+        objects {
+            nodes[] {
+                id
+                object
+            }
+            page_info
+        }
+    });
+    let nodes = nodes
         .into_iter()
-        .map(|ObjectGql { id, object }| object.ok_or(missing_data!("Bcs for object {id}")))
-        .map_ok(Base64Bcs::into_inner);
-
-    Ok((page_info, raw_objs))
+        .map(|r: Result<_, &'static str>| -> Result<_, String> {
+            let (id, bcs) = r?;
+            bcs.ok_or_else(|| format!("BCS for object {id}"))
+                .map(Base64Bcs::into_inner)
+        });
+    Ok(stream::Page::new(page_info, nodes))
 }
 
 #[derive(cynic::QueryVariables, Clone, Debug)]
@@ -58,8 +72,8 @@ struct Variables<'a> {
     first: Option<i32>,
 }
 
-impl super::stream::UpdatePageInfo for Variables<'_> {
-    fn update_page_info(&mut self, info: &PageInfoForward) {
+impl stream::UpdatePageInfo for Variables<'_> {
+    fn update_page_info(&mut self, info: &PageInfo) {
         self.after.clone_from(&info.end_cursor)
     }
 }

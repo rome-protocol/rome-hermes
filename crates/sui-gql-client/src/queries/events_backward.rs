@@ -3,7 +3,7 @@ use sui_gql_schema::scalars;
 
 use super::fragments::MoveValueRaw;
 use super::Error;
-use crate::{missing_data, schema, GraphQlClient, GraphQlResponseExt as _, Paged};
+use crate::{schema, GraphQlClient, GraphQlResponseExt as _};
 
 #[derive(cynic::InputObject, Debug, Clone)]
 pub struct EventFilter {
@@ -35,19 +35,26 @@ pub async fn query<C: GraphQlClient>(
     filter: Option<EventFilter>,
     cursor: Option<String>,
     page_size: Option<u32>,
-) -> Result<(Vec<EventEdge>, bool), Error<C::Error>> {
+) -> super::Result<(Vec<EventEdge>, bool), C> {
     let vars = Variables {
         filter,
         before: cursor,
         last: page_size.map(|v| v as i32),
     };
-    let response: Query = client
+    let data: Option<Query> = client
         .query(vars)
         .await
         .map_err(Error::Client)?
-        .try_into_data()?
-        .ok_or_else(|| missing_data!("No data"))?;
-    Ok(response.extract())
+        .try_into_data()?;
+    graphql_extract::extract!(data => {
+        events {
+            edges
+            page_info {
+                has_previous_page
+            }
+        }
+    });
+    Ok((edges, has_previous_page))
 }
 
 // =============================================================================
@@ -66,43 +73,6 @@ struct Variables {
 struct Query {
     #[arguments(before: $before, filter: $filter, last: $last)]
     events: EventConnection,
-}
-
-impl Query {
-    /// The edges in reverse order of which they where returned by the server + a flag indicating
-    /// the existence of older events
-    fn extract(self) -> (Vec<EventEdge>, bool) {
-        let Self {
-            events:
-                EventConnection {
-                    mut edges,
-                    page_info,
-                },
-        } = self;
-        edges.reverse();
-        (edges, page_info.has_previous_page)
-    }
-}
-
-impl Paged for Query {
-    type Input = Variables;
-
-    type NextInput = Variables;
-
-    type NextPage = Self;
-
-    fn next_variables(&self, mut prev_vars: Self::Input) -> Option<Self::NextInput> {
-        if !self.events.page_info.has_previous_page {
-            return None;
-        }
-
-        if let Some(edge) = self.events.edges.first() {
-            prev_vars.before = Some(edge.cursor.clone());
-            Some(prev_vars)
-        } else {
-            None
-        }
-    }
 }
 
 #[cfg(test)]

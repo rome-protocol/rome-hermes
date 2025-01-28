@@ -1,5 +1,7 @@
+use graphql_extract::extract;
+
 use crate::queries::Error;
-use crate::{missing_data, schema, GraphQlClient, GraphQlResponseExt as _};
+use crate::{schema, GraphQlClient, GraphQlResponseExt as _};
 
 pub async fn query<C>(client: &C) -> Result<u64, Error<C::Error>>
 where
@@ -9,13 +11,15 @@ where
         .query::<Query, _>(Variables {})
         .await
         .map_err(Error::Client)?
-        .try_into_data()?
-        .ok_or(missing_data!("Null data in response"))?;
+        .try_into_data()?;
 
-    Ok(data
-        .checkpoint
-        .ok_or(missing_data!("Checkpoint"))?
-        .sequence_number)
+    extract!(data => {
+        checkpoint? {
+            sequence_number
+        }
+    });
+
+    Ok(sequence_number)
 }
 
 #[derive(cynic::QueryVariables, Debug)]

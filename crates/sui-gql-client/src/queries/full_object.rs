@@ -1,9 +1,10 @@
 use af_sui_types::sui::object::Object;
 use af_sui_types::ObjectId;
 use cynic::{QueryFragment, QueryVariables};
+use graphql_extract::extract;
 
 use super::Error;
-use crate::{missing_data, scalars, schema, GraphQlClient, GraphQlResponseExt as _};
+use crate::{scalars, schema, GraphQlClient, GraphQlResponseExt as _};
 
 /// Get the full [`Object`] contents from the server at a certain version or the latest if not
 /// specified.
@@ -22,15 +23,14 @@ where
         })
         .await
         .map_err(Error::Client)?
-        .try_into_data()?
-        .ok_or(missing_data!("Null data in response"))?;
+        .try_into_data()?;
 
-    let object = data
-        .object
-        .ok_or(missing_data!("Object not found"))?
-        .bcs
-        .ok_or(missing_data!("No object BCS"))?;
-    Ok(object.into_inner())
+    extract!(data => {
+        object? {
+            bcs?
+        }
+    });
+    Ok(bcs.into_inner())
 }
 
 #[derive(QueryVariables, Clone, Debug)]

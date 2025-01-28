@@ -1,24 +1,31 @@
 use af_sui_types::Version;
-use cynic::{GraphQlResponse, QueryFragment};
+use cynic::QueryFragment;
+use graphql_extract::extract;
 
 use super::Error;
-use crate::{missing_data, schema, GraphQlClient, GraphQlResponseExt as _};
+use crate::{schema, GraphQlClient, GraphQlResponseExt as _};
 
 pub async fn query<C: GraphQlClient>(client: &C, epoch_id: u64) -> Result<u64, Error<C::Error>> {
-    let result: GraphQlResponse<Query> = client
-        .query(Variables { id: Some(epoch_id) })
+    let data = client
+        .query::<Query, _>(Variables { id: Some(epoch_id) })
         .await
-        .map_err(Error::Client)?;
-    Ok(result
-        .try_into_data()?
-        .ok_or_else(|| missing_data!("No data"))?
-        .epoch
-        .ok_or_else(|| missing_data!("epoch"))?
-        .checkpoints
-        .nodes
-        .pop()
-        .ok_or_else(|| missing_data!("checkpoints"))?
-        .sequence_number)
+        .map_err(Error::Client)?
+        .try_into_data()?;
+    Ok(extract(data)?)
+}
+
+fn extract(data: Option<Query>) -> Result<Version, &'static str> {
+    extract!(data => {
+        epoch? {
+            checkpoints {
+                nodes[] {
+                    sequence_number
+                }
+            }
+        }
+    });
+    let mut nodes = nodes;
+    nodes.next().ok_or("Empty epoch checkpoints")?
 }
 
 #[cfg(test)]
