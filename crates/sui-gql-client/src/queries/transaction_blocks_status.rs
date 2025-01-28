@@ -12,11 +12,12 @@ pub(super) async fn query<C: GraphQlClient>(
     client: &C,
     transaction_digests: Vec<String>,
 ) -> super::Result<impl Iterator<Item = Result<Item, extract::Error>>, C> {
+    let filter = TransactionBlockFilter {
+        transaction_ids: Some(transaction_digests),
+        ..Default::default()
+    };
     let vars = Variables {
-        filter: Some(TransactionBlockFilter {
-            transaction_ids: Some(transaction_digests),
-            ..Default::default()
-        }),
+        filter: Some(&filter),
         first: None,
         after: None,
     };
@@ -36,7 +37,7 @@ pub(super) async fn query<C: GraphQlClient>(
 
 async fn request<C: GraphQlClient>(
     client: &C,
-    vars: Variables,
+    vars: Variables<'_>,
 ) -> super::Result<stream::Page<impl Iterator<Item = super::Result<Item, C>>>, C> {
     let data = client
         .query::<Query, _>(vars)
@@ -63,13 +64,13 @@ async fn request<C: GraphQlClient>(
 }
 
 #[derive(cynic::QueryVariables, Debug, Clone)]
-pub struct Variables {
-    filter: Option<TransactionBlockFilter>,
+pub struct Variables<'a> {
+    filter: Option<&'a TransactionBlockFilter>,
     after: Option<String>,
     first: Option<i32>,
 }
 
-impl UpdatePageInfo for Variables {
+impl UpdatePageInfo for Variables<'_> {
     fn update_page_info(&mut self, info: &super::fragments::PageInfo) {
         self.after.clone_from(&info.end_cursor)
     }
