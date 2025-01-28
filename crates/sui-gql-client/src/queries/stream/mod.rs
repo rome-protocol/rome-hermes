@@ -25,7 +25,7 @@ where
     Client: GraphQlClient,
     Vars: 'a + UpdatePageInfo + Clone,
     Req: 'a + FnMut(&'a Client, Vars) -> Fut,
-    Fut: 'a + Future<Output = Result<Page<Iter>, Client>>,
+    Fut: Future<Output = Result<Page<Iter>, Client>>,
     Iter: IntoIterator<Item = Result<T, Client>>,
     T: 'static,
 {
