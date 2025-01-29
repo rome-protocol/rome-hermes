@@ -1,9 +1,4 @@
 [changelog]
-header = """# Changelog
-
-## [Unreleased]
-"""
-
 body = """
 
 {% macro print_commit(commit) -%}
