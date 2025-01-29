@@ -1,100 +1,39 @@
 # Changelog
 
-* The following workspace dependencies were updated
-* dependencies
-* af-sui-pkg-sdk bumped from 0.8.0 to 0.8.1
-* move-stdlib-sdk bumped from 0.9.0 to 0.9.1
-* sui-framework-sdk bumped from 0.10.0 to 0.10.1
+All notable changes to this project will be documented in this file.
 
-* The following workspace dependencies were updated
-* dependencies
-* sui-gql-client bumped from 0.14.0 to 0.14.1
-
-* The following workspace dependencies were updated
-* dependencies
-* af-move-type bumped from 0.8.0 to 0.8.1
-* af-sui-pkg-sdk bumped from 0.8.1 to 0.8.2
-* af-sui-types bumped from 0.7.0 to 0.7.1
-* af-utilities bumped from 0.7.0 to 0.7.1
-* move-stdlib-sdk bumped from 0.9.1 to 0.9.2
-* sui-framework-sdk bumped from 0.10.1 to 0.10.2
-* sui-gql-client bumped from 0.14.1 to 0.14.2
-* build-dependencies
-* sui-gql-schema bumped from 0.8.0 to 0.8.1
-
-## [0.23.6](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.23.5...af-iperps-v0.23.6) - 2025-01-28
-
-### Other
-
-- updated the following local packages: sui-gql-client
-
-## [0.23.5](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.23.4...af-iperps-v0.23.5) - 2025-01-27
-
-### Other
-
-- updated the following local packages: af-sui-pkg-sdk, sui-framework-sdk, sui-gql-client
-
-## [0.23.4](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.23.3...af-iperps-v0.23.4) - 2025-01-25
-
-### Other
-
-- *(af-iperps)* update ClearingHouse
-
-## [0.23.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.22.2...af-iperps-v0.23.0) (2025-01-14)
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-### ⚠ BREAKING CHANGES
+## [Unreleased]
 
-* **af-sui-types:** bump to 0.7.0
+## [af-iperps-v0.23.4](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/af-iperps-v0.23.4)
 
-### Miscellaneous Chores
+### 📚 Documentation
 
-* **af-sui-types:** bump to 0.7.0 ([27e110a](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/27e110a9455d4a1b9c4d9c1a9e4e0c85728a1e96))
+- *(af-iperps)* Update ClearingHouse - ([319fd0a](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/319fd0ae4e2df0f8d6d923485bd19f8c2ed1d8e2))
 
+### ⚙️ Miscellaneous Tasks
 
-### Dependencies
+- *(af-iperps)* Release v0.23.4 - ([7f45193](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/7f451934d0dbd57f0ab6316728c22db1c9143d33))
 
-* The following workspace dependencies were updated
-  * dependencies
-    * af-sui-types bumped from 0.7 to 0.7.0
-    * af-utilities bumped from 0.7 to 0.7.0
+## [af-iperps-v0.23.0](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/af-iperps-v0.23.0)
 
-## [0.22.2](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.22.1...af-iperps-v0.22.2) (2025-01-14)
+### ⚙️ Miscellaneous Tasks
 
+- *(af-sui-types)* Bump incompat version [propagate] - ([fbf06ff](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/fbf06ff5b383d73297a7595b6a4ca7300bdbfbd2))
+- *(af-sui-types)* [**breaking**] Bump to 0.7.0 - ([27e110a](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/27e110a9455d4a1b9c4d9c1a9e4e0c85728a1e96))
+- Revert fbf06ff5 - ([8f2567b](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/8f2567b6efd2924092cb5a5a382a5cabeaf7fafd))
 
-### Features
+## [af-iperps-v0.22.2](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/af-iperps-v0.22.2)
 
-* **crates:** add remaining crates ([#2](https://github.com/AftermathFinance/aftermath-sdk-rust/issues/2)) ([5d2dae1](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/5d2dae1392de8ed6a5af63a0e559bd3416112b35))
+### ⛰️ Features
 
+- *(crates)* Add remaining crates (#2) - ([5d2dae1](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/5d2dae1392de8ed6a5af63a0e559bd3416112b35))
 
-### Dependencies
+### ⚙️ Miscellaneous Tasks
 
-* The following workspace dependencies were updated
-  * dependencies
-    * af-move-type bumped from 0.7.2 to 0.7.3
-    * af-sui-pkg-sdk bumped from 0.7.1 to 0.7.2
-    * move-stdlib-sdk bumped from 0.8.1 to 0.8.2
-    * sui-framework-sdk bumped from 0.9.1 to 0.9.2
-    * sui-gql-client bumped from 0.13.3 to 0.13.4
-  * build-dependencies
-    * sui-gql-schema bumped from 0.7.2 to 0.7.3
+- Remove cyclical dev dependencies - ([08d9a17](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/08d9a1710fb56c3a58663051eecf29a18e91594b))
 
-## [0.22.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.22.0...af-iperps-v0.22.1) (2025-01-14)
-
-
-### Features
-
-* **crates:** add remaining crates ([#2](https://github.com/AftermathFinance/aftermath-sdk-rust/issues/2)) ([5d2dae1](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/5d2dae1392de8ed6a5af63a0e559bd3416112b35))
-
-
-### Dependencies
-
-* The following workspace dependencies were updated
-  * dependencies
-    * af-move-type bumped from 0.7 to 0.7.2
-    * af-sui-pkg-sdk bumped from 0.7 to 0.7.1
-    * move-stdlib-sdk bumped from 0.8 to 0.8.1
-    * sui-framework-sdk bumped from 0.9 to 0.9.1
-    * sui-gql-client bumped from 0.13 to 0.13.3
-  * build-dependencies
-    * sui-gql-schema bumped from 0.7 to 0.7.2
+<!-- generated by git-cliff -->
