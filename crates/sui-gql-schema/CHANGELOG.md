@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.2](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-schema-v0.8.1...sui-gql-schema-v0.8.2)
+
+### 📚 Documentation
+
+- Regenerate changelogs from scratch - ([288008f](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/288008f5b60193ea34b765d8ad605cf4f25207e9))
+
+
 ## [sui-gql-schema-v0.8.0](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/sui-gql-schema-v0.8.0)
 
 ### ⛰️ Features
