@@ -14,6 +14,7 @@
 //!
 //! [cynic]: https://cynic-rs.dev/
 //! [generator]: https://generator.cynic-rs.dev/
+//! [insta]: https://insta.rs/
 
 use proc_macro2::{Span, TokenStream};
 use quote::{quote, ToTokens as _};

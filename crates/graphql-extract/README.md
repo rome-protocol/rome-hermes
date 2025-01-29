@@ -16,5 +16,6 @@ Macro to extract data from deeply nested types representing GraphQL results
 
 [cynic]: https://cynic-rs.dev/
 [generator]: https://generator.cynic-rs.dev/
+[insta]: https://insta.rs/
 
 <!-- cargo-rdme end -->
