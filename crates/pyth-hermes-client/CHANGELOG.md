@@ -14,8 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Regenerate changelogs from scratch - ([288008f](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/288008f5b60193ea34b765d8ad605cf4f25207e9))
 
-
-## [pyth-hermes-client-v0.2.5](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/pyth-hermes-client-v0.2.5)
+## [0.2.5](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/pyth-hermes-client-v0.2.3...pyth-hermes-client-v0.2.5)
 
 ### 📚 Documentation
 
@@ -29,7 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Release pyth-hermes-client version 0.2.4 - ([83b23a2](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/83b23a27c6ef5a3fee55177a27106e77ea0afe57))
 - Release pyth-hermes-client version 0.2.5 - ([faa2aff](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/faa2affe4207b6a0dafb3ea7da95dd7b9e1ef989))
 
-## [pyth-hermes-client-v0.2.3](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/pyth-hermes-client-v0.2.3)
+## [0.2.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/pyth-hermes-client-v0.2.2...pyth-hermes-client-v0.2.3)
 
 ### 🐛 Bug Fixes
 
@@ -41,7 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - *(pyth-hermes-client)* Remove unused manifest key - ([ea80fa6](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/ea80fa6ad727f51dbceb9a50a0136c03c328ec8b))
 - Release pyth-hermes-client version 0.2.3 - ([d73a890](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/d73a8909e86a1fc427d616f2f7b72b4a28df2373))
 
-## [pyth-hermes-client-v0.2.2](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/pyth-hermes-client-v0.2.2)
+## [0.2.2](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/pyth-hermes-client-v0.2.1...pyth-hermes-client-v0.2.2)
 
 ### ⛰️ Features
 

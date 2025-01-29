@@ -14,14 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Regenerate changelogs from scratch - ([288008f](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/288008f5b60193ea34b765d8ad605cf4f25207e9))
 
-
-## [af-move-type-v0.8.1](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/af-move-type-v0.8.1)
+## [0.8.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-move-type-v0.8.0...af-move-type-v0.8.1)
 
 ### ⚙️ Miscellaneous Tasks
 
 - *(af-move-type)* Remove unused source files - ([70e61fd](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/70e61fd997f4a043a093c22c96acd42ede3c6c42))
 
-## [af-move-type-v0.8.0](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/af-move-type-v0.8.0)
+## [0.8.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-move-type-v0.7.3...af-move-type-v0.8.0)
 
 ### ⛰️ Features
 
@@ -34,7 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - *(af-sui-types)* [**breaking**] Bump to 0.7.0 - ([27e110a](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/27e110a9455d4a1b9c4d9c1a9e4e0c85728a1e96))
 - Revert fbf06ff5 - ([8f2567b](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/8f2567b6efd2924092cb5a5a382a5cabeaf7fafd))
 
-## [af-move-type-v0.7.3](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/af-move-type-v0.7.3)
+## [0.7.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-move-type-derive-v0.2.1...af-move-type-v0.7.3)
 
 ### ⛰️ Features
 

@@ -14,8 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Regenerate changelogs from scratch - ([288008f](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/288008f5b60193ea34b765d8ad605cf4f25207e9))
 
-
-## [af-sui-types-v0.7.1](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/af-sui-types-v0.7.1)
+## [0.7.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-types-v0.7.0...af-sui-types-v0.7.1)
 
 ### ⛰️ Features
 
@@ -23,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - *(af-sui-types)* Use string for `TransactionFromBase64Error::Base64` - ([3043e34](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/3043e3402faa2c4503235dc3505667b6e20a8858))
 - Deprecate `TransactionData::decode_base64` - ([f74b7d1](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/f74b7d150e6e0d94f10abcfd225108948235ccf2))
 
-## [af-sui-types-v0.7.0](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/af-sui-types-v0.7.0)
+## [0.7.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-types-v0.6.2...af-sui-types-v0.7.0)
 
 ### ⛰️ Features
 
@@ -56,7 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - *(af-sui-types)* [**breaking**] Bump to 0.7.0 - ([27e110a](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/27e110a9455d4a1b9c4d9c1a9e4e0c85728a1e96))
 - Revert fbf06ff5 - ([8f2567b](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/8f2567b6efd2924092cb5a5a382a5cabeaf7fafd))
 
-## [af-sui-types-v0.6.2](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/af-sui-types-v0.6.2)
+## [0.6.2](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-types-v0.6.1...af-sui-types-v0.6.2)
 
 ### ⛰️ Features
 
@@ -67,7 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - *(main)* Release af-sui-types 0.6.2 (#33) - ([5f069fa](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/5f069fadad974ecdca26bde7fa8d754e68037f92))
 - Remove cyclical dev dependencies - ([08d9a17](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/08d9a1710fb56c3a58663051eecf29a18e91594b))
 
-## [af-sui-types-v0.6.1](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/af-sui-types-v0.6.1)
+## [0.6.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-types-v0.6.0...af-sui-types-v0.6.1)
 
 ### 📚 Documentation
 
@@ -77,7 +76,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Release - ([4fa6779](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/4fa67794d13f77da7b4d516fe22f83afa025f541))
 
-## [af-sui-types-v0.6.0](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/)
+## [0.6.0](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/)
 
 ### ⛰️ Features
 

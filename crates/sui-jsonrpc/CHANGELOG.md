@@ -14,20 +14,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Regenerate changelogs from scratch - ([288008f](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/288008f5b60193ea34b765d8ad605cf4f25207e9))
 
-
-## [sui-jsonrpc-v0.12.2](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/sui-jsonrpc-v0.12.2)
+## [0.12.2](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-jsonrpc-v0.12.1...sui-jsonrpc-v0.12.2)
 
 ### ⚙️ Miscellaneous Tasks
 
 - Update itertools to 0.14 - ([bb9404f](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/bb9404fdd4df831bd923ac4b3f977f3c1f2582fd))
 
-## [sui-jsonrpc-v0.12.1](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/sui-jsonrpc-v0.12.1)
+## [0.12.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-jsonrpc-v0.12.0...sui-jsonrpc-v0.12.1)
 
 ### ⛰️ Features
 
 - Add `SuiClient::builder` - ([4958dd6](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/4958dd61277c0bc3e422be5a5edc70e0d3cdf2d7))
 
-## [sui-jsonrpc-v0.12.0](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/sui-jsonrpc-v0.12.0)
+## [0.12.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-jsonrpc-v0.11.0...sui-jsonrpc-v0.12.0)
 
 ### ⛰️ Features
 
@@ -44,7 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove TODOs over which we have no control - ([8629424](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/8629424525f2fdba504740c1cce728a48d8959dc))
 - Revert fbf06ff5 - ([8f2567b](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/8f2567b6efd2924092cb5a5a382a5cabeaf7fafd))
 
-## [sui-jsonrpc-v0.11.0](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/)
+## [0.11.0](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/)
 
 ### ⛰️ Features
 

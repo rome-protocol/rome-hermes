@@ -14,14 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Regenerate changelogs from scratch - ([288008f](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/288008f5b60193ea34b765d8ad605cf4f25207e9))
 
-
-## [sui-gql-client-v0.14.4](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/sui-gql-client-v0.14.4)
+## [0.14.4](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.14.3...sui-gql-client-v0.14.4)
 
 ### 🚜 Refactor
 
 - Use `graphql-extract` as much as possible - ([e87241f](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/e87241f785d771d0b9a55d6ed54494e2a9a9cac4))
 
-## [sui-gql-client-v0.14.3](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/sui-gql-client-v0.14.3)
+## [0.14.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.14.2...sui-gql-client-v0.14.3)
 
 ### 🚜 Refactor
 
@@ -29,7 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Simplify type aliases and improve docs - ([f2ab829](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/f2ab829f3110ebc2fa9fb7ddbf91f0509e8b9a32))
 - Inline all snapshot tests - ([c5fcff1](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/c5fcff103fe9e8667496359afadc2a71c3be9e0c))
 
-## [sui-gql-client-v0.14.1](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/sui-gql-client-v0.14.1)
+## [0.14.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.14.0...sui-gql-client-v0.14.1)
 
 ### ⛰️ Features
 
@@ -58,7 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - *(sui-gql-client)* Improve docs - ([fa74e4f](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/fa74e4fc935e5c545655e79b17d341bfd8e23e46))
 
-## [sui-gql-client-v0.14.0](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/sui-gql-client-v0.14.0)
+## [0.14.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.13.4...sui-gql-client-v0.14.0)
 
 ### ⛰️ Features
 
@@ -73,7 +72,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - *(af-sui-types)* [**breaking**] Bump to 0.7.0 - ([27e110a](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/27e110a9455d4a1b9c4d9c1a9e4e0c85728a1e96))
 - Revert fbf06ff5 - ([8f2567b](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/8f2567b6efd2924092cb5a5a382a5cabeaf7fafd))
 
-## [sui-gql-client-v0.13.4](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/sui-gql-client-v0.13.4)
+## [0.13.4](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.13.2...sui-gql-client-v0.13.4)
 
 ### ⛰️ Features
 

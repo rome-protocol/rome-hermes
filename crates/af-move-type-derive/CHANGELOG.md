@@ -14,15 +14,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Regenerate changelogs from scratch - ([288008f](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/288008f5b60193ea34b765d8ad605cf4f25207e9))
 
-
-## [af-move-type-derive-v0.2.2](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/af-move-type-derive-v0.2.2)
+## [0.2.2](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-move-type-derive-v0.2.1...af-move-type-derive-v0.2.2)
 
 ### 🧪 Testing
 
 - Derive MoveStruct for braced struct - ([c06ca8d](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/c06ca8d83d090ed6d310ece61f2d3841d66897ab))
 - More derive macro pass/fail scenarios - ([2240d84](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/2240d8459876b9baea7b674caf3ab64fe359408d))
 
-## [af-move-type-derive-v0.2.1](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/af-move-type-derive-v0.2.1)
+## [0.2.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-move-type-derive-v0.2.0...af-move-type-derive-v0.2.1)
 
 ### ⛰️ Features
 

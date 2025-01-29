@@ -14,8 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Regenerate changelogs from scratch - ([288008f](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/288008f5b60193ea34b765d8ad605cf4f25207e9))
 
-
-## [af-pyth-wrapper-v0.17.0](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/af-pyth-wrapper-v0.17.0)
+## [0.17.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-pyth-wrapper-v0.16.2...af-pyth-wrapper-v0.17.0)
 
 ### ⚙️ Miscellaneous Tasks
 
@@ -23,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - *(af-sui-types)* [**breaking**] Bump to 0.7.0 - ([27e110a](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/27e110a9455d4a1b9c4d9c1a9e4e0c85728a1e96))
 - Revert fbf06ff5 - ([8f2567b](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/8f2567b6efd2924092cb5a5a382a5cabeaf7fafd))
 
-## [af-pyth-wrapper-v0.16.2](https://github.com/AftermathFinance/aftermath-sdk-rust/releases/tag/af-pyth-wrapper-v0.16.2)
+## [0.16.2](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-pyth-wrapper-v0.16.0...af-pyth-wrapper-v0.16.2)
 
 ### ⛰️ Features
 
