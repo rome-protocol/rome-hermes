@@ -76,6 +76,7 @@ pub use sui_sdk_types::{
     TransactionExpiration,
     TransactionKind,
     TypeOrigin,
+    TypeParseError,
     TypeTag,
     UnchangedSharedKind,
     UpgradeInfo,
