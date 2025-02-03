@@ -8,6 +8,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.14.6](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.14.5...sui-gql-client-v0.14.6)
+
+### 🚜 Refactor
+
+- Remove lifetime bound on `Fut` - ([2a12176](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/2a12176c67dab92f6de4119e4dc8e01efc7bb01c))
+- Avoid copying `TransactionBlockFilter` - ([cf1c075](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/cf1c075107e89d94892f42e8655c849a8d660924))
+- Generalize queries::stream::forward a bit - ([0517bc0](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/0517bc0c4a04c6d57bdf75c6522bacf37722eb86))
+
+### 📚 Documentation
+
+- Standardize changelogs - ([383b40d](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/383b40d75c38f637aafe06438673f71e1c57d432))
+
+
 ## [0.14.5](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.14.4...sui-gql-client-v0.14.5)
 
 ### 📚 Documentation

@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.1.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-ptbuilder-v4.1.2...af-ptbuilder-v4.1.3)
+
+### 📚 Documentation
+
+- Standardize changelogs - ([383b40d](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/383b40d75c38f637aafe06438673f71e1c57d432))
+
+
 ## [4.1.2](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-ptbuilder-v4.1.1...af-ptbuilder-v4.1.2)
 
 ### 📚 Documentation

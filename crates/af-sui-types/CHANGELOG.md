@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-types-v0.7.2...af-sui-types-v0.7.3)
+
+### 📚 Documentation
+
+- Standardize changelogs - ([383b40d](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/383b40d75c38f637aafe06438673f71e1c57d432))
+
+### ⚙️ Miscellaneous Tasks
+
+- Re-export TypeParseError - ([6e930d6](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/6e930d6407b90dbfdd8667a68c3e94a73433daca))
+
+
 ## [0.7.2](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-types-v0.7.1...af-sui-types-v0.7.2)
 
 ### 📚 Documentation
