@@ -16,6 +16,7 @@ pub mod event_instance;
 pub mod graphql;
 pub mod order_helpers;
 pub mod order_id;
+#[cfg(feature = "slo")]
 pub mod slo;
 
 // Convenient aliases since these types will never exist onchain with a type argument other than an
