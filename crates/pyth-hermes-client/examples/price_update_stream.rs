@@ -4,6 +4,7 @@ use pyth_hermes_client::{EncodingType, PriceIdInput, PythClient};
 
 #[derive(Parser)]
 struct Args {
+    #[arg(default_value = "0x50c67b3fd225db8912a424dd4baed60ffdde625ed2feaaf283724f9608fea266")]
     ids: Vec<PriceIdInput>,
 
     #[arg(long)]
