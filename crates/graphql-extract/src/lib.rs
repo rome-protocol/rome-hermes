@@ -38,6 +38,7 @@ struct Root {
 
 struct Node {
     ident: Ident,
+    alias: Option<Ident>,
     optional: bool,
     iterable: bool,
     nested: Option<Nested>,
@@ -70,10 +71,19 @@ impl Parse for Node {
     fn parse(input: ParseStream) -> syn::Result<Self> {
         let mut self_ = Self {
             ident: input.parse()?,
+            alias: None,
             optional: false,
             iterable: false,
             nested: None,
         };
+
+        // Caller is allowed to set an alias like `alias: node`
+        let lookahead = input.lookahead1();
+        if lookahead.peek(Token![:]) {
+            let _: Token![:] = input.parse()?;
+            self_.alias = Some(self_.ident);
+            self_.ident = input.parse()?;
+        }
 
         while !input.is_empty() {
             let lookahead = input.lookahead1();
@@ -203,18 +213,21 @@ impl Node {
     fn generate_extract(self, data: Ident, path: String) -> (syn::Pat, TokenStream) {
         let Self {
             ident,
+            alias,
             optional,
             iterable,
             nested,
         } = self;
+        let field = &ident;
+        let ident = alias.as_ref().unwrap_or(&ident);
 
         let path = path + " -> " + ident.to_string().as_str();
 
         let assign = if optional {
             let err = path.clone() + " is null";
-            quote!(let #ident = #data.#ident.ok_or(#err)?;)
+            quote!(let #ident = #data.#field.ok_or(#err)?;)
         } else {
-            quote!(let #ident = #data.#ident;)
+            quote!(let #ident = #data.#field;)
         };
 
         let Some(inner) = nested else {
