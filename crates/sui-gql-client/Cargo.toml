@@ -76,7 +76,7 @@ serde_json = { version = "1", optional = true }
 default-features = false
 features         = ["build"]
 path             = "../sui-gql-schema"
-version = "0.8.4"
+version          = "0.8.4"
 
 
 [dev-dependencies]
@@ -89,6 +89,9 @@ rand       = "0.8"
 serde_json = "1"
 tokio      = { version = "1", features = ["full"] }
 tokio-test = "0.4"
+
+af-sui-types   = { path = "../af-sui-types" }
+sui-gql-schema = { path = "../sui-gql-schema", features = ["scalars"] }
 
 
 [[example]]
