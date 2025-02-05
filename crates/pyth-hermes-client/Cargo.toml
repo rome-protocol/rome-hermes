@@ -20,22 +20,31 @@ rustdoc-args = [
   "-Zunstable-options",
 ]
 
+[features]
+default    = ["rustls-tls"]
+native-tls = ["reqwest/native-tls"]
+rustls-tls = ["reqwest/rustls-tls"]
+stream     = ["dep:eventsource-stream", "dep:futures", "dep:serde_json", "reqwest/stream"]
+
 [dependencies]
-base64             = "0.22"
-eventsource-stream = "0.2"
-futures            = "0.3"
-hex                = "0.4"
-pyth-sdk           = "0.8"
-reqwest            = { version = "0.12", features = ["json", "stream"] }
-serde              = { version = "1", features = ["derive"] }
-serde_json         = "1"
-strum              = { version = "0.26", features = ["derive"] }
-thiserror          = "2"
-url                = "2"
+base64   = "0.22"
+hex      = "0.4"
+pyth-sdk = "0.8"
+# reqwest            = { version = "0.12", default-features = false, features = ["json", "stream"] }
+reqwest   = { version = "0.12", default-features = false, features = ["json"] }
+serde     = { version = "1", features = ["derive"] }
+strum     = { version = "0.26", features = ["derive"] }
+thiserror = "2"
+url       = "2"
+
+eventsource-stream = { version = "0.2", optional = true }
+futures            = { version = "0.3", optional = true }
+serde_json         = { version = "1", optional = true }
 
 [dev-dependencies]
 clap       = { version = "4", features = ["derive"] }
 color-eyre = "0.6"
+serde_json = "1"
 tokio      = { version = "1", features = ["full"] }
 
 [[example]]
@@ -51,5 +60,6 @@ name = "pyth-price-update"
 path = "examples/price_update.rs"
 
 [[example]]
-name = "pyth-price-update-stream"
-path = "examples/price_update_stream.rs"
+name              = "pyth-price-update-stream"
+path              = "examples/price_update_stream.rs"
+required-features = ["stream"]
