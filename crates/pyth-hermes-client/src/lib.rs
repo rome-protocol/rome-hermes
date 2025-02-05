@@ -17,7 +17,7 @@ pub enum Error {
     #[error("Building request payload: {0}")]
     RequestBuilder(reqwest::Error),
 
-    #[error("Executing request to server: {0}")]
+    #[error("Executing request to server: {0:?}")]
     Execute(reqwest::Error),
 
     #[error("Unsuccessful response status: {0}")]
