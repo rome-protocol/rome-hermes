@@ -8,6 +8,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.14.8](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.14.7...sui-gql-client-v0.14.8)
+
+### ⛰️ Features
+
+- Disable `reqwest` default features - ([34dcfc3](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/34dcfc3ccfcf4c33b1db1f9c7f16be913be31462))
+
+### 🐛 Bug Fixes
+
+- Required features - ([810aa83](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/810aa8379a2f5507c5990fe98dbf27d27e8a71ae))
+
+### 📚 Documentation
+
+- Section about HTTPS and TLS requirements - ([c907b9b](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/c907b9b74d3cef067bc2949282f00ec683acfb3c))
+
+
 ## [0.14.7](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.14.6...sui-gql-client-v0.14.7)
 
 ### ⚙️ Miscellaneous Tasks
