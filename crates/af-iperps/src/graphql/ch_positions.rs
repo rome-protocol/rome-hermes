@@ -5,7 +5,7 @@ use futures::Stream;
 use sui_gql_client::queries::fragments::{MoveValueRaw, PageInfoForward};
 pub use sui_gql_client::queries::Error;
 use sui_gql_client::queries::GraphQlClientExt as _;
-use sui_gql_client::{extract, schema, GraphQlClient, GraphQlResponseExt as _};
+use sui_gql_client::{schema, GraphQlClient, GraphQlResponseExt as _};
 
 type Position = MoveInstance<crate::position::Position>;
 
@@ -51,8 +51,17 @@ async fn request<C: GraphQlClient>(
         .map_err(Error::Client)?;
     let data = response.try_into_data()?;
 
-    let ChDfsConnection { nodes, page_info } = extract!(data?.clearing_house?.dfs);
+    let ChDfsConnection { nodes, page_info } = extract(data)?;
     Ok((page_info, nodes.into_iter().filter_map(filter_df)))
+}
+
+fn extract(data: Option<Query>) -> Result<ChDfsConnection, &'static str> {
+    graphql_extract::extract!(data => {
+        clearing_house? {
+            dfs
+        }
+    });
+    Ok(dfs)
 }
 
 fn filter_df(df: ChDf) -> Option<(u64, Position)> {

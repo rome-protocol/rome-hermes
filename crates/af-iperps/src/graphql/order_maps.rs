@@ -2,7 +2,7 @@ use af_sui_types::{Address, ObjectId};
 use enum_as_inner::EnumAsInner;
 use sui_gql_client::queries::fragments::DynamicFieldName;
 use sui_gql_client::queries::Error;
-use sui_gql_client::{extract, schema, GraphQlClient, GraphQlResponseExt};
+use sui_gql_client::{schema, GraphQlClient, GraphQlResponseExt};
 
 use crate::keys;
 
@@ -43,15 +43,40 @@ pub(super) async fn query<C: GraphQlClient>(
         .await
         .map_err(Error::Client)?
         .try_into_data()?;
-    let orderbook = extract!(data?
-        .ch?
-        .orderbook?
-        .value?
-        .as_variant(OrderbookDofValue::MoveObject));
+    let ordermaps = extract(data)?;
+    Ok(ordermaps)
+}
+
+fn extract(data: Option<Query>) -> Result<OrderMaps, &'static str> {
+    graphql_extract::extract!(data => {
+        ch? {
+            orderbook? {
+                value? {
+                    ... on OrderbookDofValue::MoveObject {
+                        orderbook: id
+                        asks? {
+                            value? {
+                                ... on MapDofValue::MoveObject {
+                                    asks: id
+                                }
+                            }
+                        }
+                        bids? {
+                            value? {
+                                ... on MapDofValue::MoveObject {
+                                    bids: id
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
     Ok(OrderMaps {
-        orderbook: orderbook.id,
-        asks: extract!(orderbook.asks?.value?.as_variant(MapDofValue::MoveObject)).id,
-        bids: extract!(orderbook.bids?.value?.as_variant(MapDofValue::MoveObject)).id,
+        orderbook,
+        asks,
+        bids,
     })
 }
 

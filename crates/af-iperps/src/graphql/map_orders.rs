@@ -5,7 +5,7 @@ use futures::Stream;
 use sui_gql_client::queries::fragments::{MoveValueRaw, PageInfoForward};
 pub use sui_gql_client::queries::Error;
 use sui_gql_client::queries::GraphQlClientExt as _;
-use sui_gql_client::{extract, schema, GraphQlClient, GraphQlResponseExt as _};
+use sui_gql_client::{schema, GraphQlClient, GraphQlResponseExt as _};
 
 use crate::orderbook::Order;
 use crate::ordered_map::Leaf;
@@ -52,8 +52,17 @@ async fn request<C: GraphQlClient>(
         .map_err(Error::Client)?;
     let data = response.try_into_data()?;
 
-    let MapDfsConnection { nodes, page_info } = extract!(data?.map?.map_dfs);
+    let MapDfsConnection { nodes, page_info } = extract(data)?;
     Ok((page_info, nodes.into_iter().flat_map(MapDf::into_orders)))
+}
+
+fn extract(data: Option<Query>) -> Result<MapDfsConnection, &'static str> {
+    graphql_extract::extract!(data => {
+        map? {
+            map_dfs
+        }
+    });
+    Ok(map_dfs)
 }
 
 #[cfg(test)]

@@ -4,7 +4,7 @@ use enum_as_inner::EnumAsInner;
 use sui_gql_client::queries::fragments::{DynamicFieldName, MoveValueRaw};
 use sui_gql_client::queries::outputs::RawMoveStruct;
 use sui_gql_client::queries::Error as QueryError;
-use sui_gql_client::{extract, schema, GraphQlClient, GraphQlResponseExt};
+use sui_gql_client::{schema, GraphQlClient, GraphQlResponseExt};
 
 use crate::keys;
 
@@ -44,11 +44,24 @@ async fn request<C: GraphQlClient>(
         .await
         .map_err(QueryError::Client)?
         .try_into_data()?;
-    Ok(
-        extract!(data?.ch?.vault?.value?.as_variant(VaultDfValue::MoveValue))
-            .try_into()
-            .expect("Vault is a struct"),
-    )
+    Ok(extract(data)?)
+}
+
+fn extract(data: Option<Query>) -> Result<RawMoveStruct, &'static str> {
+    graphql_extract::extract!(data => {
+        ch? {
+            vault? {
+                value? {
+                    ... on VaultDfValue::MoveValue {
+                        type_
+                        bcs
+                    }
+                }
+            }
+        }
+    });
+    let move_value = MoveValueRaw { type_, bcs };
+    Ok(move_value.try_into().expect("Vault is a struct"))
 }
 
 #[cfg(test)]

@@ -2,9 +2,10 @@ use af_move_type::MoveInstance;
 use af_sui_types::{Address, ObjectId, Version};
 use enum_as_inner::EnumAsInner;
 use futures::Stream;
+use graphql_extract::extract;
 use sui_gql_client::queries::fragments::{DynamicFieldName, MoveValueRaw, PageInfoForward};
 use sui_gql_client::queries::{Error, GraphQlClientExt as _};
-use sui_gql_client::{extract, schema, GraphQlClient, GraphQlResponseExt as _};
+use sui_gql_client::{schema, GraphQlClient, GraphQlResponseExt as _};
 
 use crate::orderbook::Order;
 use crate::ordered_map::Leaf;
@@ -70,18 +71,29 @@ async fn request<C: GraphQlClient>(
         .await
         .map_err(Error::Client)?
         .try_into_data()?;
-    let MapDfsConnection { nodes, page_info } = extract!(
-        data?
-            .clearing_house?
-            .orderbook_dof?
-            .orderbook?
-            .as_variant(OrderbookDofValue::MoveObject)
-            .map_dof?
-            .map?
-            .as_variant(MapDofValue::MoveObject)
-            .map_dfs
-    );
+    let MapDfsConnection { nodes, page_info } = extract(data)?;
     Ok((page_info, nodes.into_iter().flat_map(MapDf::into_orders)))
+}
+
+fn extract(data: Option<Query>) -> Result<MapDfsConnection, &'static str> {
+    extract!(data => {
+        clearing_house? {
+            orderbook_dof? {
+                orderbook? {
+                    ... on OrderbookDofValue::MoveObject {
+                        map_dof? {
+                            map? {
+                                ... on MapDofValue::MoveObject {
+                                    map_dfs
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+    Ok(map_dfs)
 }
 
 #[cfg(test)]

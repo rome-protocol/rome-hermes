@@ -29,6 +29,7 @@ graphql = [
     "dep:cynic",
     "dep:enum-as-inner",
     "dep:futures",
+    "dep:graphql-extract",
     "dep:sui-gql-client",
     "dep:sui-gql-schema",
     "sui-gql-client/move-type",
@@ -52,11 +53,12 @@ serde       = "1"
 thiserror   = "2"
 
 # GraphQL RPC (optional)
-async-stream   = { version = "0.3", optional = true }
-cynic          = { version = "3", optional = true }
-enum-as-inner  = { version = "0.6.1", optional = true }
-futures        = { version = "0.3", optional = true }
-sui-gql-client = { version = "0.14.8", path = "../sui-gql-client", default-features = false, optional = true }
+async-stream    = { version = "0.3", optional = true }
+cynic           = { version = "3", optional = true }
+enum-as-inner   = { version = "0.6", optional = true }
+futures         = { version = "0.3", optional = true }
+graphql-extract = { version = "0.0.3", path = "../graphql-extract", optional = true }
+sui-gql-client  = { version = "0.14", path = "../sui-gql-client", default-features = false, optional = true }
 
 # SLO
 bcs        = { version = "0.1", optional = true }
@@ -67,7 +69,7 @@ default-features = false
 features         = ["build"]
 optional         = true
 path             = "../sui-gql-schema"
-version = "0.8.4"
+version          = "0.8.4"
 
 
 [dev-dependencies]
