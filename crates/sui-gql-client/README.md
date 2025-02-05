@@ -49,3 +49,22 @@ as those automatically convert opaque types to more useful ones like [`af_sui_ty
 [`af_sui_types`]: https://docs.rs/af-sui-types/latest/af_sui_types/
 
 <!-- cargo-rdme end -->
+
+## Requests over HTTPS
+
+You need to import the TLS backend feature yourself in order to use HTTPS. Since this crate only provides a client implementation using `reqwest`, that means enabling one of its TLS features, e.g.,
+- `reqwest = { features = ["native-tls"], ... }`
+- `reqwest = { features = ["rustls-tls"], ... }`
+
+Otherwise, you'll get an error like
+```
+$ cargo run --example gql-latest-checkpoint
+# ...
+Error:
+   0: Client error: Inner(ReqwestError(reqwest::Error { kind: Request, url: "https://sui-testnet.mystenlabs.com/graphql", source: hyper_util::client::legacy::Error(Connect, "invalid URL, scheme is not http") }))
+
+Location:
+   crates/sui-gql-client/examples/latest_checkpoint.rs:21
+```
+
+This is why the `[dev-dependencies]` here use `reqwest = { features = ["rustls-tls"], ... }`, otherwise the crate examples would fail.
