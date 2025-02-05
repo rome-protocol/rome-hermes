@@ -4,14 +4,15 @@ use self::stream::UpdatePageInfo;
 use super::fragments::{PageInfoForward, TransactionBlockFilter};
 use super::stream;
 use crate::queries::Error;
-use crate::{extract, schema, GraphQlClient, GraphQlResponseExt as _};
+use crate::{schema, GraphQlClient, GraphQlResponseExt as _};
 
 type Item = (String, bool);
 
+#[expect(deprecated, reason = "Internal `extract` module deprecated")]
 pub(super) async fn query<C: GraphQlClient>(
     client: &C,
     transaction_digests: Vec<String>,
-) -> super::Result<impl Iterator<Item = Result<Item, extract::Error>>, C> {
+) -> super::Result<impl Iterator<Item = Result<Item, crate::extract::Error>>, C> {
     let filter = TransactionBlockFilter {
         transaction_ids: Some(transaction_digests),
         ..Default::default()
@@ -27,7 +28,7 @@ pub(super) async fn query<C: GraphQlClient>(
     while let Some(res) = stream.next().await {
         match res {
             Ok(item) => vec.push(Ok(item)),
-            Err(Error::MissingData(err)) => vec.push(Err(extract::Error::new(err))),
+            Err(Error::MissingData(err)) => vec.push(Err(crate::extract::Error::new(err))),
             Err(other) => return Err(other),
         }
     }

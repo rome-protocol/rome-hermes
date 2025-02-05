@@ -68,6 +68,7 @@ mod raw_client;
 #[cfg(feature = "reqwest")]
 pub mod reqwest;
 
+#[deprecated(since = "0.14.8", note = "use the graphql-extract crate")]
 pub mod extract;
 mod paged;
 

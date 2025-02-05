@@ -15,7 +15,7 @@ pub use bimap::BiMap;
 use futures::Stream;
 use outputs::{DynamicField, ObjectKey, RawMoveStruct, RawMoveValue};
 
-use crate::{extract, GraphQlClient, GraphQlErrors};
+use crate::{GraphQlClient, GraphQlErrors};
 
 mod current_epoch_id;
 mod epoch_final_checkpoint_num;
@@ -255,10 +255,11 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
     }
 
     /// Get execution status for the input transaction digests
+    #[expect(deprecated, reason = "Internal module deprecation")]
     async fn transaction_blocks_status(
         &self,
         transaction_digests: Vec<String>,
-    ) -> Result<impl Iterator<Item = extract::Result<(String, bool)>>, Self> {
+    ) -> Result<impl Iterator<Item = crate::extract::Result<(String, bool)>>, Self> {
         transaction_blocks_status::query(self, transaction_digests)
     }
 
@@ -301,6 +302,7 @@ pub enum Error<C: std::error::Error> {
     MissingData(String),
 }
 
+#[expect(deprecated, reason = "Internal module deprecation")]
 impl<C: std::error::Error> From<crate::extract::Error> for Error<C> {
     fn from(value: crate::extract::Error) -> Self {
         Self::MissingData(value.0)
