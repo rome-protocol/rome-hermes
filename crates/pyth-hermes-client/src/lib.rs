@@ -14,16 +14,16 @@ mod stream;
 #[derive(thiserror::Error, Debug)]
 #[non_exhaustive]
 pub enum Error {
-    #[error("Building request payload: {0}")]
+    #[error("Building request payload: {0:?}")]
     RequestBuilder(reqwest::Error),
 
     #[error("Executing request to server: {0:?}")]
     Execute(reqwest::Error),
 
-    #[error("Unsuccessful response status: {0}")]
+    #[error("Unsuccessful response status: {0:?}")]
     ResponseStatus(reqwest::Error),
 
-    #[error("Deserializing response body: {0}")]
+    #[error("Deserializing response body: {0:?}")]
     Deserialize(reqwest::Error),
 
     #[cfg(feature = "stream")]
