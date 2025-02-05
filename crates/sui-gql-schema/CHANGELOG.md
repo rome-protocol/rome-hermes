@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.4](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-schema-v0.8.3...sui-gql-schema-v0.8.4)
+
+### ⚙️ Miscellaneous Tasks
+
+- Ensure GraphQL schema is up-to-date - ([4a05cb9](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/4a05cb996ae6a47ada725a63a341e1721f83801b))
+
+
 ## [0.8.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-schema-v0.8.2...sui-gql-schema-v0.8.3)
 
 ### 📚 Documentation

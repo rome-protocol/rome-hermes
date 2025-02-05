@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.14.7](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.14.6...sui-gql-client-v0.14.7)
+
+### ⚙️ Miscellaneous Tasks
+
+- Updated the following local packages: sui-gql-schema, sui-gql-schema - ([0000000](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/0000000))
+
+
 ## [0.14.6](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.14.5...sui-gql-client-v0.14.6)
 
 ### 🚜 Refactor

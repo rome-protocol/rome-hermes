@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.23.9](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.23.8...af-iperps-v0.23.9)
+
+### ⛰️ Features
+
+- Add slo feature for af-iperps - ([df06c6a](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/df06c6a00f4a918e7880981c5dc104e8e22bfb14))
+
+
 ## [0.23.8](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.23.7...af-iperps-v0.23.8)
 
 ### 📚 Documentation
