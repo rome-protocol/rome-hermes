@@ -8,6 +8,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/pyth-hermes-client-v0.2.7...pyth-hermes-client-v0.3.0)
+
+### ⛰️ Features
+
+- [**breaking**] Make streams optional and allow tls backend choices - ([1288fdc](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/1288fdc33b7f257ec5881c678144f5454455e40c))
+
+### ⚙️ Miscellaneous Tasks
+
+- Improve error messages for `reqwest::Error` - ([8932d6e](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/8932d6ed3488288363a8a655f88a21f77e7ba1ee))
+- Improve `Execute` error message - ([b2762ff](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/b2762ffa84cd3459238eb94870b68d2a68e75df1))
+- Default value for pyth-price-update-stream example - ([5d7a984](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/5d7a984a419aeffa6cd43339e49c7481b64ba914))
+
+
 ## [0.2.7](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/pyth-hermes-client-v0.2.6...pyth-hermes-client-v0.2.7)
 
 ### 📚 Documentation
