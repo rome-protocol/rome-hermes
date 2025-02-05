@@ -59,7 +59,7 @@ async-stream = { version = "0.3", optional = true }
 futures      = { version = "0.3", optional = true }
 
 # Reqwest client (optional)
-reqwest = { version = "0.12", optional = true }
+reqwest = { version = "0.12", default-features = false, optional = true }
 
 # For pre-made queries (optional)
 af-sui-types = { version = "0.7.3", path = "../af-sui-types", optional = true }
@@ -86,6 +86,7 @@ color-eyre = "0.6"
 indicatif  = "0.17"
 insta      = "1"
 rand       = "0.8"
+reqwest    = { version = "0.12", default-features = false, features = ["rustls-tls"] }
 serde_json = "1"
 tokio      = { version = "1", features = ["full"] }
 tokio-test = "0.4"

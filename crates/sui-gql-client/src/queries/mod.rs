@@ -293,7 +293,7 @@ impl<T: GraphQlClient> GraphQlClientExt for T {}
 /// Generic error type for queries.
 #[derive(thiserror::Error, Clone, Debug)]
 pub enum Error<C: std::error::Error> {
-    #[error("Client error: {0}")]
+    #[error("Client error: {0:?}")]
     Client(C),
     #[error("In server response: {0}")]
     Server(#[from] GraphQlErrors),
