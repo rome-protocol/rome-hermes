@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.23.11](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.23.10...af-iperps-v0.23.11)
+
+### ⛰️ Features
+
+- Use `graphql-extract` with aliases - ([cb926ea](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/cb926eaa7460e3b7bda90bce8e21573d2951695e))
+
+
 ## [0.23.10](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.23.9...af-iperps-v0.23.10)
 
 ### ⚙️ Miscellaneous Tasks
