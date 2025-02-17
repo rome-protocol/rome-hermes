@@ -30,8 +30,8 @@ pub async fn query<C: GraphQlClient>(
     let df_value = data
         .owner
         .ok_or(missing_data!("Owner not found"))?
-        .dynamic_field
-        .ok_or(missing_data!("Dynamic field not found"))?
+        .dynamic_object_field
+        .ok_or(missing_data!("Dynamic object field not found"))?
         .value
         .ok_or(missing_data!("No dynamic field value"))?;
     match df_value {
@@ -116,7 +116,7 @@ struct Query {
 #[cynic(variables = "QueryVariables")]
 struct Owner {
     #[arguments(name: $name)]
-    dynamic_field: Option<_DynamicField>,
+    dynamic_object_field: Option<_DynamicField>,
 }
 
 #[derive(cynic::QueryFragment, Debug)]
