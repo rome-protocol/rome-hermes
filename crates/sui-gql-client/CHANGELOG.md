@@ -8,6 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.14.10](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.14.9...sui-gql-client-v0.14.10)
+
+### 🐛 Bug Fixes
+
+- Change `dynamic_field` to `dynamic_object_field` - ([be9675f](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/be9675f28da27c11e050a8e3227109f72cdef115))
+
+### ⚙️ Miscellaneous Tasks
+
+- `cargo insta review` - ([59f6254](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/59f625441fdedd012172410ad99927feee43fcad))
+- `cargo fmt` - ([6ef57a1](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/6ef57a1788c4447aa6c88aa229927845df3ddc88))
+
+
 ## [0.14.9](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.14.8...sui-gql-client-v0.14.9)
 
 ### ⛰️ Features

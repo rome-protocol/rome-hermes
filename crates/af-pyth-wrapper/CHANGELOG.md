@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.17.11](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-pyth-wrapper-v0.17.10...af-pyth-wrapper-v0.17.11)
+
+### ⚙️ Miscellaneous Tasks
+
+- Updated the following local packages: sui-gql-client - ([0000000](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/0000000))
+
+
 ## [0.17.10](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-pyth-wrapper-v0.17.9...af-pyth-wrapper-v0.17.10)
 
 ### ⚙️ Miscellaneous Tasks
