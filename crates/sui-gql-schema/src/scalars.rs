@@ -2,7 +2,7 @@ use std::str::FromStr;
 
 use af_sui_types::{encoding, Address as SuiAddress, ObjectId};
 use cynic::impl_scalar;
-use derive_more::{AsRef, Deref, Display, From, Into};
+use derive_more::with_trait::{AsRef, Deref, Display, From, Into};
 use serde::{Deserialize, Serialize};
 use serde_json::Value as Json;
 use serde_with::{base64, serde_as, Bytes, DisplayFromStr};
