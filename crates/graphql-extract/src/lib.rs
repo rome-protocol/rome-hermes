@@ -6,7 +6,7 @@
 //! 1. Use [insta] to define an inline snapshot test so that the query string is visible in the
 //!    module that defines the query types
 //! 1. Define an `extract` function that takes the root query type and returns the data of interest
-//! 1. Inside `extract`, use [`extract!`](crate::extract) as `extract!(data => { ... })`
+//! 1. Inside `extract`, use [`extract!`](crate::extract!) as `extract!(data => { ... })`
 //! 1. Inside the curly braces, past the query string from the snapshot test above
 //! 1. Change all node names from `camelCase` to `snake_case`
 //! 1. Add `?` after the nodes that are nullable
