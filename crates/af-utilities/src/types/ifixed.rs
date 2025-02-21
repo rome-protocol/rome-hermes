@@ -255,7 +255,7 @@ impl Zero for IFixed {
 // TODO: add IFixed::from_pyth_repr(i64, i32)
 // https://docs.rs/pyth-sdk/0.8.0/pyth_sdk/struct.Price.html
 impl IFixed {
-    const DECIMALS: u8 = 18;
+    pub const DECIMALS: u8 = 18;
 
     /// Create an `u64` from a `IFixed` applying the specified scaling factor.
     pub fn try_into_balance_with_scaling(self, scaling_factor: U256) -> Result<u64, Error> {
