@@ -47,6 +47,8 @@ pub enum FromStrErr {
     Fromf64(#[from] ParseFloatError),
 }
 
+// FIXME: currently doing str -> IFixed -> Fixed, but this will reject large positive number which
+// IFixed can't represent but Fixed can
 impl FromStr for Fixed {
     type Err = super::FromStrRadixError;
 
