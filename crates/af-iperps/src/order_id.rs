@@ -20,12 +20,12 @@ pub const fn order_id(price: u64, counter: u64, side: Side) -> u128 {
 
 /// Return order ID for ask with `price` and `counter`
 pub const fn order_id_ask(price: u64, counter: u64) -> u128 {
-    (price as u128) << 64 | (counter as u128)
+    ((price as u128) << 64) | (counter as u128)
 }
 
 /// Return order ID for bid with `price` and `counter`
 pub const fn order_id_bid(price: u64, counter: u64) -> u128 {
-    ((price ^ 0xffff_ffff_ffff_ffff) as u128) << 64 | (counter as u128)
+    (((price ^ 0xffff_ffff_ffff_ffff) as u128) << 64) | (counter as u128)
 }
 
 /// Returns price of a given `order_id`.

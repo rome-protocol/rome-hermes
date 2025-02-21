@@ -298,7 +298,7 @@ impl From<af_sui_types::Command> for Command {
             SplitCoins(args) => Self::SplitCoins(args.coin, args.amounts),
             MergeCoins(args) => Self::MergeCoins(args.coin, args.coins_to_merge),
             Publish(args) => Self::Publish(args.modules, args.dependencies),
-            MakeMoveVector(args) => Self::MakeMoveVec(args.type_.map(From::from), args.elements),
+            MakeMoveVector(args) => Self::MakeMoveVec(args.type_, args.elements),
             Upgrade(args) => {
                 Self::Upgrade(args.modules, args.dependencies, args.package, args.ticket)
             }

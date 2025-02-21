@@ -19,7 +19,7 @@ where
     let data = client
         .query::<Query, _>(Variables {
             address: object_id,
-            version: version.map(From::from),
+            version,
         })
         .await
         .map_err(Error::Client)?
