@@ -100,14 +100,11 @@ impl TryFrom<f64> for IFixed {
     }
 }
 
-impl From<IFixed> for f64 {
-    fn from(value: IFixed) -> Self {
-        let result_abs = Self::from(value.uabs());
-        if value.is_neg() {
-            -result_abs
-        } else {
-            result_abs
-        }
+impl TryFrom<IFixed> for f64 {
+    type Error = <Self as FromStr>::Err;
+
+    fn try_from(value: IFixed) -> Result<Self, Self::Error> {
+        value.to_string().parse()
     }
 }
 
@@ -393,5 +390,59 @@ mod tests {
             let z = x / y;
             assert!(z.trunc().abs() <= z.abs())
         }
+    }
+
+    fn ifixed_to_float(s: &str) -> Result<f64, <f64 as FromStr>::Err> {
+        IFixed::from_str(s).unwrap().try_into()
+    }
+
+    #[test]
+    fn try_into_f64() {
+        let mut float = ifixed_to_float("0.001").unwrap();
+        insta::assert_snapshot!(float, @"0.001");
+
+        float = ifixed_to_float("0.009").unwrap();
+        insta::assert_snapshot!(float, @"0.009");
+
+        float = ifixed_to_float("0.003").unwrap();
+        insta::assert_snapshot!(float, @"0.003");
+
+        float = ifixed_to_float("0.000000000000000001").unwrap();
+        insta::assert_snapshot!(float, @"0.000000000000000001");
+
+        float = ifixed_to_float("2.2238").unwrap();
+        insta::assert_snapshot!(float, @"2.2238");
+
+        float = ifixed_to_float("23000000000.0").unwrap();
+        insta::assert_snapshot!(float, @"23000000000");
+
+        float = ifixed_to_float("123456700000000000000.0").unwrap();
+        insta::assert_snapshot!(float, @"123456700000000000000");
+
+        float = ifixed_to_float("2.3e+10").unwrap();
+        insta::assert_snapshot!(float, @"23000000000");
+
+        float = ifixed_to_float("1.234567e+20").unwrap();
+        insta::assert_snapshot!(float, @"123456700000000000000");
+
+        float = ifixed_to_float("-2.2238").unwrap();
+        insta::assert_snapshot!(float, @"-2.2238");
+
+        float = ifixed_to_float("-1.234567e+20").unwrap();
+        insta::assert_snapshot!(float, @"-123456700000000000000");
+
+        float = ifixed_to_float(
+            "57896044618658097711785492504343953926634992332820282019728.792003956564819967",
+        )
+        .unwrap();
+        insta::assert_snapshot!(float, @"57896044618658100000000000000000000000000000000000000000000");
+        insta::assert_debug_snapshot!(float, @"5.78960446186581e58");
+
+        float = ifixed_to_float(
+            "-57896044618658097711785492504343953926634992332820282019728.792003956564819967",
+        )
+        .unwrap();
+        insta::assert_snapshot!(float, @"-57896044618658100000000000000000000000000000000000000000000");
+        insta::assert_debug_snapshot!(float, @"-5.78960446186581e58");
     }
 }
