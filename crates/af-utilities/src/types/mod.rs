@@ -1,12 +1,14 @@
 pub mod balance9;
 pub mod errors;
 pub mod fixed;
+pub(crate) mod from_str;
 pub mod i256;
 pub mod ifixed;
 pub mod onchain;
 
 pub use balance9::Balance9;
 pub use fixed::*;
+pub use from_str::Error as FromStrRadixError;
 pub use i256::*;
 pub use ifixed::*;
 

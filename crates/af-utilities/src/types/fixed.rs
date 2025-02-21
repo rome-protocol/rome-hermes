@@ -48,11 +48,14 @@ pub enum FromStrErr {
 }
 
 impl FromStr for Fixed {
-    type Err = FromStrErr;
+    type Err = super::FromStrRadixError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let signed: IFixed = s.parse()?;
-        Ok(signed.try_into()?)
+        signed.try_into().map_err(|e| super::FromStrRadixError {
+            string: s.to_owned(),
+            error: format!("{e:?}"),
+        })
     }
 }
 

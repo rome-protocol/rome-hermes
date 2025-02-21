@@ -1,5 +1,6 @@
 use af_utilities::types::{IFixed, I256};
 
+#[expect(clippy::unwrap_used)]
 fn main() {
     let min = i128::MIN;
     println!("{min}");
@@ -17,8 +18,8 @@ fn main() {
     println!("{}", I256::from(3) % (-2).into());
     println!("{}", I256::from(-3) % (-2).into());
 
-    let x: IFixed = 50.50.into();
-    let y: IFixed = 8.125.into();
+    let x: IFixed = 50.50.try_into().unwrap();
+    let y: IFixed = 8.125.try_into().unwrap();
     println!("{x} / {y} = {}", x / y);
     println!("({x} / {y}).integer() = {}", (x / y).integer());
     println!("({x} / {y}).trunc() = {}", (x / y).trunc());

@@ -35,4 +35,6 @@ name = "utilities_types"
 path = "examples/types.rs"
 
 [dev-dependencies]
-proptest = "1"
+bigdecimal = "0.4"
+insta      = "1"
+proptest   = "1"

@@ -85,24 +85,18 @@ impl TryFrom<IFixed> for Fixed {
 }
 
 impl FromStr for IFixed {
-    type Err = <f64 as FromStr>::Err;
+    type Err = super::FromStrRadixError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let float: f64 = s.parse()?;
-        Ok(float.into())
+        super::from_str::ifixed_from_str(s)
     }
 }
 
-impl From<f64> for IFixed {
-    fn from(value: f64) -> Self {
-        let max_i256 = U256::max_value() >> 1;
-        let unsigned_inner = Fixed::from(value.abs()).into_inner().min(max_i256);
-        let unsigned_inner = I256::from_inner(unsigned_inner);
-        Self(if value.is_sign_negative() {
-            unsigned_inner.neg()
-        } else {
-            unsigned_inner
-        })
+impl TryFrom<f64> for IFixed {
+    type Error = super::FromStrRadixError;
+
+    fn try_from(value: f64) -> Result<Self, Self::Error> {
+        super::from_str::ifixed_from_str(&value.to_string())
     }
 }
 
@@ -213,10 +207,10 @@ impl Div for IFixed {
 /// # Examples
 /// ```
 /// # use af_utilities::types::IFixed;
-/// let x: IFixed = 50.50.into();
-/// let y: IFixed = 8.125.into();
+/// let x: IFixed = 50.50.try_into().unwrap();
+/// let y: IFixed = 8.125.try_into().unwrap();
 /// let remainder = x - (x / y).trunc() * y;
-/// assert_eq!(x % y, IFixed::from(1.75));
+/// assert_eq!(x % y, IFixed::try_from(1.75).unwrap());
 /// ```
 impl Rem for IFixed {
     type Output = Self;
