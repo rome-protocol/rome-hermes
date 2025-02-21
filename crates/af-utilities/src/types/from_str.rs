@@ -17,6 +17,7 @@
 use af_sui_types::U256;
 
 use super::IFixed;
+use crate::types::onchain::max_i256;
 use crate::I256;
 
 const IFIXED_SCALE: i64 = 18;
@@ -29,9 +30,14 @@ pub struct Error {
     pub error: String,
 }
 
-type Result<T> = std::result::Result<T, Error>;
+pub(crate) fn ifixed_from_str(s: &str) -> Result<IFixed, Error> {
+    convert(s).map_err(|error| Error {
+        string: s.to_owned(),
+        error,
+    })
+}
 
-pub(crate) fn ifixed_from_str(s: &str) -> Result<IFixed> {
+fn convert(s: &str) -> Result<IFixed, String> {
     use std::str::FromStr as _;
 
     let exp_separator: &[_] = &['e', 'E'];
@@ -47,19 +53,14 @@ pub(crate) fn ifixed_from_str(s: &str) -> Result<IFixed> {
             let (base, e_exp) = s.split_at(loc);
             (
                 base,
-                i128::from_str(&e_exp[1..]).map_err(|e| Error {
-                    string: s.to_owned(),
-                    error: format!("Couldn't convert exponent to i128: {e:?}"),
-                })?,
+                i128::from_str(&e_exp[1..])
+                    .map_err(|e| format!("Couldn't convert exponent to i128: {e:?}"))?,
             )
         }
     };
 
     if base_part.is_empty() {
-        return Err(Error {
-            string: s.to_owned(),
-            error: "Missing base part of the number".into(),
-        });
+        return Err("Missing base part of the number".into());
     }
 
     let mut digit_buffer = String::new();
@@ -95,10 +96,7 @@ pub(crate) fn ifixed_from_str(s: &str) -> Result<IFixed> {
     let scale = decimal_offset
         .checked_sub(exponent_value)
         .and_then(|scale| i64::try_from(scale).ok())
-        .ok_or_else(|| Error {
-            string: s.to_owned(),
-            error: format!("Exponent overflow when parsing '{}'", s),
-        })?;
+        .ok_or_else(|| format!("Exponent overflow when parsing '{}'", s))?;
 
     let digits = if scale < IFIXED_SCALE {
         // If the scale is smaller than IFixed's, then we need more 0s for the underlying u256
@@ -109,21 +107,18 @@ pub(crate) fn ifixed_from_str(s: &str) -> Result<IFixed> {
         // In this case, the number has more decimals than IFixed supports, so we truncate.
         digits[0..(digits.len() - (scale - IFIXED_SCALE) as usize)].to_owned()
     };
-    dbg!(&digits);
     let is_neg = digits.starts_with('-');
 
     let u256_str = if is_neg { &digits[1..] } else { &digits };
-    let inner = U256::from_str_radix(u256_str, RADIX).map_err(|e| Error {
-        string: s.to_owned(),
-        error: format!("Parsing inner u256: {e:?}"),
-    })?;
+    let inner =
+        U256::from_str_radix(u256_str, RADIX).map_err(|e| format!("Parsing inner u256: {e:?}"))?;
+
+    if inner > max_i256() {
+        return Err(format!("Inner digits exceed maximum '{}'", max_i256()));
+    }
+
     let unsigned = IFixed::from_inner(I256::from_inner(inner));
     Ok(if is_neg { -unsigned } else { unsigned })
-}
-
-#[cfg(test)]
-fn ifixed_from_f64(v: f64) -> Result<IFixed> {
-    ifixed_from_str(&v.to_string())
 }
 
 #[cfg(test)]
@@ -167,6 +162,10 @@ mod tests {
         float = 2.2238;
         let ifixed = IFixed::from_f64_faulty(float);
         insta::assert_snapshot!(ifixed, @"2.223800000000000256");
+    }
+
+    fn ifixed_from_f64(v: f64) -> std::result::Result<IFixed, super::Error> {
+        ifixed_from_str(&v.to_string())
     }
 
     #[test]
@@ -216,6 +215,56 @@ mod tests {
 
         let ifixed = ifixed_from_str("-1.234567e+20").unwrap();
         insta::assert_snapshot!(ifixed, @"-123456700000000000000.0");
+
+        let ifixed = ifixed_from_str(
+            "57896044618658097711785492504343953926634992332820282019728.792003956564819967",
+        )
+        .unwrap();
+        insta::assert_snapshot!(ifixed, @"57896044618658097711785492504343953926634992332820282019728.792003956564819967");
+
+        let ifixed = ifixed_from_str(
+            "-57896044618658097711785492504343953926634992332820282019728.792003956564819967",
+        )
+        .unwrap();
+        insta::assert_snapshot!(ifixed, @"-57896044618658097711785492504343953926634992332820282019728.792003956564819967");
+
+        let err = ifixed_from_str(
+            "57896044618658097711785492504343953926634992332820282019728.792003956564819968",
+        )
+        .unwrap_err();
+        insta::assert_debug_snapshot!(err, @r###"
+        Error {
+            string: "57896044618658097711785492504343953926634992332820282019728.792003956564819968",
+            error: "Inner digits exceed maximum '57896044618658097711785492504343953926634992332820282019728792003956564819967'",
+        }
+        "###);
+
+        float = f64::INFINITY;
+        let err = ifixed_from_f64(float).unwrap_err();
+        insta::assert_debug_snapshot!(err, @r###"
+        Error {
+            string: "inf",
+            error: "Parsing inner u256: U256FromStrError(FromStrRadixErr { kind: InvalidCharacter, source: Some(Dec(InvalidCharacter)) })",
+        }
+        "###);
+
+        float = f64::NEG_INFINITY;
+        let err = ifixed_from_f64(float).unwrap_err();
+        insta::assert_debug_snapshot!(err, @r###"
+        Error {
+            string: "-inf",
+            error: "Parsing inner u256: U256FromStrError(FromStrRadixErr { kind: InvalidCharacter, source: Some(Dec(InvalidCharacter)) })",
+        }
+        "###);
+
+        float = f64::NAN;
+        let err = ifixed_from_f64(float).unwrap_err();
+        insta::assert_debug_snapshot!(err, @r###"
+        Error {
+            string: "NaN",
+            error: "Parsing inner u256: U256FromStrError(FromStrRadixErr { kind: InvalidCharacter, source: Some(Dec(InvalidCharacter)) })",
+        }
+        "###);
     }
     //==============================================================================================
     // Previous attempt at a 'lossless' conversion
