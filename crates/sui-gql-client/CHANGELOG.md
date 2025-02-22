@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.14.11](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.14.10...sui-gql-client-v0.14.11)
+
+### 🐛 Bug Fixes
+
+- Rust v1.85.0 Clippy lints - ([76d0110](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/76d0110eea8a0f2881125c0c8d5ba2b45f0c27fb))
+
+
 ## [0.14.10](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.14.9...sui-gql-client-v0.14.10)
 
 ### 🐛 Bug Fixes

@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.23.12](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.23.11...af-iperps-v0.23.12)
+
+### 🐛 Bug Fixes
+
+- Rust v1.85.0 Clippy lints - ([76d0110](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/76d0110eea8a0f2881125c0c8d5ba2b45f0c27fb))
+
+
 ## [0.23.11](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.23.10...af-iperps-v0.23.11)
 
 ### ⛰️ Features

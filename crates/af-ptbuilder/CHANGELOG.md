@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.1.4](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-ptbuilder-v4.1.3...af-ptbuilder-v4.1.4)
+
+### 🐛 Bug Fixes
+
+- Rust v1.85.0 Clippy lints - ([76d0110](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/76d0110eea8a0f2881125c0c8d5ba2b45f0c27fb))
+
+
 ## [4.1.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-ptbuilder-v4.1.2...af-ptbuilder-v4.1.3)
 
 ### 📚 Documentation

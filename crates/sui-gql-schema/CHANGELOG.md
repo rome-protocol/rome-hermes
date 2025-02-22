@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.5](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-schema-v0.8.4...sui-gql-schema-v0.8.5)
+
+### 🐛 Bug Fixes
+
+- *(sui-gql-schema)* Use `derive_more::with_trait` - ([d99d739](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/d99d739e68dee4513d6f68386d0aa926dd8b4166))
+
+
 ## [0.8.4](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-schema-v0.8.3...sui-gql-schema-v0.8.4)
 
 ### ⚙️ Miscellaneous Tasks

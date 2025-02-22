@@ -8,6 +8,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-utilities-v0.7.3...af-utilities-v0.8.0)
+
+### ⛰️ Features
+
+- *(af-utilities)* [**breaking**] `IFixed` -> `f64` - ([eebff56](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/eebff564390fd922fb72604dcb3c49b36dba1090))
+- *(af-utilities)* [**breaking**] Better conversions from f64 - ([4c872e5](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/4c872e56e713650261a9b8b32baf98ed082d30b6))
+- *(af-utilities)* Re-export numerical types at the top-level - ([d1e16db](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/d1e16db45ef8d325604d2ac40e44076b928fe37e))
+- Make `IFixed::DECIMALS` public - ([3cafb31](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/3cafb31dfc24f1f9c787a6b730694aacbe895fd5))
+
+### 🧪 Testing
+
+- Failure cases for f64 -> IFixed - ([6736d4a](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/6736d4a3d3e9d1052e9201314e08b73e98cd2f83))
+
+### ⚙️ Miscellaneous Tasks
+
+- Add FIXME for `Fixed::from_str` - ([301b782](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/301b78249056223d7a7bee90a5f451972517ab74))
+
+
 ## [0.7.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-utilities-v0.7.2...af-utilities-v0.7.3)
 
 ### 📚 Documentation

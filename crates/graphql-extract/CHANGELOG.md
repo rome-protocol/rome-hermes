@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.5](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/graphql-extract-v0.0.4...graphql-extract-v0.0.5)
+
+### 📚 Documentation
+
+- *(graphql-extract)* Disambiguate intralink to macro - ([3acf503](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/3acf503df4270eeff78bab64494f20033f237ec8))
+
+
 ## [0.0.4](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/graphql-extract-v0.0.3...graphql-extract-v0.0.4)
 
 ### ⛰️ Features

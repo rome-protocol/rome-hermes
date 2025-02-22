@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.11.6](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-faucet-v0.11.5...af-faucet-v0.11.6)
+
+### ⚙️ Miscellaneous Tasks
+
+- Updated the following local packages: af-move-type, af-sui-types, af-sui-pkg-sdk, sui-framework-sdk - ([0000000](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/0000000))
+
+
 ## [0.11.5](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-faucet-v0.11.4...af-faucet-v0.11.5)
 
 ### 📚 Documentation
