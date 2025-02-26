@@ -148,5 +148,11 @@ mod tests {
         units = (u64::MAX, 1);
         let ok = units.lots_to_ifixed(u64::MAX);
         insta::assert_snapshot!(ok, @"340282366920938463426481119284.349108225");
+
+        units = (100000, 1000);
+        let min_amount = units.lots_to_ifixed(1);
+        insta::assert_snapshot!(min_amount, @"0.0001");
+        let price_precision = units.price_to_ifixed(1);
+        insta::assert_snapshot!(price_precision, @"0.01");
     }
 }
