@@ -8,6 +8,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.24.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.24.0...af-iperps-v0.24.1)
+
+### ⛰️ Features
+
+- *(af-iperps)* `math` module - ([09272e2](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/09272e259ea8806c6e1b37cb14864d426feae56c))
+
+### 📚 Documentation
+
+- *(af-iperps)* Typo - ([4bcdf58](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/4bcdf58c30c87202975bb2d2745d393a33cc5213))
+
+### 🧪 Testing
+
+- *(af-iperps)* Min amount and price precision showcase - ([53e2bea](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/53e2bea720339f3f64e631dc178dd60150b89b29))
+
+
 ## [0.23.12](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.23.11...af-iperps-v0.23.12)
 
 ### 🐛 Bug Fixes
