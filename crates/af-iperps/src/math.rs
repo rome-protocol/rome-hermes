@@ -27,7 +27,7 @@ pub trait OrderBookUnits {
     ///
     /// Note that this:
     /// - rounds the equivalent ticks/lot **down** to the nearest integer.
-    /// - errors if the equivalent ticks/lot < 1, signalining not enough precision.
+    /// - errors if the equivalent ticks/lot < 1, signaling not enough precision.
     fn ifixed_to_price(&self, ifixed: IFixed) -> Result<u64, Error> {
         if ifixed.is_zero() {
             return Ok(0);
