@@ -48,6 +48,7 @@ sui-framework-sdk = { version = "0.10.6", path = "../sui-framework-sdk" }
 
 clap        = { version = "4", features = ["derive"] }
 derive_more = { version = "2", features = ["display", "from", "is_variant", "try_into"] }
+num-traits  = "0.2"
 remain      = "0.2"
 serde       = "1"
 thiserror   = "2"
@@ -69,7 +70,7 @@ default-features = false
 features         = ["build"]
 optional         = true
 path             = "../sui-gql-schema"
-version = "0.8.5"
+version          = "0.8.5"
 
 
 [dev-dependencies]

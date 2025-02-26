@@ -14,6 +14,7 @@ pub mod event_ext;
 pub mod event_instance;
 #[cfg(feature = "graphql")]
 pub mod graphql;
+pub mod math;
 pub mod order_helpers;
 pub mod order_id;
 #[cfg(feature = "slo")]
@@ -25,6 +26,8 @@ pub type Account = account::Account<Otw>;
 pub type AccountTypeTag = account::AccountTypeTag<Otw>;
 pub type ClearingHouse = clearing_house::ClearingHouse<Otw>;
 pub type ClearingHouseTypeTag = clearing_house::ClearingHouseTypeTag<Otw>;
+pub type SubAccount = subaccount::SubAccount<Otw>;
+pub type SubAccountTypeTag = subaccount::SubAccountTypeTag<Otw>;
 pub type Vault = clearing_house::Vault<Otw>;
 pub type VaultTypeTag = clearing_house::VaultTypeTag<Otw>;
 
