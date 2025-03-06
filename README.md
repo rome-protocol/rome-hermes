@@ -134,7 +134,7 @@ let resp = jrpc
 resp.check_execution_status()?;
 ```
 
-Over time, a lot of JSON-RPC methods used above will be available through GraphQL, so that you can use only one client.
+Over time, a lot of JSON-RPC methods used above will be available through GraphQL/gRPC, since the former will be deprecated.
 
 #### Programmable Transaction Blocks (PTBs)
 
