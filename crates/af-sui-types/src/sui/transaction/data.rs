@@ -234,18 +234,14 @@ impl ObjectArg {
     ///
     /// Only system transactions acquire mutable references to the clock.
     pub const CLOCK_IMM: Self = Self::SharedObject {
-        id: ObjectId::new(strict_from_str(
-            "0000000000000000000000000000000000000000000000000000000000000006",
-        )),
+        id: crate::object_id(b"0x6"),
         initial_shared_version: 1,
         mutable: false,
     };
 
     /// Argument for transactions acquiring an immutable reference to the system state.
     pub const SYSTEM_STATE_IMM: Self = Self::SharedObject {
-        id: ObjectId::new(strict_from_str(
-            "0000000000000000000000000000000000000000000000000000000000000005",
-        )),
+        id: crate::object_id(b"0x5"),
         initial_shared_version: 1,
         mutable: false,
     };
