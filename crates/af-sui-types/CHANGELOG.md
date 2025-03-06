@@ -8,6 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.6](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-types-v0.7.5...af-sui-types-v0.7.6)
+
+### ⛰️ Features
+
+- ObjectId::SYSTEM_STATE_MUT - ([4b9bd6a](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/4b9bd6a20fad5c0f0731be64faff0b99ce2dac9e))
+
+### ⚙️ Miscellaneous Tasks
+
+- Remove unused const_address::strict_from_str - ([e49a3ab](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/e49a3ab3b68084bb11af79b85009b46183e300af))
+- ObjectId const id declarations - ([6631417](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/66314171b0ef4cd97b248db1145da8833c8f4c3c))
+
+
 ## [0.7.5](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-types-v0.7.4...af-sui-types-v0.7.5)
 
 ### ⛰️ Features
