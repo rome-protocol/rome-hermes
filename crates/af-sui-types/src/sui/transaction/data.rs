@@ -242,14 +242,19 @@ impl ObjectArg {
     };
 
     /// Argument for transactions acquiring an immutable reference to the system state.
-    ///
-    /// Only system transactions acquire mutable references to the system state.
     pub const SYSTEM_STATE_IMM: Self = Self::SharedObject {
         id: ObjectId::new(strict_from_str(
             "0000000000000000000000000000000000000000000000000000000000000005",
         )),
         initial_shared_version: 1,
         mutable: false,
+    };
+
+    /// Argument for transactions acquiring a mutable reference to the system state.
+    pub const SYSTEM_STATE_MUT: Self = Self::SharedObject {
+        id: crate::object_id(b"0x5"),
+        initial_shared_version: 1,
+        mutable: true,
     };
 
     pub const fn id(&self) -> ObjectId {
