@@ -35,13 +35,6 @@ struct ObjectFilter<'a> {
     type_: Option<&'a scalars::TypeTag>,
     owner: Option<&'a Address>,
     object_ids: Option<&'a [ObjectId]>,
-    object_keys: Option<&'a [ObjectKey<'a>]>,
-}
-
-#[derive(cynic::InputObject, Clone, Debug)]
-struct ObjectKey<'a> {
-    object_id: &'a ObjectId,
-    version: Version,
 }
 
 pub async fn query<C: GraphQlClient>(

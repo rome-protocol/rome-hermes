@@ -8,6 +8,7 @@ use af_sui_types::{
     ObjectRef,
     StructTag,
     TransactionData,
+    Version,
 };
 // For `object_args!` macro only
 #[doc(hidden)]
@@ -31,6 +32,7 @@ mod latest_object_version;
 mod latest_objects_version;
 mod latest_version_at_checkpoint_v2;
 mod max_page_size;
+mod multi_get_objects;
 mod object_args;
 mod object_args_and_content;
 mod object_content;
@@ -86,7 +88,7 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
         events_backward::query(self, filter, cursor, page_size)
     }
 
-    /// The full [`Object`] contents with the possibility to filter by owner or object type.
+    /// The latest full [`Object`] contents with the possibility to filter by owner or object type.
     fn filtered_full_objects(
         &self,
         owner: Option<SuiAddress>,
@@ -101,23 +103,31 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
         full_object::query(self, object_id, version)
     }
 
-    /// The full [`Object`] contents at certain versions or the latest if not specified.
+    /// The full [`Object`] contents at their latest versions.
     ///
     /// Fails if any requested object id is not in the final map.
     ///
     /// # Note
     ///
     /// The check for returned object ids is just so that the caller can safely do `map[object_id]`
-    /// on the returned map. Keep in mind:
-    /// - The result if an object id is repeated in `objects` is undefined. Avoid doing so.
-    /// - This won't check if the returned object version matches the requested version (if any)
-    ///   for each object
-    async fn full_objects(
+    /// on the returned map. Keep in mind that the result if an object id is repeated in `objects`
+    /// is undefined. Avoid doing so.
+    async fn latest_full_objects(
         &self,
-        objects: impl IntoIterator<Item = (ObjectId, Option<u64>)> + Send,
+        objects: impl IntoIterator<Item = ObjectId> + Send,
         page_size: Option<u32>,
     ) -> Result<HashMap<ObjectId, Object>, Self> {
         full_objects::query(self, objects, page_size)
+    }
+
+    /// The full [`Object`] contents at specific versions.
+    ///
+    /// Duplicate object keys are automatically discarded.
+    async fn multi_get_objects(
+        &self,
+        keys: impl IntoIterator<Item = (ObjectId, Version)> + Send,
+    ) -> Result<Vec<Object>, Self> {
+        self::multi_get_objects::query(self, keys)
     }
 
     /// Genesis transaction of the Sui network instance.
@@ -169,7 +179,7 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
     /// Get a sequence of object args and contents corresponding to `object_ids`, but not
     /// necessarily in the same order.
     ///
-    /// **NOTE**: prefer [`GraphQlClientExt::full_objects`] instead and call `Object::object_arg`
+    /// **NOTE**: prefer [`GraphQlClientExt::latest_full_objects`] instead and call `Object::object_arg`
     /// on each returned object.
     ///
     /// The `mutable` argument controls whether we want to create mutable [`ObjectArg`]s, if they

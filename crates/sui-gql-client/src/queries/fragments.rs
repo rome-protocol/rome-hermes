@@ -5,34 +5,8 @@ use sui_gql_schema::{scalars, schema};
 // ====================================================================================================
 //  Input objects
 // ====================================================================================================
-pub use self::object_filter_legacy::ObjectFilter;
 
-#[expect(deprecated, reason = "Derived impls using ObjectFilter::object_keys")]
-mod object_filter_legacy {
-    use af_sui_types::{Address, ObjectId};
-    use sui_gql_schema::{scalars, schema};
-
-    use super::ObjectKey;
-
-    #[derive(cynic::InputObject, Clone, Debug, Default)]
-    pub struct ObjectFilter {
-        /// Filter objects by their type's `package`, `package::module`, or their fully qualified type
-        /// name.
-        ///
-        /// Generic types can be queried by either the generic type name, e.g. `0x2::coin::Coin`, or by
-        /// the full type name, such as `0x2::coin::Coin<0x2::sui::SUI>`.
-        #[cynic(rename = "type")]
-        pub type_: Option<scalars::TypeTag>,
-        pub owner: Option<Address>,
-        pub object_ids: Option<Vec<ObjectId>>,
-        /// Filter for live objects by their ID and version.
-        #[deprecated = "this input filter has been deprecated in favor of `multiGetObjects` query as \
-        it does not make sense to query for live objects by their versions. This filter will be \
-        removed with v1.42.0 release."]
-        pub object_keys: Option<Vec<ObjectKey>>,
-    }
-}
-
+/// This is only used in `Query.multiGetObjects` currently
 #[derive(cynic::InputObject, Clone, Debug)]
 pub struct ObjectKey {
     pub object_id: ObjectId,

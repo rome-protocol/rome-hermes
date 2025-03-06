@@ -1,36 +1,33 @@
 use std::collections::HashMap;
 
 use af_sui_types::ObjectId;
+use futures::TryStreamExt as _;
 use sui_gql_schema::schema;
 
-use super::fragments::{MoveValueRaw, ObjectFilter};
+use super::fragments::{MoveValueRaw, ObjectFilterV2};
 use super::objects_flat::Variables;
 use super::outputs::RawMoveStruct;
 use super::{objects_flat, Error};
-use crate::{missing_data, GraphQlClient};
+use crate::{missing_data, GraphQlClient, GraphQlResponseExt as _};
 
-pub async fn query<C: GraphQlClient>(
+pub(super) async fn query<C: GraphQlClient>(
     client: &C,
     object_ids: Vec<ObjectId>,
-) -> Result<HashMap<ObjectId, RawMoveStruct>, Error<C::Error>> {
+) -> super::Result<HashMap<ObjectId, RawMoveStruct>, C> {
     let vars = Variables {
         after: None,
         first: None,
-        filter: Some(ObjectFilter {
-            object_ids: Some(object_ids),
+        filter: Some(ObjectFilterV2 {
+            object_ids: Some(&object_ids),
             ..Default::default()
         }),
     };
-    let (init, mut pages) = client
-        .query_paged::<Query>(vars)
-        .await
-        .map_err(Error::Client)?
-        .try_into_data()?
-        .ok_or(missing_data!("Empty response data"))?;
-    pages.insert(0, init);
+
+    let mut stream = std::pin::pin!(super::stream::forward(client, vars, request));
 
     let mut raw_objs = HashMap::new();
-    for object in pages.into_iter().flat_map(|q| q.objects.nodes) {
+
+    while let Some(object) = stream.try_next().await? {
         let object_id = object.object_id;
         let struct_ = object
             .as_move_object
@@ -41,10 +38,32 @@ pub async fn query<C: GraphQlClient>(
             .expect("Only structs can be top-level objects");
         raw_objs.insert(object_id, struct_);
     }
+
     Ok(raw_objs)
 }
 
 type Query = objects_flat::Query<Object>;
+
+async fn request<C: GraphQlClient>(
+    client: &C,
+    vars: Variables<'_>,
+) -> super::Result<super::stream::Page<impl Iterator<Item = super::Result<Object, C>> + 'static>, C>
+{
+    let data = client
+        .query::<Query, _>(vars)
+        .await
+        .map_err(Error::Client)?
+        .try_into_data()?;
+
+    graphql_extract::extract!(data => {
+        objects
+    });
+
+    Ok(super::stream::Page {
+        info: objects.page_info.into(),
+        data: objects.nodes.into_iter().map(Ok),
+    })
+}
 
 #[cfg(test)]
 #[allow(clippy::unwrap_used)]

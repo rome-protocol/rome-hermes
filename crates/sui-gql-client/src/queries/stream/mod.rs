@@ -6,7 +6,6 @@ use std::future::Future;
 use futures::Stream;
 
 use super::fragments::PageInfo;
-use super::Result;
 use crate::GraphQlClient;
 
 /// Helper for paginating queries forward.
@@ -16,18 +15,19 @@ use crate::GraphQlClient;
 /// - `vars`: [`cynic::QueryVariables`] fragment; must implement [`UpdatePageInfo`]
 /// - `request`: async function that maps `(client, vars) -> Page<Iter>`, where `Iter` is an
 ///   iterator over items of a **single** page's results
-pub(super) fn forward<'a, Client, Vars, Req, Fut, Iter, T>(
+pub(super) fn forward<'a, Client, Vars, Req, Fut, Iter, T, Err>(
     client: &'a Client,
     mut vars: Vars,
     mut request: Req,
-) -> impl Stream<Item = Result<T, Client>> + 'a
+) -> impl Stream<Item = Result<T, Err>> + 'a
 where
     Client: GraphQlClient,
     Vars: 'a + UpdatePageInfo + Clone,
     Req: 'a + FnMut(&'a Client, Vars) -> Fut,
-    Fut: Future<Output = Result<Page<Iter>, Client>>,
-    Iter: IntoIterator<Item = Result<T, Client>>,
+    Fut: Future<Output = Result<Page<Iter>, Err>>,
+    Iter: IntoIterator<Item = Result<T, Err>>,
     T: 'static,
+    Err: 'a,
 {
     async_stream::try_stream! {
         let mut has_next_page = true;

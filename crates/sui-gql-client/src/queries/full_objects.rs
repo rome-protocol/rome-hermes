@@ -3,41 +3,24 @@ use std::collections::HashMap;
 use af_sui_types::{Object, ObjectId};
 use futures::{StreamExt as _, TryStreamExt as _};
 use graphql_extract::extract;
-use itertools::{Either, Itertools as _};
+use itertools::Itertools as _;
 use sui_gql_schema::scalars::Base64Bcs;
 
-use super::fragments::{ObjectFilter, ObjectKey, PageInfo, PageInfoForward};
+use super::fragments::{ObjectFilterV2, PageInfo, PageInfoForward};
 use super::stream;
 use crate::queries::Error;
 use crate::{missing_data, schema, GraphQlClient, GraphQlResponseExt as _};
 
 pub(super) async fn query<C: GraphQlClient>(
     client: &C,
-    objects: impl IntoIterator<Item = (ObjectId, Option<u64>)> + Send,
+    objects: impl IntoIterator<Item = ObjectId> + Send,
     page_size: Option<u32>,
 ) -> Result<HashMap<ObjectId, Object>, Error<C::Error>> {
     // To keep track of all ids requested.
-    let mut requested = vec![];
+    let object_ids = objects.into_iter().collect_vec();
 
-    let (object_ids, object_keys) = objects
-        .into_iter()
-        .inspect(|(id, _)| requested.push(*id))
-        .partition_map(|(id, v)| {
-            v.map_or(Either::Left(id), |n| {
-                Either::Right(ObjectKey {
-                    object_id: id,
-                    version: n,
-                })
-            })
-        });
-
-    #[expect(
-        deprecated,
-        reason = "TODO: build query from scratch with new ObjectFilter and Query.multiGetObjects"
-    )]
-    let filter = ObjectFilter {
-        object_ids: Some(object_ids),
-        object_keys: Some(object_keys),
+    let filter = ObjectFilterV2 {
+        object_ids: Some(&object_ids),
         ..Default::default()
     };
     let vars = Variables {
@@ -55,7 +38,7 @@ pub(super) async fn query<C: GraphQlClient>(
         .await?;
 
     // Ensure all requested objects were returned
-    for id in requested {
+    for id in object_ids {
         raw_objs
             .contains_key(&id)
             .then_some(())
@@ -67,7 +50,7 @@ pub(super) async fn query<C: GraphQlClient>(
 
 async fn request<C: GraphQlClient>(
     client: &C,
-    vars: Variables,
+    vars: Variables<'_>,
 ) -> super::Result<
     stream::Page<impl Iterator<Item = super::Result<(ObjectId, Option<Object>), C>> + 'static>,
     C,
@@ -97,13 +80,13 @@ async fn request<C: GraphQlClient>(
 }
 
 #[derive(cynic::QueryVariables, Clone, Debug)]
-struct Variables {
-    filter: Option<ObjectFilter>,
+struct Variables<'a> {
+    filter: Option<ObjectFilterV2<'a>>,
     after: Option<String>,
     first: Option<i32>,
 }
 
-impl stream::UpdatePageInfo for Variables {
+impl stream::UpdatePageInfo for Variables<'_> {
     fn update_page_info(&mut self, info: &PageInfo) {
         self.after.clone_from(&info.end_cursor);
     }
@@ -142,14 +125,9 @@ struct ObjectGql {
 fn gql_output() -> color_eyre::Result<()> {
     use cynic::QueryBuilder as _;
 
+    // Variables don't matter, we just need it so taht `Query::build()` compiles
     let vars = Variables {
-        filter: Some(ObjectFilter {
-            object_ids: Some(vec![
-                "0x4264c07a42f9d002c1244e43a1f0fa21c49e4a25c7202c597b8476ef6bb57113".parse()?,
-                "0x60d1a85f81172a7418206f4b16e1e07e40c91cf58783f63f18a25efc81442dcb".parse()?,
-            ]),
-            ..Default::default()
-        }),
+        filter: Some(Default::default()),
         after: None,
         first: None,
     };
