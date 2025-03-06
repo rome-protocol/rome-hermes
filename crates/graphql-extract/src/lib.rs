@@ -200,7 +200,7 @@ impl Root {
         let (pats, tokens): (Vec<_>, Vec<_>) =
             nested.generate_extract(data.clone(), data.to_string());
         quote! {
-            let #data = ( #expr ).ok_or(#err)?;
+            let #data = ( #expr ).ok_or::<&'static str>(#err)?;
             let ( #(#pats),* ) = {
                 #(#tokens)*
                 ( #(#pats),* )
@@ -225,7 +225,7 @@ impl Node {
 
         let assign = if optional {
             let err = path.clone() + " is null";
-            quote!(let #ident = #data.#field.ok_or(#err)?;)
+            quote!(let #ident = #data.#field.ok_or::<&'static str>(#err)?;)
         } else {
             quote!(let #ident = #data.#field;)
         };
