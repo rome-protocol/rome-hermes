@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.6](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/graphql-extract-v0.0.5...graphql-extract-v0.0.6)
+
+### ⛰️ Features
+
+- *(graphql-extract)* Make error type explicit in `Option::ok_or` - ([a02db25](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/a02db25a7ec1387a2b8e9ed637c9222dde30dfb9))
+
+
 ## [0.0.5](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/graphql-extract-v0.0.4...graphql-extract-v0.0.5)
 
 ### 📚 Documentation

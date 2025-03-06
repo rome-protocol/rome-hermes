@@ -1,7 +1,7 @@
 [package]
 description = "Move types for the Sui package at address 0x2"
 name        = "sui-framework-sdk"
-version     = "0.10.6"
+version     = "0.10.7"
 
 authors.workspace    = true
 categories.workspace = true
@@ -24,9 +24,9 @@ rustdoc-args = [
 workspace = true
 
 [dependencies]
-af-move-type    = { version = "0.8.4", path = "../af-move-type" }
-af-sui-pkg-sdk  = { version = "0.8.6", path = "../af-sui-pkg-sdk" }
-af-sui-types    = { version = "0.7.4", path = "../af-sui-types" }
+af-move-type    = { version = "0.8.5", path = "../af-move-type" }
+af-sui-pkg-sdk  = { version = "0.8.7", path = "../af-sui-pkg-sdk" }
+af-sui-types    = { version = "0.7.5", path = "../af-sui-types" }
 move-stdlib-sdk = { version = "0.9.6", path = "../move-stdlib-sdk" }
 
 derive-new  = "0.7"

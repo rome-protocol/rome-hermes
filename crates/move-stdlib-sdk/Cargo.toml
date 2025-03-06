@@ -24,6 +24,6 @@ rustdoc-args = [
 workspace = true
 
 [dependencies]
-af-sui-pkg-sdk = { version = "0.8.6", path = "../af-sui-pkg-sdk" }
+af-sui-pkg-sdk = { version = "0.8.7", path = "../af-sui-pkg-sdk" }
 
 thiserror = "2"

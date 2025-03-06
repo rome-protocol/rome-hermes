@@ -1,7 +1,7 @@
 [package]
 description = "Move types for the `Perpetuals` package"
 name        = "af-iperps"
-version     = "0.24.1"
+version     = "0.24.2"
 
 authors.workspace    = true
 categories.workspace = true
@@ -39,12 +39,12 @@ graphql = [
 slo = ["dep:bcs", "dep:fastcrypto"]
 
 [dependencies]
-af-move-type      = { version = "0.8.4", path = "../af-move-type" }
-af-sui-pkg-sdk    = { version = "0.8.6", path = "../af-sui-pkg-sdk" }
-af-sui-types      = { version = "0.7.4", path = "../af-sui-types" }
-af-utilities      = { version = "0.8.0", path = "../af-utilities" }
+af-move-type      = { version = "0.8.5", path = "../af-move-type" }
+af-sui-pkg-sdk    = { version = "0.8.7", path = "../af-sui-pkg-sdk" }
+af-sui-types      = { version = "0.7.5", path = "../af-sui-types" }
+af-utilities      = { version = "0.8.1", path = "../af-utilities" }
 move-stdlib-sdk   = { version = "0.9.6", path = "../move-stdlib-sdk" }
-sui-framework-sdk = { version = "0.10.6", path = "../sui-framework-sdk" }
+sui-framework-sdk = { version = "0.10.7", path = "../sui-framework-sdk" }
 
 clap        = { version = "4", features = ["derive"] }
 derive_more = { version = "2", features = ["display", "from", "is_variant", "try_into"] }
@@ -58,8 +58,8 @@ async-stream    = { version = "0.3", optional = true }
 cynic           = { version = "3", optional = true }
 enum-as-inner   = { version = "0.6", optional = true }
 futures         = { version = "0.3", optional = true }
-graphql-extract = { version = "0.0.5", path = "../graphql-extract", optional = true }
-sui-gql-client  = { version = "0.14", path = "../sui-gql-client", default-features = false, optional = true }
+graphql-extract = { version = "0.0.6", path = "../graphql-extract", optional = true }
+sui-gql-client  = { version = "0.15", path = "../sui-gql-client", default-features = false, optional = true }
 
 # SLO
 bcs        = { version = "0.1", optional = true }

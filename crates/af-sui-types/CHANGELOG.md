@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.5](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-types-v0.7.4...af-sui-types-v0.7.5)
+
+### ⛰️ Features
+
+- ObjectArg::SYSTEM_STATE_IMM - ([9552e36](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/9552e368e8a63653eddeb6531ab29856381a51db))
+
+
 ## [0.7.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-types-v0.7.2...af-sui-types-v0.7.3)
 
 ### 📚 Documentation

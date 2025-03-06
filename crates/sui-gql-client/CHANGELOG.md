@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.14.11...sui-gql-client-v0.15.0)
+
+### ⛰️ Features
+
+- *(sui-gql-client)* [**breaking**] Update for `testnet-v1.44.2` - ([d368839](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/d3688399525f996746734496f857126c22cd873a))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(sui-gql-schema)* Bump version minor - ([2c34c54](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/2c34c5436a77a9ca60f5686f629018c1321b8494))
+
+
 ## [0.14.11](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.14.10...sui-gql-client-v0.14.11)
 
 ### 🐛 Bug Fixes
