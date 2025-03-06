@@ -16,7 +16,6 @@ use sui_sdk_types::{
     Version,
 };
 
-use crate::const_address::strict_from_str;
 use crate::encoding::decode_base64_default;
 use crate::{Address, ObjectId, ObjectRef};
 

@@ -1,10 +1,3 @@
-/// Construct an address from a hex string, optionally `0x`-prefixed.
-///
-/// Validates and returns the input str as a 32-byte address (as a raw byte vector).
-pub const fn strict_from_str(hex: &str) -> [u8; 32] {
-    hex_address_bytes(hex.as_bytes())
-}
-
 /// 32-byte address from a hex byte vector, optionally `0x`-prefixed.
 pub const fn hex_address_bytes(bytes: &[u8]) -> [u8; 32] {
     // Just for compatibility with `Address::from_str`.
