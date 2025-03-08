@@ -379,6 +379,38 @@ fn number_to_string_value_recursive(value: &mut serde_json::Value) {
     }
 }
 
+/// Error for [`ObjectExt`].
+#[derive(thiserror::Error, Debug)]
+pub enum ObjectError {
+    #[error("Object is not a Move struct")]
+    NotStruct,
+    #[error(transparent)]
+    FromRawStruct(#[from] FromRawStructError),
+}
+
+/// Extract and parse a [`MoveStruct`] from a Sui object.
+pub trait ObjectExt {
+    /// Extract and parse a [`MoveStruct`] from a Sui object.
+    fn struct_instance<T: MoveStruct>(&self) -> Result<MoveInstance<T>, ObjectError>;
+}
+
+impl ObjectExt for af_sui_types::Object {
+    fn struct_instance<T: MoveStruct>(&self) -> Result<MoveInstance<T>, ObjectError> {
+        let _struct = self.as_move().ok_or(ObjectError::NotStruct)?;
+        MoveInstance::from_raw_struct(_struct.type_.clone().into(), &_struct.contents)
+            .map_err(From::from)
+    }
+}
+
+impl ObjectExt for sui_sdk_types::Object {
+    fn struct_instance<T: MoveStruct>(&self) -> Result<MoveInstance<T>, ObjectError> {
+        let sui_sdk_types::ObjectData::Struct(s) = self.data() else {
+            return Err(ObjectError::NotStruct);
+        };
+        MoveInstance::from_raw_struct(s.object_type().clone(), s.contents()).map_err(From::from)
+    }
+}
+
 // =============================================================================
 // Trait impls
 // =============================================================================
