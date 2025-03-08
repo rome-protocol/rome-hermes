@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.7](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-move-type-v0.8.6...af-move-type-v0.8.7)
+
+### ⛰️ Features
+
+- `ObjectExt` trait - ([f1906d6](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/f1906d6c22e11a30d038c31cc36b8d60580c20ba))
+
+
 ## [0.8.6](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-move-type-v0.8.5...af-move-type-v0.8.6)
 
 ### ⚙️ Miscellaneous Tasks

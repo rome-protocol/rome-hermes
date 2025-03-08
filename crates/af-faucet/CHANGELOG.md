@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.11.9](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-faucet-v0.11.8...af-faucet-v0.11.9)
+
+### ⚙️ Miscellaneous Tasks
+
+- Updated the following local packages: af-move-type - ([0000000](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/0000000))
+
+
 ## [0.11.8](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-faucet-v0.11.7...af-faucet-v0.11.8)
 
 ### ⚙️ Miscellaneous Tasks

@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.24.4](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.24.3...af-iperps-v0.24.4)
+
+### ⚙️ Miscellaneous Tasks
+
+- Updated the following local packages: af-move-type - ([0000000](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/0000000))
+
+
 ## [0.24.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.24.2...af-iperps-v0.24.3)
 
 ### ⚙️ Miscellaneous Tasks
