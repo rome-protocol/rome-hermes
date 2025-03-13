@@ -573,9 +573,21 @@ pub mod object {
         pub bytes: ObjectId,
     }
 
+    impl ID {
+        pub const fn new(object_id: ObjectId) -> Self {
+            Self { bytes: object_id }
+        }
+    }
+
     impl std::fmt::Display for ID {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             write!(f, "{}", self.bytes)
+        }
+    }
+
+    impl From<ID> for ObjectId {
+        fn from(value: ID) -> Self {
+            value.bytes
         }
     }
 
@@ -603,9 +615,29 @@ pub mod object {
         pub id: ID,
     }
 
+    impl UID {
+        pub const fn new(object_id: ObjectId) -> Self {
+            Self {
+                id: ID::new(object_id),
+            }
+        }
+    }
+
     impl std::fmt::Display for UID {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             write!(f, "{}", self.id)
+        }
+    }
+
+    impl From<ObjectId> for UID {
+        fn from(value: ObjectId) -> Self {
+            Self::new(value)
+        }
+    }
+
+    impl From<UID> for ObjectId {
+        fn from(value: UID) -> Self {
+            value.id.bytes
         }
     }
 }
