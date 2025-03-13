@@ -4,7 +4,7 @@
 
 use af_move_type::otw::Otw;
 use af_sui_pkg_sdk::sui_pkg_sdk;
-use af_sui_types::{hex_address_bytes, ObjectId};
+use af_sui_types::{object_id, ObjectId};
 use af_utilities::types::ifixed::IFixed;
 use sui_framework_sdk::balance::Balance;
 use sui_framework_sdk::object::{ID, UID};
@@ -20,21 +20,29 @@ pub mod order_id;
 #[cfg(feature = "slo")]
 pub mod slo;
 
+pub use self::market::{MarketParams, MarketState};
+pub use self::orderbook::Order;
+pub use self::position::Position;
+
 // Convenient aliases since these types will never exist onchain with a type argument other than an
 // OTW.
-pub type Account = account::Account<Otw>;
-pub type AccountTypeTag = account::AccountTypeTag<Otw>;
-pub type ClearingHouse = clearing_house::ClearingHouse<Otw>;
-pub type ClearingHouseTypeTag = clearing_house::ClearingHouseTypeTag<Otw>;
-pub type SubAccount = subaccount::SubAccount<Otw>;
-pub type SubAccountTypeTag = subaccount::SubAccountTypeTag<Otw>;
-pub type Vault = clearing_house::Vault<Otw>;
-pub type VaultTypeTag = clearing_house::VaultTypeTag<Otw>;
+pub type Account = self::account::Account<Otw>;
+pub type AccountTypeTag = self::account::AccountTypeTag<Otw>;
+pub type StopOrderTicket = self::account::StopOrderTicket<Otw>;
+pub type StopOrderTicketTypetag = self::account::StopOrderTicketTypeTag<Otw>;
+pub type ClearingHouse = self::clearing_house::ClearingHouse<Otw>;
+pub type ClearingHouseTypeTag = self::clearing_house::ClearingHouseTypeTag<Otw>;
+pub type SubAccount = self::subaccount::SubAccount<Otw>;
+pub type SubAccountTypeTag = self::subaccount::SubAccountTypeTag<Otw>;
+pub type Vault = self::clearing_house::Vault<Otw>;
+pub type VaultTypeTag = self::clearing_house::VaultTypeTag<Otw>;
 
 /// Package IDs of the perpetuals contract versions published on testnet, in order of its versions.
-pub const TESTNET_PACKAGE_VERSIONS: &[ObjectId] = &[ObjectId::new(hex_address_bytes(
-    b"0x9725155a70cf2d2241b8cc2fa8376809689312cabb4acaa5ca5ba47eaf4d611f",
-))];
+pub const TESTNET_PACKAGE_VERSIONS: &[ObjectId] = &[
+    object_id(b"0x9725155a70cf2d2241b8cc2fa8376809689312cabb4acaa5ca5ba47eaf4d611f"),
+    object_id(b"0x47ca16287406c6178717f5fda829bc403ee9b3589b1ac81d70e447dc4c017e80"),
+    object_id(b"0x7c995f9c0c0553c0f3bfac7cf3c8b85716f0ca522305586bd0168ca20aeed277"),
+];
 
 sui_pkg_sdk!(perpetuals {
     module account {

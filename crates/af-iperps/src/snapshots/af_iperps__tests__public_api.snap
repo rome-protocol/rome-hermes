@@ -4257,11 +4257,167 @@ pub fn af_iperps::subaccount::SubAccountTypeTag<T>::fmt(&self, f: &mut core::fmt
 impl<T: af_move_type::MoveType> core::str::traits::FromStr for af_iperps::subaccount::SubAccountTypeTag<T>
 pub type af_iperps::subaccount::SubAccountTypeTag<T>::Err = af_move_type::ParseStructTagError
 pub fn af_iperps::subaccount::SubAccountTypeTag<T>::from_str(s: &str) -> core::result::Result<Self, Self::Err>
+pub struct af_iperps::MarketParams
+pub af_iperps::MarketParams::base_oracle_tolerance: u64
+pub af_iperps::MarketParams::base_pfs_id: sui_framework_sdk::object::ID
+pub af_iperps::MarketParams::collateral_oracle_tolerance: u64
+pub af_iperps::MarketParams::collateral_pfs_id: sui_framework_sdk::object::ID
+pub af_iperps::MarketParams::force_cancel_fee: af_utilities::types::ifixed::IFixed
+pub af_iperps::MarketParams::funding_frequency_ms: u64
+pub af_iperps::MarketParams::funding_period_ms: u64
+pub af_iperps::MarketParams::insurance_fund_fee: af_utilities::types::ifixed::IFixed
+pub af_iperps::MarketParams::liquidation_fee: af_utilities::types::ifixed::IFixed
+pub af_iperps::MarketParams::liquidation_tolerance: u64
+pub af_iperps::MarketParams::lot_size: u64
+pub af_iperps::MarketParams::maker_fee: af_utilities::types::ifixed::IFixed
+pub af_iperps::MarketParams::margin_ratio_initial: af_utilities::types::ifixed::IFixed
+pub af_iperps::MarketParams::margin_ratio_maintenance: af_utilities::types::ifixed::IFixed
+pub af_iperps::MarketParams::max_pending_orders: u64
+pub af_iperps::MarketParams::min_order_usd_value: af_utilities::types::ifixed::IFixed
+pub af_iperps::MarketParams::premium_twap_frequency_ms: u64
+pub af_iperps::MarketParams::premium_twap_period_ms: u64
+pub af_iperps::MarketParams::spread_twap_frequency_ms: u64
+pub af_iperps::MarketParams::spread_twap_period_ms: u64
+pub af_iperps::MarketParams::taker_fee: af_utilities::types::ifixed::IFixed
+pub af_iperps::MarketParams::tick_size: u64
+impl af_iperps::market::MarketParams
+pub fn af_iperps::market::MarketParams::move_instance(self, address: sui_sdk_types::address::Address) -> af_move_type::MoveInstance<Self>
+pub fn af_iperps::market::MarketParams::type_(address: sui_sdk_types::address::Address) -> af_iperps::market::MarketParamsTypeTag
+impl af_iperps::market::MarketParams
+pub fn af_iperps::market::MarketParams::new(margin_ratio_initial: af_utilities::types::ifixed::IFixed, margin_ratio_maintenance: af_utilities::types::ifixed::IFixed, base_pfs_id: sui_framework_sdk::object::ID, collateral_pfs_id: sui_framework_sdk::object::ID, funding_frequency_ms: u64, funding_period_ms: u64, premium_twap_frequency_ms: u64, premium_twap_period_ms: u64, spread_twap_frequency_ms: u64, spread_twap_period_ms: u64, maker_fee: af_utilities::types::ifixed::IFixed, taker_fee: af_utilities::types::ifixed::IFixed, liquidation_fee: af_utilities::types::ifixed::IFixed, force_cancel_fee: af_utilities::types::ifixed::IFixed, insurance_fund_fee: af_utilities::types::ifixed::IFixed, min_order_usd_value: af_utilities::types::ifixed::IFixed, lot_size: u64, tick_size: u64, liquidation_tolerance: u64, max_pending_orders: u64, base_oracle_tolerance: u64, collateral_oracle_tolerance: u64) -> Self
+impl af_iperps::math::OrderBookUnits for af_iperps::market::MarketParams
+pub fn af_iperps::market::MarketParams::lot_size(&self) -> u64
+pub fn af_iperps::market::MarketParams::tick_size(&self) -> u64
+impl af_move_type::MoveStruct for af_iperps::market::MarketParams
+pub type af_iperps::market::MarketParams::StructTag = af_iperps::market::MarketParamsTypeTag
+impl af_move_type::MoveType for af_iperps::market::MarketParams
+pub type af_iperps::market::MarketParams::TypeTag = af_iperps::market::MarketParamsTypeTag
+impl af_move_type::StaticModule for af_iperps::market::MarketParams
+pub fn af_iperps::market::MarketParams::module() -> sui_sdk_types::type_tag::Identifier
+impl af_move_type::StaticName for af_iperps::market::MarketParams
+pub fn af_iperps::market::MarketParams::name() -> sui_sdk_types::type_tag::Identifier
+impl af_move_type::StaticTypeParams for af_iperps::market::MarketParams
+pub fn af_iperps::market::MarketParams::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
+impl core::fmt::Display for af_iperps::market::MarketParams
+pub fn af_iperps::market::MarketParams::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl tabled::tabled::Tabled for af_iperps::market::MarketParams
+pub const af_iperps::market::MarketParams::LENGTH: usize
+pub fn af_iperps::market::MarketParams::fields(&self) -> alloc::vec::Vec<alloc::borrow::Cow<'_, str>>
+pub fn af_iperps::market::MarketParams::headers() -> alloc::vec::Vec<alloc::borrow::Cow<'static, str>>
+pub struct af_iperps::MarketState
+pub af_iperps::MarketState::cum_funding_rate_long: af_utilities::types::ifixed::IFixed
+pub af_iperps::MarketState::cum_funding_rate_short: af_utilities::types::ifixed::IFixed
+pub af_iperps::MarketState::fees_accrued: af_utilities::types::ifixed::IFixed
+pub af_iperps::MarketState::funding_last_upd_ms: u64
+pub af_iperps::MarketState::open_interest: af_utilities::types::ifixed::IFixed
+pub af_iperps::MarketState::premium_twap: af_utilities::types::ifixed::IFixed
+pub af_iperps::MarketState::premium_twap_last_upd_ms: u64
+pub af_iperps::MarketState::spread_twap: af_utilities::types::ifixed::IFixed
+pub af_iperps::MarketState::spread_twap_last_upd_ms: u64
+impl af_iperps::market::MarketState
+pub fn af_iperps::market::MarketState::move_instance(self, address: sui_sdk_types::address::Address) -> af_move_type::MoveInstance<Self>
+pub fn af_iperps::market::MarketState::type_(address: sui_sdk_types::address::Address) -> af_iperps::market::MarketStateTypeTag
+impl af_iperps::market::MarketState
+pub fn af_iperps::market::MarketState::new(cum_funding_rate_long: af_utilities::types::ifixed::IFixed, cum_funding_rate_short: af_utilities::types::ifixed::IFixed, funding_last_upd_ms: u64, premium_twap: af_utilities::types::ifixed::IFixed, premium_twap_last_upd_ms: u64, spread_twap: af_utilities::types::ifixed::IFixed, spread_twap_last_upd_ms: u64, open_interest: af_utilities::types::ifixed::IFixed, fees_accrued: af_utilities::types::ifixed::IFixed) -> Self
+impl af_move_type::MoveStruct for af_iperps::market::MarketState
+pub type af_iperps::market::MarketState::StructTag = af_iperps::market::MarketStateTypeTag
+impl af_move_type::MoveType for af_iperps::market::MarketState
+pub type af_iperps::market::MarketState::TypeTag = af_iperps::market::MarketStateTypeTag
+impl af_move_type::StaticModule for af_iperps::market::MarketState
+pub fn af_iperps::market::MarketState::module() -> sui_sdk_types::type_tag::Identifier
+impl af_move_type::StaticName for af_iperps::market::MarketState
+pub fn af_iperps::market::MarketState::name() -> sui_sdk_types::type_tag::Identifier
+impl af_move_type::StaticTypeParams for af_iperps::market::MarketState
+pub fn af_iperps::market::MarketState::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
+impl core::fmt::Display for af_iperps::market::MarketState
+pub fn af_iperps::market::MarketState::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl tabled::tabled::Tabled for af_iperps::market::MarketState
+pub const af_iperps::market::MarketState::LENGTH: usize
+pub fn af_iperps::market::MarketState::fields(&self) -> alloc::vec::Vec<alloc::borrow::Cow<'_, str>>
+pub fn af_iperps::market::MarketState::headers() -> alloc::vec::Vec<alloc::borrow::Cow<'static, str>>
+pub struct af_iperps::Order
+pub af_iperps::Order::account_id: u64
+pub af_iperps::Order::size: u64
+impl af_iperps::orderbook::Order
+pub fn af_iperps::orderbook::Order::move_instance(self, address: sui_sdk_types::address::Address) -> af_move_type::MoveInstance<Self>
+pub fn af_iperps::orderbook::Order::type_(address: sui_sdk_types::address::Address) -> af_iperps::orderbook::OrderTypeTag
+impl af_iperps::orderbook::Order
+pub fn af_iperps::orderbook::Order::new(account_id: u64, size: u64) -> Self
+impl af_move_type::MoveStruct for af_iperps::orderbook::Order
+pub type af_iperps::orderbook::Order::StructTag = af_iperps::orderbook::OrderTypeTag
+impl af_move_type::MoveType for af_iperps::orderbook::Order
+pub type af_iperps::orderbook::Order::TypeTag = af_iperps::orderbook::OrderTypeTag
+impl af_move_type::StaticModule for af_iperps::orderbook::Order
+pub fn af_iperps::orderbook::Order::module() -> sui_sdk_types::type_tag::Identifier
+impl af_move_type::StaticName for af_iperps::orderbook::Order
+pub fn af_iperps::orderbook::Order::name() -> sui_sdk_types::type_tag::Identifier
+impl af_move_type::StaticTypeParams for af_iperps::orderbook::Order
+pub fn af_iperps::orderbook::Order::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
+impl core::fmt::Display for af_iperps::orderbook::Order
+pub fn af_iperps::orderbook::Order::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl tabled::tabled::Tabled for af_iperps::orderbook::Order
+pub const af_iperps::orderbook::Order::LENGTH: usize
+pub fn af_iperps::orderbook::Order::fields(&self) -> alloc::vec::Vec<alloc::borrow::Cow<'_, str>>
+pub fn af_iperps::orderbook::Order::headers() -> alloc::vec::Vec<alloc::borrow::Cow<'static, str>>
+pub struct af_iperps::Position
+pub af_iperps::Position::asks_quantity: af_utilities::types::ifixed::IFixed
+pub af_iperps::Position::base_asset_amount: af_utilities::types::ifixed::IFixed
+pub af_iperps::Position::bids_quantity: af_utilities::types::ifixed::IFixed
+pub af_iperps::Position::collateral: af_utilities::types::ifixed::IFixed
+pub af_iperps::Position::cum_funding_rate_long: af_utilities::types::ifixed::IFixed
+pub af_iperps::Position::cum_funding_rate_short: af_utilities::types::ifixed::IFixed
+pub af_iperps::Position::maker_fee: af_utilities::types::ifixed::IFixed
+pub af_iperps::Position::pending_orders: u64
+pub af_iperps::Position::quote_asset_notional_amount: af_utilities::types::ifixed::IFixed
+pub af_iperps::Position::taker_fee: af_utilities::types::ifixed::IFixed
+impl af_iperps::position::Position
+pub fn af_iperps::position::Position::move_instance(self, address: sui_sdk_types::address::Address) -> af_move_type::MoveInstance<Self>
+pub fn af_iperps::position::Position::type_(address: sui_sdk_types::address::Address) -> af_iperps::position::PositionTypeTag
+impl af_iperps::position::Position
+pub fn af_iperps::position::Position::new(collateral: af_utilities::types::ifixed::IFixed, base_asset_amount: af_utilities::types::ifixed::IFixed, quote_asset_notional_amount: af_utilities::types::ifixed::IFixed, cum_funding_rate_long: af_utilities::types::ifixed::IFixed, cum_funding_rate_short: af_utilities::types::ifixed::IFixed, asks_quantity: af_utilities::types::ifixed::IFixed, bids_quantity: af_utilities::types::ifixed::IFixed, pending_orders: u64, maker_fee: af_utilities::types::ifixed::IFixed, taker_fee: af_utilities::types::ifixed::IFixed) -> Self
+impl af_iperps::event_ext::apply::Apply<af_iperps::position::Position> for af_iperps::events::AcceptedPositionFeesProposal
+pub fn af_iperps::events::AcceptedPositionFeesProposal::apply(&self, target: &mut af_iperps::position::Position)
+impl af_iperps::event_ext::apply::Apply<af_iperps::position::Position> for af_iperps::events::AllocatedCollateral
+pub fn af_iperps::events::AllocatedCollateral::apply(&self, target: &mut af_iperps::position::Position)
+impl af_iperps::event_ext::apply::Apply<af_iperps::position::Position> for af_iperps::events::CanceledOrders
+pub fn af_iperps::events::CanceledOrders::apply(&self, target: &mut af_iperps::position::Position)
+impl af_iperps::event_ext::apply::Apply<af_iperps::position::Position> for af_iperps::events::DeallocatedCollateral
+pub fn af_iperps::events::DeallocatedCollateral::apply(&self, target: &mut af_iperps::position::Position)
+impl af_iperps::event_ext::apply::Apply<af_iperps::position::Position> for af_iperps::events::FilledMakerOrder
+pub fn af_iperps::events::FilledMakerOrder::apply(&self, target: &mut af_iperps::position::Position)
+impl af_iperps::event_ext::apply::Apply<af_iperps::position::Position> for af_iperps::events::FilledTakerOrder
+pub fn af_iperps::events::FilledTakerOrder::apply(&self, target: &mut af_iperps::position::Position)
+impl af_iperps::event_ext::apply::Apply<af_iperps::position::Position> for af_iperps::events::LiquidatedPosition
+pub fn af_iperps::events::LiquidatedPosition::apply(&self, target: &mut af_iperps::position::Position)
+impl af_iperps::event_ext::apply::Apply<af_iperps::position::Position> for af_iperps::events::PostedOrder
+pub fn af_iperps::events::PostedOrder::apply(&self, target: &mut af_iperps::position::Position)
+impl af_iperps::event_ext::apply::Apply<af_iperps::position::Position> for af_iperps::events::ResettedPositionFees
+pub fn af_iperps::events::ResettedPositionFees::apply(&self, target: &mut af_iperps::position::Position)
+impl af_iperps::event_ext::apply::Apply<af_iperps::position::Position> for af_iperps::events::SettledFunding
+pub fn af_iperps::events::SettledFunding::apply(&self, target: &mut af_iperps::position::Position)
+impl af_move_type::MoveStruct for af_iperps::position::Position
+pub type af_iperps::position::Position::StructTag = af_iperps::position::PositionTypeTag
+impl af_move_type::MoveType for af_iperps::position::Position
+pub type af_iperps::position::Position::TypeTag = af_iperps::position::PositionTypeTag
+impl af_move_type::StaticModule for af_iperps::position::Position
+pub fn af_iperps::position::Position::module() -> sui_sdk_types::type_tag::Identifier
+impl af_move_type::StaticName for af_iperps::position::Position
+pub fn af_iperps::position::Position::name() -> sui_sdk_types::type_tag::Identifier
+impl af_move_type::StaticTypeParams for af_iperps::position::Position
+pub fn af_iperps::position::Position::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
+impl core::fmt::Display for af_iperps::position::Position
+pub fn af_iperps::position::Position::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl tabled::tabled::Tabled for af_iperps::position::Position
+pub const af_iperps::position::Position::LENGTH: usize
+pub fn af_iperps::position::Position::fields(&self) -> alloc::vec::Vec<alloc::borrow::Cow<'_, str>>
+pub fn af_iperps::position::Position::headers() -> alloc::vec::Vec<alloc::borrow::Cow<'static, str>>
 pub const af_iperps::TESTNET_PACKAGE_VERSIONS: &[sui_sdk_types::object_id::ObjectId]
 pub type af_iperps::Account = af_iperps::account::Account<af_move_type::otw::Otw>
 pub type af_iperps::AccountTypeTag = af_iperps::account::AccountTypeTag<af_move_type::otw::Otw>
 pub type af_iperps::ClearingHouse = af_iperps::clearing_house::ClearingHouse<af_move_type::otw::Otw>
 pub type af_iperps::ClearingHouseTypeTag = af_iperps::clearing_house::ClearingHouseTypeTag<af_move_type::otw::Otw>
+pub type af_iperps::StopOrderTicket = af_iperps::account::StopOrderTicket<af_move_type::otw::Otw>
+pub type af_iperps::StopOrderTicketTypetag = af_iperps::account::StopOrderTicketTypeTag<af_move_type::otw::Otw>
 pub type af_iperps::SubAccount = af_iperps::subaccount::SubAccount<af_move_type::otw::Otw>
 pub type af_iperps::SubAccountTypeTag = af_iperps::subaccount::SubAccountTypeTag<af_move_type::otw::Otw>
 pub type af_iperps::Vault = af_iperps::clearing_house::Vault<af_move_type::otw::Otw>
