@@ -70,21 +70,24 @@ default-features = false
 features         = ["build"]
 optional         = true
 path             = "../sui-gql-schema"
-version = "0.9.1"
+version          = "0.9.1"
 
 
 [dev-dependencies]
-clap           = { version = "4", features = ["derive"] }
-color-eyre     = "0.6"
-indicatif      = "0.17"
-insta          = "1"
-nonempty       = "0.11"
-reqwest        = "0.12"
-rgb            = "0.8"
-sui-gql-client = { path = "../sui-gql-client", features = ["reqwest"] }
-textplots      = "0.8"
-tokio          = { version = "1", features = ["full"] }
-tokio-test     = "0.4"
+clap             = { version = "4", features = ["derive"] }
+color-eyre       = "0.6"
+indicatif        = "0.17"
+insta            = "1"
+nonempty         = "0.11"
+public-api       = "0.44.2"
+reqwest          = "0.12"
+rgb              = "0.8"
+rustdoc-json     = "0.9.5"
+rustup-toolchain = "0.1.10"
+sui-gql-client   = { path = "../sui-gql-client", features = ["reqwest"] }
+textplots        = "0.8"
+tokio            = { version = "1", features = ["full"] }
+tokio-test       = "0.4"
 
 
 [[example]]
