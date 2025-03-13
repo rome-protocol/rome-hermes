@@ -1,0 +1,7 @@
+# Seeds for failure cases proptest has generated in the past. It is
+# automatically read and these particular cases re-run before any
+# novel cases are generated.
+#
+# It is recommended to check this file in to source control so that
+# everyone who runs the test benefits from these saved cases.
+cc 2f2076758c96d934b6508d9a5dba4a40fabb0a5eef7a6e2f9eaa425a0cf5d6d8 # shrinks to input = _LiquidationPriceIsPositiveArgs { contracts: Contracts { lots: 0, ticks: 0, direction: false }, collateral: 1, coll_price: 1, maintenance_margin_ratio: 0.001, lot_size: 1, tick_size: 1 }

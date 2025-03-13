@@ -155,6 +155,8 @@ pub af_iperps::clearing_house::ClearingHouse::version: u64
 impl<T: af_move_type::MoveType> af_iperps::clearing_house::ClearingHouse<T>
 pub const fn af_iperps::clearing_house::ClearingHouse<T>::governing_package_testnet(&self) -> sui_sdk_types::object_id::ObjectId
 impl<T: af_move_type::MoveType> af_iperps::clearing_house::ClearingHouse<T>
+pub fn af_iperps::clearing_house::ClearingHouse<T>::liquidation_price(&self, pos: &af_iperps::position::Position, coll_price: af_utilities::types::ifixed::IFixed) -> core::option::Option<af_utilities::types::ifixed::IFixed>
+impl<T: af_move_type::MoveType> af_iperps::clearing_house::ClearingHouse<T>
 pub fn af_iperps::clearing_house::ClearingHouse<T>::move_instance(self, address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_move_type::MoveInstance<Self>
 pub fn af_iperps::clearing_house::ClearingHouse<T>::type_(address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_iperps::clearing_house::ClearingHouseTypeTag<T>
 impl<T: af_move_type::MoveType> af_iperps::clearing_house::ClearingHouse<T>
@@ -3479,6 +3481,8 @@ pub af_iperps::market::MarketParams::spread_twap_period_ms: u64
 pub af_iperps::market::MarketParams::taker_fee: af_utilities::types::ifixed::IFixed
 pub af_iperps::market::MarketParams::tick_size: u64
 impl af_iperps::market::MarketParams
+pub fn af_iperps::market::MarketParams::margin_requirements(&self, notional: af_utilities::types::ifixed::IFixed) -> (af_utilities::types::ifixed::IFixed, af_utilities::types::ifixed::IFixed)
+impl af_iperps::market::MarketParams
 pub fn af_iperps::market::MarketParams::move_instance(self, address: sui_sdk_types::address::Address) -> af_move_type::MoveInstance<Self>
 pub fn af_iperps::market::MarketParams::type_(address: sui_sdk_types::address::Address) -> af_iperps::market::MarketParamsTypeTag
 impl af_iperps::market::MarketParams
@@ -3534,6 +3538,8 @@ pub fn af_iperps::market::MarketState::move_instance(self, address: sui_sdk_type
 pub fn af_iperps::market::MarketState::type_(address: sui_sdk_types::address::Address) -> af_iperps::market::MarketStateTypeTag
 impl af_iperps::market::MarketState
 pub fn af_iperps::market::MarketState::new(cum_funding_rate_long: af_utilities::types::ifixed::IFixed, cum_funding_rate_short: af_utilities::types::ifixed::IFixed, funding_last_upd_ms: u64, premium_twap: af_utilities::types::ifixed::IFixed, premium_twap_last_upd_ms: u64, spread_twap: af_utilities::types::ifixed::IFixed, spread_twap_last_upd_ms: u64, open_interest: af_utilities::types::ifixed::IFixed, fees_accrued: af_utilities::types::ifixed::IFixed) -> Self
+impl af_iperps::market::MarketState
+pub fn af_iperps::market::MarketState::unrealized_funding(&self, pos: &af_iperps::position::Position) -> af_utilities::types::ifixed::IFixed
 impl af_move_type::MoveStruct for af_iperps::market::MarketState
 pub type af_iperps::market::MarketState::StructTag = af_iperps::market::MarketStateTypeTag
 impl af_move_type::MoveType for af_iperps::market::MarketState
@@ -4022,6 +4028,12 @@ pub af_iperps::position::Position::pending_orders: u64
 pub af_iperps::position::Position::quote_asset_notional_amount: af_utilities::types::ifixed::IFixed
 pub af_iperps::position::Position::taker_fee: af_utilities::types::ifixed::IFixed
 impl af_iperps::position::Position
+pub fn af_iperps::position::Position::entry_price(&self) -> af_utilities::types::ifixed::IFixed
+pub fn af_iperps::position::Position::liquidation_price(&self, coll_price: af_utilities::types::ifixed::IFixed, cum_funding_rate_long: af_utilities::types::ifixed::IFixed, cum_funding_rate_short: af_utilities::types::ifixed::IFixed, maintenance_margin_ratio: af_utilities::types::ifixed::IFixed) -> core::option::Option<af_utilities::types::ifixed::IFixed>
+pub fn af_iperps::position::Position::notional(&self, price: af_utilities::types::ifixed::IFixed) -> af_utilities::types::ifixed::IFixed
+pub fn af_iperps::position::Position::unrealized_funding(&self, cum_funding_rate_long: af_utilities::types::ifixed::IFixed, cum_funding_rate_short: af_utilities::types::ifixed::IFixed) -> af_utilities::types::ifixed::IFixed
+pub fn af_iperps::position::Position::unrealized_pnl(&self, price: af_utilities::types::ifixed::IFixed) -> af_utilities::types::ifixed::IFixed
+impl af_iperps::position::Position
 pub fn af_iperps::position::Position::move_instance(self, address: sui_sdk_types::address::Address) -> af_move_type::MoveInstance<Self>
 pub fn af_iperps::position::Position::type_(address: sui_sdk_types::address::Address) -> af_iperps::position::PositionTypeTag
 impl af_iperps::position::Position
@@ -4281,6 +4293,8 @@ pub af_iperps::MarketParams::spread_twap_period_ms: u64
 pub af_iperps::MarketParams::taker_fee: af_utilities::types::ifixed::IFixed
 pub af_iperps::MarketParams::tick_size: u64
 impl af_iperps::market::MarketParams
+pub fn af_iperps::market::MarketParams::margin_requirements(&self, notional: af_utilities::types::ifixed::IFixed) -> (af_utilities::types::ifixed::IFixed, af_utilities::types::ifixed::IFixed)
+impl af_iperps::market::MarketParams
 pub fn af_iperps::market::MarketParams::move_instance(self, address: sui_sdk_types::address::Address) -> af_move_type::MoveInstance<Self>
 pub fn af_iperps::market::MarketParams::type_(address: sui_sdk_types::address::Address) -> af_iperps::market::MarketParamsTypeTag
 impl af_iperps::market::MarketParams
@@ -4319,6 +4333,8 @@ pub fn af_iperps::market::MarketState::move_instance(self, address: sui_sdk_type
 pub fn af_iperps::market::MarketState::type_(address: sui_sdk_types::address::Address) -> af_iperps::market::MarketStateTypeTag
 impl af_iperps::market::MarketState
 pub fn af_iperps::market::MarketState::new(cum_funding_rate_long: af_utilities::types::ifixed::IFixed, cum_funding_rate_short: af_utilities::types::ifixed::IFixed, funding_last_upd_ms: u64, premium_twap: af_utilities::types::ifixed::IFixed, premium_twap_last_upd_ms: u64, spread_twap: af_utilities::types::ifixed::IFixed, spread_twap_last_upd_ms: u64, open_interest: af_utilities::types::ifixed::IFixed, fees_accrued: af_utilities::types::ifixed::IFixed) -> Self
+impl af_iperps::market::MarketState
+pub fn af_iperps::market::MarketState::unrealized_funding(&self, pos: &af_iperps::position::Position) -> af_utilities::types::ifixed::IFixed
 impl af_move_type::MoveStruct for af_iperps::market::MarketState
 pub type af_iperps::market::MarketState::StructTag = af_iperps::market::MarketStateTypeTag
 impl af_move_type::MoveType for af_iperps::market::MarketState
@@ -4370,6 +4386,12 @@ pub af_iperps::Position::maker_fee: af_utilities::types::ifixed::IFixed
 pub af_iperps::Position::pending_orders: u64
 pub af_iperps::Position::quote_asset_notional_amount: af_utilities::types::ifixed::IFixed
 pub af_iperps::Position::taker_fee: af_utilities::types::ifixed::IFixed
+impl af_iperps::position::Position
+pub fn af_iperps::position::Position::entry_price(&self) -> af_utilities::types::ifixed::IFixed
+pub fn af_iperps::position::Position::liquidation_price(&self, coll_price: af_utilities::types::ifixed::IFixed, cum_funding_rate_long: af_utilities::types::ifixed::IFixed, cum_funding_rate_short: af_utilities::types::ifixed::IFixed, maintenance_margin_ratio: af_utilities::types::ifixed::IFixed) -> core::option::Option<af_utilities::types::ifixed::IFixed>
+pub fn af_iperps::position::Position::notional(&self, price: af_utilities::types::ifixed::IFixed) -> af_utilities::types::ifixed::IFixed
+pub fn af_iperps::position::Position::unrealized_funding(&self, cum_funding_rate_long: af_utilities::types::ifixed::IFixed, cum_funding_rate_short: af_utilities::types::ifixed::IFixed) -> af_utilities::types::ifixed::IFixed
+pub fn af_iperps::position::Position::unrealized_pnl(&self, price: af_utilities::types::ifixed::IFixed) -> af_utilities::types::ifixed::IFixed
 impl af_iperps::position::Position
 pub fn af_iperps::position::Position::move_instance(self, address: sui_sdk_types::address::Address) -> af_move_type::MoveInstance<Self>
 pub fn af_iperps::position::Position::type_(address: sui_sdk_types::address::Address) -> af_iperps::position::PositionTypeTag
