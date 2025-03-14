@@ -1,7 +1,7 @@
 [package]
 description = "Move types for Aftermath's `AfOracle` package"
 name        = "af-oracle"
-version     = "0.16.3"
+version     = "0.16.4"
 
 authors.workspace    = true
 categories.workspace = true
@@ -31,7 +31,7 @@ af-move-type      = { version = "0.8.7", path = "../af-move-type" }
 af-sui-pkg-sdk    = { version = "0.8.9", path = "../af-sui-pkg-sdk" }
 af-sui-types      = { version = "0.7.6", path = "../af-sui-types" }
 af-utilities      = { version = "0.8.2", path = "../af-utilities" }
-sui-framework-sdk = { version = "0.10.9", path = "../sui-framework-sdk" }
+sui-framework-sdk = { version = "0.10.10", path = "../sui-framework-sdk" }
 
 derive_more = { version = "2", features = ["display", "from", "is_variant", "try_into"] }
 remain      = "0.2"

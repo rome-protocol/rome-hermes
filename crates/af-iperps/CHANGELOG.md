@@ -8,6 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.24.5](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.24.4...af-iperps-v0.24.5)
+
+### ⛰️ Features
+
+- *(af-iperps)* Convenience methods for `Position` stats - ([4610bcc](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/4610bccaff824aa3d79abb49bec0fe8d1d333bf2))
+- *(af-iperps)* Re-exports and testnet upgrade addresses - ([f91dd6c](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/f91dd6ccfee26b3c08665f7ba14374fa1c678e63))
+
+### 🧪 Testing
+
+- *(af-iperps)* Snapshot public API - ([ba01645](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/ba0164592b02c1f539e2c08765f22de767486256))
+
+
 ## [0.24.4](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.24.3...af-iperps-v0.24.4)
 
 ### ⚙️ Miscellaneous Tasks

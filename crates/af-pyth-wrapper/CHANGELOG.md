@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.4](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-pyth-wrapper-v0.18.3...af-pyth-wrapper-v0.18.4)
+
+### ⚙️ Miscellaneous Tasks
+
+- Updated the following local packages: sui-framework-sdk - ([0000000](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/0000000))
+
+
 ## [0.18.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-pyth-wrapper-v0.18.2...af-pyth-wrapper-v0.18.3)
 
 ### ⚙️ Miscellaneous Tasks
