@@ -913,12 +913,15 @@ impl Display for SuiTransactionBlockEffects {
 
 #[derive(Eq, PartialEq, Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[non_exhaustive]
 pub struct DryRunTransactionBlockResponse {
     pub effects: SuiTransactionBlockEffects,
     pub events: SuiTransactionBlockEvents,
     pub object_changes: Vec<ObjectChange>,
     pub balance_changes: Vec<BalanceChange>,
     pub input: SuiTransactionBlockData,
+    #[serde(default)]
+    pub execution_error_source: Option<String>,
 }
 
 #[derive(Eq, PartialEq, Clone, Debug, Default, Serialize, Deserialize)]
