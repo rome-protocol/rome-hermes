@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.13.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-jsonrpc-v0.12.8...sui-jsonrpc-v0.13.0)
+
+### ⛰️ Features
+
+- *(sui-jsonrpc)* [**breaking**] Add `DryRunTransactionBlockResponse::execution_error_source` - ([ed330f7](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/ed330f7612cf88715603f1a9250baf1e8994cc36))
+
+### 🐛 Bug Fixes
+
+- *(sui-jsonrpc)* Recreate `UserSignature` serialization used in the RPC - ([7c5f652](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/7c5f652400fade77ef3679ee8e8957b9433ad481))
+
+
 ## [0.12.8](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-jsonrpc-v0.12.7...sui-jsonrpc-v0.12.8)
 
 ### ⚙️ Miscellaneous Tasks
