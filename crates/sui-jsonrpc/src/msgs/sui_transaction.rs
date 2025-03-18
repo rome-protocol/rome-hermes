@@ -23,7 +23,7 @@ use af_sui_types::{
 use enum_dispatch::enum_dispatch;
 use serde::{Deserialize, Serialize};
 use serde_with::base64::Base64;
-use serde_with::{serde_as, DisplayFromStr, IfIsHumanReadable};
+use serde_with::{serde_as, DeserializeAs, DisplayFromStr, IfIsHumanReadable, SerializeAs};
 use sui_sdk_types::{ConsensusDeterminedVersionAssignments, MoveLocation, UserSignature, Version};
 use tabled::builder::Builder as TableBuilder;
 use tabled::settings::style::HorizontalLine;
@@ -1163,11 +1163,35 @@ impl Display for SuiTransactionBlockData {
     }
 }
 
+#[serde_as]
 #[derive(Debug, Deserialize, Serialize, Clone, PartialEq, Eq)]
 #[serde(rename = "TransactionBlock", rename_all = "camelCase")]
 pub struct SuiTransactionBlock {
     pub data: SuiTransactionBlockData,
+    #[serde_as(as = "Vec<IfIsHumanReadable<Base64UserSignature>>")]
     pub tx_signatures: Vec<UserSignature>,
+}
+
+struct Base64UserSignature;
+
+impl<'de> DeserializeAs<'de, UserSignature> for Base64UserSignature {
+    fn deserialize_as<D>(deserializer: D) -> Result<UserSignature, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        let base64 = Box::<str>::deserialize(deserializer)?;
+        UserSignature::from_base64(&base64).map_err(serde::de::Error::custom)
+    }
+}
+
+impl SerializeAs<UserSignature> for Base64UserSignature {
+    fn serialize_as<S>(source: &UserSignature, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let base64 = source.to_base64();
+        base64.serialize(serializer)
+    }
 }
 
 impl Display for SuiTransactionBlock {
@@ -1758,5 +1782,283 @@ mod tests {
         }
 
         Ok(())
+    }
+
+    #[test]
+    fn transaction_block_transaction_deser() {
+        let value = serde_json::json!({
+          "data": {
+            "messageVersion": "v1",
+            "transaction": {
+              "kind": "ProgrammableTransaction",
+              "inputs": [
+                {
+                  "type": "pure",
+                  "valueType": "u64",
+                  "value": "5"
+                },
+                {
+                  "type": "pure",
+                  "valueType": "u64",
+                  "value": "13"
+                },
+                {
+                  "type": "pure",
+                  "valueType": "u64",
+                  "value": "20"
+                },
+                {
+                  "type": "object",
+                  "objectType": "immOrOwnedObject",
+                  "objectId": "0xa3926c709e6ed570217aec468c9b81c35c4e7178a18f610f4427f4a075f63680",
+                  "version": "3",
+                  "digest": "7YeqF7kSbFrdzE2zyG4BdTctiHQrjapUkzqT3kqGAg6D"
+                },
+                {
+                  "type": "pure",
+                  "valueType": "u256",
+                  "value": "100000000000000000"
+                },
+                {
+                  "type": "pure",
+                  "valueType": "u256",
+                  "value": "50000000000000000"
+                },
+                {
+                  "type": "pure",
+                  "valueType": "u64",
+                  "value": "3600000"
+                },
+                {
+                  "type": "pure",
+                  "valueType": "u64",
+                  "value": "86400000"
+                },
+                {
+                  "type": "pure",
+                  "valueType": "u64",
+                  "value": "5000"
+                },
+                {
+                  "type": "pure",
+                  "valueType": "u256",
+                  "value": "1000000000000000"
+                },
+                {
+                  "type": "pure",
+                  "valueType": "u256",
+                  "value": "100000000000000"
+                },
+                {
+                  "type": "pure",
+                  "valueType": "u64",
+                  "value": "1000000"
+                },
+                {
+                  "type": "pure",
+                  "valueType": "u64",
+                  "value": "1000"
+                },
+                {
+                  "type": "object",
+                  "objectType": "immOrOwnedObject",
+                  "objectId": "0xf8cea4da5f0b9cf6cea67217fb99de1ac7dcc905863c5d2b1f8d4ab4530b726a",
+                  "version": "3",
+                  "digest": "6cACC7x9FFY1SdnzT6aH1z9UPMmvm4NGUz3skXGBn1Yd"
+                },
+                {
+                  "type": "object",
+                  "objectType": "sharedObject",
+                  "objectId": "0x981bfebd35bf22ab220853d6756568fd0556d127b856d7d08a12822da0cf1a4b",
+                  "initialSharedVersion": "3",
+                  "mutable": true
+                },
+                {
+                  "type": "object",
+                  "objectType": "sharedObject",
+                  "objectId": "0xd9b347da14a2600c9392d6718096d712e2b5497ce87c871854bfa92023099530",
+                  "initialSharedVersion": "509",
+                  "mutable": false
+                },
+                {
+                  "type": "object",
+                  "objectType": "sharedObject",
+                  "objectId": "0x7bbfd7177ef8042d2752deb2bfd5016114ad91e8c0abae6f78f35b4fd4db95d1",
+                  "initialSharedVersion": "510",
+                  "mutable": false
+                },
+                {
+                  "type": "object",
+                  "objectType": "sharedObject",
+                  "objectId": "0x0000000000000000000000000000000000000000000000000000000000000006",
+                  "initialSharedVersion": "1",
+                  "mutable": false
+                }
+              ],
+              "transactions": [
+                {
+                  "MoveCall": {
+                    "package": "0xb9f430cddd9cbe60f0beea60fce6da590688abbf2948dccff7cdda5a874be9ad",
+                    "module": "interface",
+                    "function": "create_orderbook",
+                    "arguments": [
+                      {
+                        "Input": 13
+                      },
+                      {
+                        "Input": 0
+                      },
+                      {
+                        "Input": 1
+                      },
+                      {
+                        "Input": 2
+                      },
+                      {
+                        "Input": 0
+                      },
+                      {
+                        "Input": 1
+                      },
+                      {
+                        "Input": 2
+                      }
+                    ]
+                  }
+                },
+                {
+                  "MoveCall": {
+                    "package": "0xb9f430cddd9cbe60f0beea60fce6da590688abbf2948dccff7cdda5a874be9ad",
+                    "module": "interface",
+                    "function": "create_clearing_house",
+                    "type_arguments": [
+                      "0x6f048d2b0929f0f2c16dd7ccf643b59b7b029d180766780ba83ce9f847306715::usdc::USDC"
+                    ],
+                    "arguments": [
+                      {
+                        "Input": 13
+                      },
+                      {
+                        "Result": 0
+                      },
+                      {
+                        "Input": 3
+                      },
+                      {
+                        "Input": 17
+                      },
+                      {
+                        "Input": 15
+                      },
+                      {
+                        "Input": 16
+                      },
+                      {
+                        "Input": 4
+                      },
+                      {
+                        "Input": 5
+                      },
+                      {
+                        "Input": 6
+                      },
+                      {
+                        "Input": 7
+                      },
+                      {
+                        "Input": 8
+                      },
+                      {
+                        "Input": 6
+                      },
+                      {
+                        "Input": 8
+                      },
+                      {
+                        "Input": 6
+                      },
+                      {
+                        "Input": 9
+                      },
+                      {
+                        "Input": 9
+                      },
+                      {
+                        "Input": 9
+                      },
+                      {
+                        "Input": 10
+                      },
+                      {
+                        "Input": 9
+                      },
+                      {
+                        "Input": 11
+                      },
+                      {
+                        "Input": 12
+                      }
+                    ]
+                  }
+                },
+                {
+                  "MoveCall": {
+                    "package": "0xb9f430cddd9cbe60f0beea60fce6da590688abbf2948dccff7cdda5a874be9ad",
+                    "module": "interface",
+                    "function": "register_market",
+                    "type_arguments": [
+                      "0x6f048d2b0929f0f2c16dd7ccf643b59b7b029d180766780ba83ce9f847306715::usdc::USDC"
+                    ],
+                    "arguments": [
+                      {
+                        "Input": 13
+                      },
+                      {
+                        "Input": 14
+                      },
+                      {
+                        "Result": 1
+                      }
+                    ]
+                  }
+                },
+                {
+                  "MoveCall": {
+                    "package": "0xb9f430cddd9cbe60f0beea60fce6da590688abbf2948dccff7cdda5a874be9ad",
+                    "module": "interface",
+                    "function": "share_clearing_house",
+                    "type_arguments": [
+                      "0x6f048d2b0929f0f2c16dd7ccf643b59b7b029d180766780ba83ce9f847306715::usdc::USDC"
+                    ],
+                    "arguments": [
+                      {
+                        "Result": 1
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "sender": "0x98e9cafb116af9d69f77ce0d644c60e384f850f8af050b268377d8293d7fe7c6",
+            "gasData": {
+              "payment": [
+                {
+                  "objectId": "0x39e44ce0f8ee07f02d38c2f5fc7d9805bee241d0acbb2153e1e3fa005abf9736",
+                  "version": 553,
+                  "digest": "A1NSYfktRWLNCVBC6jHmRs5SyhkJYoo4CtNg7QZq3vZC"
+                }
+              ],
+              "owner": "0x98e9cafb116af9d69f77ce0d644c60e384f850f8af050b268377d8293d7fe7c6",
+              "price": "1000",
+              "budget": "39172808"
+            }
+          },
+          "txSignatures": [
+            "ABfUuGXoWtGL54zCZh2Ef3NsNAHQqgibuIFUieVUox8EsTpNgH3WiKq/UgHwnlB3xW7D+AeC5hoBcVO6KbGPBAmvVqH0xXcgXDKTMc2JG4DUIii4K/ah/Is/TjelRccIlg=="
+          ]
+        });
+        let block: SuiTransactionBlock = serde_json::from_value(value.clone()).unwrap();
+        let restored = serde_json::to_value(&block).unwrap();
+        assert_eq!(value, restored);
     }
 }
