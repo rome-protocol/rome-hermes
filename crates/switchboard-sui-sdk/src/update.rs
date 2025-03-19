@@ -1,4 +1,4 @@
-use af_ptbuilder::{ptbuilder, ProgrammableTransactionBuilder};
+use af_ptbuilder::{ProgrammableTransactionBuilder, ptbuilder};
 use af_sui_types::{Argument, ObjectArg, ObjectId};
 
 /// Groups the [ProgrammableTransactionBuilder] variables for updating a Switchboard `Aggregator`.
