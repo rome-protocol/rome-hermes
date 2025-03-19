@@ -1,14 +1,14 @@
 [package]
-description = "SDK for Switchboard's Sui package; maintained by Aftermath"
-name        = "switchboard-sui-sdk"
-version     = "0.0.0"
+description  = "SDK for Switchboard's Sui package; maintained by Aftermath"
+edition      = "2024"
+name         = "switchboard-sui-sdk"
+rust-version = "1.85"
+version      = "0.0.1"
 
 authors.workspace    = true
 categories.workspace = true
-edition              = "2024"
 license.workspace    = true
 repository.workspace = true
-rust-version         = "1.85"
 
 [package.metadata.docs.rs]
 # To build locally:

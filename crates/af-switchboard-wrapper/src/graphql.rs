@@ -1,8 +1,8 @@
 use af_move_type::MoveInstance;
 use af_sui_types::{Address, ObjectId};
 use sui_framework_sdk::object::ID;
-use sui_gql_client::queries::{Error as QueryError, GraphQlClientExt as _};
 use sui_gql_client::GraphQlClient;
+use sui_gql_client::queries::{Error as QueryError, GraphQlClientExt as _};
 
 type Key = crate::wrapper::SwitchboardAggregatorId;
 
