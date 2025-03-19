@@ -24,8 +24,7 @@ rustdoc-args = [
 workspace = true
 
 [features]
-json-rpc = ["dep:af-ptbuilder", "dep:sui-jsonrpc", "sui-jsonrpc/client-api"]
-ptb      = ["bytes/serde", "dep:af-ptbuilder", "dep:bytes", "dep:extension-traits"]
+ptb = ["bytes/serde", "dep:af-ptbuilder", "dep:bytes", "dep:extension-traits"]
 
 [dependencies]
 af-move-type      = { version = "0.8.4", path = "../af-move-type" }
@@ -45,4 +44,3 @@ extension-traits = { version = "2", optional = true }
 
 # Optional aftermath deps
 af-ptbuilder = { version = "4.1.4", optional = true, path = "../af-ptbuilder" }
-sui-jsonrpc  = { version = "0.12.6", path = "../sui-jsonrpc", default-features = false, optional = true }

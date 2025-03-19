@@ -7,6 +7,9 @@ use move_stdlib_sdk::type_name::TypeName;
 use sui_framework_sdk::object::{ID, UID};
 use sui_framework_sdk::table::Table;
 
+#[cfg(feature = "ptb")]
+pub mod update;
+
 sui_pkg_sdk!(switchboard {
     module aggregator {
 
