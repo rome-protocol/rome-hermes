@@ -5,16 +5,16 @@ use std::fmt::Display;
 
 use af_sui_types::{
     Address as SuiAddress,
+    OBJECT_DIGEST_DELETED,
+    OBJECT_DIGEST_WRAPPED,
     ObjectDigest,
     ObjectId,
     ObjectRef,
     Owner,
     StructTag,
-    OBJECT_DIGEST_DELETED,
-    OBJECT_DIGEST_WRAPPED,
 };
 use serde::{Deserialize, Serialize};
-use serde_with::{serde_as, DisplayFromStr};
+use serde_with::{DisplayFromStr, serde_as};
 use sui_sdk_types::Version;
 
 use crate::serde::BigInt;

@@ -4,19 +4,19 @@ use std::borrow::Borrow;
 use std::fmt::Display;
 
 use af_sui_types::{
-    IdentStr,
-    ObjectDigest,
-    ObjectId,
-    StructTag,
-    TypeTag,
     DYNAMIC_FIELD_FIELD_STRUCT_NAME,
     DYNAMIC_FIELD_MODULE_NAME,
     DYNAMIC_OBJECT_FIELD_MODULE_NAME,
     DYNAMIC_OBJECT_FIELD_WRAPPER_STRUCT_NAME,
+    IdentStr,
+    ObjectDigest,
+    ObjectId,
     SUI_FRAMEWORK_ADDRESS,
+    StructTag,
+    TypeTag,
 };
 use serde::{Deserialize, Serialize};
-use serde_with::{serde_as, DisplayFromStr, IfIsHumanReadable};
+use serde_with::{DisplayFromStr, IfIsHumanReadable, serde_as};
 use sui_sdk_types::Version;
 
 use super::Page;

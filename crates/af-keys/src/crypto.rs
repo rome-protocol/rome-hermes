@@ -38,7 +38,7 @@ use fastcrypto::traits::{
 };
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use serde_with::base64::Base64;
-use serde_with::{serde_as, Bytes, IfIsHumanReadable};
+use serde_with::{Bytes, IfIsHumanReadable, serde_as};
 use strum::EnumString;
 
 use crate::intent::IntentMessage;

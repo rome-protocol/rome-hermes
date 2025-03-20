@@ -4,7 +4,7 @@
 
 use af_move_type::otw::Otw;
 use af_sui_pkg_sdk::sui_pkg_sdk;
-use af_sui_types::{object_id, ObjectId};
+use af_sui_types::{ObjectId, object_id};
 use af_utilities::types::ifixed::IFixed;
 use sui_framework_sdk::balance::Balance;
 use sui_framework_sdk::object::{ID, UID};

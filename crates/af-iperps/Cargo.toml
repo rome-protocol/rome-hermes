@@ -3,11 +3,12 @@ description = "Move types for the `Perpetuals` package"
 name        = "af-iperps"
 version     = "0.25.0"
 
-authors.workspace    = true
-categories.workspace = true
-edition.workspace    = true
-license.workspace    = true
-repository.workspace = true
+authors.workspace      = true
+categories.workspace   = true
+edition.workspace      = true
+license.workspace      = true
+repository.workspace   = true
+rust-version.workspace = true
 
 [package.metadata.docs.rs]
 # To build locally:

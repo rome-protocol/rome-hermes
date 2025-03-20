@@ -18,7 +18,7 @@ pub(crate) mod _serde {
     // SPDX-License-Identifier: Apache-2.0
     use serde::ser::SerializeSeq as _;
     use serde::{Deserialize, Deserializer, Serialize, Serializer};
-    use serde_with::{serde_as, DeserializeAs, SerializeAs};
+    use serde_with::{DeserializeAs, SerializeAs, serde_as};
     use sui_sdk_types::{SignedTransaction, Transaction, UserSignature};
 
     #[expect(clippy::redundant_pub_crate, reason = "wanna keep it explicit")]
@@ -145,7 +145,7 @@ pub(crate) mod _serde {
                 _ => {
                     return Err(serde::de::Error::custom(format!(
                         "invalid intent message ({scope}, {version}, {app})"
-                    )))
+                    )));
                 }
             }
 

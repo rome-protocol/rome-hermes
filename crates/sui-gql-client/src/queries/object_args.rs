@@ -7,7 +7,7 @@ use sui_gql_schema::scalars;
 
 use super::fragments::ObjectFilterV2;
 use super::objects_flat::Variables;
-use crate::{schema, GraphQlClient, GraphQlErrors, GraphQlResponseExt as _};
+use crate::{GraphQlClient, GraphQlErrors, GraphQlResponseExt as _, schema};
 
 type Query = super::objects_flat::Query<Object>;
 
@@ -67,7 +67,7 @@ pub(super) async fn query<C: GraphQlClient>(
 async fn request<C: GraphQlClient>(
     client: &C,
     vars: Variables<'_>,
-) -> Res<super::stream::Page<impl Iterator<Item = Res<ObjectArg, C>> + 'static>, C> {
+) -> Res<super::stream::Page<impl Iterator<Item = Res<ObjectArg, C>> + 'static + use<C>>, C> {
     let objects = client
         .query::<Query, _>(vars)
         .await
@@ -164,7 +164,7 @@ fn gql_output() {
 macro_rules! object_args {
     (
         {$($tt:tt)*}
-        with { $client:expr } $(paged by $page_size:expr)?
+        with { $client:expr_2021 } $(paged by $page_size:expr_2021)?
     ) => {
         $crate::object_args!(@Names $($tt)*);
         {
@@ -180,29 +180,29 @@ macro_rules! object_args {
         }
     };
 
-    (@Names mut $name:ident: $_:expr $(, $($rest:tt)*)?) => {
+    (@Names mut $name:ident: $_:expr_2021 $(, $($rest:tt)*)?) => {
         $crate::object_args!(@Names $name: $_ $(, $($rest)*)?)
     };
 
-    (@Names $name:ident: $_:expr $(, $($rest:tt)*)?) => {
+    (@Names $name:ident: $_:expr_2021 $(, $($rest:tt)*)?) => {
         let $name;
         $crate::object_args!{ @Names $($($rest)*)? }
     };
 
     (@Names ) => {};
 
-    (@Map $map:ident mut $name:ident: $object_id:expr $(, $($rest:tt)*)?) => {
+    (@Map $map:ident mut $name:ident: $object_id:expr_2021 $(, $($rest:tt)*)?) => {
         $crate::object_args! { @Map $map $name: $object_id $(, $($rest)*)? }
     };
 
-    (@Map $map:ident $name:ident: $object_id:expr $(, $($rest:tt)*)?) => {
+    (@Map $map:ident $name:ident: $object_id:expr_2021 $(, $($rest:tt)*)?) => {
         $map.insert(stringify!($name).to_owned(), $object_id);
         $crate::object_args!{ @Map $map $($($rest)*)? }
     };
 
     (@Map $map:ident) => {};
 
-    (@Result $oargs:ident mut $name:ident: $_:expr $(, $($rest:tt)*)?) => {
+    (@Result $oargs:ident mut $name:ident: $_:expr_2021 $(, $($rest:tt)*)?) => {
         let mut arg = $oargs
             .remove_by_left(stringify!($name))
             .expect("request_named_object_args should fail if any names are missing")
@@ -212,7 +212,7 @@ macro_rules! object_args {
         $crate::object_args! {@Result $oargs $($($rest)*)?}
     };
 
-    (@Result $oargs:ident $name:ident: $_:expr $(, $($rest:tt)*)?) => {
+    (@Result $oargs:ident $name:ident: $_:expr_2021 $(, $($rest:tt)*)?) => {
         $name = $oargs
             .remove_by_left(stringify!($name))
             .expect("request_named_object_args should fail if any names are missing")
@@ -223,7 +223,7 @@ macro_rules! object_args {
     (@Result $oargs:ident ) => {
     };
 
-    (@PageSize $page_size:expr) => { Some($page_size) };
+    (@PageSize $page_size:expr_2021) => { Some($page_size) };
     (@PageSize) => { None };
 }
 

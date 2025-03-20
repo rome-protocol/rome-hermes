@@ -30,7 +30,7 @@ pub trait CoinReadApi {
     /// Return the total coin balance for one coin type, owned by the address owner.
     #[method(name = "getBalance")]
     async fn get_balance(&self, owner: SuiAddress, coin_type: Option<String>)
-        -> RpcResult<Balance>;
+    -> RpcResult<Balance>;
 
     /// Return the total coin balance for all coin type, owned by the address owner.
     #[method(name = "getAllBalances")]

@@ -4,7 +4,7 @@ use itertools::Itertools as _;
 use sui_gql_schema::{scalars, schema};
 
 use super::fragments::{MoveObjectContent, MoveValueRaw};
-use super::object_args::{build_oarg_set_mut, ObjectOwner};
+use super::object_args::{ObjectOwner, build_oarg_set_mut};
 use super::objects_flat;
 use super::objects_flat::Variables;
 use crate::queries::fragments::ObjectFilterV2;
@@ -81,7 +81,7 @@ pub async fn query<C: GraphQlClient>(
 async fn request<C: GraphQlClient>(
     client: &C,
     vars: Variables<'_>,
-) -> Res<super::stream::Page<impl Iterator<Item = Res<Object, C>> + 'static>, C> {
+) -> Res<super::stream::Page<impl Iterator<Item = Res<Object, C>> + 'static + use<C>>, C> {
     let objects = client
         .query::<Query, _>(vars)
         .await

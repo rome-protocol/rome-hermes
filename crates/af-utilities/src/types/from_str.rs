@@ -17,8 +17,8 @@
 use af_sui_types::U256;
 
 use super::IFixed;
-use crate::types::onchain::max_i256;
 use crate::I256;
+use crate::types::onchain::max_i256;
 
 const IFIXED_SCALE: i64 = 18;
 const RADIX: u32 = 10;

@@ -1,13 +1,13 @@
 use af_sui_types::{Address, ObjectId, Version};
 
-use super::fragments::PageInfoForward;
 use super::Error;
-use crate::{missing_data, schema, GraphQlClient, Paged, PagedResponse};
+use super::fragments::PageInfoForward;
+use crate::{GraphQlClient, Paged, PagedResponse, missing_data, schema};
 
 pub async fn query<C: GraphQlClient>(
     client: &C,
     package_id: ObjectId,
-) -> Result<impl Iterator<Item = (ObjectId, u64)>, Error<C::Error>> {
+) -> Result<impl Iterator<Item = (ObjectId, u64)> + use<C>, Error<C::Error>> {
     let vars = Variables {
         address: package_id,
         first: None,

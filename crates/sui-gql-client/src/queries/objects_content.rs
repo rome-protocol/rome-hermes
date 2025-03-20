@@ -7,8 +7,8 @@ use sui_gql_schema::schema;
 use super::fragments::{MoveValueRaw, ObjectFilterV2};
 use super::objects_flat::Variables;
 use super::outputs::RawMoveStruct;
-use super::{objects_flat, Error};
-use crate::{missing_data, GraphQlClient, GraphQlResponseExt as _};
+use super::{Error, objects_flat};
+use crate::{GraphQlClient, GraphQlResponseExt as _, missing_data};
 
 pub(super) async fn query<C: GraphQlClient>(
     client: &C,
@@ -47,8 +47,10 @@ type Query = objects_flat::Query<Object>;
 async fn request<C: GraphQlClient>(
     client: &C,
     vars: Variables<'_>,
-) -> super::Result<super::stream::Page<impl Iterator<Item = super::Result<Object, C>> + 'static>, C>
-{
+) -> super::Result<
+    super::stream::Page<impl Iterator<Item = super::Result<Object, C>> + 'static + use<C>>,
+    C,
+> {
     let data = client
         .query::<Query, _>(vars)
         .await

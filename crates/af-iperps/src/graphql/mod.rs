@@ -5,9 +5,9 @@ use af_sui_types::{Address, ObjectId, Version};
 use futures::Stream;
 use sui_gql_client::GraphQlClient;
 
+use crate::Vault;
 use crate::orderbook::Order;
 use crate::position::Position;
-use crate::Vault;
 
 mod ch_orders;
 mod ch_positions;

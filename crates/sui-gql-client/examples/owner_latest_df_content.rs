@@ -1,8 +1,8 @@
 use af_sui_types::ObjectId;
 use color_eyre::Result;
 use serde::Serialize;
-use sui_gql_client::queries::outputs::RawMoveValue;
 use sui_gql_client::queries::GraphQlClientExt as _;
+use sui_gql_client::queries::outputs::RawMoveValue;
 use sui_gql_client::reqwest::ReqwestClient;
 
 const SUI_GRAPHQL_SERVER_URL: &str = "https://sui-testnet.mystenlabs.com/graphql";

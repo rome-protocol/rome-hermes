@@ -2,15 +2,15 @@ use af_sui_types::{ObjectId, Version};
 use futures::TryStreamExt as _;
 
 use super::fragments::{ObjectFilterV2, PageInfo, PageInfoForward};
-use super::{stream, Error};
-use crate::{schema, GraphQlClient, GraphQlResponseExt as _};
+use super::{Error, stream};
+use crate::{GraphQlClient, GraphQlResponseExt as _, schema};
 
 type Item = (ObjectId, u64, u64);
 
 pub async fn query<C: GraphQlClient>(
     client: &C,
     package_ids: Vec<ObjectId>,
-) -> Result<impl Iterator<Item = Item>, Error<C::Error>> {
+) -> Result<impl Iterator<Item = Item> + use<C>, Error<C::Error>> {
     let vars = QueryVariables {
         filter: Some(ObjectFilterV2 {
             type_: None,
@@ -29,7 +29,7 @@ pub async fn query<C: GraphQlClient>(
 async fn request<C: GraphQlClient>(
     client: &C,
     vars: QueryVariables<'_>,
-) -> super::Result<stream::Page<impl Iterator<Item = super::Result<Item, C>>>, C> {
+) -> super::Result<stream::Page<impl Iterator<Item = super::Result<Item, C>> + use<C>>, C> {
     let data = client
         .query::<Query, _>(vars)
         .await

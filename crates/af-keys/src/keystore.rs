@@ -9,7 +9,7 @@ use std::path::PathBuf;
 
 use af_sui_types::Address as SuiAddress;
 use enum_dispatch::enum_dispatch;
-use eyre::{bail, eyre, Context as _};
+use eyre::{Context as _, bail, eyre};
 use fastcrypto::traits::EncodeDecodeBase64;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
@@ -418,9 +418,14 @@ mod tests {
         aliases.flush()?;
         let keystore = FileBasedKeystore::new(path.join("sui.keystore"))?;
         assert!(!keystore.key_pairs().is_empty());
-        assert!(keystore
-            .get_key(&"0x98e9cafb116af9d69f77ce0d644c60e384f850f8af050b268377d8293d7fe7c6".parse()?)
-            .is_ok());
+        assert!(
+            keystore
+                .get_key(
+                    &"0x98e9cafb116af9d69f77ce0d644c60e384f850f8af050b268377d8293d7fe7c6"
+                        .parse()?
+                )
+                .is_ok()
+        );
         assert!(keystore.get_address_by_alias("alice".to_owned()).is_ok());
         Ok(())
     }
@@ -448,9 +453,14 @@ mod tests {
         )?;
         let keystore = FileBasedKeystore::new(keystore_path)?;
         assert!(!keystore.key_pairs().is_empty());
-        assert!(keystore
-            .get_key(&"0x98e9cafb116af9d69f77ce0d644c60e384f850f8af050b268377d8293d7fe7c6".parse()?)
-            .is_ok());
+        assert!(
+            keystore
+                .get_key(
+                    &"0x98e9cafb116af9d69f77ce0d644c60e384f850f8af050b268377d8293d7fe7c6"
+                        .parse()?
+                )
+                .is_ok()
+        );
         assert!(keystore.get_address_by_alias("alice".to_owned()).is_err());
         Ok(())
     }

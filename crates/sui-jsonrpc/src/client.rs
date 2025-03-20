@@ -6,7 +6,6 @@ use std::sync::Arc;
 use std::time::Duration;
 
 use af_sui_types::{
-    encode_base64_default,
     Address as SuiAddress,
     GasCostSummary,
     GasData,
@@ -17,6 +16,7 @@ use af_sui_types::{
     TransactionDataV1,
     TransactionExpiration,
     TransactionKind,
+    encode_base64_default,
 };
 use jsonrpsee::core::client::ClientT;
 use jsonrpsee::http_client::{HeaderMap, HeaderValue, HttpClient, HttpClientBuilder};
@@ -58,7 +58,9 @@ pub enum SuiClientError {
     JsonRpcClient(#[from] JsonRpcClientError),
     #[error("Data error: {0}")]
     DataError(String),
-    #[error("Client/Server api version mismatch, client api version : {client_version}, server api version : {server_version}")]
+    #[error(
+        "Client/Server api version mismatch, client api version : {client_version}, server api version : {server_version}"
+    )]
     ServerVersionMismatch {
         client_version: String,
         server_version: String,

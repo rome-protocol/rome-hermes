@@ -3,10 +3,10 @@
 
 use std::fmt::Display;
 
-use af_sui_types::sui::object::Owner;
 use af_sui_types::TypeTag;
+use af_sui_types::sui::object::Owner;
 use serde::{Deserialize, Serialize};
-use serde_with::{serde_as, DisplayFromStr};
+use serde_with::{DisplayFromStr, serde_as};
 
 #[serde_as]
 #[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq)]

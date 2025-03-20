@@ -5,7 +5,7 @@ use graphql_extract::extract;
 
 use super::fragments::PageInfoForward;
 use crate::queries::Error;
-use crate::{missing_data, scalars, schema, GraphQlClient, GraphQlResponseExt};
+use crate::{GraphQlClient, GraphQlResponseExt, missing_data, scalars, schema};
 
 #[derive(cynic::QueryVariables, Clone, Debug)]
 struct Variables<'a> {

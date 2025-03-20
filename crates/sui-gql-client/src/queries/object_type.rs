@@ -2,7 +2,7 @@ use af_sui_types::{ObjectId, StructTag, TypeTag};
 use graphql_extract::extract;
 
 use super::Error;
-use crate::{schema, GraphQlClient, GraphQlResponseExt};
+use crate::{GraphQlClient, GraphQlResponseExt, schema};
 
 pub(super) async fn query<C: GraphQlClient>(
     client: &C,

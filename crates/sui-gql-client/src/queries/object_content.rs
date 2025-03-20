@@ -1,10 +1,10 @@
 use af_sui_types::{ObjectId, Version};
 use graphql_extract::extract;
 
+use super::Error;
 use super::fragments::{MoveObjectContent, MoveValueRaw};
 use super::outputs::RawMoveStruct;
-use super::Error;
-use crate::{schema, GraphQlClient, GraphQlResponseExt};
+use crate::{GraphQlClient, GraphQlResponseExt, schema};
 
 pub async fn query<C: GraphQlClient>(
     client: &C,

@@ -9,8 +9,8 @@ use af_sui_types::{Address as SuiAddress, ObjectId, StructTag};
 use colored::Colorize;
 use itertools::Itertools;
 use serde::{Deserialize, Serialize};
-use serde_json::{json, Value};
-use serde_with::{serde_as, DisplayFromStr};
+use serde_json::{Value, json};
+use serde_with::{DisplayFromStr, serde_as};
 
 pub type SuiMoveTypeParameterIndex = u16;
 

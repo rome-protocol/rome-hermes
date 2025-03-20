@@ -3,7 +3,7 @@ use cynic::GraphQlResponse;
 
 use super::fragments::PageInfoForward;
 use crate::scalars::{BigInt, Digest};
-use crate::{schema, GraphQlClient, GraphQlErrors, GraphQlResponseExt as _};
+use crate::{GraphQlClient, GraphQlErrors, GraphQlResponseExt as _, schema};
 
 #[derive(thiserror::Error, Debug)]
 pub enum Error<E> {

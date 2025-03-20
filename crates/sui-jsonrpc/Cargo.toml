@@ -3,11 +3,12 @@ description = "Light-weight Sui JSON-RPC client by Aftermath Finance"
 name        = "sui-jsonrpc"
 version     = "0.14.0"
 
-authors.workspace    = true
-categories.workspace = true
-edition.workspace    = true
-license.workspace    = true
-repository.workspace = true
+authors.workspace      = true
+categories.workspace   = true
+edition.workspace      = true
+license.workspace      = true
+repository.workspace   = true
+rust-version.workspace = true
 
 [package.metadata.docs.rs]
 # To build locally:

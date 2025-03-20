@@ -1,10 +1,10 @@
-use af_sui_types::sui::object::Object;
 use af_sui_types::ObjectId;
+use af_sui_types::sui::object::Object;
 use cynic::{QueryFragment, QueryVariables};
 use graphql_extract::extract;
 
 use super::Error;
-use crate::{scalars, schema, GraphQlClient, GraphQlResponseExt as _};
+use crate::{GraphQlClient, GraphQlResponseExt as _, scalars, schema};
 
 /// Get the full [`Object`] contents from the server at a certain version or the latest if not
 /// specified.

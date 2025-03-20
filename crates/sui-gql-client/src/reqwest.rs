@@ -1,6 +1,6 @@
+use cynic::Operation;
 use cynic::http::CynicReqwestError;
 use cynic::serde::Serialize;
-use cynic::Operation;
 use serde_json::Value as Json;
 
 use crate::RawClient;

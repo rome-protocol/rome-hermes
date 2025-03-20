@@ -2,7 +2,7 @@ use af_sui_types::ObjectId;
 use graphql_extract::extract;
 
 use crate::queries::Error;
-use crate::{schema, GraphQlClient, GraphQlResponseExt as _};
+use crate::{GraphQlClient, GraphQlResponseExt as _, schema};
 
 pub async fn query<C>(client: &C, object_id: ObjectId) -> Result<(u64, u64), Error<C::Error>>
 where

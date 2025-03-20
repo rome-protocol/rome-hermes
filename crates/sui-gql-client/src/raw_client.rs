@@ -1,6 +1,6 @@
 use cynic::{GraphQlResponse, Operation};
-use serde::de::DeserializeOwned;
 use serde::Serialize;
+use serde::de::DeserializeOwned;
 use serde_json::Value as Json;
 
 use crate::GraphQlClient;

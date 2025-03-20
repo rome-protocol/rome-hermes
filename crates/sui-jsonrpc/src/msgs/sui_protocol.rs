@@ -5,7 +5,7 @@ use std::collections::BTreeMap;
 
 use af_sui_types::ProtocolVersion;
 use serde::{Deserialize, Serialize};
-use serde_with::{serde_as, DisplayFromStr, IfIsHumanReadable};
+use serde_with::{DisplayFromStr, IfIsHumanReadable, serde_as};
 
 use crate::serde::BigInt;
 

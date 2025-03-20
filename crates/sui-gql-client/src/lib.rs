@@ -51,8 +51,8 @@
 
 pub use cynic;
 use cynic::schema::{MutationRoot, QueryRoot};
-use cynic::serde::de::DeserializeOwned;
 use cynic::serde::Serialize;
+use cynic::serde::de::DeserializeOwned;
 use cynic::{GraphQlError, GraphQlResponse, Operation, QueryFragment, QueryVariables};
 use extension_traits::extension;
 #[cfg(feature = "scalars")]

@@ -2,7 +2,7 @@ use af_sui_types::TransactionData;
 use graphql_extract::extract;
 
 use super::Error;
-use crate::{scalars, schema, GraphQlClient, GraphQlResponseExt as _};
+use crate::{GraphQlClient, GraphQlResponseExt as _, scalars, schema};
 
 pub async fn query<C: GraphQlClient>(client: &C) -> Result<TransactionData, Error<C::Error>> {
     let data = client

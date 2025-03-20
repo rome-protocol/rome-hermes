@@ -2,7 +2,7 @@ use af_sui_types::TransactionEffects;
 use cynic::GraphQlResponse;
 use sui_gql_schema::scalars;
 
-use crate::{schema, GraphQlClient, GraphQlErrors, GraphQlResponseExt};
+use crate::{GraphQlClient, GraphQlErrors, GraphQlResponseExt, schema};
 
 #[derive(cynic::QueryVariables, Clone, Debug)]
 pub struct Variables {

@@ -1,6 +1,6 @@
 use super::Error;
 use crate::scalars::BigInt;
-use crate::{missing_data, schema, GraphQlClient, GraphQlResponseExt};
+use crate::{GraphQlClient, GraphQlResponseExt, missing_data, schema};
 
 pub(super) async fn query<C: GraphQlClient>(client: &C) -> Result<u64, Error<C::Error>> {
     let query: Query = client

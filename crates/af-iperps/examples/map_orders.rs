@@ -1,7 +1,7 @@
 use std::time::Instant;
 
 use af_iperps::graphql::GraphQlClientExt as _;
-use af_sui_types::{hex_address_bytes, ObjectId};
+use af_sui_types::{ObjectId, hex_address_bytes};
 use clap::Parser;
 use color_eyre::Result;
 use futures::TryStreamExt as _;

@@ -33,8 +33,8 @@ struct MoveType {
 }
 
 fn extract(data: Option<Query>) -> Result<(MoveType, String), &'static str> {
-    use graphql_extract::extract;
     use DynamicFieldValue::MoveValue;
+    use graphql_extract::extract;
 
     extract!(data => {
         object? {

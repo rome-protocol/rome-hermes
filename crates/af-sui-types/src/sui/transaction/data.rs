@@ -268,9 +268,7 @@ impl ObjectArg {
     /// For shared object arguments: set their `mutable` flag value.
     pub fn set_mutable(&mut self, mutable_: bool) -> Result<(), ImmOwnedOrReceivingError> {
         match self {
-            Self::SharedObject {
-                ref mut mutable, ..
-            } => {
+            Self::SharedObject { mutable, .. } => {
                 *mutable = mutable_;
                 Ok(())
             }

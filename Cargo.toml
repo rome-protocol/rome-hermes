@@ -3,11 +3,12 @@ members  = ["crates/*"]
 resolver = "2"
 
 [workspace.package]
-authors    = ["Aftermath Finance <admin@aftermath.finance>"]
-categories = ["cryptography::cryptocurrencies"]
-edition    = "2021"
-license    = "Apache-2.0"
-repository = "https://github.com/AftermathFinance/aftermath-sdk-rust"
+authors      = ["Aftermath Finance <admin@aftermath.finance>"]
+categories   = ["cryptography::cryptocurrencies"]
+edition      = "2024"
+license      = "Apache-2.0"
+repository   = "https://github.com/AftermathFinance/aftermath-sdk-rust"
+rust-version = "1.85"
 
 [workspace.lints.clippy]
 nursery             = { level = "warn", priority = 1 }

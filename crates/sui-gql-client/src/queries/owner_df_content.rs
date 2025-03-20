@@ -1,10 +1,10 @@
 use af_sui_types::Address as SuiAddress;
 use cynic::GraphQlResponse;
 
+use super::Error;
 use super::fragments::MoveValueRaw;
 use super::outputs::RawMoveValue;
-use super::Error;
-use crate::{missing_data, scalars, schema, GraphQlClient, GraphQlResponseExt};
+use crate::{GraphQlClient, GraphQlResponseExt, missing_data, scalars, schema};
 
 pub async fn query<C: GraphQlClient>(
     client: &C,

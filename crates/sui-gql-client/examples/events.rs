@@ -3,7 +3,7 @@ use clap::Parser;
 use color_eyre::eyre::OptionExt as _;
 use sui_gql_client::queries::fragments::MoveValueRaw;
 use sui_gql_client::reqwest::ReqwestClient;
-use sui_gql_client::{scalars, schema, GraphQlClient as _, GraphQlResponseExt as _};
+use sui_gql_client::{GraphQlClient as _, GraphQlResponseExt as _, scalars, schema};
 
 #[derive(Parser)]
 struct Args {

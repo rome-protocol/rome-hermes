@@ -1,5 +1,5 @@
-use cynic::serde::de::DeserializeOwned;
 use cynic::serde::Serialize;
+use cynic::serde::de::DeserializeOwned;
 use cynic::{GraphQlResponse, QueryFragment, QueryVariables};
 use tap::TapFallible as _;
 
@@ -31,13 +31,16 @@ where
 
         let mut pages = vec![];
         for (i, response) in next.into_iter().enumerate() {
-            if let Some(page_data) = response
+            match response
                 .try_into_data()
                 .tap_err_mut(|e| e.page = Some(i + 1))?
             {
-                pages.push(page_data);
-            } else {
-                break;
+                Some(page_data) => {
+                    pages.push(page_data);
+                }
+                _ => {
+                    break;
+                }
             }
         }
 

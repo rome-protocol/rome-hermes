@@ -202,7 +202,7 @@ mod tests {
     use std::num::NonZeroU64;
 
     use proptest::prelude::*;
-    use test_strategy::{proptest, Arbitrary};
+    use test_strategy::{Arbitrary, proptest};
 
     use super::*;
 

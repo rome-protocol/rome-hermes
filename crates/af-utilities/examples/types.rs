@@ -1,4 +1,4 @@
-use af_utilities::types::{IFixed, I256};
+use af_utilities::types::{I256, IFixed};
 
 #[expect(clippy::unwrap_used)]
 fn main() {

@@ -7,15 +7,15 @@ use std::fmt;
 use serde::{Deserialize, Serialize};
 use sui_sdk_types::{Address, StructTag, TypeTag};
 
-use super::gas_coin::{is_gas_coin, Gas};
+use super::gas_coin::{Gas, is_gas_coin};
 use crate::{
-    IdentStr,
     COIN_METADATA_STRUCT_NAME,
     COIN_MODULE_NAME,
     COIN_STRUCT_NAME,
     COIN_TREASURE_CAP_NAME,
     DYNAMIC_FIELD_FIELD_STRUCT_NAME,
     DYNAMIC_FIELD_MODULE_NAME,
+    IdentStr,
     STAKED_SUI_STRUCT_NAME,
     STAKING_POOL_MODULE_NAME,
     SUI_FRAMEWORK_ADDRESS,

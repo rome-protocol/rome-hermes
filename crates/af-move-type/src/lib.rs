@@ -300,9 +300,9 @@ impl<T: StaticTypeTag> From<T> for MoveInstance<T> {
 
 impl<T: MoveStruct + tabled::Tabled> std::fmt::Display for MoveInstance<T> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        use tabled::Table;
         use tabled::settings::panel::Header;
         use tabled::settings::{Rotate, Settings, Style};
-        use tabled::Table;
 
         let stag: StructTag = self.type_.clone().into();
         let settings = Settings::default()

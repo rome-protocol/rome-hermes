@@ -217,7 +217,7 @@ pub const ADD_STAKE_FUN_NAME: &IdentStr = IdentStr::cast("request_add_stake");
 pub const WITHDRAW_STAKE_FUN_NAME: &IdentStr = IdentStr::cast("request_withdraw_stake");
 
 macro_rules! built_in_ids {
-    ($($addr:ident / $id:ident = $init:expr);* $(;)?) => {
+    ($($addr:ident / $id:ident = $init:expr_2021);* $(;)?) => {
         $(
             pub const $addr: Address = builtin_address($init);
             pub const $id: ObjectId = ObjectId::new($addr.into_inner());
@@ -226,7 +226,7 @@ macro_rules! built_in_ids {
 }
 
 macro_rules! built_in_pkgs {
-    ($($addr:ident / $id:ident = $init:expr);* $(;)?) => {
+    ($($addr:ident / $id:ident = $init:expr_2021);* $(;)?) => {
         built_in_ids! { $($addr / $id = $init;)* }
         pub const SYSTEM_PACKAGE_ADDRESSES: &[Address] = &[$($addr),*];
         pub fn is_system_package(addr: impl Into<Address>) -> bool {

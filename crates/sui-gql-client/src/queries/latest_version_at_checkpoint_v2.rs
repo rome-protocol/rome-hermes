@@ -1,7 +1,7 @@
 use af_sui_types::{ObjectId, Version};
 use cynic::{QueryFragment, QueryVariables};
 
-use crate::{schema, GraphQlClient, GraphQlErrors, GraphQlResponseExt as _};
+use crate::{GraphQlClient, GraphQlErrors, GraphQlResponseExt as _, schema};
 
 #[derive(thiserror::Error, Clone, Debug, PartialEq)]
 pub enum Error<C: std::error::Error> {

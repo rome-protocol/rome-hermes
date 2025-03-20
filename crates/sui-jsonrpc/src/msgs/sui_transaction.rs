@@ -14,16 +14,16 @@ use af_sui_types::{
     ObjectId,
     ObjectRef,
     Owner,
+    SUI_FRAMEWORK_ADDRESS,
     StructTag,
     TransactionDigest,
     TransactionEventsDigest,
     TypeTag,
-    SUI_FRAMEWORK_ADDRESS,
 };
 use enum_dispatch::enum_dispatch;
 use serde::{Deserialize, Serialize};
 use serde_with::base64::Base64;
-use serde_with::{serde_as, DeserializeAs, DisplayFromStr, IfIsHumanReadable, SerializeAs};
+use serde_with::{DeserializeAs, DisplayFromStr, IfIsHumanReadable, SerializeAs, serde_as};
 use sui_sdk_types::{ConsensusDeterminedVersionAssignments, MoveLocation, UserSignature, Version};
 use tabled::builder::Builder as TableBuilder;
 use tabled::settings::style::HorizontalLine;
@@ -250,7 +250,7 @@ impl SuiTransactionBlockResponse {
     pub fn get_effects(
         &self,
     ) -> Result<&SuiTransactionBlockEffectsV1, SuiTransactionBlockResponseError> {
-        let SuiTransactionBlockEffects::V1(ref effects) = self
+        let SuiTransactionBlockEffects::V1(effects) = self
             .effects
             .as_ref()
             .ok_or(SuiTransactionBlockResponseError::MissingEffects)?;
@@ -529,7 +529,11 @@ impl Display for SuiTransactionBlockKind {
                 writeln!(
                     writer,
                     "Epoch: {}, Round: {}, SubDagIndex: {:?}, Timestamp: {}, ConsensusCommitDigest: {}",
-                    p.epoch, p.round, p.sub_dag_index, p.commit_timestamp_ms, p.consensus_commit_digest
+                    p.epoch,
+                    p.round,
+                    p.sub_dag_index,
+                    p.commit_timestamp_ms,
+                    p.consensus_commit_digest
                 )?;
             }
             Self::ProgrammableTransaction(p) => {

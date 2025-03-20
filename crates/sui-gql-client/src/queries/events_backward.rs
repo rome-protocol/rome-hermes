@@ -1,9 +1,9 @@
 use af_sui_types::Address as SuiAddress;
 use sui_gql_schema::scalars;
 
-use super::fragments::MoveValueRaw;
 use super::Error;
-use crate::{schema, GraphQlClient, GraphQlResponseExt as _};
+use super::fragments::MoveValueRaw;
+use crate::{GraphQlClient, GraphQlResponseExt as _, schema};
 
 #[derive(cynic::InputObject, Debug, Clone)]
 pub struct EventFilter {

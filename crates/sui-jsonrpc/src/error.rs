@@ -248,7 +248,11 @@ mod tests {
 
     #[test]
     fn object_not_found1() {
-        let error = ErrorObject::owned::<()>(ErrorCode::InvalidParams.code(), "Error checking transaction input objects: ObjectNotFound { object_id: 0x38826d19eb0338509eedf78c4f3a1de6479163e1a0a2fb447aa3fe947ef4cc2a, version: Some(SequenceNumber(247815626)) }", None);
+        let error = ErrorObject::owned::<()>(
+            ErrorCode::InvalidParams.code(),
+            "Error checking transaction input objects: ObjectNotFound { object_id: 0x38826d19eb0338509eedf78c4f3a1de6479163e1a0a2fb447aa3fe947ef4cc2a, version: Some(SequenceNumber(247815626)) }",
+            None,
+        );
         assert!(error.is_object_not_found());
         assert_eq!(
             error.as_object_not_found(),
@@ -263,7 +267,11 @@ mod tests {
 
     #[test]
     fn object_not_found2() {
-        let error = ErrorObject::owned::<()>(ErrorCode::InvalidParams.code(), "Error checking transaction input objects: ObjectNotFound { object_id: 0x38826d19eb0338509eedf78c4f3a1de6479163e1a0a2fb447aa3fe947ef4cc2a, version: None }", None);
+        let error = ErrorObject::owned::<()>(
+            ErrorCode::InvalidParams.code(),
+            "Error checking transaction input objects: ObjectNotFound { object_id: 0x38826d19eb0338509eedf78c4f3a1de6479163e1a0a2fb447aa3fe947ef4cc2a, version: None }",
+            None,
+        );
         assert!(error.is_object_not_found());
         assert_eq!(
             error.as_object_not_found(),

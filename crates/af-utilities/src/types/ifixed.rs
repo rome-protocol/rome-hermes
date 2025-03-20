@@ -345,11 +345,7 @@ impl IFixed {
     }
 
     pub fn copy_sign(self, other: &Self) -> Self {
-        if other.is_neg() {
-            -self
-        } else {
-            self
-        }
+        if other.is_neg() { -self } else { self }
     }
 }
 

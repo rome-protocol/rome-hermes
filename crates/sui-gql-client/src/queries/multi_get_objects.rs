@@ -4,7 +4,7 @@ use sui_gql_schema::scalars::Base64Bcs;
 
 use super::fragments::ObjectKey;
 use crate::queries::Error;
-use crate::{schema, GraphQlClient, GraphQlResponseExt as _};
+use crate::{GraphQlClient, GraphQlResponseExt as _, schema};
 
 pub(super) async fn query<C: GraphQlClient>(
     client: &C,

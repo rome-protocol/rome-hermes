@@ -1,7 +1,7 @@
 // Copyright (c) Mysten Labs, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-use crate::{StructTag, TypeTag, GAS_MODULE_NAME, GAS_STRUCT_NAME, SUI_FRAMEWORK_ADDRESS};
+use crate::{GAS_MODULE_NAME, GAS_STRUCT_NAME, SUI_FRAMEWORK_ADDRESS, StructTag, TypeTag};
 
 /// One-time-witness representation.
 pub struct Gas;

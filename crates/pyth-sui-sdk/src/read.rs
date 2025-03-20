@@ -1,11 +1,11 @@
 //! JSON-RPC methods for querying Pyth on-chain data.
 use af_ptbuilder::ptb;
 use af_sui_types::{
-    encode_base64_default,
     Address as SuiAddress,
     ObjectArg,
     ObjectId,
     TransactionKind,
+    encode_base64_default,
 };
 use sui_framework_sdk::object::ID;
 use sui_jsonrpc::api::WriteApiClient;

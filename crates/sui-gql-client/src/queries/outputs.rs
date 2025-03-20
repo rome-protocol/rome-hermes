@@ -1,4 +1,4 @@
-use af_sui_types::{encode_base64_default, ObjectId, StructTag, TypeTag};
+use af_sui_types::{ObjectId, StructTag, TypeTag, encode_base64_default};
 use derive_more::Display;
 
 /// An instance of a dynamic field or dynamic object.

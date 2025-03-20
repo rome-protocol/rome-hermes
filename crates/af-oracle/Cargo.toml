@@ -3,11 +3,12 @@ description = "Move types for Aftermath's `AfOracle` package"
 name        = "af-oracle"
 version     = "0.17.0"
 
-authors.workspace    = true
-categories.workspace = true
-edition.workspace    = true
-license.workspace    = true
-repository.workspace = true
+authors.workspace      = true
+categories.workspace   = true
+edition.workspace      = true
+license.workspace      = true
+repository.workspace   = true
+rust-version.workspace = true
 
 [package.metadata.docs.rs]
 # To build locally:
@@ -48,4 +49,4 @@ default-features = false
 features         = ["move-type", "queries"]
 optional         = true
 path             = "../sui-gql-client"
-version = "0.16.0"
+version          = "0.16.0"

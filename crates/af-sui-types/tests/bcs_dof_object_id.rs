@@ -1,6 +1,6 @@
 //! This showcases how to obtain a DOF's object ID from its wrapper `Field`'s BCS bytes.
 use af_sui_types::sui::object::Object;
-use af_sui_types::{decode_base64_default, hex_address_bytes, ObjectId};
+use af_sui_types::{ObjectId, decode_base64_default, hex_address_bytes};
 
 // Field wrapper:
 // {

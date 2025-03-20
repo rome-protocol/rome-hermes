@@ -26,9 +26,9 @@ use std::ops::{
 use primitive_types::U256 as PrimitiveU256;
 #[cfg(any(test, feature = "fuzzing"))]
 use proptest::strategy::BoxedStrategy;
+use rand::Rng;
 use rand::distr::uniform::{SampleUniform, UniformSampler};
 use rand::distr::{Distribution, StandardUniform};
-use rand::Rng;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use uint::FromStrRadixErr;
 

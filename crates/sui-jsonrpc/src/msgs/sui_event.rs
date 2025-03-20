@@ -5,17 +5,17 @@ use std::fmt;
 use std::fmt::Display;
 
 use af_sui_types::{
-    encode_base64_default,
     Address as SuiAddress,
     Identifier,
     ObjectId,
     StructTag,
     TransactionDigest,
+    encode_base64_default,
 };
 use json_to_table::json_to_table;
 use serde::{Deserialize, Serialize};
-use serde_json::{json, Value};
-use serde_with::{serde_as, DisplayFromStr, IfIsHumanReadable};
+use serde_json::{Value, json};
+use serde_with::{DisplayFromStr, IfIsHumanReadable, serde_as};
 use tabled::settings::Style as TableStyle;
 
 use super::Page;
@@ -62,9 +62,16 @@ impl Display for SuiEvent {
         let mut table = json_to_table(parsed_json);
         let style = TableStyle::modern();
         table.collapse().with(style);
-        write!(f,
+        write!(
+            f,
             " ┌──\n │ EventID: {}:{}\n │ PackageID: {}\n │ Transaction Module: {}\n │ Sender: {}\n │ EventType: {}\n",
-            self.id.tx_digest, self.id.event_seq, self.package_id, self.transaction_module, self.sender, self.type_)?;
+            self.id.tx_digest,
+            self.id.event_seq,
+            self.package_id,
+            self.transaction_module,
+            self.sender,
+            self.type_
+        )?;
         if let Some(ts) = self.timestamp_ms {
             writeln!(f, " │ Timestamp: {}\n └──", ts)?;
         }

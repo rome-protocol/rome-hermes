@@ -5,7 +5,7 @@ use sui_gql_schema::scalars::Base64Bcs;
 use super::fragments::{ObjectFilterV2, PageInfo, PageInfoForward};
 use super::stream;
 use crate::queries::Error;
-use crate::{scalars, schema, GraphQlClient, GraphQlResponseExt};
+use crate::{GraphQlClient, GraphQlResponseExt, scalars, schema};
 
 pub(super) fn query<C: GraphQlClient>(
     client: &C,
@@ -29,7 +29,8 @@ pub(super) fn query<C: GraphQlClient>(
 async fn request<C: GraphQlClient>(
     client: &C,
     vars: Variables<'_>,
-) -> super::Result<stream::Page<impl Iterator<Item = super::Result<Object, C>> + 'static>, C> {
+) -> super::Result<stream::Page<impl Iterator<Item = super::Result<Object, C>> + 'static + use<C>>, C>
+{
     let data = client
         .query::<Query, _>(vars)
         .await

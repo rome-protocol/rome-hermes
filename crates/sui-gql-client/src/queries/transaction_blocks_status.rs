@@ -4,7 +4,7 @@ use self::stream::UpdatePageInfo;
 use super::fragments::{PageInfoForward, TransactionBlockFilter};
 use super::stream;
 use crate::queries::Error;
-use crate::{schema, GraphQlClient, GraphQlResponseExt as _};
+use crate::{GraphQlClient, GraphQlResponseExt as _, schema};
 
 type Item = (String, bool);
 
@@ -12,7 +12,7 @@ type Item = (String, bool);
 pub(super) async fn query<C: GraphQlClient>(
     client: &C,
     transaction_digests: Vec<String>,
-) -> super::Result<impl Iterator<Item = Result<Item, crate::extract::Error>>, C> {
+) -> super::Result<impl Iterator<Item = Result<Item, crate::extract::Error>> + use<C>, C> {
     let filter = TransactionBlockFilter {
         transaction_ids: Some(transaction_digests),
         ..Default::default()
@@ -39,7 +39,7 @@ pub(super) async fn query<C: GraphQlClient>(
 async fn request<C: GraphQlClient>(
     client: &C,
     vars: Variables<'_>,
-) -> super::Result<stream::Page<impl Iterator<Item = super::Result<Item, C>>>, C> {
+) -> super::Result<stream::Page<impl Iterator<Item = super::Result<Item, C>> + use<C>>, C> {
     let data = client
         .query::<Query, _>(vars)
         .await

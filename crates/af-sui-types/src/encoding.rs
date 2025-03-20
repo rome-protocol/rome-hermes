@@ -2,11 +2,11 @@
 //!
 //! This module is mostly to avoid importing [`fastcrypto`](https://github.com/MystenLabs/fastcrypto)
 
-use base64::engine::GeneralPurpose;
 use base64::Engine;
+use base64::engine::GeneralPurpose;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use serde_with::base64::Base64;
-use serde_with::{formats, DeserializeAs, SerializeAs};
+use serde_with::{DeserializeAs, SerializeAs, formats};
 
 /// Default encoder for Base64 data.
 pub(crate) const BASE64_DEFAULT_ENGINE: GeneralPurpose = GeneralPurpose::new(

@@ -3,7 +3,7 @@
 
 use af_sui_types::{Address as SuiAddress, EpochId, ObjectId};
 use serde::{Deserialize, Serialize};
-use serde_with::{serde_as, IfIsHumanReadable};
+use serde_with::{IfIsHumanReadable, serde_as};
 use sui_sdk_types::Bls12381PublicKey;
 
 use super::SuiValidatorSummary;

@@ -259,8 +259,8 @@ pub struct BinaryPriceUpdate {
 impl BinaryPriceUpdate {
     /// Decoded price update.
     pub fn decode(&self) -> Result<Vec<Vec<u8>>, BinaryPriceUpdateError> {
-        use base64::engine::general_purpose::STANDARD as BASE64;
         use base64::Engine as _;
+        use base64::engine::general_purpose::STANDARD as BASE64;
 
         let bytes_vec = match self.encoding {
             EncodingType::Hex => self
@@ -340,8 +340,8 @@ mod tests {
     use std::path::{Path, PathBuf};
     use std::sync::LazyLock;
 
-    use color_eyre::eyre::OptionExt as _;
     use color_eyre::Result;
+    use color_eyre::eyre::OptionExt as _;
 
     use super::*;
 

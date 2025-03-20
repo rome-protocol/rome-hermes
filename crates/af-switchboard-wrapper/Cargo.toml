@@ -1,14 +1,14 @@
 [package]
-description  = "Move types for Aftermath's `SwitchboardWrapper` package that extends `AfOracle`"
-edition      = "2024"
-name         = "af-switchboard-wrapper"
-rust-version = "1.85"
-version      = "0.0.2"
+description = "Move types for Aftermath's `SwitchboardWrapper` package that extends `AfOracle`"
+name        = "af-switchboard-wrapper"
+version     = "0.0.2"
 
-authors.workspace    = true
-categories.workspace = true
-license.workspace    = true
-repository.workspace = true
+authors.workspace      = true
+categories.workspace   = true
+edition.workspace      = true
+license.workspace      = true
+repository.workspace   = true
+rust-version.workspace = true
 
 [package.metadata.docs.rs]
 # To build locally:

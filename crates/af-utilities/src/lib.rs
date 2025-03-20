@@ -6,4 +6,4 @@
 pub mod types;
 
 pub use af_sui_types::U256;
-pub use types::{Balance9, IFixed, I256};
+pub use types::{Balance9, I256, IFixed};

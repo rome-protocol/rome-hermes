@@ -1,5 +1,5 @@
 use super::Error;
-use crate::{missing_data, schema, GraphQlClient, GraphQlResponseExt};
+use crate::{GraphQlClient, GraphQlResponseExt, missing_data, schema};
 
 pub(super) async fn query<C: GraphQlClient>(client: &C) -> Result<i32, Error<C::Error>> {
     let max_page_size = client

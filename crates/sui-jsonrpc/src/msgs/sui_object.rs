@@ -25,7 +25,7 @@ use colored::Colorize;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use serde_with::base64::Base64;
-use serde_with::{serde_as, DisplayFromStr};
+use serde_with::{DisplayFromStr, serde_as};
 use sui_sdk_types::Version;
 
 use super::{Page, SuiMoveStruct, SuiMoveValue};

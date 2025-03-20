@@ -1,5 +1,5 @@
 use af_iperps::graphql::{GraphQlClientExt as _, OrderMaps};
-use af_sui_types::{hex_address_bytes, ObjectId};
+use af_sui_types::{ObjectId, hex_address_bytes};
 use clap::Parser;
 use color_eyre::Result;
 use sui_gql_client::queries::GraphQlClientExt as _;

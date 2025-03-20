@@ -5,7 +5,7 @@ use std::collections::HashMap;
 
 use af_sui_types::{EpochId, ObjectDigest, ObjectId, ObjectRef, TransactionDigest};
 use serde::{Deserialize, Serialize};
-use serde_with::{serde_as, IfIsHumanReadable};
+use serde_with::{IfIsHumanReadable, serde_as};
 use sui_sdk_types::Version;
 
 use super::Page;

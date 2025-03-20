@@ -1,8 +1,8 @@
 use af_sui_types::{Address, ObjectId};
 use enum_as_inner::EnumAsInner;
-use sui_gql_client::queries::fragments::DynamicFieldName;
 use sui_gql_client::queries::Error;
-use sui_gql_client::{schema, GraphQlClient, GraphQlResponseExt};
+use sui_gql_client::queries::fragments::DynamicFieldName;
+use sui_gql_client::{GraphQlClient, GraphQlResponseExt, schema};
 
 use crate::keys;
 

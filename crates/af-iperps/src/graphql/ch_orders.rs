@@ -5,7 +5,7 @@ use futures::Stream;
 use graphql_extract::extract;
 use sui_gql_client::queries::fragments::{DynamicFieldName, MoveValueRaw, PageInfoForward};
 use sui_gql_client::queries::{Error, GraphQlClientExt as _};
-use sui_gql_client::{schema, GraphQlClient, GraphQlResponseExt as _};
+use sui_gql_client::{GraphQlClient, GraphQlResponseExt as _, schema};
 
 use crate::orderbook::Order;
 use crate::ordered_map::Leaf;

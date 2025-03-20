@@ -17,11 +17,11 @@
 //! [insta]: https://insta.rs/
 
 use proc_macro2::{Span, TokenStream};
-use quote::{quote, ToTokens as _};
+use quote::{ToTokens as _, quote};
 use syn::parse::{Parse, ParseStream};
 use syn::spanned::Spanned as _;
 use syn::token::{self, Brace};
-use syn::{braced, bracketed, parse_macro_input, parse_quote, Error, Ident, Token};
+use syn::{Error, Ident, Token, braced, bracketed, parse_macro_input, parse_quote};
 
 /// See the top-level [`crate`] doc for a description.
 #[proc_macro]

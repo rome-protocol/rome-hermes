@@ -308,6 +308,7 @@ impl From<af_sui_types::Command> for Command {
 
 impl From<Command> for af_sui_types::Command {
     fn from(value: Command) -> Self {
+        use Command::*;
         use sui_sdk_types::{
             MakeMoveVector,
             MergeCoins,
@@ -316,7 +317,6 @@ impl From<Command> for af_sui_types::Command {
             TransferObjects,
             Upgrade,
         };
-        use Command::*;
         match value {
             MoveCall(move_call) => Self::MoveCall(*move_call),
             TransferObjects(objects, address) => {
@@ -591,7 +591,7 @@ macro_rules! ptbuilder {
     };
 
     ($builder:ident {
-        package $name:ident: $value:expr;
+        package $name:ident: $value:expr_2021;
         $($tt:tt)*
     }) => {
         let $name: $crate::ObjectId = $value;
@@ -609,7 +609,7 @@ macro_rules! ptbuilder {
     };
 
     ($builder:ident {
-        input pure $name:ident: $value:expr;
+        input pure $name:ident: $value:expr_2021;
         $($tt:tt)*
     }) => {
         let $name = $builder.pure($value)?;
@@ -627,7 +627,7 @@ macro_rules! ptbuilder {
     };
 
     ($builder:ident {
-        input obj $name:ident: $value:expr;
+        input obj $name:ident: $value:expr_2021;
         $($tt:tt)*
     }) => {
         let $name = $builder.obj($value)?;
@@ -646,7 +646,7 @@ macro_rules! ptbuilder {
     };
 
     ($builder:ident {
-        type $T:ident = $value:expr;
+        type $T:ident = $value:expr_2021;
         $($tt:tt)*
     }) => {
         #[allow(non_snake_case)]
@@ -742,7 +742,7 @@ macro_rules! ptbuilder {
 /// ```
 #[macro_export]
 macro_rules! unpack_arg {
-    ($arg:expr => {
+    ($arg:expr_2021 => {
         $($name:ident),+ $(,)?
     }) => {
         let ($($name),+) = if let $crate::Argument::Result(tuple) = $arg {

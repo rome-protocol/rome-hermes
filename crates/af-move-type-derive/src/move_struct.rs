@@ -2,7 +2,7 @@ use convert_case::{Case, Casing};
 use proc_macro2::{Ident, TokenStream};
 use quote::quote;
 use syn::spanned::Spanned;
-use syn::{parse_quote, DeriveInput, GenericParam, Generics, Path, TypeParamBound};
+use syn::{DeriveInput, GenericParam, Generics, Path, TypeParamBound, parse_quote};
 
 #[derive(deluxe::ExtractAttributes)]
 #[deluxe(attributes(move_))]
@@ -67,20 +67,23 @@ pub fn impl_move_struct(item: TokenStream) -> deluxe::Result<TokenStream> {
 }
 
 fn ensure_nonempty_struct(ast: &DeriveInput) -> deluxe::Result<()> {
-    if let syn::Data::Struct(data) = &ast.data {
-        if data.fields.is_empty() {
-            return Err(syn::Error::new(
-                data.fields.span(),
-                "Structs can't be empty. If a Move struct is empty, then in the Rust equivalent it \
+    match &ast.data {
+        syn::Data::Struct(data) => {
+            if data.fields.is_empty() {
+                return Err(syn::Error::new(
+                    data.fields.span(),
+                    "Structs can't be empty. If a Move struct is empty, then in the Rust equivalent it \
                 must have a single field of type `bool`. This is because the BCS of an empty Move \
                 struct encodes a single boolean dummy field.",
+                ));
+            }
+        }
+        _ => {
+            return Err(syn::Error::new(
+                ast.span(),
+                "MoveStruct only defined for structs",
             ));
         }
-    } else {
-        return Err(syn::Error::new(
-            ast.span(),
-            "MoveStruct only defined for structs",
-        ));
     };
     Ok(())
 }

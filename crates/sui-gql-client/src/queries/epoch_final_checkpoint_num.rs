@@ -3,7 +3,7 @@ use cynic::QueryFragment;
 use graphql_extract::extract;
 
 use super::Error;
-use crate::{schema, GraphQlClient, GraphQlResponseExt as _};
+use crate::{GraphQlClient, GraphQlResponseExt as _, schema};
 
 pub async fn query<C: GraphQlClient>(client: &C, epoch_id: u64) -> Result<u64, Error<C::Error>> {
     let data = client

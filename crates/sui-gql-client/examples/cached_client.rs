@@ -7,9 +7,9 @@ use color_eyre::Result;
 use cynic::Operation;
 use serde::Serialize;
 use serde_json::Value as Json;
+use sui_gql_client::RawClient;
 use sui_gql_client::queries::GraphQlClientExt as _;
 use sui_gql_client::reqwest::ReqwestClient;
-use sui_gql_client::RawClient;
 
 #[derive(Parser)]
 struct Cli {

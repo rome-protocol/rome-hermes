@@ -23,9 +23,9 @@ impl<T: StaticTypeTag> StaticTypeTag for MoveVec<T> {
 
 impl<T: MoveType> std::fmt::Display for MoveVec<T> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        use tabled::Table;
         use tabled::settings::style::Style;
         use tabled::settings::{Rotate, Settings};
-        use tabled::Table;
 
         let mut table = Table::from_iter([self.iter().map(|e| e.to_string())]);
         let settings = Settings::default()

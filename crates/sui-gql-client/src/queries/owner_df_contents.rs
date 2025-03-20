@@ -2,10 +2,10 @@ use std::collections::HashMap;
 
 use af_sui_types::{Address as SuiAddress, ObjectId};
 
+use super::Error;
 use super::fragments::MoveValueRaw;
 use super::outputs::{DynamicField as OutputDf, ObjectKey, RawMoveValue};
-use super::Error;
-use crate::{missing_data, schema, GraphQlClient, GraphQlResponseExt as _};
+use crate::{GraphQlClient, GraphQlResponseExt as _, missing_data, schema};
 
 pub async fn query<C: GraphQlClient>(
     client: &C,

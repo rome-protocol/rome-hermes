@@ -1,4 +1,4 @@
-use af_sui_types::{decode_base64_default, hex_address_bytes, Object, ObjectId};
+use af_sui_types::{Object, ObjectId, decode_base64_default, hex_address_bytes};
 
 // query Transactions($tx_cursor: String) {
 //   transactionBlocks(

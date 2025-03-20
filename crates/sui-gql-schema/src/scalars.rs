@@ -1,11 +1,11 @@
 use std::str::FromStr;
 
-use af_sui_types::{encoding, Address as SuiAddress, ObjectId};
+use af_sui_types::{Address as SuiAddress, ObjectId, encoding};
 use cynic::impl_scalar;
 use derive_more::with_trait::{AsRef, Deref, Display, From, Into};
 use serde::{Deserialize, Serialize};
 use serde_json::Value as Json;
-use serde_with::{base64, serde_as, Bytes, DisplayFromStr};
+use serde_with::{Bytes, DisplayFromStr, base64, serde_as};
 
 use crate::schema;
 
