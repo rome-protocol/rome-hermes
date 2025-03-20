@@ -2,7 +2,7 @@
 autotests   = false
 description = "Macro for generating `MoveStruct`s from Move source code"
 name        = "af-sui-pkg-sdk"
-version     = "0.8.9"
+version     = "0.9.0"
 
 authors.workspace    = true
 categories.workspace = true
@@ -25,8 +25,8 @@ rustdoc-args = [
 workspace = true
 
 [dependencies]
-af-move-type = { version = "0.8.7", path = "../af-move-type" }
-af-sui-types = { version = "0.7.6", path = "../af-sui-types", features = ["u256"] }
+af-move-type = { version = "0.9.0", path = "../af-move-type" }
+af-sui-types = { version = "0.8.0", path = "../af-sui-types", features = ["u256"] }
 
 derive-new = "0.7.0"
 serde      = "1"
