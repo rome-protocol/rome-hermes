@@ -88,7 +88,7 @@ pub trait TransactionEffectsAPI {
                 InputSharedObject::Mutate(..)
                 | InputSharedObject::ReadOnly(..)
                 | InputSharedObject::ReadDeleted(..)
-                | InputSharedObject::Cancelled(..) => None,
+                | InputSharedObject::Canceled(..) => None,
             })
             .collect()
     }
@@ -103,7 +103,7 @@ pub enum InputSharedObject {
     ReadOnly(ObjectRef),
     ReadDeleted(ObjectId, Version),
     MutateDeleted(ObjectId, Version),
-    Cancelled(ObjectId, Version),
+    Canceled(ObjectId, Version),
 }
 
 impl InputSharedObject {
@@ -118,7 +118,7 @@ impl InputSharedObject {
             Self::ReadDeleted(id, version) | Self::MutateDeleted(id, version) => {
                 ObjectRef::new(*id, *version, crate::OBJECT_DIGEST_DELETED)
             }
-            Self::Cancelled(id, version) => {
+            Self::Canceled(id, version) => {
                 ObjectRef::new(*id, *version, crate::OBJECT_DIGEST_CANCELLED)
             }
         }

@@ -386,8 +386,8 @@ impl TransactionEffectsAPI for TransactionEffectsV2 {
                         UnchangedSharedKind::ReadDeleted { version } => {
                             Some(InputSharedObject::ReadDeleted(u.object_id, version))
                         }
-                        UnchangedSharedKind::Cancelled { version } => {
-                            Some(InputSharedObject::Cancelled(u.object_id, version))
+                        UnchangedSharedKind::Canceled { version } => {
+                            Some(InputSharedObject::Canceled(u.object_id, version))
                         }
                         // We can not expose the per epoch config object as input shared object,
                         // since it does not require sequencing, and hence shall not be considered
