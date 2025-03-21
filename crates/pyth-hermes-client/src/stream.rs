@@ -26,7 +26,7 @@ impl crate::PythClient {
         parsed: Option<bool>,
         allow_unordered: Option<bool>,
         benchmarks_only: Option<bool>,
-    ) -> Result<impl Stream<Item = Result<PriceUpdate, Error>>, Error> {
+    ) -> Result<impl Stream<Item = Result<PriceUpdate, Error>> + use<>, Error> {
         #[derive(Serialize)]
         struct Options {
             encoding: Option<EncodingType>,
