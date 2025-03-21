@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.7](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/graphql-extract-v0.0.6...graphql-extract-v0.0.7)
+
+### ⛰️ Features
+
+- [**breaking**] Update workspace edition to 2024 - ([6132359](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/6132359dfc2b5b6bc1e3bc9857d7a2980d7d3023))
+
+
 ## [0.0.6](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/graphql-extract-v0.0.5...graphql-extract-v0.0.6)
 
 ### ⛰️ Features

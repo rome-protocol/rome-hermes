@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/pyth-hermes-client-v0.4.0...pyth-hermes-client-v0.5.0)
+
+### 🐛 Bug Fixes
+
+- [**breaking**] Signal that stream doesn't use the client's lifetime - ([73d5100](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/73d510070bb0bf447a849be115018e38240db3f0))
+
+
 ## [0.3.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/pyth-hermes-client-v0.2.7...pyth-hermes-client-v0.3.0)
 
 ### ⛰️ Features

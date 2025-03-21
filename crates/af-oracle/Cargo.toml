@@ -49,4 +49,4 @@ default-features = false
 features         = ["move-type", "queries"]
 optional         = true
 path             = "../sui-gql-client"
-version          = "0.16.0"
+version = "0.16.1"
