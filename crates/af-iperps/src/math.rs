@@ -101,9 +101,7 @@ impl<T: MoveType> ClearingHouse<T> {
 }
 
 impl MarketParams {
-    /// The initial and maintenance margin requirements given a certain notional.
-    ///
-    /// All values in USD.
+    /// The initial and maintenance margin requirements for a certain notional, in the same units.
     pub fn margin_requirements(&self, notional: IFixed) -> (IFixed, IFixed) {
         let min_margin = notional * self.margin_ratio_initial;
         let liq_margin = notional * self.margin_ratio_maintenance;
@@ -121,6 +119,8 @@ impl MarketState {
 }
 
 impl Position {
+    /// At which index price the position should be (partially) liquidated, assuming all the input
+    /// variables stay the same.
     pub fn liquidation_price(
         &self,
         coll_price: IFixed,
@@ -145,11 +145,23 @@ impl Position {
         }
     }
 
+    /// Entry price of the position's contracts; in the same units as the oracle index price.
+    ///
+    /// # Panics
+    ///
+    /// This function panics if the position has no open contracts, i.e., if
+    /// [`Self::quote_asset_notional_amount`] is zero. It is up to the caller to verify that.
+    ///
+    /// Future versions of this function will likely return an `Option` to avoid panicking.
     pub fn entry_price(&self) -> IFixed {
         self.base_asset_amount / self.quote_asset_notional_amount
     }
 
-    /// In USD.
+    /// The funding yet to be settled in this position given the market's current cumulative
+    /// fundings.
+    ///
+    /// The return value is in the same quote currency that the index price uses. E.g., if the
+    /// index price is USD/BTC, then the unrealized funding is in USD units.
     pub fn unrealized_funding(
         &self,
         cum_funding_rate_long: IFixed,
@@ -170,12 +182,18 @@ impl Position {
         }
     }
 
-    /// In USD.
+    /// Unrealized PnL given an index price.
+    ///
+    /// The returned value is in the same currency as what the index price is quoted at. E.g., if
+    /// the index price is a ratio of BTC/ETH, then the PnL is in BTC units.
     pub fn unrealized_pnl(&self, price: IFixed) -> IFixed {
         (self.base_asset_amount * price) - self.quote_asset_notional_amount
     }
 
-    /// Total position value in USD. Used for risk calculations.
+    /// Total position value used for risk calculations.
+    ///
+    /// The returned value is in the same currency as what the index price is quoted at. E.g., if
+    /// the index price is a ratio of BTC/ETH, then the PnL is in BTC units.
     pub fn notional(&self, price: IFixed) -> IFixed {
         let size = self.base_asset_amount;
         let bids_net_abs = (size + self.bids_quantity).abs();
