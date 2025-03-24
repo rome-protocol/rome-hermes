@@ -14,10 +14,17 @@ pub enum Error {
     Overflow,
     #[error("Not enough precision to represent price")]
     Precision,
+    #[error("Division by zero")]
+    DivisionByZero,
 }
 
 /// Convenience trait to convert to/from units used in the orderbook.
 pub trait OrderBookUnits {
+    /// Price in the orderbook to fixed-point number.
+    ///
+    /// # Panics
+    ///
+    /// If `self.lot_size() == 0`
     fn price_to_ifixed(&self, price: u64) -> IFixed {
         let price_ifixed = IFixed::from(price);
         let lot_size_ifixed = IFixed::from(self.lot_size());
@@ -36,6 +43,10 @@ pub trait OrderBookUnits {
         }
         // ifixed = (price_ifixed * tick_size_ifixed) / lot_size_ifixed
         // (ifixed * lot_size_ifixed) / tick_size_ifixed = price_ifixed
+        if self.tick_size() == 0 {
+            return Err(Error::DivisionByZero);
+        }
+        // safety: we checked agains division by zero above.
         let price_ifixed =
             (ifixed * IFixed::from(self.lot_size())) / IFixed::from(self.tick_size());
         let price: u64 = price_ifixed
@@ -57,7 +68,10 @@ pub trait OrderBookUnits {
 
     fn ifixed_to_lots(&self, ifixed: IFixed) -> Result<u64, Error> {
         let balance: Balance9 = ifixed.try_into().map_err(|_| Error::Overflow)?;
-        Ok(balance.into_inner() / self.lot_size())
+        balance
+            .into_inner()
+            .checked_div(self.lot_size())
+            .ok_or(Error::DivisionByZero)
     }
 
     // NOTE: these could be updated to return NonZeroU64 ensuring division by zero errors are
@@ -147,14 +161,13 @@ impl Position {
 
     /// Entry price of the position's contracts; in the same units as the oracle index price.
     ///
-    /// # Panics
-    ///
-    /// This function panics if the position has no open contracts, i.e., if
-    /// [`Self::quote_asset_notional_amount`] is zero. It is up to the caller to verify that.
-    ///
-    /// Future versions of this function will likely return an `Option` to avoid panicking.
-    pub fn entry_price(&self) -> IFixed {
-        self.base_asset_amount / self.quote_asset_notional_amount
+    /// This function returns `None` if the position has no open contracts, i.e., if
+    /// [`Self::quote_asset_notional_amount`] is zero.
+    pub fn entry_price(&self) -> Option<IFixed> {
+        if self.quote_asset_notional_amount.is_zero() {
+            return None;
+        }
+        Some(self.base_asset_amount / self.quote_asset_notional_amount)
     }
 
     /// The funding yet to be settled in this position given the market's current cumulative
@@ -290,6 +303,29 @@ mod tests {
         insta::assert_snapshot!(min_amount, @"0.0001");
         let price_precision = units.price_to_ifixed(1);
         insta::assert_snapshot!(price_precision, @"0.01");
+    }
+
+    #[test]
+    #[should_panic]
+    fn zero_lot_and_tick() {
+        (0u64, 0u64).price_to_ifixed(1);
+    }
+
+    #[test]
+    #[should_panic]
+    fn zero_lot() {
+        (0u64, 1u64).price_to_ifixed(1);
+    }
+
+    #[test]
+    fn zero_tick() {
+        assert_eq!((1u64, 0u64).price_to_ifixed(1), IFixed::zero());
+    }
+
+    #[test]
+    #[should_panic]
+    fn ifixed_to_price() {
+        (1u64, 0u64).ifixed_to_price(IFixed::one()).expect("Panics");
     }
 
     #[derive(Arbitrary, Debug)]

@@ -3575,6 +3575,7 @@ pub type af_iperps::market::MarketStateTypeTag::Err = af_move_type::ParseStructT
 pub fn af_iperps::market::MarketStateTypeTag::from_str(s: &str) -> core::result::Result<Self, Self::Err>
 pub mod af_iperps::math
 #[non_exhaustive] pub enum af_iperps::math::Error
+pub af_iperps::math::Error::DivisionByZero
 pub af_iperps::math::Error::Overflow
 #[error("Not enough precision to represent price")] pub af_iperps::math::Error::Precision
 pub trait af_iperps::math::OrderBookUnits
@@ -4028,7 +4029,7 @@ pub af_iperps::position::Position::pending_orders: u64
 pub af_iperps::position::Position::quote_asset_notional_amount: af_utilities::types::ifixed::IFixed
 pub af_iperps::position::Position::taker_fee: af_utilities::types::ifixed::IFixed
 impl af_iperps::position::Position
-pub fn af_iperps::position::Position::entry_price(&self) -> af_utilities::types::ifixed::IFixed
+pub fn af_iperps::position::Position::entry_price(&self) -> core::option::Option<af_utilities::types::ifixed::IFixed>
 pub fn af_iperps::position::Position::liquidation_price(&self, coll_price: af_utilities::types::ifixed::IFixed, cum_funding_rate_long: af_utilities::types::ifixed::IFixed, cum_funding_rate_short: af_utilities::types::ifixed::IFixed, maintenance_margin_ratio: af_utilities::types::ifixed::IFixed) -> core::option::Option<af_utilities::types::ifixed::IFixed>
 pub fn af_iperps::position::Position::notional(&self, price: af_utilities::types::ifixed::IFixed) -> af_utilities::types::ifixed::IFixed
 pub fn af_iperps::position::Position::unrealized_funding(&self, cum_funding_rate_long: af_utilities::types::ifixed::IFixed, cum_funding_rate_short: af_utilities::types::ifixed::IFixed) -> af_utilities::types::ifixed::IFixed
@@ -4387,7 +4388,7 @@ pub af_iperps::Position::pending_orders: u64
 pub af_iperps::Position::quote_asset_notional_amount: af_utilities::types::ifixed::IFixed
 pub af_iperps::Position::taker_fee: af_utilities::types::ifixed::IFixed
 impl af_iperps::position::Position
-pub fn af_iperps::position::Position::entry_price(&self) -> af_utilities::types::ifixed::IFixed
+pub fn af_iperps::position::Position::entry_price(&self) -> core::option::Option<af_utilities::types::ifixed::IFixed>
 pub fn af_iperps::position::Position::liquidation_price(&self, coll_price: af_utilities::types::ifixed::IFixed, cum_funding_rate_long: af_utilities::types::ifixed::IFixed, cum_funding_rate_short: af_utilities::types::ifixed::IFixed, maintenance_margin_ratio: af_utilities::types::ifixed::IFixed) -> core::option::Option<af_utilities::types::ifixed::IFixed>
 pub fn af_iperps::position::Position::notional(&self, price: af_utilities::types::ifixed::IFixed) -> af_utilities::types::ifixed::IFixed
 pub fn af_iperps::position::Position::unrealized_funding(&self, cum_funding_rate_long: af_utilities::types::ifixed::IFixed, cum_funding_rate_short: af_utilities::types::ifixed::IFixed) -> af_utilities::types::ifixed::IFixed
