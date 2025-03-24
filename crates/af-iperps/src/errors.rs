@@ -45,6 +45,12 @@ pub const CollateralIsNotRegistered: u64 = 19;
 pub const MarketIsNotRegistered: u64 = 20;
 /// Invalid collateral price feed storage for the clearing house
 pub const InvalidCollateralPriceFeedStorage: u64 = 21;
+/// Fees accrued are negative
+pub const NegativeFeesAccrued: u64 = 22;
+/// Reduce only conditions are not respected for stop order execution
+pub const NotReduceOnlyStopOrder: u64 = 23;
+/// Stop order gas cost provided is not enough
+pub const NotEnoughGasForStopOrder: u64 = 24;
 
 // Market ---------------------------------------------------------------
 

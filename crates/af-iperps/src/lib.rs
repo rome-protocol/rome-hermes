@@ -8,6 +8,7 @@ use af_sui_types::{ObjectId, object_id};
 use af_utilities::types::ifixed::IFixed;
 use sui_framework_sdk::balance::Balance;
 use sui_framework_sdk::object::{ID, UID};
+use sui_framework_sdk::sui::SUI;
 
 pub mod errors;
 pub mod event_ext;
@@ -74,6 +75,8 @@ sui_pkg_sdk!(perpetuals {
         /// The user needs to share such details with the 3rd party only.
         struct StopOrderTicket<!phantom T> has key {
             id: UID,
+            /// Gas coin that must be provided by the user to cover for one stop order cost.
+            gas: Balance<SUI>,
             /// Account id for user
             account_id: u64,
             /// Vector containing the blake2b hash obtained by the offchain
@@ -533,6 +536,10 @@ sui_pkg_sdk!(perpetuals {
             max_pending_orders: u64
         }
 
+        struct UpdatedStopOrderMistCost has copy, drop {
+            stop_order_mist_cost: u64
+        }
+
         struct DonatedToInsuranceFund has copy, drop {
             sender: address,
             ch_id: ID,
@@ -627,6 +634,9 @@ sui_pkg_sdk!(perpetuals {
 
         /// Key type for accessing a `CollateralInfo` saved in registry.
         struct RegistryCollateralInfo<!phantom T> has copy, drop, store {}
+
+        /// Key type for accessing a `Config` saved in registry.
+        struct RegistryConfig has copy, drop, store {}
 
         /// Key type for accessing market params in clearing house.
         struct Orderbook has copy, drop, store {}
@@ -911,6 +921,11 @@ sui_pkg_sdk!(perpetuals {
         struct CollateralInfo<!phantom T> has store {
             collateral_pfs_id: ID,
             scaling_factor: IFixed
+        }
+
+        /// Config that stores useful info for the protocol
+        struct Config has store {
+            stop_order_mist_cost: u64,
         }
     }
 });

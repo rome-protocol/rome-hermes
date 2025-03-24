@@ -24,6 +24,7 @@ pub struct StopOrderTicketDetails {
     pub price: u64,
     /// Can be set at random value if `is_limit_order` is false
     pub order_type: OrderType,
+    pub reduce_only: bool,
 }
 
 impl StopOrderTicketDetails {
