@@ -133,30 +133,38 @@ impl EncodeDecodeBase64 for PublicKey {
         Base64Wrapper::encode(&bytes[..])
     }
 
-    fn decode_base64(value: &str) -> Result<Self, eyre::Report> {
-        let bytes = Base64Wrapper::decode(value).map_err(|e| eyre!("{}", e.to_string()))?;
+    fn decode_base64(value: &str) -> Result<Self, FastCryptoError> {
+        let bytes = Base64Wrapper::decode(value)?;
         match bytes.first() {
             Some(x) => {
                 if x == &SignatureScheme::ED25519.flag() {
                     let pk: Ed25519PublicKey = Ed25519PublicKey::from_bytes(
-                        bytes.get(1..).ok_or_else(|| eyre!("Invalid length"))?,
+                        bytes
+                            .get(1..)
+                            .ok_or(FastCryptoError::InputLengthWrong(bytes.len()))?,
                     )?;
                     Ok(Self::Ed25519((&pk).into()))
                 } else if x == &SignatureScheme::Secp256k1.flag() {
                     let pk = Secp256k1PublicKey::from_bytes(
-                        bytes.get(1..).ok_or_else(|| eyre!("Invalid length"))?,
+                        bytes
+                            .get(1..)
+                            .ok_or(FastCryptoError::InputLengthWrong(bytes.len()))?,
                     )?;
                     Ok(Self::Secp256k1((&pk).into()))
                 } else if x == &SignatureScheme::Secp256r1.flag() {
                     let pk = Secp256r1PublicKey::from_bytes(
-                        bytes.get(1..).ok_or_else(|| eyre!("Invalid length"))?,
+                        bytes
+                            .get(1..)
+                            .ok_or(FastCryptoError::InputLengthWrong(bytes.len()))?,
                     )?;
                     Ok(Self::Secp256r1((&pk).into()))
                 } else {
-                    Err(eyre!("Invalid flag byte"))
+                    Err(FastCryptoError::GeneralError(
+                        "Invalid flag byte".to_string(),
+                    ))
                 }
             }
-            _ => Err(eyre!("Invalid bytes")),
+            _ => Err(FastCryptoError::InvalidInput),
         }
     }
 }
@@ -453,8 +461,8 @@ impl EncodeDecodeBase64 for SuiKeyPair {
         Base64Wrapper::encode(self.to_bytes())
     }
 
-    fn decode_base64(value: &str) -> Result<Self, eyre::Report> {
-        let bytes = Base64Wrapper::decode(value).map_err(|e| eyre!("{}", e.to_string()))?;
+    fn decode_base64(value: &str) -> Result<Self, FastCryptoError> {
+        let bytes = Base64Wrapper::decode(value)?;
         Self::from_bytes(&bytes)
     }
 }
@@ -477,31 +485,42 @@ impl SuiKeyPair {
         bytes
     }
 
-    pub fn from_bytes(bytes: &[u8]) -> Result<Self, eyre::Report> {
-        match SignatureScheme::from_flag_byte(bytes.first().ok_or_else(|| eyre!("Invalid length"))?)
-        {
+    pub fn from_bytes(bytes: &[u8]) -> Result<Self, FastCryptoError> {
+        match SignatureScheme::from_flag_byte(
+            bytes
+                .first()
+                .ok_or(FastCryptoError::InputLengthWrong(bytes.len()))?,
+        ) {
             Ok(x) => match x {
                 SignatureScheme::ED25519 => Ok(Self::Ed25519(Ed25519KeyPair::from_bytes(
-                    bytes.get(1..).ok_or_else(|| eyre!("Invalid length"))?,
+                    bytes
+                        .get(1..)
+                        .ok_or(FastCryptoError::InputLengthWrong(bytes.len()))?,
                 )?)),
                 SignatureScheme::Secp256k1 => Ok(Self::Secp256k1(Secp256k1KeyPair::from_bytes(
-                    bytes.get(1..).ok_or_else(|| eyre!("Invalid length"))?,
+                    bytes
+                        .get(1..)
+                        .ok_or(FastCryptoError::InputLengthWrong(bytes.len()))?,
                 )?)),
                 SignatureScheme::Secp256r1 => Ok(Self::Secp256r1(Secp256r1KeyPair::from_bytes(
-                    bytes.get(1..).ok_or_else(|| eyre!("Invalid length"))?,
+                    bytes
+                        .get(1..)
+                        .ok_or(FastCryptoError::InputLengthWrong(bytes.len()))?,
                 )?)),
-                _ => Err(eyre!("Invalid flag byte")),
+                _ => Err(FastCryptoError::GeneralError(
+                    "Invalid flag byte".to_string(),
+                )),
             },
-            _ => Err(eyre!("Invalid bytes")),
+            _ => Err(FastCryptoError::InvalidInput),
         }
     }
     /// Encode a SuiKeyPair as `flag || privkey` in Bech32 starting with "suiprivkey" to a string. Note that the pubkey is not encoded.
-    pub fn encode(&self) -> Result<String, eyre::Report> {
+    pub fn encode(&self) -> Result<String, FastCryptoError> {
         Bech32::encode(self.to_bytes(), SUI_PRIV_KEY_PREFIX)
     }
 
     /// Decode a SuiKeyPair from `flag || privkey` in Bech32 starting with "suiprivkey" to SuiKeyPair. The public key is computed directly from the private key bytes.
-    pub fn decode(value: &str) -> Result<Self, eyre::Report> {
+    pub fn decode(value: &str) -> Result<Self, FastCryptoError> {
         let bytes = Bech32::decode(value, SUI_PRIV_KEY_PREFIX)?;
         Self::from_bytes(&bytes)
     }
