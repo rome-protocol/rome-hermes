@@ -8,6 +8,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.26.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.25.1...af-iperps-v0.26.0)
+
+### ⛰️ Features
+
+- Add registry config - ([87f6171](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/87f6171147f47c61c57d2e85844afb8b96151064))
+- [**breaking**] Prepare sdk for new publish - ([5c9e761](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/5c9e761ec937829f931cb875ee245dc601c6b4ed))
+
+### 🐛 Bug Fixes
+
+- *(af-iperps)* [**breaking**] Return none if entry price is undefined - ([befe54f](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/befe54fd43e459f05db6425dd7a91a4ebab6caca))
+
+### 📚 Documentation
+
+- *(af-iperps)* Documents panics and units in math module - ([52a6119](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/52a61195c7b4e12b73530a763467ae8d7cd5e02c))
+
+### 🧪 Testing
+
+- Fix insta snapshot - ([71b3d53](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/71b3d537b0dc88a83faabcf60ad96b54cb949ffa))
+
+
 ## [0.25.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.25.0...af-iperps-v0.25.1)
 
 ### ⚙️ Miscellaneous Tasks

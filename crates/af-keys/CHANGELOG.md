@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-keys-v0.7.0...af-keys-v0.8.0)
+
+### ⛰️ Features
+
+- *(af-keys)* [**breaking**] Upgrade `fastcrypto` dep - ([1ff5f2b](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/1ff5f2b3a4f6c731e442a74108757ac5e118e719))
+
+
 ## [0.6.7](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-keys-v0.6.6...af-keys-v0.6.7)
 
 ### ⚙️ Miscellaneous Tasks
