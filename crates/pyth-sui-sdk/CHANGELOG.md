@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.17.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/pyth-sui-sdk-v0.17.0...pyth-sui-sdk-v0.17.1)
+
+### ⛰️ Features
+
+- *(pyth-sui-sdk)* Add get_pyth_price - ([7dd9d96](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/7dd9d96f21d235c7461faf6368e790b4c3f9edc2))
+
+### ⚙️ Miscellaneous Tasks
+
+- Add non-exhaustive for error - ([1faa283](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/1faa283e00489120c43c84332d73e4ecacb73faf))
+
+
 ## [0.15.13](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/pyth-sui-sdk-v0.15.12...pyth-sui-sdk-v0.15.13)
 
 ### ⚙️ Miscellaneous Tasks
