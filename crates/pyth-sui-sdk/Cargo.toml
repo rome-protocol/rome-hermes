@@ -27,6 +27,7 @@ workspace = true
 [features]
 json-rpc = ["dep:af-ptbuilder", "dep:sui-jsonrpc", "sui-jsonrpc/client-api"]
 ptb      = ["bytes/serde", "dep:af-ptbuilder", "dep:bytes", "dep:extension-traits"]
+pyth-sdk = ["dep:af-utilities", "dep:pyth-sdk"]
 
 [dependencies]
 af-move-type      = { version = "0.9.0", path = "../af-move-type" }
@@ -41,6 +42,7 @@ serde     = "1"
 thiserror = "2"
 
 # Optional deps
+af-utilities     = { version = "0.9", optional = true }
 bytes            = { version = "1", optional = true }
 extension-traits = { version = "2", optional = true }
 pyth-sdk         = { version = "0.8", optional = true }
