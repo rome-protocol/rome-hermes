@@ -38,6 +38,7 @@ impl PriceInfoObject {
 }
 
 #[derive(Debug, thiserror::Error)]
+#[non_exhaustive]
 pub enum Error {
     #[error("Pyth price is negative: -{0}")]
     NegativePythPrice(i64),
