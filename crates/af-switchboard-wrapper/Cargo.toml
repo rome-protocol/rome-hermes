@@ -37,7 +37,6 @@ graphql = [
 ptb = ["dep:af-ptbuilder", "dep:extension-traits"]
 
 [dependencies]
-af-oracle         = { version = "0.18.0", path = "../af-oracle" }
 af-sui-pkg-sdk    = { version = "0.9.0", path = "../af-sui-pkg-sdk" }
 sui-framework-sdk = { version = "0.11.0", path = "../sui-framework-sdk" }
 
@@ -63,4 +62,4 @@ default-features = false
 features         = ["move-type", "queries"]
 optional         = true
 path             = "../sui-gql-client"
-version = "0.16.1"
+version          = "0.16.1"
