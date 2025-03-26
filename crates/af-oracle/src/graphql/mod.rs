@@ -14,7 +14,7 @@ pub mod price_feeds;
 pub trait GraphQlClientExt: GraphQlClient + Sized {
     /// Snapshot of price feeds under the [`PriceFeedStorage`].
     ///
-    /// [`PriceFeedStorage`]: crate::PriceFeedStorage
+    /// [`PriceFeedStorage`]: crate::oracle::PriceFeedStorage
     fn price_feeds(
         &self,
         pfs: ObjectId,
@@ -26,7 +26,7 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
 
     /// Get a price feed under the [`PriceFeedStorage`], given a specific `source_wrapper_id`.
     ///
-    /// [`PriceFeedStorage`]: crate::PriceFeedStorage
+    /// [`PriceFeedStorage`]: crate::oracle::PriceFeedStorage
     fn price_feed_for_source(
         &self,
         af_oracle_pkg: Address,
