@@ -558,6 +558,7 @@ pub af_iperps::event_instance::EventInstance::FilledMakerOrders(af_move_type::Mo
 pub af_iperps::event_instance::EventInstance::FilledTakerOrder(af_move_type::MoveInstance<af_iperps::events::FilledTakerOrder>)
 pub af_iperps::event_instance::EventInstance::LiquidatedPosition(af_move_type::MoveInstance<af_iperps::events::LiquidatedPosition>)
 pub af_iperps::event_instance::EventInstance::OrderbookPostReceipt(af_move_type::MoveInstance<af_iperps::events::OrderbookPostReceipt>)
+pub af_iperps::event_instance::EventInstance::PerfomedLiquidation(af_move_type::MoveInstance<af_iperps::events::PerfomedLiquidation>)
 pub af_iperps::event_instance::EventInstance::PostedOrder(af_move_type::MoveInstance<af_iperps::events::PostedOrder>)
 pub af_iperps::event_instance::EventInstance::RegisteredCollateralInfo(af_move_type::MoveInstance<af_iperps::events::RegisteredCollateralInfo<af_move_type::otw::Otw>>)
 pub af_iperps::event_instance::EventInstance::RegisteredMarketInfo(af_move_type::MoveInstance<af_iperps::events::RegisteredMarketInfo<af_move_type::otw::Otw>>)

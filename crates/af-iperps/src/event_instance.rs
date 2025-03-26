@@ -83,6 +83,7 @@ event_instance!(EventInstance {
     FilledTakerOrder,
     LiquidatedPosition,
     OrderbookPostReceipt,
+    PerfomedLiquidation,
     PostedOrder,
     RegisteredCollateralInfo<Otw>,
     RegisteredMarketInfo<Otw>,
