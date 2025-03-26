@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-oracle-v0.18.0...af-oracle-v0.18.1)
+
+### 🐛 Bug Fixes
+
+- Make PfForSourceError public - ([595d696](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/595d696062c6f7a8a2bcf48d4e134848830f61b8))
+
+
 ## [0.18.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-oracle-v0.17.1...af-oracle-v0.18.0)
 
 ### ⛰️ Features
