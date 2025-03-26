@@ -8,6 +8,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-oracle-v0.17.1...af-oracle-v0.18.0)
+
+### ⛰️ Features
+
+- *(af-oracle)* [**breaking**] Add price feeds stream query - ([6fe2a44](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/6fe2a44bab3335db589629f8d1e91590084a7463))
+
+### ⚙️ Miscellaneous Tasks
+
+- Suggestions - ([16a352a](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/16a352a7e7b1f82387a75f5166936b5b9f72f014))
+- Removed unused deps - ([b576b74](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/b576b74f4de68db49906fd56d649f6996d1e2a20))
+- Docs - ([858fed1](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/858fed1b8883fa2080aa75df7a5184a6781ba9cb))
+- Add examples - ([1b6bce9](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/1b6bce9be5397ded301c4c5afc0e893328b70bb4))
+
+
 ## [0.17.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-oracle-v0.17.0...af-oracle-v0.17.1)
 
 ### ⚙️ Miscellaneous Tasks
