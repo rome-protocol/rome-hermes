@@ -79,6 +79,7 @@ event_instance!(EventInstance {
     DepositedCollateralSubAccount,
     DonatedToInsuranceFund,
     FilledMakerOrder,
+    FilledMakerOrders,
     FilledTakerOrder,
     LiquidatedPosition,
     OrderbookPostReceipt,

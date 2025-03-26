@@ -554,6 +554,7 @@ pub af_iperps::event_instance::EventInstance::DepositedCollateral(af_move_type::
 pub af_iperps::event_instance::EventInstance::DepositedCollateralSubAccount(af_move_type::MoveInstance<af_iperps::events::DepositedCollateralSubAccount>)
 pub af_iperps::event_instance::EventInstance::DonatedToInsuranceFund(af_move_type::MoveInstance<af_iperps::events::DonatedToInsuranceFund>)
 pub af_iperps::event_instance::EventInstance::FilledMakerOrder(af_move_type::MoveInstance<af_iperps::events::FilledMakerOrder>)
+pub af_iperps::event_instance::EventInstance::FilledMakerOrders(af_move_type::MoveInstance<af_iperps::events::FilledMakerOrders>)
 pub af_iperps::event_instance::EventInstance::FilledTakerOrder(af_move_type::MoveInstance<af_iperps::events::FilledTakerOrder>)
 pub af_iperps::event_instance::EventInstance::LiquidatedPosition(af_move_type::MoveInstance<af_iperps::events::LiquidatedPosition>)
 pub af_iperps::event_instance::EventInstance::OrderbookPostReceipt(af_move_type::MoveInstance<af_iperps::events::OrderbookPostReceipt>)
