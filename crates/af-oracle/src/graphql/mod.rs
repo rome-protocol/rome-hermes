@@ -4,7 +4,7 @@ use futures::Stream;
 use sui_gql_client::GraphQlClient;
 use sui_gql_client::queries::Error;
 
-use crate::graphql::price_feed_for_source::Error as PfForSourceError;
+pub use crate::graphql::price_feed_for_source::Error as PfForSourceError;
 use crate::oracle::PriceFeed;
 
 pub(crate) mod price_feed_for_source;
