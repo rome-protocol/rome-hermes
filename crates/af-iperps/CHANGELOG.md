@@ -8,6 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.26.2](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.26.1...af-iperps-v0.26.2)
+
+### 🐛 Bug Fixes
+
+- *(af-iperps)* Remaining `EventInstance` variants - ([ba95533](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/ba95533a13730c9ec199bdd76acff40c92f866f5))
+- *(af-iperps)* Add `EventInstance::PerfomedLiquidation` - ([bc42140](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/bc421404543347a8c355f4953893cb5737b0dc81))
+
+
 ## [0.26.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.26.0...af-iperps-v0.26.1)
 
 ### 🐛 Bug Fixes
