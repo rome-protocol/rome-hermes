@@ -25,7 +25,22 @@ rustdoc-args = [
 workspace = true
 
 [features]
-graphql = ["dep:bcs", "dep:extension-traits", "dep:sui-gql-client", "dep:trait-variant"]
+default = ["graphql"]
+graphql = [
+  "dep:async-stream",
+  "dep:bcs",
+  "dep:cynic",
+  "dep:enum-as-inner",
+  "dep:extension-traits",
+  "dep:futures",
+  "dep:graphql-extract",
+  "dep:sui-gql-client",
+  "dep:sui-gql-schema",
+  "dep:trait-variant",
+  "sui-gql-client/move-type",
+  "sui-gql-client/queries",
+  "sui-gql-schema/build",
+]
 
 [dependencies]
 af-move-type      = { version = "0.9.0", path = "../af-move-type" }
@@ -44,9 +59,51 @@ bcs              = { version = "0.1", optional = true }
 extension-traits = { version = "2", optional = true }
 trait-variant    = { version = "0.1", optional = true }
 
+# GraphQL RPC (optional)
+async-stream    = { version = "0.3", optional = true }
+cynic           = { version = "3", optional = true }
+enum-as-inner   = { version = "0.6", optional = true }
+futures         = { version = "0.3", optional = true }
+graphql-extract = { version = "0.0.7", path = "../graphql-extract", optional = true }
+
 [dependencies.sui-gql-client]
 default-features = false
 features         = ["move-type", "queries"]
 optional         = true
 path             = "../sui-gql-client"
-version = "0.16.1"
+version          = "0.16.1"
+
+[build-dependencies.sui-gql-schema]
+default-features = false
+features         = ["build"]
+optional         = true
+path             = "../sui-gql-schema"
+version          = "0.10.0"
+
+[dev-dependencies]
+clap             = { version = "4", features = ["derive"] }
+color-eyre       = "0.6"
+indicatif        = "0.17"
+insta            = "1"
+nonempty         = "0.11"
+proptest         = "1"
+public-api       = "0.44.2"
+reqwest          = "0.12"
+rgb              = "0.8"
+rustdoc-json     = "0.9.5"
+rustup-toolchain = "0.1.10"
+sui-gql-client   = { path = "../sui-gql-client", features = ["reqwest"] }
+test-strategy    = "0.4"
+textplots        = "0.8"
+tokio            = { version = "1", features = ["full"] }
+tokio-test       = "0.4"
+
+[[example]]
+name              = "price-feeds"
+path              = "examples/price_feeds.rs"
+required-features = ["graphql"]
+
+[[example]]
+name              = "price-feed-for-source"
+path              = "examples/price_feed_for_source.rs"
+required-features = ["graphql"]
