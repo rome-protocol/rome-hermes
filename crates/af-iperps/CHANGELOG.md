@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.26.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.26.0...af-iperps-v0.26.1)
+
+### 🐛 Bug Fixes
+
+- *(af-iperps)* Add `EventInstance::FilledMakerOrders` - ([82ad9bd](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/82ad9bd85b16a719c5e025af97ebd77693b2bd74))
+
+
 ## [0.26.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.25.1...af-iperps-v0.26.0)
 
 ### ⛰️ Features
