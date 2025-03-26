@@ -25,7 +25,6 @@ rustdoc-args = [
 workspace = true
 
 [features]
-default = ["graphql"]
 graphql = [
   "dep:async-stream",
   "dep:bcs",

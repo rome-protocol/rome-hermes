@@ -7,7 +7,7 @@ use crate::oracle::PriceFeed;
 
 type Key = crate::keys::PriceFeedForSource;
 
-pub async fn query<C>(
+pub(crate) async fn query<C>(
     client: &C,
     af_oracle_pkg: Address,
     price_feed_storage: ObjectId,

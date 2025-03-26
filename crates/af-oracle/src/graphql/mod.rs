@@ -4,15 +4,16 @@ use futures::Stream;
 use sui_gql_client::GraphQlClient;
 use sui_gql_client::queries::Error;
 
-use crate::graphql::price_feed_for_source::Error as QueryError;
+use crate::graphql::price_feed_for_source::Error as PfForSourceError;
 use crate::oracle::PriceFeed;
 
-pub mod price_feed_for_source;
-pub mod price_feeds;
+pub(crate) mod price_feed_for_source;
+pub(crate) mod price_feeds;
 
 /// Extension trait to [`GraphQlClient`] collecting all defined queries in one place.
 pub trait GraphQlClientExt: GraphQlClient + Sized {
     /// Snapshot of price feeds under the [`PriceFeedStorage`].
+    /// Returns tuples representing (`source_wrapper_id`, `price_feed`)
     ///
     /// [`PriceFeedStorage`]: crate::oracle::PriceFeedStorage
     fn price_feeds(
@@ -32,8 +33,8 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
         af_oracle_pkg: Address,
         pfs: ObjectId,
         source_wrapper_id: ObjectId,
-    ) -> impl Future<Output = Result<Option<MoveInstance<PriceFeed>>, QueryError<Self::Error>>> + Send
-    {
+    ) -> impl Future<Output = Result<Option<MoveInstance<PriceFeed>>, PfForSourceError<Self::Error>>>
+    + Send {
         price_feed_for_source::query(self, af_oracle_pkg, pfs, source_wrapper_id)
     }
 }

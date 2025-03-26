@@ -2,9 +2,8 @@ use af_move_type::MoveInstance;
 use af_sui_types::{ObjectId, Version};
 use enum_as_inner::EnumAsInner;
 use futures::Stream;
-pub use sui_gql_client::queries::Error;
-use sui_gql_client::queries::GraphQlClientExt as _;
 use sui_gql_client::queries::fragments::{MoveValueRaw, PageInfoForward};
+use sui_gql_client::queries::{Error, GraphQlClientExt as _};
 use sui_gql_client::{GraphQlClient, GraphQlResponseExt as _, schema};
 
 type PriceFeed = MoveInstance<crate::oracle::PriceFeed>;

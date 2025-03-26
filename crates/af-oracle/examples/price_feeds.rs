@@ -1,7 +1,7 @@
 use std::time::Instant;
 
 use af_oracle::graphql::GraphQlClientExt as _;
-use af_sui_types::{ObjectId, hex_address_bytes};
+use af_sui_types::ObjectId;
 use clap::Parser;
 use color_eyre::Result;
 use futures::TryStreamExt as _;
@@ -13,9 +13,9 @@ struct Args {
     #[arg(long, default_value = "https://sui-testnet.mystenlabs.com/graphql")]
     rpc: String,
 
-    #[arg(long, default_value_t = ObjectId::new(hex_address_bytes(
+    #[arg(long, default_value_t = af_sui_types::object_id(
         b"0x2e26816616244fe952ef924453d3468ed76addeaaf5873caf0970ba9b2b32722",
-    )))]
+    ))]
     pfs: ObjectId,
 
     /// Only the summary of query time and number of price feeds.
@@ -27,7 +27,7 @@ struct Args {
 async fn main() -> Result<()> {
     color_eyre::install()?;
     let Args { rpc, pfs, summary } = Args::parse();
-    let client = ReqwestClient::new(reqwest::Client::default(), rpc.to_owned());
+    let client = ReqwestClient::new_default(rpc);
 
     tokio::pin!(
         let stream = client.price_feeds(pfs, None);
