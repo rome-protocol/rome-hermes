@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.19.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-pyth-wrapper-v0.19.2...af-pyth-wrapper-v0.19.3)
+
+### ⛰️ Features
+
+- *(af-pyth-wrapper)* Remove af-oracle dep - ([604bf5f](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/604bf5f30b7824e5ea7573d912040676a2a67814))
+
+
 ## [0.19.2](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-pyth-wrapper-v0.19.1...af-pyth-wrapper-v0.19.2)
 
 ### ⚙️ Miscellaneous Tasks

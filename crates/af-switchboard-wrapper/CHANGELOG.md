@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.5](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-switchboard-wrapper-v0.0.4...af-switchboard-wrapper-v0.0.5)
+
+### ⛰️ Features
+
+- *(af-switchboard-wrapper)* Remove af-oracle dep - ([f422fa6](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/f422fa615d4775c74ffc5baabe87e5ee8a98a996))
+
+
 ## [0.0.4](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-switchboard-wrapper-v0.0.3...af-switchboard-wrapper-v0.0.4)
 
 ### ⚙️ Miscellaneous Tasks
