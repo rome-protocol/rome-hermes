@@ -247,7 +247,7 @@ impl std::fmt::Display for Authenticator {
 //  MoveObject
 // =============================================================================
 
-/// Index marking the end of the object's ID + the beginning of its version
+/// Index marking the end of the object's ID in its BCS contents.
 const ID_END_INDEX: usize = ObjectId::LENGTH;
 
 #[serde_as]
@@ -278,5 +278,16 @@ impl MoveObject {
                 .try_into()
                 .expect("Corrupted Object BCS"),
         )
+    }
+
+    /// Return if this object can be publicly transferred.
+    ///
+    /// DEPRECATED
+    ///
+    /// This field is no longer used to determine whether a tx can transfer this object. Instead,
+    /// it is always calculated from the objects type when loaded in execution.
+    #[doc(hidden)]
+    pub const fn has_public_transfer(&self) -> bool {
+        self.has_public_transfer
     }
 }
