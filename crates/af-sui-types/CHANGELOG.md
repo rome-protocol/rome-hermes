@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-types-v0.8.0...af-sui-types-v0.8.1)
+
+### ⛰️ Features
+
+- *(af-sui-types)* Expose hidden `MoveObject::has_public_transfer` - ([e0e0f41](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/e0e0f410a9a8adc57cc5be30604783e16ca21752))
+
+
 ## [0.7.6](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-types-v0.7.5...af-sui-types-v0.7.6)
 
 ### ⛰️ Features
