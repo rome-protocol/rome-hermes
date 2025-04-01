@@ -1,5 +1,5 @@
 use af_ptbuilder::{ProgrammableTransactionBuilder, ptbuilder};
-use af_sui_types::{Argument, ObjectArg, ObjectId};
+use af_sui_types::{Argument, ObjectArg, ObjectId, TypeTag};
 
 /// Groups the [ProgrammableTransactionBuilder] variables for updating a Switchboard `Aggregator`.
 #[derive(Clone, Debug)]
@@ -22,10 +22,13 @@ impl ProgrammableTransactionBuilder {
         switchboard_agg: ObjectArg,
         queue: ObjectArg,
         fee_coin: Argument,
+        fee_coin_otw: TypeTag,
         oracle_args: Vec<OraclePtbArguments>,
     ) -> Result<(), af_ptbuilder::Error> {
         ptbuilder!(self {
             package switchboard_pkg;
+
+            type T = fee_coin_otw;
 
             input obj switchboard_agg;
             input obj queue;
@@ -46,7 +49,7 @@ impl ProgrammableTransactionBuilder {
                 input pure timestamp_seconds: &args.timestamp_seconds;
                 input pure signature: &args.signature;
 
-                switchboard_pkg::aggregator_submit_result_action::run(
+                switchboard_pkg::aggregator_submit_result_action::run<T>(
                     switchboard_agg,
                     queue,
                     value,
