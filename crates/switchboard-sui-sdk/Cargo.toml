@@ -1,7 +1,7 @@
 [package]
 description = "SDK for Switchboard's Sui package; maintained by Aftermath"
 name        = "switchboard-sui-sdk"
-version     = "0.0.3"
+version     = "0.0.4"
 
 authors.workspace      = true
 categories.workspace   = true

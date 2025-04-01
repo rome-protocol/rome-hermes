@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.4](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/switchboard-sui-sdk-v0.0.3...switchboard-sui-sdk-v0.0.4)
+
+### 🐛 Bug Fixes
+
+- Add fee coin type to switchboard ptb - ([c2a702b](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/c2a702b9112f90fdd34491792e3900d4cb94cf18))
+
+
 ## [0.0.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/switchboard-sui-sdk-v0.0.2...switchboard-sui-sdk-v0.0.3)
 
 ### ⚙️ Miscellaneous Tasks
