@@ -8,6 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.2](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-types-v0.8.1...af-sui-types-v0.8.2)
+
+### ⛰️ Features
+
+- *(af-sui-types)* `MoveObject::{new, id_opt}` - ([fd8dd59](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/fd8dd595175ad78aba14be6e1dab7819c057e445))
+- *(af-sui-types)* `Object::new_struct` - ([5d405b6](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/5d405b6e02d2ce40d22a5e4c708f39894efcd4c9))
+
+
 ## [0.8.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-types-v0.8.0...af-sui-types-v0.8.1)
 
 ### ⛰️ Features
