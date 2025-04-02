@@ -25,6 +25,21 @@ pub struct Object {
 }
 
 impl Object {
+    /// Construct a new object that wraps a Move struct.
+    pub const fn new_struct(
+        inner: MoveObject,
+        owner: Owner,
+        previous_transaction: TransactionDigest,
+        storage_rebate: u64,
+    ) -> Self {
+        Self {
+            data: Data::Move(inner),
+            owner,
+            previous_transaction,
+            storage_rebate,
+        }
+    }
+
     /// Its unique on-chain identifier.
     pub fn id(&self) -> ObjectId {
         match &self.data {
