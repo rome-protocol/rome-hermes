@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 use serde_with::{Bytes, serde_as};
-use sui_sdk_types::{MovePackage, Version};
+use sui_sdk_types::{MovePackage, StructTag, Version};
 
 use super::move_object_type::MoveObjectType;
 use crate::{Address, ObjectId, TransactionDigest};
@@ -282,17 +282,44 @@ pub struct MoveObject {
 }
 
 impl MoveObject {
+    /// Construct a new Move struct, if the BCS contents start with a valid [`ObjectId`].
+    ///
+    /// `has_public_transfer` is just for completeness; it is a deprecated field.
+    pub fn new(
+        type_: StructTag,
+        has_public_transfer: bool,
+        version: Version,
+        contents: Vec<u8>,
+    ) -> Option<Self> {
+        let this = Self {
+            type_: type_.into(),
+            has_public_transfer,
+            version,
+            contents,
+        };
+        this.id_opt().map(|_| this)
+    }
+
     /// Get the object's ID from its BCS serialization.
     ///
     /// # Panics
     ///
     /// This will panic if the BCS contents do not enconde a [`MoveObject`].
     pub fn id(&self) -> ObjectId {
-        ObjectId::new(
-            self.contents[0..ID_END_INDEX]
-                .try_into()
-                .expect("Corrupted Object BCS"),
-        )
+        self.id_opt().expect("Corrupted Object BCS")
+    }
+
+    /// Get the object's ID from its BCS serialization if valid.
+    ///
+    /// This will be [`None`] if there are not enough bytes in [`contents`] to encode an
+    /// [`ObjectId`].
+    ///
+    /// [`contents`]: Self::contents
+    pub fn id_opt(&self) -> Option<ObjectId> {
+        self.contents[0..ID_END_INDEX]
+            .try_into()
+            .ok()
+            .map(ObjectId::new)
     }
 
     /// Return if this object can be publicly transferred.
