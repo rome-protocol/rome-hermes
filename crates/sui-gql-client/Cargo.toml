@@ -77,7 +77,7 @@ serde_json = { version = "1", optional = true }
 default-features = false
 features         = ["build"]
 path             = "../sui-gql-schema"
-version = "0.10.2"
+version          = "0.10.2"
 
 
 [dev-dependencies]
@@ -199,4 +199,9 @@ required-features = ["queries", "reqwest"]
 [[example]]
 name              = "gql-filtered-full-objects"
 path              = "examples/filtered_full_objects.rs"
+required-features = ["queries", "reqwest"]
+
+[[example]]
+name              = "gql-latest-package"
+path              = "examples/latest_package.rs"
 required-features = ["queries", "reqwest"]

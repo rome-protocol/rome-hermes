@@ -30,6 +30,7 @@ mod genesis_tx;
 mod latest_checkpoint;
 mod latest_object_version;
 mod latest_objects_version;
+mod latest_package;
 mod latest_version_at_checkpoint_v2;
 mod max_page_size;
 mod multi_get_objects;
@@ -241,6 +242,13 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
         root_version: Option<u64>,
     ) -> Result<(ObjectKey, RawMoveStruct), Self> {
         owner_dof_content::query(self, address, raw_move_value, root_version)
+    }
+
+    /// Get the latest version of a package.
+    ///
+    /// Returns both its ID and version number.
+    async fn latest_package(&self, package_id: ObjectId) -> Result<(ObjectId, Version), Self> {
+        latest_package::query(self, package_id)
     }
 
     /// Get all the package ids and versions given the original package id.
