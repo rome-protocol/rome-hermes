@@ -162,6 +162,27 @@ fn gql_output() {
 /// ```
 #[macro_export]
 macro_rules! object_args {
+    // Optimization: 1 object arg only
+    (
+        { $name:ident: $object_id:expr_2021 $(,)? }
+        with { $client:expr_2021 }
+    ) => {
+        let $name = $crate::queries::GraphQlClientExt::object_arg($client, $object_id)
+            .await?;
+    };
+
+    (
+        { mut $name:ident: $object_id:expr_2021 $(,)? }
+        with { $client:expr_2021 }
+    ) => {
+        let $name = {
+            let mut oarg = $crate::queries::GraphQlClientExt::object_arg($client, $object_id)
+                .await?;
+            oarg.set_mutable(true)?;
+            oarg
+        };
+    };
+
     (
         {$($tt:tt)*}
         with { $client:expr_2021 } $(paged by $page_size:expr_2021)?
@@ -259,7 +280,7 @@ impl Object {
     }
 }
 
-fn build_object_arg_default(
+pub(crate) fn build_object_arg_default(
     id: ObjectId,
     version: Version,
     owner: ObjectOwner,

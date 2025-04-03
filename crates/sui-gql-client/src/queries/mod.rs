@@ -34,6 +34,7 @@ mod latest_package;
 mod latest_version_at_checkpoint_v2;
 mod max_page_size;
 mod multi_get_objects;
+mod object_arg;
 mod object_args;
 mod object_args_and_content;
 mod object_content;
@@ -165,6 +166,11 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
         ckpt_num: u64,
     ) -> std::result::Result<u64, LatestVersionAtCheckpointError<Self::Error>> {
         latest_version_at_checkpoint_v2::query(self, id, ckpt_num)
+    }
+
+    /// Get the object argument for a programmable transaction.
+    async fn object_arg(&self, id: ObjectId) -> Result<ObjectArg, Self> {
+        object_arg::query(self, id)
     }
 
     /// Turn a bijective map of names and object ids into one of names and object args.
