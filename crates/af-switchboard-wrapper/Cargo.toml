@@ -1,7 +1,7 @@
 [package]
 description = "Move types for Aftermath's `SwitchboardWrapper` package that extends `AfOracle`"
 name        = "af-switchboard-wrapper"
-version     = "0.0.8"
+version     = "0.0.9"
 
 authors.workspace      = true
 categories.workspace   = true
@@ -37,8 +37,8 @@ graphql = [
 ptb = ["dep:af-ptbuilder", "dep:extension-traits"]
 
 [dependencies]
-af-sui-pkg-sdk    = { version = "0.9.2", path = "../af-sui-pkg-sdk" }
-sui-framework-sdk = { version = "0.11.2", path = "../sui-framework-sdk" }
+af-sui-pkg-sdk    = { version = "0.9.3", path = "../af-sui-pkg-sdk" }
+sui-framework-sdk = { version = "0.11.3", path = "../sui-framework-sdk" }
 
 bcs              = { version = "0.1", optional = true }
 extension-traits = { version = "2", optional = true }
@@ -48,18 +48,18 @@ trait-variant    = { version = "0.1", optional = true }
 [dependencies.af-ptbuilder]
 optional = true
 path     = "../af-ptbuilder"
-version = "5.0.2"
+version = "5.0.3"
 [dependencies.af-sui-types]
 optional = true
 path     = "../af-sui-types"
-version = "0.8.2"
+version = "0.8.3"
 [dependencies.af-move-type]
 optional = true
 path     = "../af-move-type"
-version = "0.9.2"
+version = "0.9.3"
 [dependencies.sui-gql-client]
 default-features = false
 features         = ["move-type", "queries"]
 optional         = true
 path             = "../sui-gql-client"
-version = "0.16.4"
+version = "0.16.5"

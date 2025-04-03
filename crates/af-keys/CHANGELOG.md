@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-keys-v0.8.2...af-keys-v0.8.3)
+
+### 🚜 Refactor
+
+- Address clippy lints in Rust 1.86 - ([c6855e1](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/c6855e1d290ab3bdd2bba3ae9ddb24502c4ce58a))
+
+
 ## [0.8.2](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-keys-v0.8.1...af-keys-v0.8.2)
 
 ### ⚙️ Miscellaneous Tasks

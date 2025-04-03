@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.14.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-jsonrpc-v0.14.2...sui-jsonrpc-v0.14.3)
+
+### 🚜 Refactor
+
+- Address clippy lints in Rust 1.86 - ([c6855e1](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/c6855e1d290ab3bdd2bba3ae9ddb24502c4ce58a))
+
+
 ## [0.14.2](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-jsonrpc-v0.14.1...sui-jsonrpc-v0.14.2)
 
 ### ⚙️ Miscellaneous Tasks

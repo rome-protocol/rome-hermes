@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.0.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-ptbuilder-v5.0.2...af-ptbuilder-v5.0.3)
+
+### ⚙️ Miscellaneous Tasks
+
+- Updated the following local packages: af-sui-types - ([0000000](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/0000000))
+
+
 ## [5.0.2](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-ptbuilder-v5.0.1...af-ptbuilder-v5.0.2)
 
 ### ⚙️ Miscellaneous Tasks
