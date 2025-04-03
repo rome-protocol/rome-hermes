@@ -44,6 +44,7 @@ pub mod outputs;
 mod owner_df_content;
 mod owner_df_contents;
 mod owner_dof_content;
+mod package_at_version;
 mod packages_from_original;
 mod packages_published_epoch;
 mod reference_gas_price;
@@ -249,6 +250,15 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
     /// Returns both its ID and version number.
     async fn latest_package(&self, package_id: ObjectId) -> Result<(ObjectId, Version), Self> {
         latest_package::query(self, package_id)
+    }
+
+    /// Get the address of a package at a specific version.
+    async fn package_at_version(
+        &self,
+        package_id: ObjectId,
+        version: Version,
+    ) -> Result<ObjectId, Self> {
+        package_at_version::query(self, package_id, version)
     }
 
     /// Get all the package ids and versions given the original package id.

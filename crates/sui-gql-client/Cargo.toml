@@ -205,3 +205,8 @@ required-features = ["queries", "reqwest"]
 name              = "gql-latest-package"
 path              = "examples/latest_package.rs"
 required-features = ["queries", "reqwest"]
+
+[[example]]
+name              = "gql-package-at-version"
+path              = "examples/package_at_version.rs"
+required-features = ["queries", "reqwest"]
