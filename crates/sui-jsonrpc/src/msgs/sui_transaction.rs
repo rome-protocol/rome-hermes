@@ -1041,7 +1041,7 @@ impl SuiExecutionStatus {
     const MOVE_ABORT_PATTERN: &str = r#"MoveAbort\(MoveLocation \{ module: ModuleId \{ address: ([[:alnum:]]+), name: Identifier\("([[:word:]]+)"\) \}, function: (\d+), instruction: (\d+), function_name: Some\("([[:word:]]+)"\) \}, (\d+)\)"#;
 
     pub fn is_ok(&self) -> bool {
-        matches!(self, SuiExecutionStatus::Success { .. })
+        matches!(self, SuiExecutionStatus::Success)
     }
 
     pub fn is_err(&self) -> bool {

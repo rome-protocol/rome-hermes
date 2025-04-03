@@ -266,6 +266,10 @@ impl ObjectArg {
     }
 
     /// For shared object arguments: set their `mutable` flag value.
+    #[expect(
+        clippy::missing_const_for_fn,
+        reason = "Not changing the public API right now"
+    )]
     pub fn set_mutable(&mut self, mutable_: bool) -> Result<(), ImmOwnedOrReceivingError> {
         match self {
             Self::SharedObject { mutable, .. } => {

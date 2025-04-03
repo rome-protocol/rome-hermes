@@ -121,6 +121,10 @@ impl MultiSig {
         &self.multisig_pk
     }
 
+    #[expect(
+        clippy::missing_const_for_fn,
+        reason = "Not changing the public API right now"
+    )]
     pub fn get_sigs(&self) -> &[CompressedSignature] {
         &self.sigs
     }
