@@ -5,15 +5,18 @@
 pub use af_move_type;
 use af_move_type::{MoveInstance, MoveType};
 pub use af_sui_types::ObjectId;
-use bag::*;
-use balance::*;
 use move_stdlib_sdk::type_name::TypeName;
-use object::*;
-use table::*;
-use url::*;
-use vec_map::*;
-use vec_set::*;
-use versioned::*;
+
+use self::bag::*;
+use self::balance::*;
+// These are used far too often.
+pub use self::dynamic_field::{Field, FieldTypeTag};
+pub use self::object::{ID, UID};
+use self::table::*;
+use self::url::*;
+use self::vec_map::*;
+use self::vec_set::*;
+use self::versioned::*;
 
 af_sui_pkg_sdk::sui_pkg_sdk!(sui @ "0x2" {
     module bag {
@@ -645,9 +648,16 @@ pub mod object {
 // =============================================================================
 // Convenience functions
 // =============================================================================
-use dynamic_field::{Field, FieldTypeTag};
 
-/// Unpack an instance of a dynamic field into its name and value instances.
+impl<K: MoveType, V: MoveType> Field<K, V> {
+    /// Unpack an instance of a dynamic field into its name and value instances.
+    pub fn unpack_instance(this: MoveInstance<Self>) -> (MoveInstance<K>, MoveInstance<V>) {
+        #[expect(deprecated)]
+        unpack_field_instance(this)
+    }
+}
+
+#[deprecated = "Use Field::unpack_instance"]
 pub fn unpack_field_instance<K: MoveType, V: MoveType>(
     field: MoveInstance<Field<K, V>>,
 ) -> (MoveInstance<K>, MoveInstance<V>) {
