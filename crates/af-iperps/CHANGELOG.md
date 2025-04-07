@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.26.7](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.26.6...af-iperps-v0.26.7)
+
+### ⛰️ Features
+
+- *(af-iperps)* Conveniences for dealing with the main DF types - ([ae2e3ef](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/ae2e3ef1dc1d842f8aa263f4de5b5d4c5bef28e2))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(iperps)* Update testnet packages const - ([4d7a795](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/4d7a7951302f6ba3a86fa65dd0c1625e5b7766be))
+
+
 ## [0.26.6](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.26.5...af-iperps-v0.26.6)
 
 ### ⚙️ Miscellaneous Tasks

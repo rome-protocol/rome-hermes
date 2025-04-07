@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.11.4](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-framework-sdk-v0.11.3...sui-framework-sdk-v0.11.4)
+
+### ⛰️ Features
+
+- *(sui-framework-sdk)* More convenient access to common types - ([ec5ece7](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/ec5ece7c01086ffe9e8963c001d0c12c0f8d45b2))
+
+
 ## [0.11.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-framework-sdk-v0.11.2...sui-framework-sdk-v0.11.3)
 
 ### ⚙️ Miscellaneous Tasks

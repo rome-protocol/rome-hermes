@@ -1,7 +1,7 @@
 [package]
 description = "Move types for the Wormhole package"
 name        = "wormhole-sui-sdk"
-version     = "0.11.3"
+version     = "0.11.4"
 
 authors.workspace      = true
 categories.workspace   = true
@@ -27,6 +27,6 @@ workspace = true
 [dependencies]
 af-sui-pkg-sdk    = { version = "0.9.3", path = "../af-sui-pkg-sdk" }
 af-sui-types      = { version = "0.8.3", path = "../af-sui-types" }
-sui-framework-sdk = { version = "0.11.3", path = "../sui-framework-sdk" }
+sui-framework-sdk = { version = "0.11.4", path = "../sui-framework-sdk" }
 
 serde = "1"

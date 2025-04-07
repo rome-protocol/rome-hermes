@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.6](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-oracle-v0.18.5...af-oracle-v0.18.6)
+
+### ⛰️ Features
+
+- *(af-oracle)* Conveniences for dealing with the main DF types - ([bbd3768](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/bbd376845dbc729ee02b98befbc627367c4a9127))
+
+
 ## [0.18.5](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-oracle-v0.18.4...af-oracle-v0.18.5)
 
 ### ⚙️ Miscellaneous Tasks
