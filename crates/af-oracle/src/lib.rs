@@ -2,14 +2,22 @@
 
 //! Move types for Aftermath's `AfOracle` package
 
+use af_sui_types::Address;
 use af_utilities::types::IFixed;
 use sui_framework_sdk::object::{ID, UID};
+use sui_framework_sdk::{Field, FieldTypeTag};
 
 pub mod errors;
 pub mod event_ext;
 pub mod event_instance;
 #[cfg(feature = "graphql")]
 pub mod graphql;
+
+// Main package types
+pub use self::oracle::{PriceFeed, PriceFeedStorage, PriceFeedStorageTypeTag, PriceFeedTypeTag};
+
+/// Dynamic field storing a [`PriceFeed`].
+pub type PriceFeedDf = Field<keys::PriceFeedForSource, PriceFeed>;
 
 af_sui_pkg_sdk::sui_pkg_sdk!(af_oracle {
     module oracle {
@@ -110,3 +118,15 @@ af_sui_pkg_sdk::sui_pkg_sdk!(af_oracle {
         }
     }
 });
+
+impl PriceFeedStorage {
+    /// Convenience function to build the type of a [`PriceFeedDf`].
+    pub fn price_feed_df_type(
+        package: Address,
+    ) -> FieldTypeTag<self::keys::PriceFeedForSource, PriceFeed> {
+        Field::type_(
+            self::keys::PriceFeedForSource::type_(package),
+            PriceFeed::type_(package),
+        )
+    }
+}
