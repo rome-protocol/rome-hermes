@@ -146,6 +146,7 @@ pub af_iperps::clearing_house::ClearingHouse::market_state: af_iperps::market::M
 pub af_iperps::clearing_house::ClearingHouse::version: u64
 impl<T: af_move_type::MoveType> af_iperps::clearing_house::ClearingHouse<T>
 pub const fn af_iperps::clearing_house::ClearingHouse<T>::governing_package_testnet(&self) -> sui_sdk_types::object_id::ObjectId
+pub fn af_iperps::clearing_house::ClearingHouse<T>::position_df_type(package: sui_sdk_types::address::Address) -> sui_framework_sdk::dynamic_field::FieldTypeTag<af_iperps::keys::Position, af_iperps::position::Position>
 impl<T: af_move_type::MoveType> af_iperps::clearing_house::ClearingHouse<T>
 pub fn af_iperps::clearing_house::ClearingHouse<T>::liquidation_price(&self, pos: &af_iperps::position::Position, coll_price: af_utilities::types::ifixed::IFixed) -> core::option::Option<af_utilities::types::ifixed::IFixed>
 impl<T: af_move_type::MoveType> af_iperps::clearing_house::ClearingHouse<T>
@@ -3965,6 +3966,8 @@ pub af_iperps::ordered_map::Map::leaf_min: u64
 pub af_iperps::ordered_map::Map::leaves_merge_max: u64
 pub af_iperps::ordered_map::Map::root: u64
 pub af_iperps::ordered_map::Map::size: u64
+impl af_iperps::ordered_map::Map<af_iperps::orderbook::Order>
+pub fn af_iperps::ordered_map::Map<af_iperps::orderbook::Order>::leaf_df_type(package: sui_sdk_types::address::Address) -> sui_framework_sdk::dynamic_field::FieldTypeTag<u64, af_iperps::ordered_map::Leaf<af_iperps::orderbook::Order>>
 impl<V: af_move_type::MoveType> af_iperps::ordered_map::Map<V>
 pub fn af_iperps::ordered_map::Map<V>::move_instance(self, address: sui_sdk_types::address::Address, v: <V as af_move_type::MoveType>::TypeTag) -> af_move_type::MoveInstance<Self>
 pub fn af_iperps::ordered_map::Map<V>::type_(address: sui_sdk_types::address::Address, v: <V as af_move_type::MoveType>::TypeTag) -> af_iperps::ordered_map::MapTypeTag<V>
@@ -4471,6 +4474,8 @@ pub type af_iperps::Account = af_iperps::account::Account<af_move_type::otw::Otw
 pub type af_iperps::AccountTypeTag = af_iperps::account::AccountTypeTag<af_move_type::otw::Otw>
 pub type af_iperps::ClearingHouse = af_iperps::clearing_house::ClearingHouse<af_move_type::otw::Otw>
 pub type af_iperps::ClearingHouseTypeTag = af_iperps::clearing_house::ClearingHouseTypeTag<af_move_type::otw::Otw>
+pub type af_iperps::OrderLeafDf = sui_framework_sdk::dynamic_field::Field<u64, af_iperps::ordered_map::Leaf<af_iperps::orderbook::Order>>
+pub type af_iperps::PositionDf = sui_framework_sdk::dynamic_field::Field<af_iperps::keys::Position, af_iperps::position::Position>
 pub type af_iperps::StopOrderTicket = af_iperps::account::StopOrderTicket<af_move_type::otw::Otw>
 pub type af_iperps::StopOrderTicketTypetag = af_iperps::account::StopOrderTicketTypeTag<af_move_type::otw::Otw>
 pub type af_iperps::SubAccount = af_iperps::subaccount::SubAccount<af_move_type::otw::Otw>

@@ -4,11 +4,12 @@
 
 use af_move_type::otw::Otw;
 use af_sui_pkg_sdk::sui_pkg_sdk;
-use af_sui_types::{ObjectId, object_id};
+use af_sui_types::{Address, ObjectId, object_id};
 use af_utilities::types::ifixed::IFixed;
 use sui_framework_sdk::balance::Balance;
 use sui_framework_sdk::object::{ID, UID};
 use sui_framework_sdk::sui::SUI;
+use sui_framework_sdk::{Field, FieldTypeTag};
 
 pub mod errors;
 pub mod event_ext;
@@ -25,6 +26,11 @@ pub use self::market::{MarketParams, MarketState};
 pub use self::orderbook::Order;
 pub use self::position::Position;
 
+/// Package IDs of the perpetuals contract versions published on testnet, in order of its versions.
+pub const TESTNET_PACKAGE_VERSIONS: &[ObjectId] = &[object_id(
+    b"0x1fc71972750d0d81567183a8500befef94d7699aac76edffcca253fe541367fd",
+)];
+
 // Convenient aliases since these types will never exist onchain with a type argument other than an
 // OTW.
 pub type Account = self::account::Account<Otw>;
@@ -38,10 +44,12 @@ pub type SubAccountTypeTag = self::subaccount::SubAccountTypeTag<Otw>;
 pub type Vault = self::clearing_house::Vault<Otw>;
 pub type VaultTypeTag = self::clearing_house::VaultTypeTag<Otw>;
 
-/// Package IDs of the perpetuals contract versions published on testnet, in order of its versions.
-pub const TESTNET_PACKAGE_VERSIONS: &[ObjectId] = &[object_id(
-    b"0x1fc71972750d0d81567183a8500befef94d7699aac76edffcca253fe541367fd",
-)];
+/// Dynamic field storing a [`Position`].
+pub type PositionDf = Field<self::keys::Position, Position>;
+/// Dynamic field storing a leaf in a [`Map`] of [`Order`]s.
+///
+/// [`Map`]: self::ordered_map::Map
+pub type OrderLeafDf = Field<u64, self::ordered_map::Leaf<Order>>;
 
 sui_pkg_sdk!(perpetuals {
     module account {
@@ -929,6 +937,14 @@ sui_pkg_sdk!(perpetuals {
 });
 
 impl<T: af_move_type::MoveType> clearing_house::ClearingHouse<T> {
+    /// Convenience function to build the type of a [`PositionDf`].
+    pub fn position_df_type(package: Address) -> FieldTypeTag<self::keys::Position, Position> {
+        Field::type_(
+            self::keys::Position::type_(package),
+            Position::type_(package),
+        )
+    }
+
     /// The ID of the package that governs this clearing house's logic.
     ///
     /// This may be different than the package defining the clearing house's type because a package
@@ -941,6 +957,16 @@ impl<T: af_move_type::MoveType> clearing_house::ClearingHouse<T> {
     pub const fn governing_package_testnet(&self) -> ObjectId {
         // NOTE: we published the most recent testnet contracts starting with `VERSION = 1`
         TESTNET_PACKAGE_VERSIONS[self.version as usize - 1]
+    }
+}
+
+impl self::ordered_map::Map<Order> {
+    /// Convenience function to build the type of an [`OrderLeafDf`].
+    pub fn leaf_df_type(package: Address) -> FieldTypeTag<u64, self::ordered_map::Leaf<Order>> {
+        Field::type_(
+            af_move_type::U64TypeTag,
+            self::ordered_map::Leaf::type_(package, Order::type_(package)),
+        )
     }
 }
 
