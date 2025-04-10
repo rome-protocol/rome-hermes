@@ -179,6 +179,24 @@ impl MoveObjectType {
             }
         }
     }
+
+    /// If this is a dynamic field, return the name and value type arguments.
+    ///
+    /// # Panics
+    ///
+    /// If the object type was misconstructed, i.e., deserialized from an invalid dynamic field
+    /// type with != 2 type parameters.
+    pub fn dynamic_field_type_args(&self) -> Option<(&TypeTag, &TypeTag)> {
+        match &self.0 {
+            MoveObjectType_::GasCoin | MoveObjectType_::StakedSui | MoveObjectType_::Coin(_) => {
+                None
+            }
+            MoveObjectType_::Other(s) => (s.address == SUI_FRAMEWORK_ADDRESS
+                && Borrow::<IdentStr>::borrow(&s.module) == DYNAMIC_FIELD_MODULE_NAME
+                && Borrow::<IdentStr>::borrow(&s.name) == DYNAMIC_FIELD_FIELD_STRUCT_NAME)
+                .then(|| (&s.type_params[0], &s.type_params[1])),
+        }
+    }
 }
 
 impl From<StructTag> for MoveObjectType {
