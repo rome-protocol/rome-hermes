@@ -11,6 +11,12 @@ use crate::{MoveType, ParseTypeTagError, StaticTypeTag, TypeTagError};
 #[serde(bound(deserialize = ""))]
 pub struct MoveVec<T: MoveType>(Vec<T>);
 
+impl<T: MoveType> MoveVec<T> {
+    pub fn into_inner(self) -> Vec<T> {
+        self.0
+    }
+}
+
 impl<T: MoveType> MoveType for MoveVec<T> {
     type TypeTag = VecTypeTag<T>;
 }
