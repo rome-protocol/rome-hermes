@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.4](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-keys-v0.8.3...af-keys-v0.8.4)
+
+### ⚙️ Miscellaneous Tasks
+
+- Updated the following local packages: af-sui-types - ([0000000](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/0000000))
+
+
 ## [0.8.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-keys-v0.8.2...af-keys-v0.8.3)
 
 ### 🚜 Refactor

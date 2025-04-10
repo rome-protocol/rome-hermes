@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.4](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-types-v0.8.3...af-sui-types-v0.8.4)
+
+### ⛰️ Features
+
+- *(af-sui-types)* `MoveObjectType::dynamic_field_type_args` - ([b4d23e0](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/b4d23e0a94360f4016a035f1fc7588af6ca80724))
+
+
 ## [0.8.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-types-v0.8.2...af-sui-types-v0.8.3)
 
 ### 🚜 Refactor

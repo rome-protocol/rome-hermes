@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.4](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-move-type-v0.9.3...af-move-type-v0.9.4)
+
+### ⛰️ Features
+
+- *(af-move-type)* `MoveVec::into_inner` - ([377b0fa](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/377b0fa814c8d54d025d7f4fc7279d8f7ba780ce))
+
+### 🚜 Refactor
+
+- *(af-move-type)* Internal reorg - ([11d6ab2](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/11d6ab2210519ac9d6c597975b7e4366fdf3bdac))
+
+
 ## [0.9.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-move-type-v0.9.2...af-move-type-v0.9.3)
 
 ### ⚙️ Miscellaneous Tasks
