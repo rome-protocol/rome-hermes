@@ -20,89 +20,27 @@ use std::str::FromStr;
 
 pub use af_move_type_derive::MoveStruct;
 use af_sui_types::u256::U256;
-use af_sui_types::{Address, IdentStr, Identifier, ObjectId, StructTag, TypeTag};
+use af_sui_types::{Address, Identifier, ObjectId, StructTag, TypeTag};
 use serde::{Deserialize, Serialize};
 
 #[doc(hidden)]
 pub mod external;
 pub mod otw;
+mod primitives;
+mod string;
 pub mod vector;
 
-// =============================================================================
-//  Errors
-// =============================================================================
-
-#[derive(thiserror::Error, Debug)]
-pub enum TypeTagError {
-    #[error("Wrong TypeTag variant: expected {expected}, got {got}")]
-    Variant { expected: String, got: TypeTag },
-    #[error("StructTag params: {0}")]
-    StructTag(#[from] StructTagError),
-}
-
-#[derive(thiserror::Error, Debug)]
-pub enum StructTagError {
-    #[error("Wrong address: expected {expected}, got {got}")]
-    Address { expected: Address, got: Address },
-    #[error("Wrong module: expected {expected}, got {got}")]
-    Module {
-        expected: Identifier,
-        got: Identifier,
-    },
-    #[error("Wrong name: expected {expected}, got {got}")]
-    Name {
-        expected: Identifier,
-        got: Identifier,
-    },
-    #[error("Wrong type parameters: {0}")]
-    TypeParams(#[from] TypeParamsError),
-}
-
-#[derive(thiserror::Error, Debug)]
-pub enum TypeParamsError {
-    #[error("Wrong number of generics: expected {expected}, got {got}")]
-    Number { expected: usize, got: usize },
-    #[error("Wrong type for generic: {0}")]
-    TypeTag(Box<TypeTagError>),
-}
-
-impl From<TypeTagError> for TypeParamsError {
-    fn from(value: TypeTagError) -> Self {
-        Self::TypeTag(Box::new(value))
-    }
-}
-
-#[derive(thiserror::Error, Debug)]
-pub enum ParseTypeTagError {
-    #[error("Parsing TypeTag: {0}")]
-    FromStr(#[from] sui_sdk_types::TypeParseError),
-    #[error("Converting from TypeTag: {0}")]
-    TypeTag(#[from] TypeTagError),
-}
-
-#[derive(thiserror::Error, Debug)]
-pub enum ParseStructTagError {
-    #[error("Parsing StructTag: {0}")]
-    FromStr(#[from] sui_sdk_types::TypeParseError),
-    #[error("Converting from StructTag: {0}")]
-    StructTag(#[from] StructTagError),
-}
-
-#[derive(thiserror::Error, Debug)]
-pub enum FromRawTypeError {
-    #[error("Converting from TypeTag: {0}")]
-    TypeTag(#[from] TypeTagError),
-    #[error("Deserializing BCS: {0}")]
-    Bcs(#[from] bcs::Error),
-}
-
-#[derive(thiserror::Error, Debug)]
-pub enum FromRawStructError {
-    #[error("Converting from StructTag: {0}")]
-    StructTag(#[from] StructTagError),
-    #[error("Deserializing BCS: {0}")]
-    Bcs(#[from] bcs::Error),
-}
+pub use self::primitives::{
+    AddressTypeTag,
+    BoolTypeTag,
+    U8TypeTag,
+    U16TypeTag,
+    U32TypeTag,
+    U64TypeTag,
+    U128TypeTag,
+    U256TypeTag,
+};
+pub use self::string::StringTypeTag;
 
 // =============================================================================
 //  MoveType
@@ -379,14 +317,9 @@ fn number_to_string_value_recursive(value: &mut serde_json::Value) {
     }
 }
 
-/// Error for [`ObjectExt`].
-#[derive(thiserror::Error, Debug)]
-pub enum ObjectError {
-    #[error("Object is not a Move struct")]
-    NotStruct,
-    #[error(transparent)]
-    FromRawStruct(#[from] FromRawStructError),
-}
+// =============================================================================
+//  ObjectExt
+// =============================================================================
 
 /// Extract and parse a [`MoveStruct`] from a Sui object.
 pub trait ObjectExt {
@@ -411,191 +344,87 @@ impl ObjectExt for sui_sdk_types::Object {
     }
 }
 
+/// Error for [`ObjectExt`].
+#[derive(thiserror::Error, Debug)]
+pub enum ObjectError {
+    #[error("Object is not a Move struct")]
+    NotStruct,
+    #[error(transparent)]
+    FromRawStruct(#[from] FromRawStructError),
+}
+
 // =============================================================================
-// Trait impls
+//  Errors
 // =============================================================================
 
-macro_rules! impl_primitive_type_tags {
-    ($($typ:ty: ($type_:ident, $variant:ident)),*) => {
-        $(
-            #[derive(
-                Clone,
-                Debug,
-                PartialEq,
-                Eq,
-                Hash,
-                Deserialize,
-                PartialOrd,
-                Ord,
-                Serialize
-            )]
-            pub struct $type_;
-
-            impl From<$type_> for TypeTag {
-                fn from(_value: $type_) -> Self {
-                    Self::$variant
-                }
-            }
-
-            impl TryFrom<TypeTag> for $type_ {
-                type Error = TypeTagError;
-
-                fn try_from(value: TypeTag) -> Result<Self, Self::Error> {
-                    match value {
-                        TypeTag::$variant => Ok(Self),
-                        _ => Err(TypeTagError::Variant {
-                            expected: stringify!($variant).to_owned(),
-                            got: value }
-                        )
-                    }
-                }
-            }
-
-            impl FromStr for $type_ {
-                type Err = ParseTypeTagError;
-
-                fn from_str(s: &str) -> Result<Self, Self::Err> {
-                    let tag: TypeTag = s.parse()?;
-                    Ok(tag.try_into()?)
-                }
-            }
-
-            impl MoveType for $typ {
-                type TypeTag = $type_;
-            }
-
-            impl StaticTypeTag for $typ {
-                fn type_() -> Self::TypeTag {
-                    $type_ {}
-                }
-            }
-        )*
-    };
+#[derive(thiserror::Error, Debug)]
+pub enum TypeTagError {
+    #[error("Wrong TypeTag variant: expected {expected}, got {got}")]
+    Variant { expected: String, got: TypeTag },
+    #[error("StructTag params: {0}")]
+    StructTag(#[from] StructTagError),
 }
 
-impl_primitive_type_tags! {
-    Address: (AddressTypeTag, Address),
-    bool: (BoolTypeTag, Bool),
-    u8: (U8TypeTag, U8),
-    u16: (U16TypeTag, U16),
-    u32: (U32TypeTag, U32),
-    u64: (U64TypeTag, U64),
-    u128: (U128TypeTag, U128),
-    U256: (U256TypeTag, U256)
+#[derive(thiserror::Error, Debug)]
+pub enum StructTagError {
+    #[error("Wrong address: expected {expected}, got {got}")]
+    Address { expected: Address, got: Address },
+    #[error("Wrong module: expected {expected}, got {got}")]
+    Module {
+        expected: Identifier,
+        got: Identifier,
+    },
+    #[error("Wrong name: expected {expected}, got {got}")]
+    Name {
+        expected: Identifier,
+        got: Identifier,
+    },
+    #[error("Wrong type parameters: {0}")]
+    TypeParams(#[from] TypeParamsError),
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Hash, Deserialize, PartialOrd, Ord, Serialize)]
-pub struct StringTypeTag;
+#[derive(thiserror::Error, Debug)]
+pub enum TypeParamsError {
+    #[error("Wrong number of generics: expected {expected}, got {got}")]
+    Number { expected: usize, got: usize },
+    #[error("Wrong type for generic: {0}")]
+    TypeTag(Box<TypeTagError>),
+}
 
-impl From<StringTypeTag> for TypeTag {
-    fn from(value: StringTypeTag) -> Self {
-        Self::Struct(Box::new(value.into()))
+impl From<TypeTagError> for TypeParamsError {
+    fn from(value: TypeTagError) -> Self {
+        Self::TypeTag(Box::new(value))
     }
 }
 
-impl TryFrom<TypeTag> for StringTypeTag {
-    type Error = TypeTagError;
-
-    fn try_from(value: TypeTag) -> Result<Self, Self::Error> {
-        match value {
-            TypeTag::Struct(stag) => Ok((*stag).try_into()?),
-            other => Err(TypeTagError::Variant {
-                expected: "Struct(_)".to_owned(),
-                got: other,
-            }),
-        }
-    }
+#[derive(thiserror::Error, Debug)]
+pub enum ParseTypeTagError {
+    #[error("Parsing TypeTag: {0}")]
+    FromStr(#[from] sui_sdk_types::TypeParseError),
+    #[error("Converting from TypeTag: {0}")]
+    TypeTag(#[from] TypeTagError),
 }
 
-impl From<StringTypeTag> for StructTag {
-    fn from(_: StringTypeTag) -> Self {
-        String::struct_tag()
-    }
+#[derive(thiserror::Error, Debug)]
+pub enum ParseStructTagError {
+    #[error("Parsing StructTag: {0}")]
+    FromStr(#[from] sui_sdk_types::TypeParseError),
+    #[error("Converting from StructTag: {0}")]
+    StructTag(#[from] StructTagError),
 }
 
-impl TryFrom<StructTag> for StringTypeTag {
-    type Error = StructTagError;
-
-    fn try_from(value: StructTag) -> Result<Self, Self::Error> {
-        use StructTagError::*;
-        let StructTag {
-            address,
-            module,
-            name,
-            type_params,
-        } = value;
-        let expected = String::struct_tag();
-        if address != expected.address {
-            return Err(Address {
-                expected: expected.address,
-                got: address,
-            });
-        }
-        if module != expected.module {
-            return Err(Module {
-                expected: expected.module,
-                got: module,
-            });
-        }
-        if name != expected.name {
-            return Err(Name {
-                expected: expected.name,
-                got: name,
-            });
-        }
-        if !type_params.is_empty() {
-            return Err(TypeParams(TypeParamsError::Number {
-                expected: 0,
-                got: type_params.len(),
-            }));
-        }
-        Ok(Self)
-    }
+#[derive(thiserror::Error, Debug)]
+pub enum FromRawTypeError {
+    #[error("Converting from TypeTag: {0}")]
+    TypeTag(#[from] TypeTagError),
+    #[error("Deserializing BCS: {0}")]
+    Bcs(#[from] bcs::Error),
 }
 
-impl FromStr for StringTypeTag {
-    type Err = ParseStructTagError;
-
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let stag: StructTag = s.parse()?;
-        Ok(stag.try_into()?)
-    }
-}
-
-impl MoveType for String {
-    type TypeTag = StringTypeTag;
-}
-
-impl MoveStruct for String {
-    type StructTag = StringTypeTag;
-}
-
-impl StaticTypeTag for String {
-    fn type_() -> Self::TypeTag {
-        StringTypeTag {}
-    }
-}
-
-impl StaticAddress for String {
-    fn address() -> Address {
-        Address::new(af_sui_types::hex_address_bytes(b"0x1"))
-    }
-}
-
-impl StaticModule for String {
-    fn module() -> Identifier {
-        IdentStr::cast("string").to_owned()
-    }
-}
-
-impl StaticName for String {
-    fn name() -> Identifier {
-        IdentStr::cast("String").to_owned()
-    }
-}
-
-impl StaticTypeParams for String {
-    fn type_params() -> Vec<TypeTag> {
-        vec![]
-    }
+#[derive(thiserror::Error, Debug)]
+pub enum FromRawStructError {
+    #[error("Converting from StructTag: {0}")]
+    StructTag(#[from] StructTagError),
+    #[error("Deserializing BCS: {0}")]
+    Bcs(#[from] bcs::Error),
 }
