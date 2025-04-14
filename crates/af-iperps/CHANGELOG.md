@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.26.9](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.26.8...af-iperps-v0.26.9)
+
+### ⛰️ Features
+
+- *(af-iperps)* `MoveAbort` enum with all error codes and documentation - ([d43e801](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/d43e801d97c7e35bcef347f9d2b76a15c67d04de))
+
+### 🚜 Refactor
+
+- *(af-iperps)* Move abort code consts conversion to Rust - ([3a320bd](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/3a320bd20945e4dec6b4fe271d86b0560d29b3c6))
+
+
 ## [0.26.8](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.26.7...af-iperps-v0.26.8)
 
 ### ⚙️ Miscellaneous Tasks

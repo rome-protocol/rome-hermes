@@ -8,6 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-jsonrpc-v0.14.4...sui-jsonrpc-v0.15.0)
+
+### ⛰️ Features
+
+- *(sui-jsonrpc)* `SuiClient::dry_run_transaction` - ([ec45741](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/ec457412ef8461e04d8d3d05edbfc1b2702e2a1a))
+- *(sui-jsonrpc)* [**breaking**] `SuiTransactionBlockResponse::sui_effects` - ([468b6f3](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/468b6f3e72f122400ffb30012cee10f902413827))
+- *(sui-jsonrpc)* `SuiClient::submit_transaction` - ([03d139f](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/03d139fcd669fa297afdb95e55bdb056cdf2276c))
+- *(sui-jsonrpc)* Better coin queries - ([f97d1fe](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/f97d1fe641497a22f76c49ec172b5952e60684ba))
+
+
 ## [0.14.4](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-jsonrpc-v0.14.3...sui-jsonrpc-v0.14.4)
 
 ### ⚙️ Miscellaneous Tasks

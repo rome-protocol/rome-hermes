@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.5](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-types-v0.8.4...af-sui-types-v0.8.5)
+
+### 🧪 Testing
+
+- *(af-sui-types)* Ensure TransactionData roundtrip through base64 is valid - ([85cd9c5](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/85cd9c517b40b73bd3b26940f56ed9877c5746ca))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(af-sui-types)* Remove erroneus deprecation - ([5345085](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/5345085cf724d7daa7f64df89824619e615711f7))
+
+
 ## [0.8.4](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-types-v0.8.3...af-sui-types-v0.8.4)
 
 ### ⛰️ Features
