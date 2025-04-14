@@ -12,6 +12,23 @@ macro_rules! move_aborts {
             $(#[$meta])*
             pub const $Error: u64 = $num;
         )*
+        #[derive(
+            Debug,
+            PartialEq,
+            Eq,
+            Hash,
+            num_enum::IntoPrimitive,
+            num_enum::TryFromPrimitive,
+            strum::Display,
+            strum::EnumIs,
+            strum::EnumMessage,
+            strum::IntoStaticStr,
+        )]
+        #[repr(u64)]
+        pub enum MoveAbort {$(
+            $(#[$meta])*
+            $Error = $num,
+        )*}
     };
 }
 
@@ -139,4 +156,17 @@ module perpetuals::errors {
     /// When taker matches its own order
     const SelfTrading: u64 = 3008;
 }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::MoveAbort;
+
+    #[test]
+    fn variant_to_code() {
+        assert_eq!(MoveAbort::MaxPendingOrdersExceeded as u64, 2000);
+        assert_eq!(MoveAbort::SelfTrading as u64, 3008);
+        assert_eq!(Ok(MoveAbort::MaxPendingOrdersExceeded), 2000_u64.try_into());
+        assert_eq!(Ok(MoveAbort::SelfTrading), 3008_u64.try_into());
+    }
 }

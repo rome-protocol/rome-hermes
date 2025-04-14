@@ -464,6 +464,133 @@ impl<T: af_move_type::MoveType> core::str::traits::FromStr for af_iperps::cleari
 pub type af_iperps::clearing_house::VaultTypeTag<T>::Err = af_move_type::ParseStructTagError
 pub fn af_iperps::clearing_house::VaultTypeTag<T>::from_str(s: &str) -> core::result::Result<Self, Self::Err>
 pub mod af_iperps::errors
+#[repr(u64)] pub enum af_iperps::errors::MoveAbort
+pub af_iperps::errors::MoveAbort::BadIndexPrice = 2
+pub af_iperps::errors::MoveAbort::CollateralIsNotRegistered = 19
+pub af_iperps::errors::MoveAbort::DeallocateTargetMrTooLow = 2008
+pub af_iperps::errors::MoveAbort::DepositOrWithdrawAmountZero = 0
+pub af_iperps::errors::MoveAbort::DestroyNotEmpty = 3003
+pub af_iperps::errors::MoveAbort::EmptySession = 17
+pub af_iperps::errors::MoveAbort::FlagRequirementsViolated = 3005
+pub af_iperps::errors::MoveAbort::InitialMarginRequirementViolated = 2003
+pub af_iperps::errors::MoveAbort::InsufficientFreeCollateral = 2006
+pub af_iperps::errors::MoveAbort::InsufficientInsuranceSurplus = 1007
+pub af_iperps::errors::MoveAbort::InvalidBasePriceFeedStorage = 11
+pub af_iperps::errors::MoveAbort::InvalidCancelOrderIds = 7
+pub af_iperps::errors::MoveAbort::InvalidCollateralPriceFeedStorage = 21
+pub af_iperps::errors::MoveAbort::InvalidForceCancelIds = 5
+pub af_iperps::errors::MoveAbort::InvalidMapParameters = 3000
+pub af_iperps::errors::MoveAbort::InvalidMarketParameters = 1000
+pub af_iperps::errors::MoveAbort::InvalidProposalDelay = 1004
+pub af_iperps::errors::MoveAbort::InvalidSizeOrPrice = 1
+pub af_iperps::errors::MoveAbort::InvalidSubAccountUser = 13
+pub af_iperps::errors::MoveAbort::InvalidUserForOrder = 3004
+pub af_iperps::errors::MoveAbort::KeyAlreadyExists = 3002
+pub af_iperps::errors::MoveAbort::KeyNotExist = 3001
+pub af_iperps::errors::MoveAbort::LiquidateNotFirstOperation = 6
+pub af_iperps::errors::MoveAbort::MapTooSmall = 3007
+pub af_iperps::errors::MoveAbort::MarketAlreadyRegistered = 18
+pub af_iperps::errors::MoveAbort::MarketIsNotRegistered = 20
+pub af_iperps::errors::MoveAbort::MaxPendingOrdersExceeded = 2000
+pub af_iperps::errors::MoveAbort::NegativeFeesAccrued = 22
+pub af_iperps::errors::MoveAbort::NoFeesAccrued = 1006
+pub af_iperps::errors::MoveAbort::NoPriceFeedForMarket = 1008
+pub af_iperps::errors::MoveAbort::NotEnoughGasForStopOrder = 24
+pub af_iperps::errors::MoveAbort::NotEnoughLiquidity = 3006
+pub af_iperps::errors::MoveAbort::NotReduceOnlyStopOrder = 23
+pub af_iperps::errors::MoveAbort::OrderUsdValueTooLow = 4
+pub af_iperps::errors::MoveAbort::PositionAboveMMR = 2004
+pub af_iperps::errors::MoveAbort::PositionAboveTolerance = 2002
+pub af_iperps::errors::MoveAbort::PositionAlreadyExists = 2007
+pub af_iperps::errors::MoveAbort::PositionBadDebt = 2005
+pub af_iperps::errors::MoveAbort::PositionBelowIMR = 2001
+pub af_iperps::errors::MoveAbort::PrematureProposal = 1003
+pub af_iperps::errors::MoveAbort::ProposalAlreadyExists = 1002
+pub af_iperps::errors::MoveAbort::ProposalAlreadyMatured = 1009
+pub af_iperps::errors::MoveAbort::ProposalDoesNotExist = 1005
+pub af_iperps::errors::MoveAbort::SelfLiquidation = 12
+pub af_iperps::errors::MoveAbort::SelfTrading = 3008
+pub af_iperps::errors::MoveAbort::StopOrderConditionsViolated = 9
+pub af_iperps::errors::MoveAbort::StopOrderTicketExpired = 8
+pub af_iperps::errors::MoveAbort::SubAccountContainsCollateral = 15
+pub af_iperps::errors::MoveAbort::UpdatingFundingTooEarly = 1001
+pub af_iperps::errors::MoveAbort::WrongOrderDetails = 10
+pub af_iperps::errors::MoveAbort::WrongParentForSubAccount = 14
+pub af_iperps::errors::MoveAbort::WrongVersion = 16
+impl af_iperps::errors::MoveAbort
+pub const fn af_iperps::errors::MoveAbort::is_bad_index_price(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_collateral_is_not_registered(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_deallocate_target_mr_too_low(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_deposit_or_withdraw_amount_zero(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_destroy_not_empty(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_empty_session(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_flag_requirements_violated(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_initial_margin_requirement_violated(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_insufficient_free_collateral(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_insufficient_insurance_surplus(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_invalid_base_price_feed_storage(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_invalid_cancel_order_ids(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_invalid_collateral_price_feed_storage(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_invalid_force_cancel_ids(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_invalid_map_parameters(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_invalid_market_parameters(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_invalid_proposal_delay(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_invalid_size_or_price(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_invalid_sub_account_user(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_invalid_user_for_order(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_key_already_exists(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_key_not_exist(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_liquidate_not_first_operation(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_map_too_small(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_market_already_registered(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_market_is_not_registered(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_max_pending_orders_exceeded(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_negative_fees_accrued(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_no_fees_accrued(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_no_price_feed_for_market(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_not_enough_gas_for_stop_order(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_not_enough_liquidity(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_not_reduce_only_stop_order(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_order_usd_value_too_low(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_position_above_mmr(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_position_above_tolerance(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_position_already_exists(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_position_bad_debt(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_position_below_imr(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_premature_proposal(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_proposal_already_exists(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_proposal_already_matured(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_proposal_does_not_exist(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_self_liquidation(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_self_trading(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_stop_order_conditions_violated(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_stop_order_ticket_expired(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_sub_account_contains_collateral(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_updating_funding_too_early(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_wrong_order_details(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_wrong_parent_for_sub_account(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_wrong_version(&self) -> bool
+impl core::convert::From<af_iperps::errors::MoveAbort> for &'static str
+pub fn &'static str::from(x: af_iperps::errors::MoveAbort) -> &'static str
+impl core::convert::From<af_iperps::errors::MoveAbort> for u64
+pub fn u64::from(enum_value: af_iperps::errors::MoveAbort) -> Self
+impl core::convert::TryFrom<u64> for af_iperps::errors::MoveAbort
+pub type af_iperps::errors::MoveAbort::Error = num_enum::TryFromPrimitiveError<af_iperps::errors::MoveAbort>
+pub fn af_iperps::errors::MoveAbort::try_from(number: u64) -> core::result::Result<Self, num_enum::TryFromPrimitiveError<Self>>
+impl core::fmt::Display for af_iperps::errors::MoveAbort
+pub fn af_iperps::errors::MoveAbort::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::result::Result<(), core::fmt::Error>
+impl num_enum::TryFromPrimitive for af_iperps::errors::MoveAbort
+pub type af_iperps::errors::MoveAbort::Error = num_enum::TryFromPrimitiveError<af_iperps::errors::MoveAbort>
+pub type af_iperps::errors::MoveAbort::Primitive = u64
+pub const af_iperps::errors::MoveAbort::NAME: &'static str
+pub fn af_iperps::errors::MoveAbort::try_from_primitive(number: Self::Primitive) -> core::result::Result<Self, num_enum::TryFromPrimitiveError<Self>>
+impl strum::EnumMessage for af_iperps::errors::MoveAbort
+pub fn af_iperps::errors::MoveAbort::get_detailed_message(&self) -> core::option::Option<&'static str>
+pub fn af_iperps::errors::MoveAbort::get_documentation(&self) -> core::option::Option<&'static str>
+pub fn af_iperps::errors::MoveAbort::get_message(&self) -> core::option::Option<&'static str>
+pub fn af_iperps::errors::MoveAbort::get_serializations(&self) -> &'static [&'static str]
+impl<'_derivative_strum> core::convert::From<&'_derivative_strum af_iperps::errors::MoveAbort> for &'static str
+pub fn &'static str::from(x: &'_derivative_strum af_iperps::errors::MoveAbort) -> &'static str
 pub const af_iperps::errors::BadIndexPrice: u64
 pub const af_iperps::errors::CollateralIsNotRegistered: u64
 pub const af_iperps::errors::DeallocateTargetMrTooLow: u64
