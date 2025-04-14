@@ -401,3 +401,18 @@ impl TransactionDataAPI for TransactionDataV1 {
         &mut self.gas_data
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use test_strategy::proptest;
+
+    use super::*;
+
+    #[proptest]
+    fn transaction_data_base64_roundtrip(transaction: sui_sdk_types::Transaction) {
+        let original: TransactionData = transaction.into();
+        let reconstructed = TransactionData::decode_base64(original.encode_base64())
+            .expect("Valid base64 transaction");
+        assert_eq!(original, reconstructed);
+    }
+}
