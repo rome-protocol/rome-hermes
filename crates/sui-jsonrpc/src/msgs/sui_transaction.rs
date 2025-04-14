@@ -1,6 +1,7 @@
 // Copyright (c) Mysten Labs, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
+use std::error::Error as StdError;
 use std::fmt::{self, Display, Formatter, Write};
 use std::str::FromStr;
 
@@ -239,6 +240,17 @@ impl SuiTransactionBlockResponse {
         self.effects.as_ref().map(|e| e.status().is_ok())
     }
 
+    /// Transaction effects as a standard Sui type.
+    pub fn sui_effects(&self) -> Result<Option<sui_sdk_types::TransactionEffects>, ToEffectsError> {
+        self.raw_effects
+            .is_empty()
+            .then_some(&self.raw_effects)
+            .map(|b| bcs::from_bytes(b))
+            .transpose()
+            .map_err(From::from)
+            .map_err(ToEffectsError::Generic)
+    }
+
     pub fn get_transaction(
         &self,
     ) -> Result<&SuiTransactionBlock, SuiTransactionBlockResponseError> {
@@ -319,6 +331,13 @@ impl SuiTransactionBlockResponse {
         let Self { object_changes, .. } = self;
         object_changes.ok_or(SuiTransactionBlockResponseError::MissingObjectChanges)
     }
+}
+
+#[derive(thiserror::Error, Debug)]
+#[non_exhaustive]
+pub enum ToEffectsError {
+    #[error("Generic: {0:#}")]
+    Generic(Box<dyn StdError + Send + Sync + 'static>),
 }
 
 #[derive(thiserror::Error, Clone, Debug, PartialEq, Eq)]
