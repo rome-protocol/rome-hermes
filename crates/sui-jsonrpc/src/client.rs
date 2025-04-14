@@ -445,6 +445,32 @@ impl SuiClient {
             .await
     }
 
+    /// Helper to dry run a transaction kind for its effects.
+    ///
+    /// This sets the gas budget to the maximum possible. If you want to test different values,
+    /// manually perform the dry-run using the inner [`Self::http`] client.
+    pub async fn dry_run_transaction(
+        &self,
+        tx_kind: &TransactionKind,
+        sender: SuiAddress,
+        gas_price: u64,
+    ) -> Result<DryRunTransactionBlockResponse, JsonRpcClientError> {
+        let sentinel = TransactionData::V1(TransactionDataV1 {
+            kind: tx_kind.clone(),
+            sender,
+            gas_data: GasData {
+                payment: vec![],
+                owner: sender,
+                price: gas_price,
+                budget: MAX_GAS_BUDGET,
+            },
+            expiration: TransactionExpiration::None,
+        });
+        self.http()
+            .dry_run_transaction_block(sentinel.encode_base64())
+            .await
+    }
+
     /// Estimate a budget for the transaction by dry-running it.
     ///
     /// Uses default [`GasBudgetOptions`] to compute the cost estimate.
