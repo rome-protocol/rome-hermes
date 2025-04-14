@@ -18,6 +18,7 @@ use af_sui_types::{
     TransactionKind,
     encode_base64_default,
 };
+use futures_core::Stream;
 use jsonrpsee::core::client::ClientT;
 use jsonrpsee::http_client::{HeaderMap, HeaderValue, HttpClient, HttpClientBuilder};
 use jsonrpsee::rpc_params;
@@ -418,71 +419,6 @@ impl SuiClient {
         Ok(result)
     }
 
-    /// Return a list of coins for the given address, or an error upon failure.
-    ///
-    /// Note that the function selects coins to meet or exceed the requested `amount`.
-    /// If that it is not possible, it will fail with an insufficient fund error.
-    ///
-    /// The coins can be filtered by `coin_type` (e.g., 0x168da5bf1f48dafc111b0a488fa454aca95e0b5e::usdc::USDC)
-    /// or use `None` to use the default `Coin<SUI>`.
-    ///
-    /// # Examples
-    ///
-    /// ```rust,no_run
-    /// use sui_jsonrpc::client::SuiClientBuilder;
-    /// use af_sui_types::Address as SuiAddress;
-    ///
-    /// #[tokio::main]
-    /// async fn main() -> color_eyre::Result<()> {
-    ///     let sui = SuiClientBuilder::default().build_localnet().await?;
-    ///     let address = "0x0000....0000".parse()?;
-    ///     let coins = sui
-    ///         .select_coins(address, None, 5, vec![])
-    ///         .await?;
-    ///     Ok(())
-    /// }
-    /// ```
-    pub async fn select_coins(
-        &self,
-        address: SuiAddress,
-        coin_type: Option<String>,
-        amount: u64,
-        exclude: Vec<ObjectId>,
-    ) -> SuiClientResult<Vec<Coin>> {
-        let mut coins = vec![];
-        let mut total = 0;
-        let mut has_next_page = true;
-        let mut cursor = None;
-
-        while has_next_page {
-            let page = self
-                .http()
-                .get_coins(address, coin_type.clone(), cursor, None)
-                .await?;
-
-            for coin in page
-                .data
-                .into_iter()
-                .filter(|c| !exclude.contains(&c.coin_object_id))
-            {
-                total += coin.balance;
-                coins.push(coin);
-                if total >= amount {
-                    return Ok(coins);
-                }
-            }
-
-            has_next_page = page.has_next_page;
-            cursor = page.next_cursor;
-        }
-
-        Err(SuiClientError::InsufficientFunds {
-            address,
-            found: total,
-            requested: amount,
-        })
-    }
-
     /// Estimate a budget for the transaction by dry-running it.
     ///
     /// Uses default [`GasBudgetOptions`] to compute the cost estimate.
@@ -558,24 +494,159 @@ impl SuiClient {
             return Err(GetGasDataError::BudgetTooSmall { budget, price });
         }
 
-        let coins = self
-            .select_coins(sponsor, Some("0x2::sui::SUI".to_owned()), budget, exclude)
+        let payment = self
+            .get_gas_payment(sponsor, budget, &exclude)
             .await
-            .map_err(|inner| GetGasDataError::NotEnoughGas {
+            .map_err(GetGasDataError::from_not_enough_gas)?;
+
+        Ok(GasData {
+            payment,
+            owner: sponsor,
+            price,
+            budget,
+        })
+    }
+
+    /// Query the node for gas objects to fulfill a certain budget.
+    ///
+    /// `exclude`s certain object ids from being part of the returned objects.
+    pub async fn get_gas_payment(
+        &self,
+        sponsor: SuiAddress,
+        budget: u64,
+        exclude: &[ObjectId],
+    ) -> Result<Vec<ObjectRef>, NotEnoughGasError> {
+        Ok(self
+            .coins_for_amount(sponsor, Some("0x2::sui::SUI".to_owned()), budget, exclude)
+            .await
+            .map_err(|inner| NotEnoughGasError {
                 sponsor,
                 budget,
                 inner,
             })?
             .into_iter()
             .map(|c| c.object_ref())
-            .collect();
+            .collect())
+    }
 
-        Ok(GasData {
-            payment: coins,
-            owner: sponsor,
-            price,
-            budget,
+    #[deprecated(since = "0.14.5", note = "use SuiClient::coins_for_amount")]
+    pub async fn select_coins(
+        &self,
+        address: SuiAddress,
+        coin_type: Option<String>,
+        amount: u64,
+        exclude: Vec<ObjectId>,
+    ) -> SuiClientResult<Vec<Coin>> {
+        self.coins_for_amount(address, coin_type, amount, &exclude)
+            .await
+    }
+
+    /// Return a list of coins for the given address, or an error upon failure.
+    ///
+    /// Note that the function selects coins to meet or exceed the requested `amount`.
+    /// If that it is not possible, it will fail with an insufficient fund error.
+    ///
+    /// The coins can be filtered by `coin_type` (e.g., 0x168da5bf1f48dafc111b0a488fa454aca95e0b5e::usdc::USDC)
+    /// or use `None` to use the default `Coin<SUI>`.
+    ///
+    /// # Examples
+    ///
+    /// ```rust,no_run
+    /// use sui_jsonrpc::client::SuiClientBuilder;
+    /// use af_sui_types::Address as SuiAddress;
+    ///
+    /// #[tokio::main]
+    /// async fn main() -> color_eyre::Result<()> {
+    ///     let sui = SuiClientBuilder::default().build_localnet().await?;
+    ///     let address = "0x0000....0000".parse()?;
+    ///     let coins = sui
+    ///         .select_coins(address, None, 5, vec![])
+    ///         .await?;
+    ///     Ok(())
+    /// }
+    /// ```
+    pub async fn coins_for_amount(
+        &self,
+        address: SuiAddress,
+        coin_type: Option<String>,
+        amount: u64,
+        exclude: &[ObjectId],
+    ) -> SuiClientResult<Vec<Coin>> {
+        use futures_util::{TryStreamExt as _, future};
+        let mut coins = vec![];
+        let mut total = 0;
+        let mut stream = std::pin::pin!(
+            self.coins_for_address(address, coin_type, None)
+                .try_filter(|c| future::ready(!exclude.contains(&c.coin_object_id)))
+        );
+
+        while let Some(coin) = stream.try_next().await? {
+            total += coin.balance;
+            coins.push(coin);
+            if total >= amount {
+                return Ok(coins);
+            }
+        }
+
+        Err(SuiClientError::InsufficientFunds {
+            address,
+            found: total,
+            requested: amount,
         })
+    }
+
+    /// Return a stream of coins for the given address, or an error upon failure.
+    ///
+    /// This simply wraps a paginated query. Use `page_size` to control the inner query's page
+    /// size.
+    ///
+    /// The coins can be filtered by `coin_type` (e.g., 0x168da5bf1f48dafc111b0a488fa454aca95e0b5e::usdc::USDC)
+    /// or use `None` to use the default `Coin<SUI>`.
+    ///
+    /// # Examples
+    ///
+    /// ```rust,no_run
+    /// use sui_jsonrpc::client::SuiClientBuilder;
+    /// use af_sui_types::Address as SuiAddress;
+    /// use futures::TryStreamExt as _;
+    ///
+    /// #[tokio::main]
+    /// async fn main() -> color_eyre::Result<()> {
+    ///     let sui = SuiClientBuilder::default().build_localnet().await?;
+    ///     let address = "0x0000....0000".parse()?;
+    ///     let mut coins = std::pin::pin!(sui.coins_for_address(address, None, Some(5)));
+    ///
+    ///     while let Some(coin) = coins.try_next().await? {
+    ///         println!("{coin:?}");
+    ///     }
+    ///     Ok(())
+    /// }
+    /// ```
+    pub fn coins_for_address(
+        &self,
+        address: SuiAddress,
+        coin_type: Option<String>,
+        page_size: Option<u32>,
+    ) -> impl Stream<Item = SuiClientResult<Coin>> + Send + '_ {
+        async_stream::try_stream! {
+            let mut has_next_page = true;
+            let mut cursor = None;
+
+            while has_next_page {
+                let page = self
+                    .http()
+                    .get_coins(address, coin_type.clone(), cursor, page_size.map(|u| u as usize))
+                    .await?;
+
+                for coin in page.data
+                {
+                    yield coin;
+                }
+
+                has_next_page = page.has_next_page;
+                cursor = page.next_cursor;
+            }
+        }
     }
 
     /// Get the latest object reference for an ID from the node.
@@ -649,6 +720,33 @@ pub enum GetGasDataError {
         budget: u64,
         inner: SuiClientError,
     },
+}
+
+impl GetGasDataError {
+    fn from_not_enough_gas(e: NotEnoughGasError) -> Self {
+        let NotEnoughGasError {
+            sponsor,
+            budget,
+            inner,
+        } = e;
+        Self::NotEnoughGas {
+            sponsor,
+            budget,
+            inner,
+        }
+    }
+}
+
+#[derive(thiserror::Error, Debug)]
+#[error(
+    "Cannot find gas coins for address [{sponsor}] \
+        with amount sufficient for the required gas amount [{budget}]. \
+        Caused by {inner}"
+)]
+pub struct NotEnoughGasError {
+    sponsor: SuiAddress,
+    budget: u64,
+    inner: SuiClientError,
 }
 
 /// Multiplier on the gas price for computing gas budgets from dry-runs.

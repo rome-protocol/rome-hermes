@@ -25,9 +25,18 @@ rustdoc-args = [
 workspace = true
 
 [features]
-client     = ["client-api", "dep:http", "dep:jsonrpsee", "jsonrpsee/http-client", "jsonrpsee/ws-client"]
+client = [
+  "client-api",
+  "dep:async-stream",
+  "dep:futures-core",
+  "dep:futures-util",
+  "dep:http",
+  "dep:jsonrpsee",
+  "jsonrpsee/http-client",
+  "jsonrpsee/ws-client",
+]
 client-api = ["dep:extension-traits", "jsonrpsee/client-core", "jsonrpsee/macros"]
-default    = ["client"]
+default = ["client"]
 
 [dependencies]
 af-sui-types  = { version = "0.8.4", path = "../af-sui-types" }
@@ -45,7 +54,10 @@ sui-sdk-types = "0.0.3"
 tabled        = "0.12"
 thiserror     = "2"
 
+async-stream     = { version = "0.3", optional = true }
 extension-traits = { version = "2", optional = true }
+futures-core     = { version = "0.3", optional = true }
+futures-util     = { version = "0.3", optional = true }
 http             = { version = "1", optional = true }
 jsonrpsee        = { version = "0.24", optional = true }
 
