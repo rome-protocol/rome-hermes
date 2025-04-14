@@ -40,6 +40,10 @@ static RETRIED_TRANSACTION_SUCCESS_REGEX: LazyLock<regex::Regex> = LazyLock::new
 impl JsonRpcClientError {
     /// If this is a JSON-RPC [error object], return a reference to it.
     ///
+    /// If submitting a transaction, these are usually pre-execution validity check failures, e.g.,
+    /// wrong signatures, equivocated objects, etc. Use [`ErrorObjectExt`] to extract more
+    /// information from those.
+    ///
     /// [error object]: https://www.jsonrpc.org/specification#response_object
     fn as_error_object(&self) -> Option<&ErrorObjectOwned> {
         match &self {

@@ -16,6 +16,7 @@ use af_sui_types::{
     TransactionDataV1,
     TransactionExpiration,
     TransactionKind,
+    UserSignature,
     encode_base64_default,
 };
 use futures_core::Stream;
@@ -37,6 +38,8 @@ use crate::msgs::{
     SuiObjectResponse,
     SuiObjectResponseError,
     SuiTransactionBlockEffectsAPI as _,
+    SuiTransactionBlockResponse,
+    SuiTransactionBlockResponseOptions,
 };
 
 /// Maximum possible budget.
@@ -417,6 +420,29 @@ impl SuiClient {
             }
         }
         Ok(result)
+    }
+
+    /// Helper to execute a transaction using standard Sui types.
+    ///
+    /// See [`JsonRpcClientErrorExt::as_error_object`] and [`ErrorObjectExt`] for how to inspect
+    /// the error in case a transaction failed before being included in a checkpoint.
+    ///
+    /// [`JsonRpcClientErrorExt::as_error_object`]: crate::error::JsonRpcClientErrorExt::as_error_object
+    /// [`ErrorObjectExt`]: crate::error::ErrorObjectExt
+    pub async fn submit_transaction(
+        &self,
+        tx_data: &TransactionData,
+        signatures: &[UserSignature],
+        options: Option<SuiTransactionBlockResponseOptions>,
+    ) -> Result<SuiTransactionBlockResponse, JsonRpcClientError> {
+        self.http()
+            .execute_transaction_block(
+                tx_data.encode_base64(),
+                signatures.iter().map(UserSignature::to_base64).collect(),
+                options,
+                None,
+            )
+            .await
     }
 
     /// Estimate a budget for the transaction by dry-running it.
