@@ -35,8 +35,8 @@ pub const TESTNET_PACKAGE_VERSIONS: &[ObjectId] = &[object_id(
 // OTW.
 pub type Account = self::account::Account<Otw>;
 pub type AccountTypeTag = self::account::AccountTypeTag<Otw>;
-pub type StopOrderTicket = self::account::StopOrderTicket<Otw>;
-pub type StopOrderTicketTypetag = self::account::StopOrderTicketTypeTag<Otw>;
+pub type StopOrderTicket = self::stop_orders::StopOrderTicket<Otw>;
+pub type StopOrderTicketTypetag = self::stop_orders::StopOrderTicketTypeTag<Otw>;
 pub type ClearingHouse = self::clearing_house::ClearingHouse<Otw>;
 pub type ClearingHouseTypeTag = self::clearing_house::ClearingHouseTypeTag<Otw>;
 pub type SubAccount = self::subaccount::SubAccount<Otw>;
@@ -60,46 +60,6 @@ sui_pkg_sdk!(perpetuals {
             account_id: u64,
             /// Balance available to be allocated to markets.
             collateral: Balance<T>,
-        }
-
-        /// Object that allows to place one order on behalf of the user, used to
-        /// offer stop limit or market orders. A stop order is an order that is placed
-        /// only if the index price respects certain conditions, like being above or
-        /// below a certain price.
-        ///
-        /// Only the `Account` owner can mint this object and can decide who is
-        /// going to be the recipient of the ticket. This allows users to run their
-        /// own stop orders bots eventually, but it's mainly used to allow 3rd parties
-        /// to offer such a service (the user is required to trust such 3rd party).
-        /// The object is intended to be sent to a multisig wallet owned by
-        /// both the 3rd party and the user. The object is not transferable, stopping
-        /// the 3rd party from transferring it away, and can be destroyed in any moment
-        /// only by the user. The user needs to trust the 3rd party for liveness of the
-        /// service offered.
-        ///
-        /// The order details are encrypted offchain and the result is stored in the ticket.
-        /// The user needs to share such details with the 3rd party only.
-        struct StopOrderTicket<!phantom T> has key {
-            id: UID,
-            /// Gas coin that must be provided by the user to cover for one stop order cost.
-            gas: Balance<SUI>,
-            /// Account id for user
-            account_id: u64,
-            /// Vector containing the blake2b hash obtained by the offchain
-            /// application of blake2b on the following parameters:
-            /// - clearing_house_id: ID
-            /// - expire_timestamp: u64
-            /// - is_limit_order: `true` if limit order, `false` if market order
-            /// - stop_index_price: u256
-            /// - ge_stop_index_price: `true` means the order can be placed when
-            /// oracle index price is >= than chosen `stop_index_price`
-            /// - side: bool
-            /// - size: u64
-            /// - price: u64 (can be set at random value if `is_limit_order` is false)
-            /// - order_type: u64 (can be set at random value if `is_limit_order` is false)
-            /// - reduce_only: bool
-            /// - salt: vector<u8>
-            encrypted_details: vector<u8>
         }
     }
 
@@ -194,6 +154,55 @@ sui_pkg_sdk!(perpetuals {
         }
     }
 
+    module stop_orders {
+        /// Object that allows to place one order on behalf of the user, used to
+        /// offer stop limit or market orders. A stop order is an order that is placed
+        /// only if the index price respects certain conditions, like being above or
+        /// below a certain price.
+        ///
+        /// Only the `Account` owner can mint this object and can decide who can be
+        /// the executor of the ticket. This allows users to run their
+        /// own stop orders bots eventually, but it's mainly used to allow 3rd parties
+        /// to offer such a service (the user is required to trust such 3rd party).
+        /// The object is shared and the 3rd party is set as `executor`. The ticket
+        /// can be destroyed in any moment only by the user.
+        /// The user needs to trust the 3rd party for liveness of the service offered.
+        ///
+        /// The order details are encrypted offchain and the result is stored in the ticket.
+        /// The user needs to share such details with the 3rd party only to allow for execution.
+        struct StopOrderTicket<!phantom T> has key {
+            id: UID,
+            /// Address that is allowed to execute the order on behalf of the user.
+            executor: address,
+            /// Gas coin that must be provided by the user to cover for one stop order cost.
+            /// This amount of gas is going to be sent to the executor of the order.
+            gas: Balance<SUI>,
+            /// Amount of collateral the user can decide to allocate to place this order.
+            /// It can be 0.
+            collateral_to_allocate: Balance<T>,
+            /// User account object id
+            account_obj_id: ID,
+            /// User account id
+            account_id: u64,
+            /// Vector containing the blake2b hash obtained by the offchain
+            /// application of blake2b on the following parameters:
+            /// - clearing_house_id: ID
+            /// - expire_timestamp: u64
+            /// - is_limit_order: `true` if limit order, `false` if market order
+            /// - stop_index_price: u256
+            /// - ge_stop_index_price: `true` means the order can be placed when
+            /// oracle index price is >= than chosen `stop_index_price`
+            /// - side: bool
+            /// - size: u64
+            /// - price: u64 (can be set at random value if `is_limit_order` is false)
+            /// - order_type: u64 (can be set at random value if `is_limit_order` is false)
+            /// - reduce_only: bool
+            /// - margin_ratio: u256
+            /// - salt: vector<u8>
+            encrypted_details: vector<u8>
+        }
+    }
+
     module subaccount {
         /// The SubAccount object represents an `Account` object with limited access to
         /// protocol's features. Being a shared object, it can only be used by the address
@@ -207,7 +216,6 @@ sui_pkg_sdk!(perpetuals {
             /// Balance available to be allocated to markets.
             collateral: Balance<T>,
         }
-
     }
 
     module events {
@@ -226,15 +234,25 @@ sui_pkg_sdk!(perpetuals {
             ch_id: ID,
             account_id: u64,
             collateral: u64,
-            account_collateral_after: u64,
-            position_collateral_after: IFixed,
-            vault_balance_after: u64
         }
 
         struct WithdrewCollateral<!phantom T> has copy, drop {
             account_id: u64,
             collateral: u64,
             account_collateral_after: u64
+        }
+
+        struct TransferredDeallocatedCollateral<!phantom T> has copy, drop {
+            ch_id: ID,
+            account_obj_id: ID,
+            account_id: u64,
+            collateral: u64,
+        }
+
+        struct ReceivedDeallocatedCollateral<!phantom T> has copy, drop {
+            account_obj_id: ID,
+            account_id: u64,
+            collateral: u64,
         }
 
         struct DeallocatedCollateral has copy, drop {
@@ -430,17 +448,44 @@ sui_pkg_sdk!(perpetuals {
             mkt_funding_rate_short: IFixed,
         }
 
-        struct CreatedStopOrderTicket has copy, drop {
+        struct CreatedStopOrderTicket<!phantom T> has copy, drop {
             ticket_id: ID,
+            account_obj_id: ID,
             account_id: u64,
-            recipient: address,
+            executor: address,
+            gas: u64,
+            collateral_to_allocate: u64,
             encrypted_details: vector<u8>
         }
 
-        struct DeletedStopOrderTicket has copy, drop {
+        struct DeletedStopOrderTicket<!phantom T> has copy, drop {
             ticket_id: ID,
             account_id: u64,
             executed: bool
+        }
+
+        struct EditedStopOrderTicketDetails<!phantom T> has copy, drop {
+            ticket_id: ID,
+            account_id: u64,
+            encrypted_details: vector<u8>
+        }
+
+        struct EditedStopOrderTicketExecutor<!phantom T> has copy, drop {
+            ticket_id: ID,
+            account_id: u64,
+            executor: address
+        }
+
+        struct AddedStopOrderTicketCollateral<!phantom T> has copy, drop {
+            ticket_id: ID,
+            account_id: u64,
+            collateral_to_allocate: u64
+        }
+
+        struct RemovedStopOrderTicketCollateral<!phantom T> has copy, drop {
+            ticket_id: ID,
+            account_id: u64,
+            collateral_to_remove: u64
         }
 
         struct CreatedMarginRatiosProposal has copy, drop {
@@ -535,6 +580,17 @@ sui_pkg_sdk!(perpetuals {
         struct UpdatedCollateralOracleTolerance has copy, drop {
             ch_id: ID,
             oracle_tolerance: u64,
+        }
+
+        struct UpdatedMaxOpenInterest has copy, drop {
+            ch_id: ID,
+            max_open_interest: IFixed,
+        }
+
+        struct UpdatedMaxOpenInterestPositionParams has copy, drop {
+            ch_id: ID,
+            max_open_interest_threshold: IFixed,
+            max_open_interest_position_percent: IFixed,
         }
 
         struct UpdatedMaxPendingOrders has copy, drop {
@@ -732,7 +788,14 @@ sui_pkg_sdk!(perpetuals {
             /// Timestamp tolerance for base oracle price
             base_oracle_tolerance: u64,
             /// Timestamp tolerance for collateral oracle price
-            collateral_oracle_tolerance: u64
+            collateral_oracle_tolerance: u64,
+            /// Max open interest (in base tokens) available for this market
+            max_open_interest: IFixed,
+            /// The check on `max_open_interest_position_percent` is not performed if
+            /// the market's open interest is below this threshold.
+            max_open_interest_threshold: IFixed,
+            /// Max open interest percentage a position can have relative to total market's open interest
+            max_open_interest_position_percent: IFixed,
         }
 
         /// The state of a perpetuals market.
