@@ -429,9 +429,11 @@ pub af_iperps::errors::MoveAbort::FlagRequirementsViolated = 3005
 pub af_iperps::errors::MoveAbort::InitialMarginRequirementViolated = 2003
 pub af_iperps::errors::MoveAbort::InsufficientFreeCollateral = 2006
 pub af_iperps::errors::MoveAbort::InsufficientInsuranceSurplus = 1007
+pub af_iperps::errors::MoveAbort::InvalidAccountForStopOrder = 26
 pub af_iperps::errors::MoveAbort::InvalidBasePriceFeedStorage = 11
 pub af_iperps::errors::MoveAbort::InvalidCancelOrderIds = 7
 pub af_iperps::errors::MoveAbort::InvalidCollateralPriceFeedStorage = 21
+pub af_iperps::errors::MoveAbort::InvalidExecutorForStopOrder = 27
 pub af_iperps::errors::MoveAbort::InvalidForceCancelIds = 5
 pub af_iperps::errors::MoveAbort::InvalidMapParameters = 3000
 pub af_iperps::errors::MoveAbort::InvalidMarketParameters = 1000
@@ -445,10 +447,13 @@ pub af_iperps::errors::MoveAbort::LiquidateNotFirstOperation = 6
 pub af_iperps::errors::MoveAbort::MapTooSmall = 3007
 pub af_iperps::errors::MoveAbort::MarketAlreadyRegistered = 18
 pub af_iperps::errors::MoveAbort::MarketIsNotRegistered = 20
+pub af_iperps::errors::MoveAbort::MaxOpenInterestPositionPercentSurpassed = 29
+pub af_iperps::errors::MoveAbort::MaxOpenInterestSurpassed = 28
 pub af_iperps::errors::MoveAbort::MaxPendingOrdersExceeded = 2000
 pub af_iperps::errors::MoveAbort::NegativeFeesAccrued = 22
 pub af_iperps::errors::MoveAbort::NoFeesAccrued = 1006
 pub af_iperps::errors::MoveAbort::NoPriceFeedForMarket = 1008
+pub af_iperps::errors::MoveAbort::NotEnoughCollateralToAllocateForStopOrder = 25
 pub af_iperps::errors::MoveAbort::NotEnoughGasForStopOrder = 24
 pub af_iperps::errors::MoveAbort::NotEnoughLiquidity = 3006
 pub af_iperps::errors::MoveAbort::NotReduceOnlyStopOrder = 23
@@ -482,9 +487,11 @@ pub const fn af_iperps::errors::MoveAbort::is_flag_requirements_violated(&self) 
 pub const fn af_iperps::errors::MoveAbort::is_initial_margin_requirement_violated(&self) -> bool
 pub const fn af_iperps::errors::MoveAbort::is_insufficient_free_collateral(&self) -> bool
 pub const fn af_iperps::errors::MoveAbort::is_insufficient_insurance_surplus(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_invalid_account_for_stop_order(&self) -> bool
 pub const fn af_iperps::errors::MoveAbort::is_invalid_base_price_feed_storage(&self) -> bool
 pub const fn af_iperps::errors::MoveAbort::is_invalid_cancel_order_ids(&self) -> bool
 pub const fn af_iperps::errors::MoveAbort::is_invalid_collateral_price_feed_storage(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_invalid_executor_for_stop_order(&self) -> bool
 pub const fn af_iperps::errors::MoveAbort::is_invalid_force_cancel_ids(&self) -> bool
 pub const fn af_iperps::errors::MoveAbort::is_invalid_map_parameters(&self) -> bool
 pub const fn af_iperps::errors::MoveAbort::is_invalid_market_parameters(&self) -> bool
@@ -498,10 +505,13 @@ pub const fn af_iperps::errors::MoveAbort::is_liquidate_not_first_operation(&sel
 pub const fn af_iperps::errors::MoveAbort::is_map_too_small(&self) -> bool
 pub const fn af_iperps::errors::MoveAbort::is_market_already_registered(&self) -> bool
 pub const fn af_iperps::errors::MoveAbort::is_market_is_not_registered(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_max_open_interest_position_percent_surpassed(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_max_open_interest_surpassed(&self) -> bool
 pub const fn af_iperps::errors::MoveAbort::is_max_pending_orders_exceeded(&self) -> bool
 pub const fn af_iperps::errors::MoveAbort::is_negative_fees_accrued(&self) -> bool
 pub const fn af_iperps::errors::MoveAbort::is_no_fees_accrued(&self) -> bool
 pub const fn af_iperps::errors::MoveAbort::is_no_price_feed_for_market(&self) -> bool
+pub const fn af_iperps::errors::MoveAbort::is_not_enough_collateral_to_allocate_for_stop_order(&self) -> bool
 pub const fn af_iperps::errors::MoveAbort::is_not_enough_gas_for_stop_order(&self) -> bool
 pub const fn af_iperps::errors::MoveAbort::is_not_enough_liquidity(&self) -> bool
 pub const fn af_iperps::errors::MoveAbort::is_not_reduce_only_stop_order(&self) -> bool
@@ -555,9 +565,11 @@ pub const af_iperps::errors::FlagRequirementsViolated: u64
 pub const af_iperps::errors::InitialMarginRequirementViolated: u64
 pub const af_iperps::errors::InsufficientFreeCollateral: u64
 pub const af_iperps::errors::InsufficientInsuranceSurplus: u64
+pub const af_iperps::errors::InvalidAccountForStopOrder: u64
 pub const af_iperps::errors::InvalidBasePriceFeedStorage: u64
 pub const af_iperps::errors::InvalidCancelOrderIds: u64
 pub const af_iperps::errors::InvalidCollateralPriceFeedStorage: u64
+pub const af_iperps::errors::InvalidExecutorForStopOrder: u64
 pub const af_iperps::errors::InvalidForceCancelIds: u64
 pub const af_iperps::errors::InvalidMapParameters: u64
 pub const af_iperps::errors::InvalidMarketParameters: u64
@@ -571,10 +583,13 @@ pub const af_iperps::errors::LiquidateNotFirstOperation: u64
 pub const af_iperps::errors::MapTooSmall: u64
 pub const af_iperps::errors::MarketAlreadyRegistered: u64
 pub const af_iperps::errors::MarketIsNotRegistered: u64
+pub const af_iperps::errors::MaxOpenInterestPositionPercentSurpassed: u64
+pub const af_iperps::errors::MaxOpenInterestSurpassed: u64
 pub const af_iperps::errors::MaxPendingOrdersExceeded: u64
 pub const af_iperps::errors::NegativeFeesAccrued: u64
 pub const af_iperps::errors::NoFeesAccrued: u64
 pub const af_iperps::errors::NoPriceFeedForMarket: u64
+pub const af_iperps::errors::NotEnoughCollateralToAllocateForStopOrder: u64
 pub const af_iperps::errors::NotEnoughGasForStopOrder: u64
 pub const af_iperps::errors::NotEnoughLiquidity: u64
 pub const af_iperps::errors::NotReduceOnlyStopOrder: u64
@@ -616,26 +631,21 @@ pub mod af_iperps::event_instance
 pub af_iperps::event_instance::EventInstance::AcceptedPositionFeesProposal(af_move_type::MoveInstance<af_iperps::events::AcceptedPositionFeesProposal>)
 pub af_iperps::event_instance::EventInstance::AddedStopOrderTicketCollateral(af_move_type::MoveInstance<af_iperps::events::AddedStopOrderTicketCollateral<af_move_type::otw::Otw>>)
 pub af_iperps::event_instance::EventInstance::AllocatedCollateral(af_move_type::MoveInstance<af_iperps::events::AllocatedCollateral>)
-pub af_iperps::event_instance::EventInstance::AllocatedCollateralSubAccount(af_move_type::MoveInstance<af_iperps::events::AllocatedCollateralSubAccount>)
 pub af_iperps::event_instance::EventInstance::CanceledOrder(af_move_type::MoveInstance<af_iperps::events::CanceledOrder>)
-pub af_iperps::event_instance::EventInstance::CanceledOrders(af_move_type::MoveInstance<af_iperps::events::CanceledOrders>)
 pub af_iperps::event_instance::EventInstance::CreatedAccount(af_move_type::MoveInstance<af_iperps::events::CreatedAccount<af_move_type::otw::Otw>>)
 pub af_iperps::event_instance::EventInstance::CreatedClearingHouse(af_move_type::MoveInstance<af_iperps::events::CreatedClearingHouse>)
 pub af_iperps::event_instance::EventInstance::CreatedMarginRatiosProposal(af_move_type::MoveInstance<af_iperps::events::CreatedMarginRatiosProposal>)
-pub af_iperps::event_instance::EventInstance::CreatedMarketPositionSubAccount(af_move_type::MoveInstance<af_iperps::events::CreatedMarketPositionSubAccount>)
 pub af_iperps::event_instance::EventInstance::CreatedOrderbook(af_move_type::MoveInstance<af_iperps::events::CreatedOrderbook>)
 pub af_iperps::event_instance::EventInstance::CreatedPosition(af_move_type::MoveInstance<af_iperps::events::CreatedPosition>)
 pub af_iperps::event_instance::EventInstance::CreatedPositionFeesProposal(af_move_type::MoveInstance<af_iperps::events::CreatedPositionFeesProposal>)
 pub af_iperps::event_instance::EventInstance::CreatedStopOrderTicket(af_move_type::MoveInstance<af_iperps::events::CreatedStopOrderTicket<af_move_type::otw::Otw>>)
 pub af_iperps::event_instance::EventInstance::CreatedSubAccount(af_move_type::MoveInstance<af_iperps::events::CreatedSubAccount>)
 pub af_iperps::event_instance::EventInstance::DeallocatedCollateral(af_move_type::MoveInstance<af_iperps::events::DeallocatedCollateral>)
-pub af_iperps::event_instance::EventInstance::DeallocatedCollateralSubAccount(af_move_type::MoveInstance<af_iperps::events::DeallocatedCollateralSubAccount>)
 pub af_iperps::event_instance::EventInstance::DeletedMarginRatiosProposal(af_move_type::MoveInstance<af_iperps::events::DeletedMarginRatiosProposal>)
 pub af_iperps::event_instance::EventInstance::DeletedPositionFeesProposal(af_move_type::MoveInstance<af_iperps::events::DeletedPositionFeesProposal>)
 pub af_iperps::event_instance::EventInstance::DeletedStopOrderTicket(af_move_type::MoveInstance<af_iperps::events::DeletedStopOrderTicket<af_move_type::otw::Otw>>)
 pub af_iperps::event_instance::EventInstance::DeletedSubAccount(af_move_type::MoveInstance<af_iperps::events::DeletedSubAccount>)
 pub af_iperps::event_instance::EventInstance::DepositedCollateral(af_move_type::MoveInstance<af_iperps::events::DepositedCollateral<af_move_type::otw::Otw>>)
-pub af_iperps::event_instance::EventInstance::DepositedCollateralSubAccount(af_move_type::MoveInstance<af_iperps::events::DepositedCollateralSubAccount>)
 pub af_iperps::event_instance::EventInstance::DonatedToInsuranceFund(af_move_type::MoveInstance<af_iperps::events::DonatedToInsuranceFund>)
 pub af_iperps::event_instance::EventInstance::EditedStopOrderTicketDetails(af_move_type::MoveInstance<af_iperps::events::EditedStopOrderTicketDetails<af_move_type::otw::Otw>>)
 pub af_iperps::event_instance::EventInstance::EditedStopOrderTicketExecutor(af_move_type::MoveInstance<af_iperps::events::EditedStopOrderTicketExecutor<af_move_type::otw::Otw>>)
@@ -645,7 +655,6 @@ pub af_iperps::event_instance::EventInstance::FilledTakerOrder(af_move_type::Mov
 pub af_iperps::event_instance::EventInstance::LiquidatedPosition(af_move_type::MoveInstance<af_iperps::events::LiquidatedPosition>)
 pub af_iperps::event_instance::EventInstance::OrderbookPostReceipt(af_move_type::MoveInstance<af_iperps::events::OrderbookPostReceipt>)
 pub af_iperps::event_instance::EventInstance::PerfomedLiquidation(af_move_type::MoveInstance<af_iperps::events::PerfomedLiquidation>)
-pub af_iperps::event_instance::EventInstance::PostedOrder(af_move_type::MoveInstance<af_iperps::events::PostedOrder>)
 pub af_iperps::event_instance::EventInstance::RegisteredCollateralInfo(af_move_type::MoveInstance<af_iperps::events::RegisteredCollateralInfo<af_move_type::otw::Otw>>)
 pub af_iperps::event_instance::EventInstance::RegisteredMarketInfo(af_move_type::MoveInstance<af_iperps::events::RegisteredMarketInfo<af_move_type::otw::Otw>>)
 pub af_iperps::event_instance::EventInstance::RejectedPositionFeesProposal(af_move_type::MoveInstance<af_iperps::events::RejectedPositionFeesProposal>)
@@ -673,7 +682,6 @@ pub af_iperps::event_instance::EventInstance::UpdatedSpreadTwap(af_move_type::Mo
 pub af_iperps::event_instance::EventInstance::UpdatedSpreadTwapParameters(af_move_type::MoveInstance<af_iperps::events::UpdatedSpreadTwapParameters>)
 pub af_iperps::event_instance::EventInstance::UpdatedStopOrderMistCost(af_move_type::MoveInstance<af_iperps::events::UpdatedStopOrderMistCost>)
 pub af_iperps::event_instance::EventInstance::WithdrewCollateral(af_move_type::MoveInstance<af_iperps::events::WithdrewCollateral<af_move_type::otw::Otw>>)
-pub af_iperps::event_instance::EventInstance::WithdrewCollateralSubAccount(af_move_type::MoveInstance<af_iperps::events::WithdrewCollateralSubAccount>)
 pub af_iperps::event_instance::EventInstance::WithdrewFees(af_move_type::MoveInstance<af_iperps::events::WithdrewFees>)
 pub af_iperps::event_instance::EventInstance::WithdrewInsuranceFund(af_move_type::MoveInstance<af_iperps::events::WithdrewInsuranceFund>)
 impl af_iperps::event_instance::EventInstance
@@ -729,12 +737,13 @@ pub fn af_iperps::events::AcceptedPositionFeesProposalTypeTag::from_str(s: &str)
 pub struct af_iperps::events::AddedStopOrderTicketCollateral<T: af_move_type::MoveType>
 pub af_iperps::events::AddedStopOrderTicketCollateral::account_id: u64
 pub af_iperps::events::AddedStopOrderTicketCollateral::collateral_to_allocate: u64
+pub af_iperps::events::AddedStopOrderTicketCollateral::subaccount_id: core::option::Option<sui_framework_sdk::object::ID>
 pub af_iperps::events::AddedStopOrderTicketCollateral::ticket_id: sui_framework_sdk::object::ID
 impl<T: af_move_type::MoveType> af_iperps::events::AddedStopOrderTicketCollateral<T>
 pub fn af_iperps::events::AddedStopOrderTicketCollateral<T>::move_instance(self, address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_move_type::MoveInstance<Self>
 pub fn af_iperps::events::AddedStopOrderTicketCollateral<T>::type_(address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_iperps::events::AddedStopOrderTicketCollateralTypeTag<T>
 impl<T: af_move_type::MoveType> af_iperps::events::AddedStopOrderTicketCollateral<T>
-pub fn af_iperps::events::AddedStopOrderTicketCollateral<T>::new(ticket_id: sui_framework_sdk::object::ID, account_id: u64, collateral_to_allocate: u64) -> Self
+pub fn af_iperps::events::AddedStopOrderTicketCollateral<T>::new(ticket_id: sui_framework_sdk::object::ID, account_id: u64, subaccount_id: core::option::Option<sui_framework_sdk::object::ID>, collateral_to_allocate: u64) -> Self
 impl<T: af_move_type::MoveType + af_move_type::StaticTypeTag> af_move_type::StaticTypeParams for af_iperps::events::AddedStopOrderTicketCollateral<T>
 pub fn af_iperps::events::AddedStopOrderTicketCollateral<T>::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
 impl<T: af_move_type::MoveType> af_move_type::MoveStruct for af_iperps::events::AddedStopOrderTicketCollateral<T>
@@ -773,11 +782,12 @@ pub struct af_iperps::events::AllocatedCollateral
 pub af_iperps::events::AllocatedCollateral::account_id: u64
 pub af_iperps::events::AllocatedCollateral::ch_id: sui_framework_sdk::object::ID
 pub af_iperps::events::AllocatedCollateral::collateral: u64
+pub af_iperps::events::AllocatedCollateral::subaccount_id: core::option::Option<sui_framework_sdk::object::ID>
 impl af_iperps::events::AllocatedCollateral
 pub fn af_iperps::events::AllocatedCollateral::move_instance(self, address: sui_sdk_types::address::Address) -> af_move_type::MoveInstance<Self>
 pub fn af_iperps::events::AllocatedCollateral::type_(address: sui_sdk_types::address::Address) -> af_iperps::events::AllocatedCollateralTypeTag
 impl af_iperps::events::AllocatedCollateral
-pub fn af_iperps::events::AllocatedCollateral::new(ch_id: sui_framework_sdk::object::ID, account_id: u64, collateral: u64) -> Self
+pub fn af_iperps::events::AllocatedCollateral::new(ch_id: sui_framework_sdk::object::ID, account_id: u64, subaccount_id: core::option::Option<sui_framework_sdk::object::ID>, collateral: u64) -> Self
 impl af_move_type::MoveStruct for af_iperps::events::AllocatedCollateral
 pub type af_iperps::events::AllocatedCollateral::StructTag = af_iperps::events::AllocatedCollateralTypeTag
 impl af_move_type::MoveType for af_iperps::events::AllocatedCollateral
@@ -794,52 +804,6 @@ impl tabled::tabled::Tabled for af_iperps::events::AllocatedCollateral
 pub const af_iperps::events::AllocatedCollateral::LENGTH: usize
 pub fn af_iperps::events::AllocatedCollateral::fields(&self) -> alloc::vec::Vec<alloc::borrow::Cow<'_, str>>
 pub fn af_iperps::events::AllocatedCollateral::headers() -> alloc::vec::Vec<alloc::borrow::Cow<'static, str>>
-pub struct af_iperps::events::AllocatedCollateralSubAccount
-pub af_iperps::events::AllocatedCollateralSubAccount::account_id: u64
-pub af_iperps::events::AllocatedCollateralSubAccount::ch_id: sui_framework_sdk::object::ID
-pub af_iperps::events::AllocatedCollateralSubAccount::collateral: u64
-pub af_iperps::events::AllocatedCollateralSubAccount::position_collateral_after: af_utilities::types::ifixed::IFixed
-pub af_iperps::events::AllocatedCollateralSubAccount::subaccount_collateral_after: u64
-pub af_iperps::events::AllocatedCollateralSubAccount::subaccount_id: sui_framework_sdk::object::ID
-pub af_iperps::events::AllocatedCollateralSubAccount::vault_balance_after: u64
-impl af_iperps::events::AllocatedCollateralSubAccount
-pub fn af_iperps::events::AllocatedCollateralSubAccount::move_instance(self, address: sui_sdk_types::address::Address) -> af_move_type::MoveInstance<Self>
-pub fn af_iperps::events::AllocatedCollateralSubAccount::type_(address: sui_sdk_types::address::Address) -> af_iperps::events::AllocatedCollateralSubAccountTypeTag
-impl af_iperps::events::AllocatedCollateralSubAccount
-pub fn af_iperps::events::AllocatedCollateralSubAccount::new(ch_id: sui_framework_sdk::object::ID, subaccount_id: sui_framework_sdk::object::ID, account_id: u64, collateral: u64, subaccount_collateral_after: u64, position_collateral_after: af_utilities::types::ifixed::IFixed, vault_balance_after: u64) -> Self
-impl af_move_type::MoveStruct for af_iperps::events::AllocatedCollateralSubAccount
-pub type af_iperps::events::AllocatedCollateralSubAccount::StructTag = af_iperps::events::AllocatedCollateralSubAccountTypeTag
-impl af_move_type::MoveType for af_iperps::events::AllocatedCollateralSubAccount
-pub type af_iperps::events::AllocatedCollateralSubAccount::TypeTag = af_iperps::events::AllocatedCollateralSubAccountTypeTag
-impl af_move_type::StaticModule for af_iperps::events::AllocatedCollateralSubAccount
-pub fn af_iperps::events::AllocatedCollateralSubAccount::module() -> sui_sdk_types::type_tag::Identifier
-impl af_move_type::StaticName for af_iperps::events::AllocatedCollateralSubAccount
-pub fn af_iperps::events::AllocatedCollateralSubAccount::name() -> sui_sdk_types::type_tag::Identifier
-impl af_move_type::StaticTypeParams for af_iperps::events::AllocatedCollateralSubAccount
-pub fn af_iperps::events::AllocatedCollateralSubAccount::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
-impl core::fmt::Display for af_iperps::events::AllocatedCollateralSubAccount
-pub fn af_iperps::events::AllocatedCollateralSubAccount::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
-impl tabled::tabled::Tabled for af_iperps::events::AllocatedCollateralSubAccount
-pub const af_iperps::events::AllocatedCollateralSubAccount::LENGTH: usize
-pub fn af_iperps::events::AllocatedCollateralSubAccount::fields(&self) -> alloc::vec::Vec<alloc::borrow::Cow<'_, str>>
-pub fn af_iperps::events::AllocatedCollateralSubAccount::headers() -> alloc::vec::Vec<alloc::borrow::Cow<'static, str>>
-pub struct af_iperps::events::AllocatedCollateralSubAccountTypeTag
-pub af_iperps::events::AllocatedCollateralSubAccountTypeTag::address: sui_sdk_types::address::Address
-impl core::convert::From<af_iperps::events::AllocatedCollateralSubAccountTypeTag> for sui_sdk_types::type_tag::StructTag
-pub fn sui_sdk_types::type_tag::StructTag::from(value: af_iperps::events::AllocatedCollateralSubAccountTypeTag) -> Self
-impl core::convert::From<af_iperps::events::AllocatedCollateralSubAccountTypeTag> for sui_sdk_types::type_tag::TypeTag
-pub fn sui_sdk_types::type_tag::TypeTag::from(value: af_iperps::events::AllocatedCollateralSubAccountTypeTag) -> Self
-impl core::convert::TryFrom<sui_sdk_types::type_tag::StructTag> for af_iperps::events::AllocatedCollateralSubAccountTypeTag
-pub type af_iperps::events::AllocatedCollateralSubAccountTypeTag::Error = af_move_type::StructTagError
-pub fn af_iperps::events::AllocatedCollateralSubAccountTypeTag::try_from(value: sui_sdk_types::type_tag::StructTag) -> core::result::Result<Self, Self::Error>
-impl core::convert::TryFrom<sui_sdk_types::type_tag::TypeTag> for af_iperps::events::AllocatedCollateralSubAccountTypeTag
-pub type af_iperps::events::AllocatedCollateralSubAccountTypeTag::Error = af_move_type::TypeTagError
-pub fn af_iperps::events::AllocatedCollateralSubAccountTypeTag::try_from(value: sui_sdk_types::type_tag::TypeTag) -> core::result::Result<Self, Self::Error>
-impl core::fmt::Display for af_iperps::events::AllocatedCollateralSubAccountTypeTag
-pub fn af_iperps::events::AllocatedCollateralSubAccountTypeTag::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
-impl core::str::traits::FromStr for af_iperps::events::AllocatedCollateralSubAccountTypeTag
-pub type af_iperps::events::AllocatedCollateralSubAccountTypeTag::Err = af_move_type::ParseStructTagError
-pub fn af_iperps::events::AllocatedCollateralSubAccountTypeTag::from_str(s: &str) -> core::result::Result<Self, Self::Err>
 pub struct af_iperps::events::AllocatedCollateralTypeTag
 pub af_iperps::events::AllocatedCollateralTypeTag::address: sui_sdk_types::address::Address
 impl core::convert::From<af_iperps::events::AllocatedCollateralTypeTag> for sui_sdk_types::type_tag::StructTag
@@ -902,50 +866,6 @@ pub fn af_iperps::events::CanceledOrderTypeTag::fmt(&self, f: &mut core::fmt::Fo
 impl core::str::traits::FromStr for af_iperps::events::CanceledOrderTypeTag
 pub type af_iperps::events::CanceledOrderTypeTag::Err = af_move_type::ParseStructTagError
 pub fn af_iperps::events::CanceledOrderTypeTag::from_str(s: &str) -> core::result::Result<Self, Self::Err>
-pub struct af_iperps::events::CanceledOrders
-pub af_iperps::events::CanceledOrders::account_id: u64
-pub af_iperps::events::CanceledOrders::asks_quantity: af_utilities::types::ifixed::IFixed
-pub af_iperps::events::CanceledOrders::bids_quantity: af_utilities::types::ifixed::IFixed
-pub af_iperps::events::CanceledOrders::ch_id: sui_framework_sdk::object::ID
-pub af_iperps::events::CanceledOrders::pending_orders: u64
-impl af_iperps::events::CanceledOrders
-pub fn af_iperps::events::CanceledOrders::move_instance(self, address: sui_sdk_types::address::Address) -> af_move_type::MoveInstance<Self>
-pub fn af_iperps::events::CanceledOrders::type_(address: sui_sdk_types::address::Address) -> af_iperps::events::CanceledOrdersTypeTag
-impl af_iperps::events::CanceledOrders
-pub fn af_iperps::events::CanceledOrders::new(ch_id: sui_framework_sdk::object::ID, account_id: u64, asks_quantity: af_utilities::types::ifixed::IFixed, bids_quantity: af_utilities::types::ifixed::IFixed, pending_orders: u64) -> Self
-impl af_move_type::MoveStruct for af_iperps::events::CanceledOrders
-pub type af_iperps::events::CanceledOrders::StructTag = af_iperps::events::CanceledOrdersTypeTag
-impl af_move_type::MoveType for af_iperps::events::CanceledOrders
-pub type af_iperps::events::CanceledOrders::TypeTag = af_iperps::events::CanceledOrdersTypeTag
-impl af_move_type::StaticModule for af_iperps::events::CanceledOrders
-pub fn af_iperps::events::CanceledOrders::module() -> sui_sdk_types::type_tag::Identifier
-impl af_move_type::StaticName for af_iperps::events::CanceledOrders
-pub fn af_iperps::events::CanceledOrders::name() -> sui_sdk_types::type_tag::Identifier
-impl af_move_type::StaticTypeParams for af_iperps::events::CanceledOrders
-pub fn af_iperps::events::CanceledOrders::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
-impl core::fmt::Display for af_iperps::events::CanceledOrders
-pub fn af_iperps::events::CanceledOrders::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
-impl tabled::tabled::Tabled for af_iperps::events::CanceledOrders
-pub const af_iperps::events::CanceledOrders::LENGTH: usize
-pub fn af_iperps::events::CanceledOrders::fields(&self) -> alloc::vec::Vec<alloc::borrow::Cow<'_, str>>
-pub fn af_iperps::events::CanceledOrders::headers() -> alloc::vec::Vec<alloc::borrow::Cow<'static, str>>
-pub struct af_iperps::events::CanceledOrdersTypeTag
-pub af_iperps::events::CanceledOrdersTypeTag::address: sui_sdk_types::address::Address
-impl core::convert::From<af_iperps::events::CanceledOrdersTypeTag> for sui_sdk_types::type_tag::StructTag
-pub fn sui_sdk_types::type_tag::StructTag::from(value: af_iperps::events::CanceledOrdersTypeTag) -> Self
-impl core::convert::From<af_iperps::events::CanceledOrdersTypeTag> for sui_sdk_types::type_tag::TypeTag
-pub fn sui_sdk_types::type_tag::TypeTag::from(value: af_iperps::events::CanceledOrdersTypeTag) -> Self
-impl core::convert::TryFrom<sui_sdk_types::type_tag::StructTag> for af_iperps::events::CanceledOrdersTypeTag
-pub type af_iperps::events::CanceledOrdersTypeTag::Error = af_move_type::StructTagError
-pub fn af_iperps::events::CanceledOrdersTypeTag::try_from(value: sui_sdk_types::type_tag::StructTag) -> core::result::Result<Self, Self::Error>
-impl core::convert::TryFrom<sui_sdk_types::type_tag::TypeTag> for af_iperps::events::CanceledOrdersTypeTag
-pub type af_iperps::events::CanceledOrdersTypeTag::Error = af_move_type::TypeTagError
-pub fn af_iperps::events::CanceledOrdersTypeTag::try_from(value: sui_sdk_types::type_tag::TypeTag) -> core::result::Result<Self, Self::Error>
-impl core::fmt::Display for af_iperps::events::CanceledOrdersTypeTag
-pub fn af_iperps::events::CanceledOrdersTypeTag::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
-impl core::str::traits::FromStr for af_iperps::events::CanceledOrdersTypeTag
-pub type af_iperps::events::CanceledOrdersTypeTag::Err = af_move_type::ParseStructTagError
-pub fn af_iperps::events::CanceledOrdersTypeTag::from_str(s: &str) -> core::result::Result<Self, Self::Err>
 pub struct af_iperps::events::CreatedAccount<T: af_move_type::MoveType>
 pub af_iperps::events::CreatedAccount::account_id: u64
 pub af_iperps::events::CreatedAccount::user: sui_sdk_types::address::Address
@@ -1089,50 +1009,6 @@ pub fn af_iperps::events::CreatedMarginRatiosProposalTypeTag::fmt(&self, f: &mut
 impl core::str::traits::FromStr for af_iperps::events::CreatedMarginRatiosProposalTypeTag
 pub type af_iperps::events::CreatedMarginRatiosProposalTypeTag::Err = af_move_type::ParseStructTagError
 pub fn af_iperps::events::CreatedMarginRatiosProposalTypeTag::from_str(s: &str) -> core::result::Result<Self, Self::Err>
-pub struct af_iperps::events::CreatedMarketPositionSubAccount
-pub af_iperps::events::CreatedMarketPositionSubAccount::account_id: u64
-pub af_iperps::events::CreatedMarketPositionSubAccount::ch_id: sui_framework_sdk::object::ID
-pub af_iperps::events::CreatedMarketPositionSubAccount::mkt_funding_rate_long: af_utilities::types::ifixed::IFixed
-pub af_iperps::events::CreatedMarketPositionSubAccount::mkt_funding_rate_short: af_utilities::types::ifixed::IFixed
-pub af_iperps::events::CreatedMarketPositionSubAccount::subaccount_id: sui_framework_sdk::object::ID
-impl af_iperps::events::CreatedMarketPositionSubAccount
-pub fn af_iperps::events::CreatedMarketPositionSubAccount::move_instance(self, address: sui_sdk_types::address::Address) -> af_move_type::MoveInstance<Self>
-pub fn af_iperps::events::CreatedMarketPositionSubAccount::type_(address: sui_sdk_types::address::Address) -> af_iperps::events::CreatedMarketPositionSubAccountTypeTag
-impl af_iperps::events::CreatedMarketPositionSubAccount
-pub fn af_iperps::events::CreatedMarketPositionSubAccount::new(ch_id: sui_framework_sdk::object::ID, subaccount_id: sui_framework_sdk::object::ID, account_id: u64, mkt_funding_rate_long: af_utilities::types::ifixed::IFixed, mkt_funding_rate_short: af_utilities::types::ifixed::IFixed) -> Self
-impl af_move_type::MoveStruct for af_iperps::events::CreatedMarketPositionSubAccount
-pub type af_iperps::events::CreatedMarketPositionSubAccount::StructTag = af_iperps::events::CreatedMarketPositionSubAccountTypeTag
-impl af_move_type::MoveType for af_iperps::events::CreatedMarketPositionSubAccount
-pub type af_iperps::events::CreatedMarketPositionSubAccount::TypeTag = af_iperps::events::CreatedMarketPositionSubAccountTypeTag
-impl af_move_type::StaticModule for af_iperps::events::CreatedMarketPositionSubAccount
-pub fn af_iperps::events::CreatedMarketPositionSubAccount::module() -> sui_sdk_types::type_tag::Identifier
-impl af_move_type::StaticName for af_iperps::events::CreatedMarketPositionSubAccount
-pub fn af_iperps::events::CreatedMarketPositionSubAccount::name() -> sui_sdk_types::type_tag::Identifier
-impl af_move_type::StaticTypeParams for af_iperps::events::CreatedMarketPositionSubAccount
-pub fn af_iperps::events::CreatedMarketPositionSubAccount::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
-impl core::fmt::Display for af_iperps::events::CreatedMarketPositionSubAccount
-pub fn af_iperps::events::CreatedMarketPositionSubAccount::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
-impl tabled::tabled::Tabled for af_iperps::events::CreatedMarketPositionSubAccount
-pub const af_iperps::events::CreatedMarketPositionSubAccount::LENGTH: usize
-pub fn af_iperps::events::CreatedMarketPositionSubAccount::fields(&self) -> alloc::vec::Vec<alloc::borrow::Cow<'_, str>>
-pub fn af_iperps::events::CreatedMarketPositionSubAccount::headers() -> alloc::vec::Vec<alloc::borrow::Cow<'static, str>>
-pub struct af_iperps::events::CreatedMarketPositionSubAccountTypeTag
-pub af_iperps::events::CreatedMarketPositionSubAccountTypeTag::address: sui_sdk_types::address::Address
-impl core::convert::From<af_iperps::events::CreatedMarketPositionSubAccountTypeTag> for sui_sdk_types::type_tag::StructTag
-pub fn sui_sdk_types::type_tag::StructTag::from(value: af_iperps::events::CreatedMarketPositionSubAccountTypeTag) -> Self
-impl core::convert::From<af_iperps::events::CreatedMarketPositionSubAccountTypeTag> for sui_sdk_types::type_tag::TypeTag
-pub fn sui_sdk_types::type_tag::TypeTag::from(value: af_iperps::events::CreatedMarketPositionSubAccountTypeTag) -> Self
-impl core::convert::TryFrom<sui_sdk_types::type_tag::StructTag> for af_iperps::events::CreatedMarketPositionSubAccountTypeTag
-pub type af_iperps::events::CreatedMarketPositionSubAccountTypeTag::Error = af_move_type::StructTagError
-pub fn af_iperps::events::CreatedMarketPositionSubAccountTypeTag::try_from(value: sui_sdk_types::type_tag::StructTag) -> core::result::Result<Self, Self::Error>
-impl core::convert::TryFrom<sui_sdk_types::type_tag::TypeTag> for af_iperps::events::CreatedMarketPositionSubAccountTypeTag
-pub type af_iperps::events::CreatedMarketPositionSubAccountTypeTag::Error = af_move_type::TypeTagError
-pub fn af_iperps::events::CreatedMarketPositionSubAccountTypeTag::try_from(value: sui_sdk_types::type_tag::TypeTag) -> core::result::Result<Self, Self::Error>
-impl core::fmt::Display for af_iperps::events::CreatedMarketPositionSubAccountTypeTag
-pub fn af_iperps::events::CreatedMarketPositionSubAccountTypeTag::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
-impl core::str::traits::FromStr for af_iperps::events::CreatedMarketPositionSubAccountTypeTag
-pub type af_iperps::events::CreatedMarketPositionSubAccountTypeTag::Err = af_move_type::ParseStructTagError
-pub fn af_iperps::events::CreatedMarketPositionSubAccountTypeTag::from_str(s: &str) -> core::result::Result<Self, Self::Err>
 pub struct af_iperps::events::CreatedOrderbook
 pub af_iperps::events::CreatedOrderbook::branch_max: u64
 pub af_iperps::events::CreatedOrderbook::branch_min: u64
@@ -1183,11 +1059,12 @@ pub af_iperps::events::CreatedPosition::account_id: u64
 pub af_iperps::events::CreatedPosition::ch_id: sui_framework_sdk::object::ID
 pub af_iperps::events::CreatedPosition::mkt_funding_rate_long: af_utilities::types::ifixed::IFixed
 pub af_iperps::events::CreatedPosition::mkt_funding_rate_short: af_utilities::types::ifixed::IFixed
+pub af_iperps::events::CreatedPosition::subaccount_id: core::option::Option<sui_framework_sdk::object::ID>
 impl af_iperps::events::CreatedPosition
 pub fn af_iperps::events::CreatedPosition::move_instance(self, address: sui_sdk_types::address::Address) -> af_move_type::MoveInstance<Self>
 pub fn af_iperps::events::CreatedPosition::type_(address: sui_sdk_types::address::Address) -> af_iperps::events::CreatedPositionTypeTag
 impl af_iperps::events::CreatedPosition
-pub fn af_iperps::events::CreatedPosition::new(ch_id: sui_framework_sdk::object::ID, account_id: u64, mkt_funding_rate_long: af_utilities::types::ifixed::IFixed, mkt_funding_rate_short: af_utilities::types::ifixed::IFixed) -> Self
+pub fn af_iperps::events::CreatedPosition::new(ch_id: sui_framework_sdk::object::ID, account_id: u64, subaccount_id: core::option::Option<sui_framework_sdk::object::ID>, mkt_funding_rate_long: af_utilities::types::ifixed::IFixed, mkt_funding_rate_short: af_utilities::types::ifixed::IFixed) -> Self
 impl af_move_type::MoveStruct for af_iperps::events::CreatedPosition
 pub type af_iperps::events::CreatedPosition::StructTag = af_iperps::events::CreatedPositionTypeTag
 impl af_move_type::MoveType for af_iperps::events::CreatedPosition
@@ -1266,17 +1143,17 @@ pub type af_iperps::events::CreatedPositionTypeTag::Err = af_move_type::ParseStr
 pub fn af_iperps::events::CreatedPositionTypeTag::from_str(s: &str) -> core::result::Result<Self, Self::Err>
 pub struct af_iperps::events::CreatedStopOrderTicket<T: af_move_type::MoveType>
 pub af_iperps::events::CreatedStopOrderTicket::account_id: u64
-pub af_iperps::events::CreatedStopOrderTicket::account_obj_id: sui_framework_sdk::object::ID
 pub af_iperps::events::CreatedStopOrderTicket::collateral_to_allocate: u64
 pub af_iperps::events::CreatedStopOrderTicket::encrypted_details: af_move_type::vector::MoveVec<u8>
 pub af_iperps::events::CreatedStopOrderTicket::executor: sui_sdk_types::address::Address
 pub af_iperps::events::CreatedStopOrderTicket::gas: u64
+pub af_iperps::events::CreatedStopOrderTicket::obj_id: sui_framework_sdk::object::ID
 pub af_iperps::events::CreatedStopOrderTicket::ticket_id: sui_framework_sdk::object::ID
 impl<T: af_move_type::MoveType> af_iperps::events::CreatedStopOrderTicket<T>
 pub fn af_iperps::events::CreatedStopOrderTicket<T>::move_instance(self, address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_move_type::MoveInstance<Self>
 pub fn af_iperps::events::CreatedStopOrderTicket<T>::type_(address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_iperps::events::CreatedStopOrderTicketTypeTag<T>
 impl<T: af_move_type::MoveType> af_iperps::events::CreatedStopOrderTicket<T>
-pub fn af_iperps::events::CreatedStopOrderTicket<T>::new(ticket_id: sui_framework_sdk::object::ID, account_obj_id: sui_framework_sdk::object::ID, account_id: u64, executor: sui_sdk_types::address::Address, gas: u64, collateral_to_allocate: u64, encrypted_details: af_move_type::vector::MoveVec<u8>) -> Self
+pub fn af_iperps::events::CreatedStopOrderTicket<T>::new(ticket_id: sui_framework_sdk::object::ID, obj_id: sui_framework_sdk::object::ID, account_id: u64, executor: sui_sdk_types::address::Address, gas: u64, collateral_to_allocate: u64, encrypted_details: af_move_type::vector::MoveVec<u8>) -> Self
 impl<T: af_move_type::MoveType + af_move_type::StaticTypeTag> af_move_type::StaticTypeParams for af_iperps::events::CreatedStopOrderTicket<T>
 pub fn af_iperps::events::CreatedStopOrderTicket<T>::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
 impl<T: af_move_type::MoveType> af_move_type::MoveStruct for af_iperps::events::CreatedStopOrderTicket<T>
@@ -1354,17 +1231,15 @@ impl core::str::traits::FromStr for af_iperps::events::CreatedSubAccountTypeTag
 pub type af_iperps::events::CreatedSubAccountTypeTag::Err = af_move_type::ParseStructTagError
 pub fn af_iperps::events::CreatedSubAccountTypeTag::from_str(s: &str) -> core::result::Result<Self, Self::Err>
 pub struct af_iperps::events::DeallocatedCollateral
-pub af_iperps::events::DeallocatedCollateral::account_collateral_after: u64
 pub af_iperps::events::DeallocatedCollateral::account_id: u64
 pub af_iperps::events::DeallocatedCollateral::ch_id: sui_framework_sdk::object::ID
 pub af_iperps::events::DeallocatedCollateral::collateral: u64
-pub af_iperps::events::DeallocatedCollateral::position_collateral_after: af_utilities::types::ifixed::IFixed
-pub af_iperps::events::DeallocatedCollateral::vault_balance_after: u64
+pub af_iperps::events::DeallocatedCollateral::subaccount_id: core::option::Option<sui_framework_sdk::object::ID>
 impl af_iperps::events::DeallocatedCollateral
 pub fn af_iperps::events::DeallocatedCollateral::move_instance(self, address: sui_sdk_types::address::Address) -> af_move_type::MoveInstance<Self>
 pub fn af_iperps::events::DeallocatedCollateral::type_(address: sui_sdk_types::address::Address) -> af_iperps::events::DeallocatedCollateralTypeTag
 impl af_iperps::events::DeallocatedCollateral
-pub fn af_iperps::events::DeallocatedCollateral::new(ch_id: sui_framework_sdk::object::ID, account_id: u64, collateral: u64, account_collateral_after: u64, position_collateral_after: af_utilities::types::ifixed::IFixed, vault_balance_after: u64) -> Self
+pub fn af_iperps::events::DeallocatedCollateral::new(ch_id: sui_framework_sdk::object::ID, account_id: u64, subaccount_id: core::option::Option<sui_framework_sdk::object::ID>, collateral: u64) -> Self
 impl af_move_type::MoveStruct for af_iperps::events::DeallocatedCollateral
 pub type af_iperps::events::DeallocatedCollateral::StructTag = af_iperps::events::DeallocatedCollateralTypeTag
 impl af_move_type::MoveType for af_iperps::events::DeallocatedCollateral
@@ -1381,52 +1256,6 @@ impl tabled::tabled::Tabled for af_iperps::events::DeallocatedCollateral
 pub const af_iperps::events::DeallocatedCollateral::LENGTH: usize
 pub fn af_iperps::events::DeallocatedCollateral::fields(&self) -> alloc::vec::Vec<alloc::borrow::Cow<'_, str>>
 pub fn af_iperps::events::DeallocatedCollateral::headers() -> alloc::vec::Vec<alloc::borrow::Cow<'static, str>>
-pub struct af_iperps::events::DeallocatedCollateralSubAccount
-pub af_iperps::events::DeallocatedCollateralSubAccount::account_id: u64
-pub af_iperps::events::DeallocatedCollateralSubAccount::ch_id: sui_framework_sdk::object::ID
-pub af_iperps::events::DeallocatedCollateralSubAccount::collateral: u64
-pub af_iperps::events::DeallocatedCollateralSubAccount::position_collateral_after: af_utilities::types::ifixed::IFixed
-pub af_iperps::events::DeallocatedCollateralSubAccount::subaccount_collateral_after: u64
-pub af_iperps::events::DeallocatedCollateralSubAccount::subaccount_id: sui_framework_sdk::object::ID
-pub af_iperps::events::DeallocatedCollateralSubAccount::vault_balance_after: u64
-impl af_iperps::events::DeallocatedCollateralSubAccount
-pub fn af_iperps::events::DeallocatedCollateralSubAccount::move_instance(self, address: sui_sdk_types::address::Address) -> af_move_type::MoveInstance<Self>
-pub fn af_iperps::events::DeallocatedCollateralSubAccount::type_(address: sui_sdk_types::address::Address) -> af_iperps::events::DeallocatedCollateralSubAccountTypeTag
-impl af_iperps::events::DeallocatedCollateralSubAccount
-pub fn af_iperps::events::DeallocatedCollateralSubAccount::new(ch_id: sui_framework_sdk::object::ID, subaccount_id: sui_framework_sdk::object::ID, account_id: u64, collateral: u64, subaccount_collateral_after: u64, position_collateral_after: af_utilities::types::ifixed::IFixed, vault_balance_after: u64) -> Self
-impl af_move_type::MoveStruct for af_iperps::events::DeallocatedCollateralSubAccount
-pub type af_iperps::events::DeallocatedCollateralSubAccount::StructTag = af_iperps::events::DeallocatedCollateralSubAccountTypeTag
-impl af_move_type::MoveType for af_iperps::events::DeallocatedCollateralSubAccount
-pub type af_iperps::events::DeallocatedCollateralSubAccount::TypeTag = af_iperps::events::DeallocatedCollateralSubAccountTypeTag
-impl af_move_type::StaticModule for af_iperps::events::DeallocatedCollateralSubAccount
-pub fn af_iperps::events::DeallocatedCollateralSubAccount::module() -> sui_sdk_types::type_tag::Identifier
-impl af_move_type::StaticName for af_iperps::events::DeallocatedCollateralSubAccount
-pub fn af_iperps::events::DeallocatedCollateralSubAccount::name() -> sui_sdk_types::type_tag::Identifier
-impl af_move_type::StaticTypeParams for af_iperps::events::DeallocatedCollateralSubAccount
-pub fn af_iperps::events::DeallocatedCollateralSubAccount::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
-impl core::fmt::Display for af_iperps::events::DeallocatedCollateralSubAccount
-pub fn af_iperps::events::DeallocatedCollateralSubAccount::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
-impl tabled::tabled::Tabled for af_iperps::events::DeallocatedCollateralSubAccount
-pub const af_iperps::events::DeallocatedCollateralSubAccount::LENGTH: usize
-pub fn af_iperps::events::DeallocatedCollateralSubAccount::fields(&self) -> alloc::vec::Vec<alloc::borrow::Cow<'_, str>>
-pub fn af_iperps::events::DeallocatedCollateralSubAccount::headers() -> alloc::vec::Vec<alloc::borrow::Cow<'static, str>>
-pub struct af_iperps::events::DeallocatedCollateralSubAccountTypeTag
-pub af_iperps::events::DeallocatedCollateralSubAccountTypeTag::address: sui_sdk_types::address::Address
-impl core::convert::From<af_iperps::events::DeallocatedCollateralSubAccountTypeTag> for sui_sdk_types::type_tag::StructTag
-pub fn sui_sdk_types::type_tag::StructTag::from(value: af_iperps::events::DeallocatedCollateralSubAccountTypeTag) -> Self
-impl core::convert::From<af_iperps::events::DeallocatedCollateralSubAccountTypeTag> for sui_sdk_types::type_tag::TypeTag
-pub fn sui_sdk_types::type_tag::TypeTag::from(value: af_iperps::events::DeallocatedCollateralSubAccountTypeTag) -> Self
-impl core::convert::TryFrom<sui_sdk_types::type_tag::StructTag> for af_iperps::events::DeallocatedCollateralSubAccountTypeTag
-pub type af_iperps::events::DeallocatedCollateralSubAccountTypeTag::Error = af_move_type::StructTagError
-pub fn af_iperps::events::DeallocatedCollateralSubAccountTypeTag::try_from(value: sui_sdk_types::type_tag::StructTag) -> core::result::Result<Self, Self::Error>
-impl core::convert::TryFrom<sui_sdk_types::type_tag::TypeTag> for af_iperps::events::DeallocatedCollateralSubAccountTypeTag
-pub type af_iperps::events::DeallocatedCollateralSubAccountTypeTag::Error = af_move_type::TypeTagError
-pub fn af_iperps::events::DeallocatedCollateralSubAccountTypeTag::try_from(value: sui_sdk_types::type_tag::TypeTag) -> core::result::Result<Self, Self::Error>
-impl core::fmt::Display for af_iperps::events::DeallocatedCollateralSubAccountTypeTag
-pub fn af_iperps::events::DeallocatedCollateralSubAccountTypeTag::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
-impl core::str::traits::FromStr for af_iperps::events::DeallocatedCollateralSubAccountTypeTag
-pub type af_iperps::events::DeallocatedCollateralSubAccountTypeTag::Err = af_move_type::ParseStructTagError
-pub fn af_iperps::events::DeallocatedCollateralSubAccountTypeTag::from_str(s: &str) -> core::result::Result<Self, Self::Err>
 pub struct af_iperps::events::DeallocatedCollateralTypeTag
 pub af_iperps::events::DeallocatedCollateralTypeTag::address: sui_sdk_types::address::Address
 impl core::convert::From<af_iperps::events::DeallocatedCollateralTypeTag> for sui_sdk_types::type_tag::StructTag
@@ -1531,13 +1360,13 @@ pub type af_iperps::events::DeletedPositionFeesProposalTypeTag::Err = af_move_ty
 pub fn af_iperps::events::DeletedPositionFeesProposalTypeTag::from_str(s: &str) -> core::result::Result<Self, Self::Err>
 pub struct af_iperps::events::DeletedStopOrderTicket<T: af_move_type::MoveType>
 pub af_iperps::events::DeletedStopOrderTicket::account_id: u64
-pub af_iperps::events::DeletedStopOrderTicket::executed: bool
+pub af_iperps::events::DeletedStopOrderTicket::subaccount_id: core::option::Option<sui_framework_sdk::object::ID>
 pub af_iperps::events::DeletedStopOrderTicket::ticket_id: sui_framework_sdk::object::ID
 impl<T: af_move_type::MoveType> af_iperps::events::DeletedStopOrderTicket<T>
 pub fn af_iperps::events::DeletedStopOrderTicket<T>::move_instance(self, address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_move_type::MoveInstance<Self>
 pub fn af_iperps::events::DeletedStopOrderTicket<T>::type_(address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_iperps::events::DeletedStopOrderTicketTypeTag<T>
 impl<T: af_move_type::MoveType> af_iperps::events::DeletedStopOrderTicket<T>
-pub fn af_iperps::events::DeletedStopOrderTicket<T>::new(ticket_id: sui_framework_sdk::object::ID, account_id: u64, executed: bool) -> Self
+pub fn af_iperps::events::DeletedStopOrderTicket<T>::new(ticket_id: sui_framework_sdk::object::ID, account_id: u64, subaccount_id: core::option::Option<sui_framework_sdk::object::ID>) -> Self
 impl<T: af_move_type::MoveType + af_move_type::StaticTypeTag> af_move_type::StaticTypeParams for af_iperps::events::DeletedStopOrderTicket<T>
 pub fn af_iperps::events::DeletedStopOrderTicket<T>::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
 impl<T: af_move_type::MoveType> af_move_type::MoveStruct for af_iperps::events::DeletedStopOrderTicket<T>
@@ -1614,14 +1443,14 @@ impl core::str::traits::FromStr for af_iperps::events::DeletedSubAccountTypeTag
 pub type af_iperps::events::DeletedSubAccountTypeTag::Err = af_move_type::ParseStructTagError
 pub fn af_iperps::events::DeletedSubAccountTypeTag::from_str(s: &str) -> core::result::Result<Self, Self::Err>
 pub struct af_iperps::events::DepositedCollateral<T: af_move_type::MoveType>
-pub af_iperps::events::DepositedCollateral::account_collateral_after: u64
 pub af_iperps::events::DepositedCollateral::account_id: u64
 pub af_iperps::events::DepositedCollateral::collateral: u64
+pub af_iperps::events::DepositedCollateral::subaccount_id: core::option::Option<sui_framework_sdk::object::ID>
 impl<T: af_move_type::MoveType> af_iperps::events::DepositedCollateral<T>
 pub fn af_iperps::events::DepositedCollateral<T>::move_instance(self, address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_move_type::MoveInstance<Self>
 pub fn af_iperps::events::DepositedCollateral<T>::type_(address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_iperps::events::DepositedCollateralTypeTag<T>
 impl<T: af_move_type::MoveType> af_iperps::events::DepositedCollateral<T>
-pub fn af_iperps::events::DepositedCollateral<T>::new(account_id: u64, collateral: u64, account_collateral_after: u64) -> Self
+pub fn af_iperps::events::DepositedCollateral<T>::new(account_id: u64, subaccount_id: core::option::Option<sui_framework_sdk::object::ID>, collateral: u64) -> Self
 impl<T: af_move_type::MoveType + af_move_type::StaticTypeTag> af_move_type::StaticTypeParams for af_iperps::events::DepositedCollateral<T>
 pub fn af_iperps::events::DepositedCollateral<T>::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
 impl<T: af_move_type::MoveType> af_move_type::MoveStruct for af_iperps::events::DepositedCollateral<T>
@@ -1638,49 +1467,6 @@ impl<T: af_move_type::MoveType> tabled::tabled::Tabled for af_iperps::events::De
 pub const af_iperps::events::DepositedCollateral<T>::LENGTH: usize
 pub fn af_iperps::events::DepositedCollateral<T>::fields(&self) -> alloc::vec::Vec<alloc::borrow::Cow<'_, str>>
 pub fn af_iperps::events::DepositedCollateral<T>::headers() -> alloc::vec::Vec<alloc::borrow::Cow<'static, str>>
-pub struct af_iperps::events::DepositedCollateralSubAccount
-pub af_iperps::events::DepositedCollateralSubAccount::account_id: u64
-pub af_iperps::events::DepositedCollateralSubAccount::collateral: u64
-pub af_iperps::events::DepositedCollateralSubAccount::subaccount_collateral_after: u64
-pub af_iperps::events::DepositedCollateralSubAccount::subaccount_id: sui_framework_sdk::object::ID
-impl af_iperps::events::DepositedCollateralSubAccount
-pub fn af_iperps::events::DepositedCollateralSubAccount::move_instance(self, address: sui_sdk_types::address::Address) -> af_move_type::MoveInstance<Self>
-pub fn af_iperps::events::DepositedCollateralSubAccount::type_(address: sui_sdk_types::address::Address) -> af_iperps::events::DepositedCollateralSubAccountTypeTag
-impl af_iperps::events::DepositedCollateralSubAccount
-pub fn af_iperps::events::DepositedCollateralSubAccount::new(subaccount_id: sui_framework_sdk::object::ID, account_id: u64, collateral: u64, subaccount_collateral_after: u64) -> Self
-impl af_move_type::MoveStruct for af_iperps::events::DepositedCollateralSubAccount
-pub type af_iperps::events::DepositedCollateralSubAccount::StructTag = af_iperps::events::DepositedCollateralSubAccountTypeTag
-impl af_move_type::MoveType for af_iperps::events::DepositedCollateralSubAccount
-pub type af_iperps::events::DepositedCollateralSubAccount::TypeTag = af_iperps::events::DepositedCollateralSubAccountTypeTag
-impl af_move_type::StaticModule for af_iperps::events::DepositedCollateralSubAccount
-pub fn af_iperps::events::DepositedCollateralSubAccount::module() -> sui_sdk_types::type_tag::Identifier
-impl af_move_type::StaticName for af_iperps::events::DepositedCollateralSubAccount
-pub fn af_iperps::events::DepositedCollateralSubAccount::name() -> sui_sdk_types::type_tag::Identifier
-impl af_move_type::StaticTypeParams for af_iperps::events::DepositedCollateralSubAccount
-pub fn af_iperps::events::DepositedCollateralSubAccount::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
-impl core::fmt::Display for af_iperps::events::DepositedCollateralSubAccount
-pub fn af_iperps::events::DepositedCollateralSubAccount::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
-impl tabled::tabled::Tabled for af_iperps::events::DepositedCollateralSubAccount
-pub const af_iperps::events::DepositedCollateralSubAccount::LENGTH: usize
-pub fn af_iperps::events::DepositedCollateralSubAccount::fields(&self) -> alloc::vec::Vec<alloc::borrow::Cow<'_, str>>
-pub fn af_iperps::events::DepositedCollateralSubAccount::headers() -> alloc::vec::Vec<alloc::borrow::Cow<'static, str>>
-pub struct af_iperps::events::DepositedCollateralSubAccountTypeTag
-pub af_iperps::events::DepositedCollateralSubAccountTypeTag::address: sui_sdk_types::address::Address
-impl core::convert::From<af_iperps::events::DepositedCollateralSubAccountTypeTag> for sui_sdk_types::type_tag::StructTag
-pub fn sui_sdk_types::type_tag::StructTag::from(value: af_iperps::events::DepositedCollateralSubAccountTypeTag) -> Self
-impl core::convert::From<af_iperps::events::DepositedCollateralSubAccountTypeTag> for sui_sdk_types::type_tag::TypeTag
-pub fn sui_sdk_types::type_tag::TypeTag::from(value: af_iperps::events::DepositedCollateralSubAccountTypeTag) -> Self
-impl core::convert::TryFrom<sui_sdk_types::type_tag::StructTag> for af_iperps::events::DepositedCollateralSubAccountTypeTag
-pub type af_iperps::events::DepositedCollateralSubAccountTypeTag::Error = af_move_type::StructTagError
-pub fn af_iperps::events::DepositedCollateralSubAccountTypeTag::try_from(value: sui_sdk_types::type_tag::StructTag) -> core::result::Result<Self, Self::Error>
-impl core::convert::TryFrom<sui_sdk_types::type_tag::TypeTag> for af_iperps::events::DepositedCollateralSubAccountTypeTag
-pub type af_iperps::events::DepositedCollateralSubAccountTypeTag::Error = af_move_type::TypeTagError
-pub fn af_iperps::events::DepositedCollateralSubAccountTypeTag::try_from(value: sui_sdk_types::type_tag::TypeTag) -> core::result::Result<Self, Self::Error>
-impl core::fmt::Display for af_iperps::events::DepositedCollateralSubAccountTypeTag
-pub fn af_iperps::events::DepositedCollateralSubAccountTypeTag::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
-impl core::str::traits::FromStr for af_iperps::events::DepositedCollateralSubAccountTypeTag
-pub type af_iperps::events::DepositedCollateralSubAccountTypeTag::Err = af_move_type::ParseStructTagError
-pub fn af_iperps::events::DepositedCollateralSubAccountTypeTag::from_str(s: &str) -> core::result::Result<Self, Self::Err>
 pub struct af_iperps::events::DepositedCollateralTypeTag<T: af_move_type::MoveType>
 pub af_iperps::events::DepositedCollateralTypeTag::address: sui_sdk_types::address::Address
 pub af_iperps::events::DepositedCollateralTypeTag::t: <T as af_move_type::MoveType>::TypeTag
@@ -1744,12 +1530,13 @@ pub fn af_iperps::events::DonatedToInsuranceFundTypeTag::from_str(s: &str) -> co
 pub struct af_iperps::events::EditedStopOrderTicketDetails<T: af_move_type::MoveType>
 pub af_iperps::events::EditedStopOrderTicketDetails::account_id: u64
 pub af_iperps::events::EditedStopOrderTicketDetails::encrypted_details: af_move_type::vector::MoveVec<u8>
+pub af_iperps::events::EditedStopOrderTicketDetails::subaccount_id: core::option::Option<sui_framework_sdk::object::ID>
 pub af_iperps::events::EditedStopOrderTicketDetails::ticket_id: sui_framework_sdk::object::ID
 impl<T: af_move_type::MoveType> af_iperps::events::EditedStopOrderTicketDetails<T>
 pub fn af_iperps::events::EditedStopOrderTicketDetails<T>::move_instance(self, address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_move_type::MoveInstance<Self>
 pub fn af_iperps::events::EditedStopOrderTicketDetails<T>::type_(address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_iperps::events::EditedStopOrderTicketDetailsTypeTag<T>
 impl<T: af_move_type::MoveType> af_iperps::events::EditedStopOrderTicketDetails<T>
-pub fn af_iperps::events::EditedStopOrderTicketDetails<T>::new(ticket_id: sui_framework_sdk::object::ID, account_id: u64, encrypted_details: af_move_type::vector::MoveVec<u8>) -> Self
+pub fn af_iperps::events::EditedStopOrderTicketDetails<T>::new(ticket_id: sui_framework_sdk::object::ID, account_id: u64, subaccount_id: core::option::Option<sui_framework_sdk::object::ID>, encrypted_details: af_move_type::vector::MoveVec<u8>) -> Self
 impl<T: af_move_type::MoveType + af_move_type::StaticTypeTag> af_move_type::StaticTypeParams for af_iperps::events::EditedStopOrderTicketDetails<T>
 pub fn af_iperps::events::EditedStopOrderTicketDetails<T>::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
 impl<T: af_move_type::MoveType> af_move_type::MoveStruct for af_iperps::events::EditedStopOrderTicketDetails<T>
@@ -1787,12 +1574,13 @@ pub fn af_iperps::events::EditedStopOrderTicketDetailsTypeTag<T>::from_str(s: &s
 pub struct af_iperps::events::EditedStopOrderTicketExecutor<T: af_move_type::MoveType>
 pub af_iperps::events::EditedStopOrderTicketExecutor::account_id: u64
 pub af_iperps::events::EditedStopOrderTicketExecutor::executor: sui_sdk_types::address::Address
+pub af_iperps::events::EditedStopOrderTicketExecutor::subaccount_id: core::option::Option<sui_framework_sdk::object::ID>
 pub af_iperps::events::EditedStopOrderTicketExecutor::ticket_id: sui_framework_sdk::object::ID
 impl<T: af_move_type::MoveType> af_iperps::events::EditedStopOrderTicketExecutor<T>
 pub fn af_iperps::events::EditedStopOrderTicketExecutor<T>::move_instance(self, address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_move_type::MoveInstance<Self>
 pub fn af_iperps::events::EditedStopOrderTicketExecutor<T>::type_(address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_iperps::events::EditedStopOrderTicketExecutorTypeTag<T>
 impl<T: af_move_type::MoveType> af_iperps::events::EditedStopOrderTicketExecutor<T>
-pub fn af_iperps::events::EditedStopOrderTicketExecutor<T>::new(ticket_id: sui_framework_sdk::object::ID, account_id: u64, executor: sui_sdk_types::address::Address) -> Self
+pub fn af_iperps::events::EditedStopOrderTicketExecutor<T>::new(ticket_id: sui_framework_sdk::object::ID, account_id: u64, subaccount_id: core::option::Option<sui_framework_sdk::object::ID>, executor: sui_sdk_types::address::Address) -> Self
 impl<T: af_move_type::MoveType + af_move_type::StaticTypeTag> af_move_type::StaticTypeParams for af_iperps::events::EditedStopOrderTicketExecutor<T>
 pub fn af_iperps::events::EditedStopOrderTicketExecutor<T>::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
 impl<T: af_move_type::MoveType> af_move_type::MoveStruct for af_iperps::events::EditedStopOrderTicketExecutor<T>
@@ -1827,6 +1615,49 @@ pub fn af_iperps::events::EditedStopOrderTicketExecutorTypeTag<T>::fmt(&self, f:
 impl<T: af_move_type::MoveType> core::str::traits::FromStr for af_iperps::events::EditedStopOrderTicketExecutorTypeTag<T>
 pub type af_iperps::events::EditedStopOrderTicketExecutorTypeTag<T>::Err = af_move_type::ParseStructTagError
 pub fn af_iperps::events::EditedStopOrderTicketExecutorTypeTag<T>::from_str(s: &str) -> core::result::Result<Self, Self::Err>
+pub struct af_iperps::events::ExecutedStopOrderTicket<T: af_move_type::MoveType>
+pub af_iperps::events::ExecutedStopOrderTicket::account_id: u64
+pub af_iperps::events::ExecutedStopOrderTicket::subaccount_id: core::option::Option<sui_framework_sdk::object::ID>
+pub af_iperps::events::ExecutedStopOrderTicket::ticket_id: sui_framework_sdk::object::ID
+impl<T: af_move_type::MoveType> af_iperps::events::ExecutedStopOrderTicket<T>
+pub fn af_iperps::events::ExecutedStopOrderTicket<T>::move_instance(self, address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_move_type::MoveInstance<Self>
+pub fn af_iperps::events::ExecutedStopOrderTicket<T>::type_(address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_iperps::events::ExecutedStopOrderTicketTypeTag<T>
+impl<T: af_move_type::MoveType> af_iperps::events::ExecutedStopOrderTicket<T>
+pub fn af_iperps::events::ExecutedStopOrderTicket<T>::new(ticket_id: sui_framework_sdk::object::ID, account_id: u64, subaccount_id: core::option::Option<sui_framework_sdk::object::ID>) -> Self
+impl<T: af_move_type::MoveType + af_move_type::StaticTypeTag> af_move_type::StaticTypeParams for af_iperps::events::ExecutedStopOrderTicket<T>
+pub fn af_iperps::events::ExecutedStopOrderTicket<T>::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
+impl<T: af_move_type::MoveType> af_move_type::MoveStruct for af_iperps::events::ExecutedStopOrderTicket<T>
+pub type af_iperps::events::ExecutedStopOrderTicket<T>::StructTag = af_iperps::events::ExecutedStopOrderTicketTypeTag<T>
+impl<T: af_move_type::MoveType> af_move_type::MoveType for af_iperps::events::ExecutedStopOrderTicket<T>
+pub type af_iperps::events::ExecutedStopOrderTicket<T>::TypeTag = af_iperps::events::ExecutedStopOrderTicketTypeTag<T>
+impl<T: af_move_type::MoveType> af_move_type::StaticModule for af_iperps::events::ExecutedStopOrderTicket<T>
+pub fn af_iperps::events::ExecutedStopOrderTicket<T>::module() -> sui_sdk_types::type_tag::Identifier
+impl<T: af_move_type::MoveType> af_move_type::StaticName for af_iperps::events::ExecutedStopOrderTicket<T>
+pub fn af_iperps::events::ExecutedStopOrderTicket<T>::name() -> sui_sdk_types::type_tag::Identifier
+impl<T: af_move_type::MoveType> core::fmt::Display for af_iperps::events::ExecutedStopOrderTicket<T>
+pub fn af_iperps::events::ExecutedStopOrderTicket<T>::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl<T: af_move_type::MoveType> tabled::tabled::Tabled for af_iperps::events::ExecutedStopOrderTicket<T>
+pub const af_iperps::events::ExecutedStopOrderTicket<T>::LENGTH: usize
+pub fn af_iperps::events::ExecutedStopOrderTicket<T>::fields(&self) -> alloc::vec::Vec<alloc::borrow::Cow<'_, str>>
+pub fn af_iperps::events::ExecutedStopOrderTicket<T>::headers() -> alloc::vec::Vec<alloc::borrow::Cow<'static, str>>
+pub struct af_iperps::events::ExecutedStopOrderTicketTypeTag<T: af_move_type::MoveType>
+pub af_iperps::events::ExecutedStopOrderTicketTypeTag::address: sui_sdk_types::address::Address
+pub af_iperps::events::ExecutedStopOrderTicketTypeTag::t: <T as af_move_type::MoveType>::TypeTag
+impl<T: af_move_type::MoveType> core::convert::From<af_iperps::events::ExecutedStopOrderTicketTypeTag<T>> for sui_sdk_types::type_tag::StructTag
+pub fn sui_sdk_types::type_tag::StructTag::from(value: af_iperps::events::ExecutedStopOrderTicketTypeTag<T>) -> Self
+impl<T: af_move_type::MoveType> core::convert::From<af_iperps::events::ExecutedStopOrderTicketTypeTag<T>> for sui_sdk_types::type_tag::TypeTag
+pub fn sui_sdk_types::type_tag::TypeTag::from(value: af_iperps::events::ExecutedStopOrderTicketTypeTag<T>) -> Self
+impl<T: af_move_type::MoveType> core::convert::TryFrom<sui_sdk_types::type_tag::StructTag> for af_iperps::events::ExecutedStopOrderTicketTypeTag<T>
+pub type af_iperps::events::ExecutedStopOrderTicketTypeTag<T>::Error = af_move_type::StructTagError
+pub fn af_iperps::events::ExecutedStopOrderTicketTypeTag<T>::try_from(value: sui_sdk_types::type_tag::StructTag) -> core::result::Result<Self, Self::Error>
+impl<T: af_move_type::MoveType> core::convert::TryFrom<sui_sdk_types::type_tag::TypeTag> for af_iperps::events::ExecutedStopOrderTicketTypeTag<T>
+pub type af_iperps::events::ExecutedStopOrderTicketTypeTag<T>::Error = af_move_type::TypeTagError
+pub fn af_iperps::events::ExecutedStopOrderTicketTypeTag<T>::try_from(value: sui_sdk_types::type_tag::TypeTag) -> core::result::Result<Self, Self::Error>
+impl<T: af_move_type::MoveType> core::fmt::Display for af_iperps::events::ExecutedStopOrderTicketTypeTag<T>
+pub fn af_iperps::events::ExecutedStopOrderTicketTypeTag<T>::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl<T: af_move_type::MoveType> core::str::traits::FromStr for af_iperps::events::ExecutedStopOrderTicketTypeTag<T>
+pub type af_iperps::events::ExecutedStopOrderTicketTypeTag<T>::Err = af_move_type::ParseStructTagError
+pub fn af_iperps::events::ExecutedStopOrderTicketTypeTag<T>::from_str(s: &str) -> core::result::Result<Self, Self::Err>
 pub struct af_iperps::events::FilledMakerOrder
 pub af_iperps::events::FilledMakerOrder::ch_id: sui_framework_sdk::object::ID
 pub af_iperps::events::FilledMakerOrder::fees: af_utilities::types::ifixed::IFixed
@@ -2105,95 +1936,49 @@ pub fn af_iperps::events::PerfomedLiquidationTypeTag::fmt(&self, f: &mut core::f
 impl core::str::traits::FromStr for af_iperps::events::PerfomedLiquidationTypeTag
 pub type af_iperps::events::PerfomedLiquidationTypeTag::Err = af_move_type::ParseStructTagError
 pub fn af_iperps::events::PerfomedLiquidationTypeTag::from_str(s: &str) -> core::result::Result<Self, Self::Err>
-pub struct af_iperps::events::PostedOrder
-pub af_iperps::events::PostedOrder::account_id: u64
-pub af_iperps::events::PostedOrder::ch_id: sui_framework_sdk::object::ID
-pub af_iperps::events::PostedOrder::pending_asks: af_utilities::types::ifixed::IFixed
-pub af_iperps::events::PostedOrder::pending_bids: af_utilities::types::ifixed::IFixed
-pub af_iperps::events::PostedOrder::pending_orders: u64
-pub af_iperps::events::PostedOrder::posted_base_ask: u64
-pub af_iperps::events::PostedOrder::posted_base_bid: u64
-impl af_iperps::events::PostedOrder
-pub fn af_iperps::events::PostedOrder::move_instance(self, address: sui_sdk_types::address::Address) -> af_move_type::MoveInstance<Self>
-pub fn af_iperps::events::PostedOrder::type_(address: sui_sdk_types::address::Address) -> af_iperps::events::PostedOrderTypeTag
-impl af_iperps::events::PostedOrder
-pub fn af_iperps::events::PostedOrder::new(ch_id: sui_framework_sdk::object::ID, account_id: u64, posted_base_ask: u64, posted_base_bid: u64, pending_asks: af_utilities::types::ifixed::IFixed, pending_bids: af_utilities::types::ifixed::IFixed, pending_orders: u64) -> Self
-impl af_move_type::MoveStruct for af_iperps::events::PostedOrder
-pub type af_iperps::events::PostedOrder::StructTag = af_iperps::events::PostedOrderTypeTag
-impl af_move_type::MoveType for af_iperps::events::PostedOrder
-pub type af_iperps::events::PostedOrder::TypeTag = af_iperps::events::PostedOrderTypeTag
-impl af_move_type::StaticModule for af_iperps::events::PostedOrder
-pub fn af_iperps::events::PostedOrder::module() -> sui_sdk_types::type_tag::Identifier
-impl af_move_type::StaticName for af_iperps::events::PostedOrder
-pub fn af_iperps::events::PostedOrder::name() -> sui_sdk_types::type_tag::Identifier
-impl af_move_type::StaticTypeParams for af_iperps::events::PostedOrder
-pub fn af_iperps::events::PostedOrder::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
-impl core::fmt::Display for af_iperps::events::PostedOrder
-pub fn af_iperps::events::PostedOrder::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
-impl tabled::tabled::Tabled for af_iperps::events::PostedOrder
-pub const af_iperps::events::PostedOrder::LENGTH: usize
-pub fn af_iperps::events::PostedOrder::fields(&self) -> alloc::vec::Vec<alloc::borrow::Cow<'_, str>>
-pub fn af_iperps::events::PostedOrder::headers() -> alloc::vec::Vec<alloc::borrow::Cow<'static, str>>
-pub struct af_iperps::events::PostedOrderTypeTag
-pub af_iperps::events::PostedOrderTypeTag::address: sui_sdk_types::address::Address
-impl core::convert::From<af_iperps::events::PostedOrderTypeTag> for sui_sdk_types::type_tag::StructTag
-pub fn sui_sdk_types::type_tag::StructTag::from(value: af_iperps::events::PostedOrderTypeTag) -> Self
-impl core::convert::From<af_iperps::events::PostedOrderTypeTag> for sui_sdk_types::type_tag::TypeTag
-pub fn sui_sdk_types::type_tag::TypeTag::from(value: af_iperps::events::PostedOrderTypeTag) -> Self
-impl core::convert::TryFrom<sui_sdk_types::type_tag::StructTag> for af_iperps::events::PostedOrderTypeTag
-pub type af_iperps::events::PostedOrderTypeTag::Error = af_move_type::StructTagError
-pub fn af_iperps::events::PostedOrderTypeTag::try_from(value: sui_sdk_types::type_tag::StructTag) -> core::result::Result<Self, Self::Error>
-impl core::convert::TryFrom<sui_sdk_types::type_tag::TypeTag> for af_iperps::events::PostedOrderTypeTag
-pub type af_iperps::events::PostedOrderTypeTag::Error = af_move_type::TypeTagError
-pub fn af_iperps::events::PostedOrderTypeTag::try_from(value: sui_sdk_types::type_tag::TypeTag) -> core::result::Result<Self, Self::Error>
-impl core::fmt::Display for af_iperps::events::PostedOrderTypeTag
-pub fn af_iperps::events::PostedOrderTypeTag::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
-impl core::str::traits::FromStr for af_iperps::events::PostedOrderTypeTag
-pub type af_iperps::events::PostedOrderTypeTag::Err = af_move_type::ParseStructTagError
-pub fn af_iperps::events::PostedOrderTypeTag::from_str(s: &str) -> core::result::Result<Self, Self::Err>
-pub struct af_iperps::events::ReceivedDeallocatedCollateral<T: af_move_type::MoveType>
-pub af_iperps::events::ReceivedDeallocatedCollateral::account_id: u64
-pub af_iperps::events::ReceivedDeallocatedCollateral::account_obj_id: sui_framework_sdk::object::ID
-pub af_iperps::events::ReceivedDeallocatedCollateral::collateral: u64
-impl<T: af_move_type::MoveType> af_iperps::events::ReceivedDeallocatedCollateral<T>
-pub fn af_iperps::events::ReceivedDeallocatedCollateral<T>::move_instance(self, address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_move_type::MoveInstance<Self>
-pub fn af_iperps::events::ReceivedDeallocatedCollateral<T>::type_(address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_iperps::events::ReceivedDeallocatedCollateralTypeTag<T>
-impl<T: af_move_type::MoveType> af_iperps::events::ReceivedDeallocatedCollateral<T>
-pub fn af_iperps::events::ReceivedDeallocatedCollateral<T>::new(account_obj_id: sui_framework_sdk::object::ID, account_id: u64, collateral: u64) -> Self
-impl<T: af_move_type::MoveType + af_move_type::StaticTypeTag> af_move_type::StaticTypeParams for af_iperps::events::ReceivedDeallocatedCollateral<T>
-pub fn af_iperps::events::ReceivedDeallocatedCollateral<T>::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
-impl<T: af_move_type::MoveType> af_move_type::MoveStruct for af_iperps::events::ReceivedDeallocatedCollateral<T>
-pub type af_iperps::events::ReceivedDeallocatedCollateral<T>::StructTag = af_iperps::events::ReceivedDeallocatedCollateralTypeTag<T>
-impl<T: af_move_type::MoveType> af_move_type::MoveType for af_iperps::events::ReceivedDeallocatedCollateral<T>
-pub type af_iperps::events::ReceivedDeallocatedCollateral<T>::TypeTag = af_iperps::events::ReceivedDeallocatedCollateralTypeTag<T>
-impl<T: af_move_type::MoveType> af_move_type::StaticModule for af_iperps::events::ReceivedDeallocatedCollateral<T>
-pub fn af_iperps::events::ReceivedDeallocatedCollateral<T>::module() -> sui_sdk_types::type_tag::Identifier
-impl<T: af_move_type::MoveType> af_move_type::StaticName for af_iperps::events::ReceivedDeallocatedCollateral<T>
-pub fn af_iperps::events::ReceivedDeallocatedCollateral<T>::name() -> sui_sdk_types::type_tag::Identifier
-impl<T: af_move_type::MoveType> core::fmt::Display for af_iperps::events::ReceivedDeallocatedCollateral<T>
-pub fn af_iperps::events::ReceivedDeallocatedCollateral<T>::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
-impl<T: af_move_type::MoveType> tabled::tabled::Tabled for af_iperps::events::ReceivedDeallocatedCollateral<T>
-pub const af_iperps::events::ReceivedDeallocatedCollateral<T>::LENGTH: usize
-pub fn af_iperps::events::ReceivedDeallocatedCollateral<T>::fields(&self) -> alloc::vec::Vec<alloc::borrow::Cow<'_, str>>
-pub fn af_iperps::events::ReceivedDeallocatedCollateral<T>::headers() -> alloc::vec::Vec<alloc::borrow::Cow<'static, str>>
-pub struct af_iperps::events::ReceivedDeallocatedCollateralTypeTag<T: af_move_type::MoveType>
-pub af_iperps::events::ReceivedDeallocatedCollateralTypeTag::address: sui_sdk_types::address::Address
-pub af_iperps::events::ReceivedDeallocatedCollateralTypeTag::t: <T as af_move_type::MoveType>::TypeTag
-impl<T: af_move_type::MoveType> core::convert::From<af_iperps::events::ReceivedDeallocatedCollateralTypeTag<T>> for sui_sdk_types::type_tag::StructTag
-pub fn sui_sdk_types::type_tag::StructTag::from(value: af_iperps::events::ReceivedDeallocatedCollateralTypeTag<T>) -> Self
-impl<T: af_move_type::MoveType> core::convert::From<af_iperps::events::ReceivedDeallocatedCollateralTypeTag<T>> for sui_sdk_types::type_tag::TypeTag
-pub fn sui_sdk_types::type_tag::TypeTag::from(value: af_iperps::events::ReceivedDeallocatedCollateralTypeTag<T>) -> Self
-impl<T: af_move_type::MoveType> core::convert::TryFrom<sui_sdk_types::type_tag::StructTag> for af_iperps::events::ReceivedDeallocatedCollateralTypeTag<T>
-pub type af_iperps::events::ReceivedDeallocatedCollateralTypeTag<T>::Error = af_move_type::StructTagError
-pub fn af_iperps::events::ReceivedDeallocatedCollateralTypeTag<T>::try_from(value: sui_sdk_types::type_tag::StructTag) -> core::result::Result<Self, Self::Error>
-impl<T: af_move_type::MoveType> core::convert::TryFrom<sui_sdk_types::type_tag::TypeTag> for af_iperps::events::ReceivedDeallocatedCollateralTypeTag<T>
-pub type af_iperps::events::ReceivedDeallocatedCollateralTypeTag<T>::Error = af_move_type::TypeTagError
-pub fn af_iperps::events::ReceivedDeallocatedCollateralTypeTag<T>::try_from(value: sui_sdk_types::type_tag::TypeTag) -> core::result::Result<Self, Self::Error>
-impl<T: af_move_type::MoveType> core::fmt::Display for af_iperps::events::ReceivedDeallocatedCollateralTypeTag<T>
-pub fn af_iperps::events::ReceivedDeallocatedCollateralTypeTag<T>::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
-impl<T: af_move_type::MoveType> core::str::traits::FromStr for af_iperps::events::ReceivedDeallocatedCollateralTypeTag<T>
-pub type af_iperps::events::ReceivedDeallocatedCollateralTypeTag<T>::Err = af_move_type::ParseStructTagError
-pub fn af_iperps::events::ReceivedDeallocatedCollateralTypeTag<T>::from_str(s: &str) -> core::result::Result<Self, Self::Err>
+pub struct af_iperps::events::ReceivedCollateral<T: af_move_type::MoveType>
+pub af_iperps::events::ReceivedCollateral::account_id: u64
+pub af_iperps::events::ReceivedCollateral::collateral: u64
+pub af_iperps::events::ReceivedCollateral::obj_id: sui_framework_sdk::object::ID
+impl<T: af_move_type::MoveType> af_iperps::events::ReceivedCollateral<T>
+pub fn af_iperps::events::ReceivedCollateral<T>::move_instance(self, address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_move_type::MoveInstance<Self>
+pub fn af_iperps::events::ReceivedCollateral<T>::type_(address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_iperps::events::ReceivedCollateralTypeTag<T>
+impl<T: af_move_type::MoveType> af_iperps::events::ReceivedCollateral<T>
+pub fn af_iperps::events::ReceivedCollateral<T>::new(obj_id: sui_framework_sdk::object::ID, account_id: u64, collateral: u64) -> Self
+impl<T: af_move_type::MoveType + af_move_type::StaticTypeTag> af_move_type::StaticTypeParams for af_iperps::events::ReceivedCollateral<T>
+pub fn af_iperps::events::ReceivedCollateral<T>::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
+impl<T: af_move_type::MoveType> af_move_type::MoveStruct for af_iperps::events::ReceivedCollateral<T>
+pub type af_iperps::events::ReceivedCollateral<T>::StructTag = af_iperps::events::ReceivedCollateralTypeTag<T>
+impl<T: af_move_type::MoveType> af_move_type::MoveType for af_iperps::events::ReceivedCollateral<T>
+pub type af_iperps::events::ReceivedCollateral<T>::TypeTag = af_iperps::events::ReceivedCollateralTypeTag<T>
+impl<T: af_move_type::MoveType> af_move_type::StaticModule for af_iperps::events::ReceivedCollateral<T>
+pub fn af_iperps::events::ReceivedCollateral<T>::module() -> sui_sdk_types::type_tag::Identifier
+impl<T: af_move_type::MoveType> af_move_type::StaticName for af_iperps::events::ReceivedCollateral<T>
+pub fn af_iperps::events::ReceivedCollateral<T>::name() -> sui_sdk_types::type_tag::Identifier
+impl<T: af_move_type::MoveType> core::fmt::Display for af_iperps::events::ReceivedCollateral<T>
+pub fn af_iperps::events::ReceivedCollateral<T>::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl<T: af_move_type::MoveType> tabled::tabled::Tabled for af_iperps::events::ReceivedCollateral<T>
+pub const af_iperps::events::ReceivedCollateral<T>::LENGTH: usize
+pub fn af_iperps::events::ReceivedCollateral<T>::fields(&self) -> alloc::vec::Vec<alloc::borrow::Cow<'_, str>>
+pub fn af_iperps::events::ReceivedCollateral<T>::headers() -> alloc::vec::Vec<alloc::borrow::Cow<'static, str>>
+pub struct af_iperps::events::ReceivedCollateralTypeTag<T: af_move_type::MoveType>
+pub af_iperps::events::ReceivedCollateralTypeTag::address: sui_sdk_types::address::Address
+pub af_iperps::events::ReceivedCollateralTypeTag::t: <T as af_move_type::MoveType>::TypeTag
+impl<T: af_move_type::MoveType> core::convert::From<af_iperps::events::ReceivedCollateralTypeTag<T>> for sui_sdk_types::type_tag::StructTag
+pub fn sui_sdk_types::type_tag::StructTag::from(value: af_iperps::events::ReceivedCollateralTypeTag<T>) -> Self
+impl<T: af_move_type::MoveType> core::convert::From<af_iperps::events::ReceivedCollateralTypeTag<T>> for sui_sdk_types::type_tag::TypeTag
+pub fn sui_sdk_types::type_tag::TypeTag::from(value: af_iperps::events::ReceivedCollateralTypeTag<T>) -> Self
+impl<T: af_move_type::MoveType> core::convert::TryFrom<sui_sdk_types::type_tag::StructTag> for af_iperps::events::ReceivedCollateralTypeTag<T>
+pub type af_iperps::events::ReceivedCollateralTypeTag<T>::Error = af_move_type::StructTagError
+pub fn af_iperps::events::ReceivedCollateralTypeTag<T>::try_from(value: sui_sdk_types::type_tag::StructTag) -> core::result::Result<Self, Self::Error>
+impl<T: af_move_type::MoveType> core::convert::TryFrom<sui_sdk_types::type_tag::TypeTag> for af_iperps::events::ReceivedCollateralTypeTag<T>
+pub type af_iperps::events::ReceivedCollateralTypeTag<T>::Error = af_move_type::TypeTagError
+pub fn af_iperps::events::ReceivedCollateralTypeTag<T>::try_from(value: sui_sdk_types::type_tag::TypeTag) -> core::result::Result<Self, Self::Error>
+impl<T: af_move_type::MoveType> core::fmt::Display for af_iperps::events::ReceivedCollateralTypeTag<T>
+pub fn af_iperps::events::ReceivedCollateralTypeTag<T>::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+impl<T: af_move_type::MoveType> core::str::traits::FromStr for af_iperps::events::ReceivedCollateralTypeTag<T>
+pub type af_iperps::events::ReceivedCollateralTypeTag<T>::Err = af_move_type::ParseStructTagError
+pub fn af_iperps::events::ReceivedCollateralTypeTag<T>::from_str(s: &str) -> core::result::Result<Self, Self::Err>
 pub struct af_iperps::events::RegisteredCollateralInfo<T: af_move_type::MoveType>
 pub af_iperps::events::RegisteredCollateralInfo::ch_id: sui_framework_sdk::object::ID
 pub af_iperps::events::RegisteredCollateralInfo::collateral_pfs_id: sui_framework_sdk::object::ID
@@ -2370,12 +2155,13 @@ pub fn af_iperps::events::RemovedRegisteredMarketInfoTypeTag<T>::from_str(s: &st
 pub struct af_iperps::events::RemovedStopOrderTicketCollateral<T: af_move_type::MoveType>
 pub af_iperps::events::RemovedStopOrderTicketCollateral::account_id: u64
 pub af_iperps::events::RemovedStopOrderTicketCollateral::collateral_to_remove: u64
+pub af_iperps::events::RemovedStopOrderTicketCollateral::subaccount_id: core::option::Option<sui_framework_sdk::object::ID>
 pub af_iperps::events::RemovedStopOrderTicketCollateral::ticket_id: sui_framework_sdk::object::ID
 impl<T: af_move_type::MoveType> af_iperps::events::RemovedStopOrderTicketCollateral<T>
 pub fn af_iperps::events::RemovedStopOrderTicketCollateral<T>::move_instance(self, address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_move_type::MoveInstance<Self>
 pub fn af_iperps::events::RemovedStopOrderTicketCollateral<T>::type_(address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_iperps::events::RemovedStopOrderTicketCollateralTypeTag<T>
 impl<T: af_move_type::MoveType> af_iperps::events::RemovedStopOrderTicketCollateral<T>
-pub fn af_iperps::events::RemovedStopOrderTicketCollateral<T>::new(ticket_id: sui_framework_sdk::object::ID, account_id: u64, collateral_to_remove: u64) -> Self
+pub fn af_iperps::events::RemovedStopOrderTicketCollateral<T>::new(ticket_id: sui_framework_sdk::object::ID, account_id: u64, subaccount_id: core::option::Option<sui_framework_sdk::object::ID>, collateral_to_remove: u64) -> Self
 impl<T: af_move_type::MoveType + af_move_type::StaticTypeTag> af_move_type::StaticTypeParams for af_iperps::events::RemovedStopOrderTicketCollateral<T>
 pub fn af_iperps::events::RemovedStopOrderTicketCollateral<T>::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
 impl<T: af_move_type::MoveType> af_move_type::MoveStruct for af_iperps::events::RemovedStopOrderTicketCollateral<T>
@@ -2540,14 +2326,14 @@ pub type af_iperps::events::SettledFundingTypeTag::Err = af_move_type::ParseStru
 pub fn af_iperps::events::SettledFundingTypeTag::from_str(s: &str) -> core::result::Result<Self, Self::Err>
 pub struct af_iperps::events::TransferredDeallocatedCollateral<T: af_move_type::MoveType>
 pub af_iperps::events::TransferredDeallocatedCollateral::account_id: u64
-pub af_iperps::events::TransferredDeallocatedCollateral::account_obj_id: sui_framework_sdk::object::ID
 pub af_iperps::events::TransferredDeallocatedCollateral::ch_id: sui_framework_sdk::object::ID
 pub af_iperps::events::TransferredDeallocatedCollateral::collateral: u64
+pub af_iperps::events::TransferredDeallocatedCollateral::obj_id: sui_framework_sdk::object::ID
 impl<T: af_move_type::MoveType> af_iperps::events::TransferredDeallocatedCollateral<T>
 pub fn af_iperps::events::TransferredDeallocatedCollateral<T>::move_instance(self, address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_move_type::MoveInstance<Self>
 pub fn af_iperps::events::TransferredDeallocatedCollateral<T>::type_(address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_iperps::events::TransferredDeallocatedCollateralTypeTag<T>
 impl<T: af_move_type::MoveType> af_iperps::events::TransferredDeallocatedCollateral<T>
-pub fn af_iperps::events::TransferredDeallocatedCollateral<T>::new(ch_id: sui_framework_sdk::object::ID, account_obj_id: sui_framework_sdk::object::ID, account_id: u64, collateral: u64) -> Self
+pub fn af_iperps::events::TransferredDeallocatedCollateral<T>::new(ch_id: sui_framework_sdk::object::ID, obj_id: sui_framework_sdk::object::ID, account_id: u64, collateral: u64) -> Self
 impl<T: af_move_type::MoveType + af_move_type::StaticTypeTag> af_move_type::StaticTypeParams for af_iperps::events::TransferredDeallocatedCollateral<T>
 pub fn af_iperps::events::TransferredDeallocatedCollateral<T>::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
 impl<T: af_move_type::MoveType> af_move_type::MoveStruct for af_iperps::events::TransferredDeallocatedCollateral<T>
@@ -3340,14 +3126,14 @@ impl core::str::traits::FromStr for af_iperps::events::UpdatedStopOrderMistCostT
 pub type af_iperps::events::UpdatedStopOrderMistCostTypeTag::Err = af_move_type::ParseStructTagError
 pub fn af_iperps::events::UpdatedStopOrderMistCostTypeTag::from_str(s: &str) -> core::result::Result<Self, Self::Err>
 pub struct af_iperps::events::WithdrewCollateral<T: af_move_type::MoveType>
-pub af_iperps::events::WithdrewCollateral::account_collateral_after: u64
 pub af_iperps::events::WithdrewCollateral::account_id: u64
 pub af_iperps::events::WithdrewCollateral::collateral: u64
+pub af_iperps::events::WithdrewCollateral::subaccount_id: core::option::Option<sui_framework_sdk::object::ID>
 impl<T: af_move_type::MoveType> af_iperps::events::WithdrewCollateral<T>
 pub fn af_iperps::events::WithdrewCollateral<T>::move_instance(self, address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_move_type::MoveInstance<Self>
 pub fn af_iperps::events::WithdrewCollateral<T>::type_(address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_iperps::events::WithdrewCollateralTypeTag<T>
 impl<T: af_move_type::MoveType> af_iperps::events::WithdrewCollateral<T>
-pub fn af_iperps::events::WithdrewCollateral<T>::new(account_id: u64, collateral: u64, account_collateral_after: u64) -> Self
+pub fn af_iperps::events::WithdrewCollateral<T>::new(account_id: u64, subaccount_id: core::option::Option<sui_framework_sdk::object::ID>, collateral: u64) -> Self
 impl<T: af_move_type::MoveType + af_move_type::StaticTypeTag> af_move_type::StaticTypeParams for af_iperps::events::WithdrewCollateral<T>
 pub fn af_iperps::events::WithdrewCollateral<T>::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
 impl<T: af_move_type::MoveType> af_move_type::MoveStruct for af_iperps::events::WithdrewCollateral<T>
@@ -3364,49 +3150,6 @@ impl<T: af_move_type::MoveType> tabled::tabled::Tabled for af_iperps::events::Wi
 pub const af_iperps::events::WithdrewCollateral<T>::LENGTH: usize
 pub fn af_iperps::events::WithdrewCollateral<T>::fields(&self) -> alloc::vec::Vec<alloc::borrow::Cow<'_, str>>
 pub fn af_iperps::events::WithdrewCollateral<T>::headers() -> alloc::vec::Vec<alloc::borrow::Cow<'static, str>>
-pub struct af_iperps::events::WithdrewCollateralSubAccount
-pub af_iperps::events::WithdrewCollateralSubAccount::account_id: u64
-pub af_iperps::events::WithdrewCollateralSubAccount::collateral: u64
-pub af_iperps::events::WithdrewCollateralSubAccount::subaccount_collateral_after: u64
-pub af_iperps::events::WithdrewCollateralSubAccount::subaccount_id: sui_framework_sdk::object::ID
-impl af_iperps::events::WithdrewCollateralSubAccount
-pub fn af_iperps::events::WithdrewCollateralSubAccount::move_instance(self, address: sui_sdk_types::address::Address) -> af_move_type::MoveInstance<Self>
-pub fn af_iperps::events::WithdrewCollateralSubAccount::type_(address: sui_sdk_types::address::Address) -> af_iperps::events::WithdrewCollateralSubAccountTypeTag
-impl af_iperps::events::WithdrewCollateralSubAccount
-pub fn af_iperps::events::WithdrewCollateralSubAccount::new(subaccount_id: sui_framework_sdk::object::ID, account_id: u64, collateral: u64, subaccount_collateral_after: u64) -> Self
-impl af_move_type::MoveStruct for af_iperps::events::WithdrewCollateralSubAccount
-pub type af_iperps::events::WithdrewCollateralSubAccount::StructTag = af_iperps::events::WithdrewCollateralSubAccountTypeTag
-impl af_move_type::MoveType for af_iperps::events::WithdrewCollateralSubAccount
-pub type af_iperps::events::WithdrewCollateralSubAccount::TypeTag = af_iperps::events::WithdrewCollateralSubAccountTypeTag
-impl af_move_type::StaticModule for af_iperps::events::WithdrewCollateralSubAccount
-pub fn af_iperps::events::WithdrewCollateralSubAccount::module() -> sui_sdk_types::type_tag::Identifier
-impl af_move_type::StaticName for af_iperps::events::WithdrewCollateralSubAccount
-pub fn af_iperps::events::WithdrewCollateralSubAccount::name() -> sui_sdk_types::type_tag::Identifier
-impl af_move_type::StaticTypeParams for af_iperps::events::WithdrewCollateralSubAccount
-pub fn af_iperps::events::WithdrewCollateralSubAccount::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
-impl core::fmt::Display for af_iperps::events::WithdrewCollateralSubAccount
-pub fn af_iperps::events::WithdrewCollateralSubAccount::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
-impl tabled::tabled::Tabled for af_iperps::events::WithdrewCollateralSubAccount
-pub const af_iperps::events::WithdrewCollateralSubAccount::LENGTH: usize
-pub fn af_iperps::events::WithdrewCollateralSubAccount::fields(&self) -> alloc::vec::Vec<alloc::borrow::Cow<'_, str>>
-pub fn af_iperps::events::WithdrewCollateralSubAccount::headers() -> alloc::vec::Vec<alloc::borrow::Cow<'static, str>>
-pub struct af_iperps::events::WithdrewCollateralSubAccountTypeTag
-pub af_iperps::events::WithdrewCollateralSubAccountTypeTag::address: sui_sdk_types::address::Address
-impl core::convert::From<af_iperps::events::WithdrewCollateralSubAccountTypeTag> for sui_sdk_types::type_tag::StructTag
-pub fn sui_sdk_types::type_tag::StructTag::from(value: af_iperps::events::WithdrewCollateralSubAccountTypeTag) -> Self
-impl core::convert::From<af_iperps::events::WithdrewCollateralSubAccountTypeTag> for sui_sdk_types::type_tag::TypeTag
-pub fn sui_sdk_types::type_tag::TypeTag::from(value: af_iperps::events::WithdrewCollateralSubAccountTypeTag) -> Self
-impl core::convert::TryFrom<sui_sdk_types::type_tag::StructTag> for af_iperps::events::WithdrewCollateralSubAccountTypeTag
-pub type af_iperps::events::WithdrewCollateralSubAccountTypeTag::Error = af_move_type::StructTagError
-pub fn af_iperps::events::WithdrewCollateralSubAccountTypeTag::try_from(value: sui_sdk_types::type_tag::StructTag) -> core::result::Result<Self, Self::Error>
-impl core::convert::TryFrom<sui_sdk_types::type_tag::TypeTag> for af_iperps::events::WithdrewCollateralSubAccountTypeTag
-pub type af_iperps::events::WithdrewCollateralSubAccountTypeTag::Error = af_move_type::TypeTagError
-pub fn af_iperps::events::WithdrewCollateralSubAccountTypeTag::try_from(value: sui_sdk_types::type_tag::TypeTag) -> core::result::Result<Self, Self::Error>
-impl core::fmt::Display for af_iperps::events::WithdrewCollateralSubAccountTypeTag
-pub fn af_iperps::events::WithdrewCollateralSubAccountTypeTag::fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
-impl core::str::traits::FromStr for af_iperps::events::WithdrewCollateralSubAccountTypeTag
-pub type af_iperps::events::WithdrewCollateralSubAccountTypeTag::Err = af_move_type::ParseStructTagError
-pub fn af_iperps::events::WithdrewCollateralSubAccountTypeTag::from_str(s: &str) -> core::result::Result<Self, Self::Err>
 pub struct af_iperps::events::WithdrewCollateralTypeTag<T: af_move_type::MoveType>
 pub af_iperps::events::WithdrewCollateralTypeTag::address: sui_sdk_types::address::Address
 pub af_iperps::events::WithdrewCollateralTypeTag::t: <T as af_move_type::MoveType>::TypeTag
@@ -4715,17 +4458,17 @@ pub fn af_iperps::registry::RegistryTypeTag::from_str(s: &str) -> core::result::
 pub mod af_iperps::stop_orders
 pub struct af_iperps::stop_orders::StopOrderTicket<T: af_move_type::MoveType>
 pub af_iperps::stop_orders::StopOrderTicket::account_id: u64
-pub af_iperps::stop_orders::StopOrderTicket::account_obj_id: sui_framework_sdk::object::ID
 pub af_iperps::stop_orders::StopOrderTicket::collateral_to_allocate: sui_framework_sdk::balance::Balance<T>
 pub af_iperps::stop_orders::StopOrderTicket::encrypted_details: af_move_type::vector::MoveVec<u8>
 pub af_iperps::stop_orders::StopOrderTicket::executor: sui_sdk_types::address::Address
 pub af_iperps::stop_orders::StopOrderTicket::gas: sui_framework_sdk::balance::Balance<sui_framework_sdk::sui::SUI>
 pub af_iperps::stop_orders::StopOrderTicket::id: sui_framework_sdk::object::UID
+pub af_iperps::stop_orders::StopOrderTicket::obj_id: sui_framework_sdk::object::ID
 impl<T: af_move_type::MoveType> af_iperps::stop_orders::StopOrderTicket<T>
 pub fn af_iperps::stop_orders::StopOrderTicket<T>::move_instance(self, address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_move_type::MoveInstance<Self>
 pub fn af_iperps::stop_orders::StopOrderTicket<T>::type_(address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_iperps::stop_orders::StopOrderTicketTypeTag<T>
 impl<T: af_move_type::MoveType> af_iperps::stop_orders::StopOrderTicket<T>
-pub fn af_iperps::stop_orders::StopOrderTicket<T>::new(id: sui_framework_sdk::object::UID, executor: sui_sdk_types::address::Address, gas: sui_framework_sdk::balance::Balance<sui_framework_sdk::sui::SUI>, collateral_to_allocate: sui_framework_sdk::balance::Balance<T>, account_obj_id: sui_framework_sdk::object::ID, account_id: u64, encrypted_details: af_move_type::vector::MoveVec<u8>) -> Self
+pub fn af_iperps::stop_orders::StopOrderTicket<T>::new(id: sui_framework_sdk::object::UID, executor: sui_sdk_types::address::Address, gas: sui_framework_sdk::balance::Balance<sui_framework_sdk::sui::SUI>, collateral_to_allocate: sui_framework_sdk::balance::Balance<T>, obj_id: sui_framework_sdk::object::ID, account_id: u64, encrypted_details: af_move_type::vector::MoveVec<u8>) -> Self
 impl<T: af_move_type::MoveType + af_move_type::StaticTypeTag> af_move_type::StaticTypeParams for af_iperps::stop_orders::StopOrderTicket<T>
 pub fn af_iperps::stop_orders::StopOrderTicket<T>::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
 impl<T: af_move_type::MoveType> af_move_type::HasKey for af_iperps::stop_orders::StopOrderTicket<T>

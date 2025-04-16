@@ -85,6 +85,18 @@ module perpetuals::errors {
     const NotReduceOnlyStopOrder: u64 = 23;
     /// Stop order gas cost provided is not enough
     const NotEnoughGasForStopOrder: u64 = 24;
+    /// Stop order collateral to allocate provided is not enough
+    const NotEnoughCollateralToAllocateForStopOrder: u64 = 25;
+    /// Invalid account trying to perform an action on a StopOrderTicket
+    const InvalidAccountForStopOrder: u64 = 26;
+    /// Invalid executor trying to execute the StopOrderTicket
+    const InvalidExecutorForStopOrder: u64 = 27;
+    /// Raised when the market's max open interest is surpassed as a result of
+    /// the session's actions
+    const MaxOpenInterestSurpassed: u64 = 28;
+    /// Raised when a position's would get a base amount higher than the
+    /// allowed percentage of open interest
+    const MaxOpenInterestPositionPercentSurpassed: u64 = 29;
 
     // Market ---------------------------------------------------------------
 

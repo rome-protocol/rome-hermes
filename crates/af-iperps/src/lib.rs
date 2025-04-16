@@ -180,8 +180,12 @@ sui_pkg_sdk!(perpetuals {
             /// Amount of collateral the user can decide to allocate to place this order.
             /// It can be 0.
             collateral_to_allocate: Balance<T>,
-            /// User account object id
-            account_obj_id: ID,
+            /// User account or subaccount object id that created this stop order.
+            ///
+            /// This is used to know where to transfer collateral to **if** a `margin_ratio`
+            /// is set in `encrypted_details` **and** placing the order requires
+            /// de-allocating collateral to maintain that target `margin_ratio`.
+            obj_id: ID,
             /// User account id
             account_id: u64,
             /// Vector containing the blake2b hash obtained by the offchain
@@ -226,31 +230,34 @@ sui_pkg_sdk!(perpetuals {
 
         struct DepositedCollateral<!phantom T> has copy, drop {
             account_id: u64,
+            subaccount_id: Option<ID>,
             collateral: u64,
-            account_collateral_after: u64
         }
 
         struct AllocatedCollateral has copy, drop {
             ch_id: ID,
             account_id: u64,
+            subaccount_id: Option<ID>,
             collateral: u64,
         }
 
         struct WithdrewCollateral<!phantom T> has copy, drop {
             account_id: u64,
+            subaccount_id: Option<ID>,
             collateral: u64,
-            account_collateral_after: u64
         }
 
         struct TransferredDeallocatedCollateral<!phantom T> has copy, drop {
             ch_id: ID,
-            account_obj_id: ID,
+            /// Can be the `Account` or `SubAccount` object id
+            obj_id: ID,
             account_id: u64,
             collateral: u64,
         }
 
-        struct ReceivedDeallocatedCollateral<!phantom T> has copy, drop {
-            account_obj_id: ID,
+        struct ReceivedCollateral<!phantom T> has copy, drop {
+            /// Can be the `Account` or `SubAccount` object id
+            obj_id: ID,
             account_id: u64,
             collateral: u64,
         }
@@ -258,10 +265,8 @@ sui_pkg_sdk!(perpetuals {
         struct DeallocatedCollateral has copy, drop {
             ch_id: ID,
             account_id: u64,
+            subaccount_id: Option<ID>,
             collateral: u64,
-            account_collateral_after: u64,
-            position_collateral_after: IFixed,
-            vault_balance_after: u64
         }
 
         struct CreatedOrderbook has copy, drop {
@@ -385,29 +390,11 @@ sui_pkg_sdk!(perpetuals {
             order_size: u64,
         }
 
-        struct PostedOrder has copy, drop {
-            ch_id: ID,
-            account_id: u64,
-            posted_base_ask: u64,
-            posted_base_bid: u64,
-            pending_asks: IFixed,
-            pending_bids: IFixed,
-            pending_orders: u64,
-        }
-
         struct CanceledOrder has copy, drop {
             ch_id: ID,
             account_id: u64,
             size: u64,
             order_id: u128,
-        }
-
-        struct CanceledOrders has copy, drop {
-            ch_id: ID,
-            account_id: u64,
-            asks_quantity: IFixed,
-            bids_quantity: IFixed,
-            pending_orders: u64,
         }
 
         struct LiquidatedPosition has copy, drop {
@@ -444,13 +431,14 @@ sui_pkg_sdk!(perpetuals {
         struct CreatedPosition has copy, drop {
             ch_id: ID,
             account_id: u64,
+            subaccount_id: Option<ID>,
             mkt_funding_rate_long: IFixed,
             mkt_funding_rate_short: IFixed,
         }
 
         struct CreatedStopOrderTicket<!phantom T> has copy, drop {
             ticket_id: ID,
-            account_obj_id: ID,
+            obj_id: ID,
             account_id: u64,
             executor: address,
             gas: u64,
@@ -458,33 +446,43 @@ sui_pkg_sdk!(perpetuals {
             encrypted_details: vector<u8>
         }
 
+        struct ExecutedStopOrderTicket<!phantom T> has copy, drop {
+            ticket_id: ID,
+            account_id: u64,
+            subaccount_id: Option<ID>,
+        }
+
         struct DeletedStopOrderTicket<!phantom T> has copy, drop {
             ticket_id: ID,
             account_id: u64,
-            executed: bool
+            subaccount_id: Option<ID>,
         }
 
         struct EditedStopOrderTicketDetails<!phantom T> has copy, drop {
             ticket_id: ID,
             account_id: u64,
+            subaccount_id: Option<ID>,
             encrypted_details: vector<u8>
         }
 
         struct EditedStopOrderTicketExecutor<!phantom T> has copy, drop {
             ticket_id: ID,
             account_id: u64,
+            subaccount_id: Option<ID>,
             executor: address
         }
 
         struct AddedStopOrderTicketCollateral<!phantom T> has copy, drop {
             ticket_id: ID,
             account_id: u64,
+            subaccount_id: Option<ID>,
             collateral_to_allocate: u64
         }
 
         struct RemovedStopOrderTicketCollateral<!phantom T> has copy, drop {
             ticket_id: ID,
             account_id: u64,
+            subaccount_id: Option<ID>,
             collateral_to_remove: u64
         }
 
@@ -643,48 +641,6 @@ sui_pkg_sdk!(perpetuals {
         struct DeletedSubAccount has copy, drop {
             subaccount_id: ID,
             account_id: u64
-        }
-
-        struct DepositedCollateralSubAccount has copy, drop {
-            subaccount_id: ID,
-            account_id: u64,
-            collateral: u64,
-            subaccount_collateral_after: u64
-        }
-
-        struct WithdrewCollateralSubAccount has copy, drop {
-            subaccount_id: ID,
-            account_id: u64,
-            collateral: u64,
-            subaccount_collateral_after: u64
-        }
-
-        struct CreatedMarketPositionSubAccount has copy, drop {
-            ch_id: ID,
-            subaccount_id: ID,
-            account_id: u64,
-            mkt_funding_rate_long: IFixed,
-            mkt_funding_rate_short: IFixed
-        }
-
-        struct AllocatedCollateralSubAccount has copy, drop {
-            ch_id: ID,
-            subaccount_id: ID,
-            account_id: u64,
-            collateral: u64,
-            subaccount_collateral_after: u64,
-            position_collateral_after: IFixed,
-            vault_balance_after: u64
-        }
-
-        struct DeallocatedCollateralSubAccount has copy, drop {
-            ch_id: ID,
-            subaccount_id: ID,
-            account_id: u64,
-            collateral: u64,
-            subaccount_collateral_after: u64,
-            position_collateral_after: IFixed,
-            vault_balance_after: u64
         }
     }
 
