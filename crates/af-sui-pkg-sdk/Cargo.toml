@@ -36,6 +36,7 @@ tabled     = "0.16"
 [dev-dependencies]
 anyhow      = "1"
 derive_more = { version = "2", features = ["display"] }
+insta       = "1"
 trybuild    = { version = "1", features = ["diff"] }
 
 [[example]]
