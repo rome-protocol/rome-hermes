@@ -201,7 +201,7 @@ sui_pkg_sdk!(perpetuals {
             /// - price: u64 (can be set at random value if `is_limit_order` is false)
             /// - order_type: u64 (can be set at random value if `is_limit_order` is false)
             /// - reduce_only: bool
-            /// - margin_ratio: u256
+            /// - margin_ratio: Option<u256>
             /// - salt: vector<u8>
             encrypted_details: vector<u8>
         }
@@ -449,7 +449,6 @@ sui_pkg_sdk!(perpetuals {
         struct ExecutedStopOrderTicket<!phantom T> has copy, drop {
             ticket_id: ID,
             account_id: u64,
-            subaccount_id: Option<ID>,
         }
 
         struct DeletedStopOrderTicket<!phantom T> has copy, drop {

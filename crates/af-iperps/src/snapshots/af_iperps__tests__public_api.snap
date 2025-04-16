@@ -649,12 +649,14 @@ pub af_iperps::event_instance::EventInstance::DepositedCollateral(af_move_type::
 pub af_iperps::event_instance::EventInstance::DonatedToInsuranceFund(af_move_type::MoveInstance<af_iperps::events::DonatedToInsuranceFund>)
 pub af_iperps::event_instance::EventInstance::EditedStopOrderTicketDetails(af_move_type::MoveInstance<af_iperps::events::EditedStopOrderTicketDetails<af_move_type::otw::Otw>>)
 pub af_iperps::event_instance::EventInstance::EditedStopOrderTicketExecutor(af_move_type::MoveInstance<af_iperps::events::EditedStopOrderTicketExecutor<af_move_type::otw::Otw>>)
+pub af_iperps::event_instance::EventInstance::ExecutedStopOrderTicket(af_move_type::MoveInstance<af_iperps::events::ExecutedStopOrderTicket<af_move_type::otw::Otw>>)
 pub af_iperps::event_instance::EventInstance::FilledMakerOrder(af_move_type::MoveInstance<af_iperps::events::FilledMakerOrder>)
 pub af_iperps::event_instance::EventInstance::FilledMakerOrders(af_move_type::MoveInstance<af_iperps::events::FilledMakerOrders>)
 pub af_iperps::event_instance::EventInstance::FilledTakerOrder(af_move_type::MoveInstance<af_iperps::events::FilledTakerOrder>)
 pub af_iperps::event_instance::EventInstance::LiquidatedPosition(af_move_type::MoveInstance<af_iperps::events::LiquidatedPosition>)
 pub af_iperps::event_instance::EventInstance::OrderbookPostReceipt(af_move_type::MoveInstance<af_iperps::events::OrderbookPostReceipt>)
 pub af_iperps::event_instance::EventInstance::PerfomedLiquidation(af_move_type::MoveInstance<af_iperps::events::PerfomedLiquidation>)
+pub af_iperps::event_instance::EventInstance::ReceivedCollateral(af_move_type::MoveInstance<af_iperps::events::ReceivedCollateral<af_move_type::otw::Otw>>)
 pub af_iperps::event_instance::EventInstance::RegisteredCollateralInfo(af_move_type::MoveInstance<af_iperps::events::RegisteredCollateralInfo<af_move_type::otw::Otw>>)
 pub af_iperps::event_instance::EventInstance::RegisteredMarketInfo(af_move_type::MoveInstance<af_iperps::events::RegisteredMarketInfo<af_move_type::otw::Otw>>)
 pub af_iperps::event_instance::EventInstance::RejectedPositionFeesProposal(af_move_type::MoveInstance<af_iperps::events::RejectedPositionFeesProposal>)
@@ -663,6 +665,7 @@ pub af_iperps::event_instance::EventInstance::RemovedStopOrderTicketCollateral(a
 pub af_iperps::event_instance::EventInstance::ResettedPositionFees(af_move_type::MoveInstance<af_iperps::events::ResettedPositionFees>)
 pub af_iperps::event_instance::EventInstance::SetSubAccountUser(af_move_type::MoveInstance<af_iperps::events::SetSubAccountUser>)
 pub af_iperps::event_instance::EventInstance::SettledFunding(af_move_type::MoveInstance<af_iperps::events::SettledFunding>)
+pub af_iperps::event_instance::EventInstance::TransferredDeallocatedCollateral(af_move_type::MoveInstance<af_iperps::events::TransferredDeallocatedCollateral<af_move_type::otw::Otw>>)
 pub af_iperps::event_instance::EventInstance::UpdatedBaseOracleTolerance(af_move_type::MoveInstance<af_iperps::events::UpdatedBaseOracleTolerance>)
 pub af_iperps::event_instance::EventInstance::UpdatedClearingHouseVersion(af_move_type::MoveInstance<af_iperps::events::UpdatedClearingHouseVersion>)
 pub af_iperps::event_instance::EventInstance::UpdatedCollateralOracleTolerance(af_move_type::MoveInstance<af_iperps::events::UpdatedCollateralOracleTolerance>)
@@ -1617,13 +1620,12 @@ pub type af_iperps::events::EditedStopOrderTicketExecutorTypeTag<T>::Err = af_mo
 pub fn af_iperps::events::EditedStopOrderTicketExecutorTypeTag<T>::from_str(s: &str) -> core::result::Result<Self, Self::Err>
 pub struct af_iperps::events::ExecutedStopOrderTicket<T: af_move_type::MoveType>
 pub af_iperps::events::ExecutedStopOrderTicket::account_id: u64
-pub af_iperps::events::ExecutedStopOrderTicket::subaccount_id: core::option::Option<sui_framework_sdk::object::ID>
 pub af_iperps::events::ExecutedStopOrderTicket::ticket_id: sui_framework_sdk::object::ID
 impl<T: af_move_type::MoveType> af_iperps::events::ExecutedStopOrderTicket<T>
 pub fn af_iperps::events::ExecutedStopOrderTicket<T>::move_instance(self, address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_move_type::MoveInstance<Self>
 pub fn af_iperps::events::ExecutedStopOrderTicket<T>::type_(address: sui_sdk_types::address::Address, t: <T as af_move_type::MoveType>::TypeTag) -> af_iperps::events::ExecutedStopOrderTicketTypeTag<T>
 impl<T: af_move_type::MoveType> af_iperps::events::ExecutedStopOrderTicket<T>
-pub fn af_iperps::events::ExecutedStopOrderTicket<T>::new(ticket_id: sui_framework_sdk::object::ID, account_id: u64, subaccount_id: core::option::Option<sui_framework_sdk::object::ID>) -> Self
+pub fn af_iperps::events::ExecutedStopOrderTicket<T>::new(ticket_id: sui_framework_sdk::object::ID, account_id: u64) -> Self
 impl<T: af_move_type::MoveType + af_move_type::StaticTypeTag> af_move_type::StaticTypeParams for af_iperps::events::ExecutedStopOrderTicket<T>
 pub fn af_iperps::events::ExecutedStopOrderTicket<T>::type_params() -> alloc::vec::Vec<sui_sdk_types::type_tag::TypeTag>
 impl<T: af_move_type::MoveType> af_move_type::MoveStruct for af_iperps::events::ExecutedStopOrderTicket<T>
