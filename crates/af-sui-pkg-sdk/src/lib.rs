@@ -542,6 +542,38 @@ macro_rules! sui_pkg_sdk {
         );
     };
 
+    // #[tabled(format("{}.{}", self.id, self.name))]
+    // -------------------------------------------------------------------------
+    // option field type
+    // -------------------------------------------------------------------------
+    (@Struct
+        $(#[$meta:meta])*
+        $Struct:ident$(<$($G:ident),*>)?
+        []
+        ($(#[$fmeta:meta])* $field:ident: Option<$type:ty> $(, $($rest:tt)*)?)
+        -> { $($result:tt)* }
+    ) => {
+        $crate::sui_pkg_sdk!(@Struct
+            $(#[$meta])*
+            $Struct$(<$($G),*>)?
+            []
+            ($($($rest)*)?)
+            -> {
+                $($result)*
+                $(#[$fmeta])*
+                #[tabled(format(
+                    "{}",
+                    self.$field
+                        .as_ref()
+                        .map(ToString::to_string)
+                        .unwrap_or_else(|| "None".into())
+                ))]
+                pub $field: Option<$type>,
+            }
+        );
+    };
+
+
     // -------------------------------------------------------------------------
     // generic field type
     // -------------------------------------------------------------------------

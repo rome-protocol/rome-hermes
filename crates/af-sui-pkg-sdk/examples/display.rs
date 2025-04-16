@@ -19,6 +19,11 @@ sui_pkg_sdk!(coin_package {
             other: bool,
         }
     }
+    module opt {
+        struct Optional {
+            inner: Option<u64>
+        }
+    }
 });
 
 fn main() -> anyhow::Result<()> {
