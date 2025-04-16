@@ -566,7 +566,7 @@ macro_rules! sui_pkg_sdk {
                     self.$field
                         .as_ref()
                         .map(ToString::to_string)
-                        .unwrap_or_else(String::new)
+                        .unwrap_or_else(|| "None".into())
                 ))]
                 pub $field: Option<$type>,
             }

@@ -27,11 +27,11 @@ sui_pkg_sdk!(package {
 fn display() {
     let none = dummy::Int::new(None);
     insta::assert_snapshot!(none, @r###"
-    ╭────────┬──╮
-    │ Int       │
-    ├────────┼──┤
-    │ option │  │
-    ╰────────┴──╯
+    ╭────────┬──────╮
+    │ Int           │
+    ├────────┼──────┤
+    │ option │ None │
+    ╰────────┴──────╯
     "###);
     let some = dummy::Int::new(Some(1));
     insta::assert_snapshot!(some, @r###"
@@ -43,11 +43,11 @@ fn display() {
     "###);
     let none = dummy::Str::new(None);
     insta::assert_snapshot!(none, @r###"
-    ╭────────┬──╮
-    │ Str       │
-    ├────────┼──┤
-    │ option │  │
-    ╰────────┴──╯
+    ╭────────┬──────╮
+    │ Str           │
+    ├────────┼──────┤
+    │ option │ None │
+    ╰────────┴──────╯
     "###);
     let some = dummy::Str::new(Some(String::new()));
     insta::assert_snapshot!(some, @r###"
@@ -59,11 +59,11 @@ fn display() {
     "###);
     let nested_none = dummy::Nested::new(None);
     insta::assert_snapshot!(nested_none, @r###"
-    ╭────────┬──╮
-    │ Nested    │
-    ├────────┼──┤
-    │ option │  │
-    ╰────────┴──╯
+    ╭────────┬──────╮
+    │ Nested        │
+    ├────────┼──────┤
+    │ option │ None │
+    ╰────────┴──────╯
     "###);
     let nested_some = dummy::Nested::new(Some(dummy::Str::new(Some("1".into()))));
     insta::assert_snapshot!(nested_some, @r###"
