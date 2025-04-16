@@ -1,7 +1,7 @@
 [package]
 description = "SDK for Pyth's Sui package; maintained by Aftermath"
 name        = "pyth-sui-sdk"
-version     = "0.18.0"
+version     = "0.18.1"
 
 authors.workspace      = true
 categories.workspace   = true
@@ -31,10 +31,10 @@ pyth-sdk = ["dep:af-utilities", "dep:pyth-sdk"]
 
 [dependencies]
 af-move-type      = { version = "0.9.5", path = "../af-move-type" }
-af-sui-pkg-sdk    = { version = "0.9.5", path = "../af-sui-pkg-sdk" }
+af-sui-pkg-sdk    = { version = "0.9.6", path = "../af-sui-pkg-sdk" }
 af-sui-types      = { version = "0.8.5", path = "../af-sui-types" }
-sui-framework-sdk = { version = "0.11.6", path = "../sui-framework-sdk" }
-wormhole-sui-sdk  = { version = "0.11.6", path = "../wormhole-sui-sdk" }
+sui-framework-sdk = { version = "0.11.7", path = "../sui-framework-sdk" }
+wormhole-sui-sdk  = { version = "0.11.7", path = "../wormhole-sui-sdk" }
 
 bcs       = "0.1"
 hex       = "0.4.3"

@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.6](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-pkg-sdk-v0.9.5...af-sui-pkg-sdk-v0.9.6)
+
+### ⛰️ Features
+
+- *(af-sui-pkg-sdk)* Support `Option<T>` type fields - ([e37b17f](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/e37b17f6265c1d6420b9f49945da0e5737563d3c))
+
+
 ## [0.9.5](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-pkg-sdk-v0.9.4...af-sui-pkg-sdk-v0.9.5)
 
 ### ⚙️ Miscellaneous Tasks

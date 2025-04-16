@@ -1,7 +1,7 @@
 [package]
 description = "Move types for the Sui package at address 0x2"
 name        = "sui-framework-sdk"
-version     = "0.11.6"
+version     = "0.11.7"
 
 authors.workspace      = true
 categories.workspace   = true
@@ -26,9 +26,9 @@ workspace = true
 
 [dependencies]
 af-move-type    = { version = "0.9.5", path = "../af-move-type" }
-af-sui-pkg-sdk  = { version = "0.9.5", path = "../af-sui-pkg-sdk" }
+af-sui-pkg-sdk  = { version = "0.9.6", path = "../af-sui-pkg-sdk" }
 af-sui-types    = { version = "0.8.5", path = "../af-sui-types" }
-move-stdlib-sdk = { version = "0.10.5", path = "../move-stdlib-sdk" }
+move-stdlib-sdk = { version = "0.10.6", path = "../move-stdlib-sdk" }
 
 derive-new  = "0.7"
 derive_more = { version = "2", features = ["from"] }
