@@ -180,6 +180,24 @@ impl Owner {
     pub const fn is_shared(&self) -> bool {
         matches!(self, Self::Shared { .. })
     }
+
+    /// Either the `initial_shared_version` for a [`Shared`] object or the `start_version` of a
+    /// [`ConsensusV2`] one.
+    ///
+    /// [`Shared`]: Owner::Shared
+    /// [`ConsensusV2`]: Owner::ConsensusV2
+    pub const fn start_version(&self) -> Option<Version> {
+        match self {
+            Self::Immutable | Self::ObjectOwner(_) | Self::AddressOwner(_) => None,
+            Self::Shared {
+                initial_shared_version: version,
+            }
+            | Self::ConsensusV2 {
+                start_version: version,
+                ..
+            } => Some(*version),
+        }
+    }
 }
 
 impl From<sui_sdk_types::Owner> for Owner {
