@@ -8,6 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.27.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.26.10...af-iperps-v0.27.0)
+
+### ⛰️ Features
+
+- *(af-iperps)* [**breaking**] Update lib for latest contracts - ([05dbe8c](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/05dbe8ccde9948d12df9fa45ce9a9b94733452d6))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(af-iperps)* Add missing event instances - ([e8ec427](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/e8ec427623bbee78f31fc3181c6a4bb8f122ec01))
+- *(af-iperps)* Add errors and rename event - ([9524cdd](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/9524cddb0c56a8293dafd57e4c5a1ce2a4be2f25))
+
+
 ## [0.26.10](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.26.9...af-iperps-v0.26.10)
 
 ### ⚙️ Miscellaneous Tasks

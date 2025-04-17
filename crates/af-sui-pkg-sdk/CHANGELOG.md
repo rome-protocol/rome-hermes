@@ -8,6 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.7](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-pkg-sdk-v0.9.6...af-sui-pkg-sdk-v0.9.7)
+
+### ⛰️ Features
+
+- *(af-sui-pkg-sdk)* Display `None` as `"None"` - ([4912005](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/4912005f66c6cb11d28c21b4aa1f9109d545f141))
+- *(af-sui-pkg-sdk)* `Option<T>` display improvement - ([da5fc42](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/da5fc421888276c05d6a1d1b49eb9ca101c20c50))
+
+### 🧪 Testing
+
+- *(af-sui-pkg-sdk)* `Option<T>` field display - ([19542d6](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/19542d63ae185a1d0a774baf7af1803f8fcc1f5f))
+
+
 ## [0.9.6](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-pkg-sdk-v0.9.5...af-sui-pkg-sdk-v0.9.6)
 
 ### ⛰️ Features
