@@ -13,6 +13,7 @@ mod ch_positions;
 mod ch_vault;
 mod map_orders;
 mod order_maps;
+mod registry;
 
 pub use self::ch_vault::Error as ChVaultError;
 pub use self::order_maps::OrderMaps;
@@ -84,6 +85,15 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
         version: Option<Version>,
     ) -> impl Stream<Item = Result<(u64, MoveInstance<Position>), Self>> + '_ {
         ch_positions::query(self, ch, version)
+    }
+
+    /// List of registered [`ClearingHouse`](crate::ClearingHouse) object IDs.
+    fn registered_clearing_houses(
+        &self,
+        registry_address: ObjectId,
+        version: Option<Version>,
+    ) -> impl Stream<Item = Result<ObjectId, Self>> + '_ {
+        self::registry::query(self, registry_address, version)
     }
 }
 
