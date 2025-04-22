@@ -18,10 +18,10 @@ mod registry;
 pub use self::ch_vault::Error as ChVaultError;
 pub use self::order_maps::OrderMaps;
 
-type Result<T, C> = ::std::result::Result<T, Error<<C as GraphQlClient>::Error>>;
+type StdResult<T, E> = ::std::result::Result<T, E>;
+type Result<T, C> = StdResult<T, Error<<C as GraphQlClient>::Error>>;
 
 /// Extension trait to [`GraphQlClient`] collecting all defined queries in one place.
-#[trait_variant::make(Send)]
 pub trait GraphQlClientExt: GraphQlClient + Sized {
     /// Snapshot of the orders on one side of the orderbook, rooted at the [`ClearingHouse`] id
     /// and version.
@@ -61,18 +61,23 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
     /// Object IDs of the orderbook and asks/bids maps for a market.
     ///
     /// These never change, so you can query them once and save them.
-    async fn order_maps(&self, package: Address, ch: ObjectId) -> Result<OrderMaps, Self> {
+    fn order_maps(
+        &self,
+        package: Address,
+        ch: ObjectId,
+    ) -> impl Future<Output = Result<OrderMaps, Self>> + Send + '_ {
         order_maps::query(self, package, ch)
     }
 
     /// The unparsed clearing house's collateral [`Vault`].
     ///
     /// [`Vault`]: crate::Vault
-    async fn clearing_house_vault(
+    fn clearing_house_vault(
         &self,
         package: Address,
         ch: ObjectId,
-    ) -> ::std::result::Result<MoveInstance<Vault>, ChVaultError<Self::Error>> {
+    ) -> impl Future<Output = StdResult<MoveInstance<Vault>, ChVaultError<Self::Error>>> + Send + '_
+    {
         ch_vault::query(self, package, ch)
     }
 
