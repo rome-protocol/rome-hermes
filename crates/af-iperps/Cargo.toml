@@ -33,6 +33,7 @@ graphql = [
     "dep:graphql-extract",
     "dep:sui-gql-client",
     "dep:sui-gql-schema",
+    "dep:trait-variant",
     "sui-gql-client/move-type",
     "sui-gql-client/queries",
     "sui-gql-schema/build",
@@ -63,6 +64,7 @@ enum-as-inner   = { version = "0.6", optional = true }
 futures         = { version = "0.3", optional = true }
 graphql-extract = { version = "0.0.7", path = "../graphql-extract", optional = true }
 sui-gql-client  = { version = "0.16", path = "../sui-gql-client", default-features = false, optional = true }
+trait-variant   = { version = "0.1", optional = true }
 
 # SLO
 bcs        = { version = "0.1", optional = true }
@@ -73,7 +75,7 @@ default-features = false
 features         = ["build"]
 optional         = true
 path             = "../sui-gql-schema"
-version = "0.10.6"
+version          = "0.10.6"
 
 
 [dev-dependencies]
