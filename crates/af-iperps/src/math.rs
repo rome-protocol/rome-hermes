@@ -162,12 +162,12 @@ impl Position {
     /// Entry price of the position's contracts; in the same units as the oracle index price.
     ///
     /// This function returns `None` if the position has no open contracts, i.e., if
-    /// [`Self::quote_asset_notional_amount`] is zero.
+    /// [`Self::base_asset_amount`] is zero.
     pub fn entry_price(&self) -> Option<IFixed> {
-        if self.quote_asset_notional_amount.is_zero() {
+        if self.base_asset_amount.is_zero() {
             return None;
         }
-        Some(self.base_asset_amount / self.quote_asset_notional_amount)
+        Some(self.quote_asset_notional_amount / self.base_asset_amount)
     }
 
     /// The funding yet to be settled in this position given the market's current cumulative
