@@ -8,6 +8,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.27.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.27.0...af-iperps-v0.27.1)
+
+### ⛰️ Features
+
+- *(af-iperps)* Registered `ClearingHouse`s query - ([12e095f](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/12e095ff7780768b8c9f35e68437630348f405f9))
+
+### 🐛 Bug Fixes
+
+- *(af-iperps)* `Position::entry_price` - ([c1b7961](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/c1b7961af68cd64cc59b86317c9d8c78510a855d))
+- *(af-iperps)* Revert breaking changes - ([009c5eb](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/009c5ebd0a31775c9747b72bd86541266732d663))
+
+### 🚜 Refactor
+
+- *(af-iperps)* Use `trait-variant` internally - ([b474d43](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/b474d43ff49a5203c583e0e300d8a47e30399fdc))
+
+
 ## [0.27.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.26.10...af-iperps-v0.27.0)
 
 ### ⛰️ Features
