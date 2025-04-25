@@ -100,6 +100,7 @@ pub af_iperps::clearing_house::ClearingHouse::market_state: af_iperps::market::M
 pub af_iperps::clearing_house::ClearingHouse::version: u64
 impl<T: af_move_type::MoveType> af_iperps::clearing_house::ClearingHouse<T>
 pub const fn af_iperps::clearing_house::ClearingHouse<T>::governing_package_testnet(&self) -> sui_sdk_types::object_id::ObjectId
+pub fn af_iperps::clearing_house::ClearingHouse<T>::orderbook_dof_wrapper_type(package: sui_sdk_types::address::Address) -> sui_framework_sdk::dynamic_field::FieldTypeTag<sui_framework_sdk::dynamic_object_field::Wrapper<af_iperps::keys::Orderbook>, sui_framework_sdk::object::ID>
 pub fn af_iperps::clearing_house::ClearingHouse<T>::position_df_type(package: sui_sdk_types::address::Address) -> sui_framework_sdk::dynamic_field::FieldTypeTag<af_iperps::keys::Position, af_iperps::position::Position>
 impl<T: af_move_type::MoveType> af_iperps::clearing_house::ClearingHouse<T>
 pub fn af_iperps::clearing_house::ClearingHouse<T>::liquidation_price(&self, pos: &af_iperps::position::Position, coll_price: af_utilities::types::ifixed::IFixed) -> core::option::Option<af_utilities::types::ifixed::IFixed>
@@ -3968,6 +3969,9 @@ pub struct af_iperps::orderbook::Orderbook
 pub af_iperps::orderbook::Orderbook::counter: u64
 pub af_iperps::orderbook::Orderbook::id: sui_framework_sdk::object::UID
 impl af_iperps::orderbook::Orderbook
+pub fn af_iperps::orderbook::Orderbook::asks_dof_wrapper_type(package: sui_sdk_types::address::Address) -> sui_framework_sdk::dynamic_field::FieldTypeTag<sui_framework_sdk::dynamic_object_field::Wrapper<af_iperps::keys::AsksMap>, sui_framework_sdk::object::ID>
+pub fn af_iperps::orderbook::Orderbook::bids_dof_wrapper_type(package: sui_sdk_types::address::Address) -> sui_framework_sdk::dynamic_field::FieldTypeTag<sui_framework_sdk::dynamic_object_field::Wrapper<af_iperps::keys::BidsMap>, sui_framework_sdk::object::ID>
+impl af_iperps::orderbook::Orderbook
 pub fn af_iperps::orderbook::Orderbook::move_instance(self, address: sui_sdk_types::address::Address) -> af_move_type::MoveInstance<Self>
 pub fn af_iperps::orderbook::Orderbook::type_(address: sui_sdk_types::address::Address) -> af_iperps::orderbook::OrderbookTypeTag
 impl af_iperps::orderbook::Orderbook
@@ -4704,9 +4708,12 @@ pub fn af_iperps::position::Position::headers() -> alloc::vec::Vec<alloc::borrow
 pub const af_iperps::TESTNET_PACKAGE_VERSIONS: &[sui_sdk_types::object_id::ObjectId]
 pub type af_iperps::Account = af_iperps::account::Account<af_move_type::otw::Otw>
 pub type af_iperps::AccountTypeTag = af_iperps::account::AccountTypeTag<af_move_type::otw::Otw>
+pub type af_iperps::AsksMapDofWrapper = sui_framework_sdk::dynamic_field::Field<sui_framework_sdk::dynamic_object_field::Wrapper<af_iperps::keys::AsksMap>, sui_framework_sdk::object::ID>
+pub type af_iperps::BidsMapDofWrapper = sui_framework_sdk::dynamic_field::Field<sui_framework_sdk::dynamic_object_field::Wrapper<af_iperps::keys::BidsMap>, sui_framework_sdk::object::ID>
 pub type af_iperps::ClearingHouse = af_iperps::clearing_house::ClearingHouse<af_move_type::otw::Otw>
 pub type af_iperps::ClearingHouseTypeTag = af_iperps::clearing_house::ClearingHouseTypeTag<af_move_type::otw::Otw>
 pub type af_iperps::OrderLeafDf = sui_framework_sdk::dynamic_field::Field<u64, af_iperps::ordered_map::Leaf<af_iperps::orderbook::Order>>
+pub type af_iperps::OrderbookDofWrapper = sui_framework_sdk::dynamic_field::Field<sui_framework_sdk::dynamic_object_field::Wrapper<af_iperps::keys::Orderbook>, sui_framework_sdk::object::ID>
 pub type af_iperps::PositionDf = sui_framework_sdk::dynamic_field::Field<af_iperps::keys::Position, af_iperps::position::Position>
 pub type af_iperps::StopOrderTicket = af_iperps::stop_orders::StopOrderTicket<af_move_type::otw::Otw>
 pub type af_iperps::StopOrderTicketTypetag = af_iperps::stop_orders::StopOrderTicketTypeTag<af_move_type::otw::Otw>
