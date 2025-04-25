@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.27.2](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.27.1...af-iperps-v0.27.2)
+
+### ⛰️ Features
+
+- *(af-iperps)* Type helpers for DOF wrappers - ([a73673a](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/a73673a8d40b3c037ceb6fc30598f4530eafe700))
+
+
 ## [0.27.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.27.0...af-iperps-v0.27.1)
 
 ### ⛰️ Features
