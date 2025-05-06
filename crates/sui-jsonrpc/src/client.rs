@@ -34,10 +34,12 @@ use crate::msgs::{
     Coin,
     DryRunTransactionBlockResponse,
     SuiExecutionStatus,
+    SuiObjectData,
     SuiObjectDataError,
     SuiObjectDataOptions,
     SuiObjectResponse,
     SuiObjectResponseError,
+    SuiObjectResponseQuery,
     SuiTransactionBlockEffectsAPI as _,
     SuiTransactionBlockResponse,
     SuiTransactionBlockResponseOptions,
@@ -404,7 +406,7 @@ impl SuiClient {
     pub async fn object_args<Iter>(
         &self,
         ids: Iter,
-    ) -> Result<impl Iterator<Item = Result<ObjectArg, BoxError>>, BoxError>
+    ) -> Result<impl Iterator<Item = Result<ObjectArg, BoxError>> + use<Iter>, BoxError>
     where
         Iter: IntoIterator<Item = ObjectId> + Send,
         Iter::IntoIter: Send,
@@ -764,6 +766,35 @@ impl SuiClient {
                     yield coin;
                 }
 
+                has_next_page = page.has_next_page;
+                cursor = page.next_cursor;
+            }
+        }
+    }
+
+    /// Return a stream of coins for the given address.
+    ///
+    /// This simply wraps a paginated query. Use `page_size` to control the inner query's page
+    /// size.
+    pub fn owned_objects(
+        &self,
+        owner: SuiAddress,
+        query: Option<SuiObjectResponseQuery>,
+        page_size: Option<u32>,
+    ) -> impl Stream<Item = SuiClientResult<SuiObjectData>> + Send + '_ {
+        use crate::api::IndexerApiClient as _;
+        async_stream::try_stream! {
+            let mut has_next_page = true;
+            let mut cursor = None;
+
+            while has_next_page {
+                let page = self
+                    .http()
+                    .get_owned_objects(owner, query.clone(), cursor, page_size.map(|u| u as usize)).await?;
+
+                for data in page.data {
+                    yield data.into_object()?;
+                }
                 has_next_page = page.has_next_page;
                 cursor = page.next_cursor;
             }
