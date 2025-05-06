@@ -10,7 +10,9 @@ use std::str::FromStr;
 use af_sui_types::{
     Address as SuiAddress,
     Identifier,
+    MoveObject,
     MoveObjectType,
+    Object,
     ObjectArg,
     ObjectDigest,
     ObjectId,
@@ -210,6 +212,23 @@ pub enum SuiObjectDataError {
     ObjectType(#[from] NotMoveStructError),
 }
 
+/// Error for [`SuiObjectData::into_full_object`].
+#[derive(thiserror::Error, Debug)]
+pub(crate) enum FullObjectDataError {
+    #[error("Missing BCS encoding")]
+    MissingBcs,
+    #[error("Missing object owner")]
+    MissingOwner,
+    #[error("Not a Move object")]
+    NotMoveObject,
+    #[error("Missing previous transaction digest")]
+    MissingPreviousTransaction,
+    #[error("Missing storage rebate")]
+    MissingStorageRebate,
+    #[error("MoveObject BCS doesn't start with ObjectId")]
+    InvalidBcs,
+}
+
 #[serde_as]
 #[derive(Debug, Clone, Deserialize, Serialize, Eq, PartialEq)]
 #[serde(rename_all = "camelCase", rename = "ObjectData")]
@@ -320,6 +339,33 @@ impl SuiObjectData {
 
     pub fn owner(&self) -> Result<Owner, SuiObjectDataError> {
         self.owner.clone().ok_or(SuiObjectDataError::MissingOwner)
+    }
+
+    /// Structs only.
+    pub(crate) fn into_full_object(self) -> Result<Object, FullObjectDataError> {
+        let Self {
+            owner,
+            previous_transaction,
+            storage_rebate,
+            bcs,
+            ..
+        } = self;
+        let SuiRawData::MoveObject(raw_struct) = bcs.ok_or(FullObjectDataError::MissingBcs)? else {
+            return Err(FullObjectDataError::NotMoveObject);
+        };
+        let struct_ = MoveObject::new(
+            raw_struct.type_,
+            raw_struct.has_public_transfer,
+            raw_struct.version,
+            raw_struct.bcs_bytes,
+        )
+        .ok_or(FullObjectDataError::InvalidBcs)?;
+        Ok(Object::new_struct(
+            struct_,
+            owner.ok_or(FullObjectDataError::MissingOwner)?,
+            previous_transaction.ok_or(FullObjectDataError::MissingPreviousTransaction)?,
+            storage_rebate.ok_or(FullObjectDataError::MissingStorageRebate)?,
+        ))
     }
 }
 

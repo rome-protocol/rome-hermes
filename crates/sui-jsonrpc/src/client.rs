@@ -9,6 +9,7 @@ use af_sui_types::{
     Address as SuiAddress,
     GasCostSummary,
     GasData,
+    Object,
     ObjectArg,
     ObjectId,
     ObjectRef,
@@ -55,6 +56,9 @@ pub const SUI_DEVNET_URL: &str = "https://fullnode.devnet.sui.io:443";
 pub const SUI_TESTNET_URL: &str = "https://fullnode.testnet.sui.io:443";
 
 pub type SuiClientResult<T = ()> = Result<T, SuiClientError>;
+// Placeholder for errors that can't be added to `SuiClientError` yet since that would be a
+// breaking change.
+type BoxError = Box<dyn std::error::Error + Send + Sync + 'static>;
 
 #[derive(thiserror::Error, Debug)]
 pub enum SuiClientError {
@@ -389,6 +393,49 @@ impl SuiClient {
             .await?
             .into_object()?;
         Ok(data.imm_or_owned_object_arg()?)
+    }
+
+    /// Query the full object contents as a standard Sui type.
+    pub async fn full_object(&self, id: ObjectId) -> Result<Object, BoxError> {
+        let options = SuiObjectDataOptions {
+            show_bcs: true,
+            show_owner: true,
+            show_storage_rebate: true,
+            show_previous_transaction: true,
+            ..Default::default()
+        };
+        Ok(self
+            .http()
+            .get_object(id, Some(options))
+            .await?
+            .into_object()?
+            .into_full_object()?)
+    }
+
+    /// Query the full contents for several objects.
+    ///
+    /// This has **no** consistency guarantees, i.e., object versions may come from different
+    /// points in the chain's history (i.e., from different checkpoints).
+    pub async fn full_objects<Iter>(
+        &self,
+        ids: Iter,
+    ) -> Result<impl Iterator<Item = Result<Object, BoxError>>, BoxError>
+    where
+        Iter: IntoIterator<Item = ObjectId> + Send,
+        Iter::IntoIter: Send,
+    {
+        let options = SuiObjectDataOptions {
+            show_bcs: true,
+            show_owner: true,
+            show_storage_rebate: true,
+            show_previous_transaction: true,
+            ..Default::default()
+        };
+        Ok(self
+            .multi_get_objects(ids, options)
+            .await?
+            .into_iter()
+            .map(|r| Ok(r.into_object()?.into_full_object()?)))
     }
 
     /// Return the object data for a list of objects.
