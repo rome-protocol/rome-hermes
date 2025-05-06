@@ -361,7 +361,6 @@ impl SuiObjectData {
         self.owner.clone().ok_or(SuiObjectDataError::MissingOwner)
     }
 
-    /// Structs only.
     pub(crate) fn into_full_object(self) -> Result<Object, FullObjectDataError> {
         let Self {
             owner,
@@ -370,6 +369,7 @@ impl SuiObjectData {
             bcs,
             ..
         } = self;
+        // TODO: generalize this to handle `MovePackage`s
         let SuiRawData::MoveObject(raw_struct) = bcs.ok_or(FullObjectDataError::MissingBcs)? else {
             return Err(FullObjectDataError::NotMoveObject);
         };
