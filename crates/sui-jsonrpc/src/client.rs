@@ -395,6 +395,28 @@ impl SuiClient {
         Ok(data.imm_or_owned_object_arg()?)
     }
 
+    /// Query the PTB args for several objects.
+    ///
+    /// Mutability (for shared objects) defaults to `false`.
+    ///
+    /// This has **no** consistency guarantees, i.e., object versions may come from different
+    /// points in the chain's history (i.e., from different checkpoints).
+    pub async fn object_args<Iter>(
+        &self,
+        ids: Iter,
+    ) -> Result<impl Iterator<Item = Result<ObjectArg, BoxError>>, BoxError>
+    where
+        Iter: IntoIterator<Item = ObjectId> + Send,
+        Iter::IntoIter: Send,
+    {
+        let options = SuiObjectDataOptions::new().with_owner();
+        Ok(self
+            .multi_get_objects(ids, options)
+            .await?
+            .into_iter()
+            .map(|r| Ok(r.into_object()?.object_arg(false)?)))
+    }
+
     /// Query the full object contents as a standard Sui type.
     pub async fn full_object(&self, id: ObjectId) -> Result<Object, BoxError> {
         let options = SuiObjectDataOptions {

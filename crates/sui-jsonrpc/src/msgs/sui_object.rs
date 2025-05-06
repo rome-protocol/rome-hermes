@@ -337,6 +337,26 @@ impl SuiObjectData {
         Ok(ObjectArg::ImmOrOwnedObject((i, v, d)))
     }
 
+    pub(crate) fn object_arg(&self, mutable: bool) -> Result<ObjectArg, SuiObjectDataError> {
+        use Owner as O;
+        Ok(match self.owner()? {
+            O::AddressOwner(_) | O::ObjectOwner(_) | O::Immutable => {
+                ObjectArg::ImmOrOwnedObject(self.object_ref())
+            }
+            O::Shared {
+                initial_shared_version,
+            }
+            | O::ConsensusV2 {
+                start_version: initial_shared_version,
+                ..
+            } => ObjectArg::SharedObject {
+                id: self.object_id,
+                initial_shared_version,
+                mutable,
+            },
+        })
+    }
+
     pub fn owner(&self) -> Result<Owner, SuiObjectDataError> {
         self.owner.clone().ok_or(SuiObjectDataError::MissingOwner)
     }
