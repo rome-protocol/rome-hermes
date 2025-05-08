@@ -40,6 +40,21 @@ impl Object {
         }
     }
 
+    /// Construct a new object that wraps a Move package.
+    pub const fn new_package(
+        inner: MovePackage,
+        owner: Owner,
+        previous_transaction: TransactionDigest,
+        storage_rebate: u64,
+    ) -> Self {
+        Self {
+            data: Data::Package(inner),
+            owner,
+            previous_transaction,
+            storage_rebate,
+        }
+    }
+
     /// Its unique on-chain identifier.
     pub fn id(&self) -> ObjectId {
         match &self.data {
