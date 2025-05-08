@@ -214,19 +214,24 @@ pub enum SuiObjectDataError {
 
 /// Error for [`SuiObjectData::into_full_object`].
 #[derive(thiserror::Error, Debug)]
-pub(crate) enum FullObjectDataError {
+#[non_exhaustive]
+pub enum FullObjectDataError {
     #[error("Missing BCS encoding")]
     MissingBcs,
     #[error("Missing object owner")]
     MissingOwner,
-    #[error("Not a Move object")]
-    NotMoveObject,
     #[error("Missing previous transaction digest")]
     MissingPreviousTransaction,
     #[error("Missing storage rebate")]
     MissingStorageRebate,
     #[error("MoveObject BCS doesn't start with ObjectId")]
     InvalidBcs,
+    #[error("Invalid identifier: {ident}\nReason: {source}")]
+    InvalidIdentifier {
+        ident: Box<str>,
+        #[source]
+        source: af_sui_types::TypeParseError,
+    },
 }
 
 #[serde_as]
@@ -361,7 +366,9 @@ impl SuiObjectData {
         self.owner.clone().ok_or(SuiObjectDataError::MissingOwner)
     }
 
-    pub(crate) fn into_full_object(self) -> Result<Object, FullObjectDataError> {
+    /// Create a standard Sui [`Object`] if there's enough information.
+    pub fn into_full_object(self) -> Result<Object, FullObjectDataError> {
+        use itertools::Itertools as _;
         let Self {
             owner,
             previous_transaction,
@@ -369,23 +376,57 @@ impl SuiObjectData {
             bcs,
             ..
         } = self;
-        // TODO: generalize this to handle `MovePackage`s
-        let SuiRawData::MoveObject(raw_struct) = bcs.ok_or(FullObjectDataError::MissingBcs)? else {
-            return Err(FullObjectDataError::NotMoveObject);
-        };
-        let struct_ = MoveObject::new(
-            raw_struct.type_,
-            raw_struct.has_public_transfer,
-            raw_struct.version,
-            raw_struct.bcs_bytes,
-        )
-        .ok_or(FullObjectDataError::InvalidBcs)?;
-        Ok(Object::new_struct(
-            struct_,
-            owner.ok_or(FullObjectDataError::MissingOwner)?,
-            previous_transaction.ok_or(FullObjectDataError::MissingPreviousTransaction)?,
-            storage_rebate.ok_or(FullObjectDataError::MissingStorageRebate)?,
-        ))
+        let owner = owner.ok_or(FullObjectDataError::MissingOwner)?;
+        let previous_transaction =
+            previous_transaction.ok_or(FullObjectDataError::MissingPreviousTransaction)?;
+        let storage_rebate = storage_rebate.ok_or(FullObjectDataError::MissingStorageRebate)?;
+
+        match bcs.ok_or(FullObjectDataError::MissingBcs)? {
+            SuiRawData::Package(p) => {
+                let modules = p
+                    .module_map
+                    .into_iter()
+                    .map(|(s, bytes)| {
+                        Ok((
+                            s.parse()
+                                .map_err(|e| FullObjectDataError::InvalidIdentifier {
+                                    ident: s.into(),
+                                    source: e,
+                                })?,
+                            bytes,
+                        ))
+                    })
+                    .try_collect()?;
+                let inner = af_sui_types::MovePackage {
+                    id: p.id,
+                    version: p.version,
+                    modules,
+                    type_origin_table: p.type_origin_table,
+                    linkage_table: p.linkage_table,
+                };
+                Ok(Object::new_package(
+                    inner,
+                    owner,
+                    previous_transaction,
+                    storage_rebate,
+                ))
+            }
+            SuiRawData::MoveObject(raw_struct) => {
+                let struct_ = MoveObject::new(
+                    raw_struct.type_,
+                    raw_struct.has_public_transfer,
+                    raw_struct.version,
+                    raw_struct.bcs_bytes,
+                )
+                .ok_or(FullObjectDataError::InvalidBcs)?;
+                Ok(Object::new_struct(
+                    struct_,
+                    owner,
+                    previous_transaction,
+                    storage_rebate,
+                ))
+            }
+        }
     }
 }
 
@@ -518,6 +559,19 @@ pub struct SuiObjectDataOptions {
 impl SuiObjectDataOptions {
     pub fn new() -> Self {
         Self::default()
+    }
+
+    /// Just enough information to create an [`Object`].
+    pub fn full_object() -> Self {
+        Self {
+            show_bcs: true,
+            show_owner: true,
+            show_storage_rebate: true,
+            show_previous_transaction: true,
+            show_content: false,
+            show_display: false,
+            show_type: false,
+        }
     }
 
     /// return BCS data and all other metadata such as storage rebate
