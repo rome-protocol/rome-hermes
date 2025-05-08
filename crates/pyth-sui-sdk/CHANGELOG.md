@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/pyth-sui-sdk-v0.18.2...pyth-sui-sdk-v0.18.3)
+
+### ⚙️ Miscellaneous Tasks
+
+- Updated the following local packages: af-sui-types, sui-jsonrpc, af-move-type, af-sui-pkg-sdk, sui-framework-sdk, af-ptbuilder, wormhole-sui-sdk - ([0000000](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/0000000))
+
+
 ## [0.18.2](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/pyth-sui-sdk-v0.18.1...pyth-sui-sdk-v0.18.2)
 
 ### ⚙️ Miscellaneous Tasks

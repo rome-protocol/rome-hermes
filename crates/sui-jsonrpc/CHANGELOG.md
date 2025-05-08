@@ -8,6 +8,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.2](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-jsonrpc-v0.15.1...sui-jsonrpc-v0.15.2)
+
+### ⛰️ Features
+
+- *(sui-jsonrpc)* Helpers to request and create full `Object`s - ([10c552a](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/10c552abaa3faceff0cce36e72eb2977a4f0b4de))
+- *(sui-jsonrpc)* `SuiClient::owned_objects` stream - ([e93d45c](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/e93d45c7f5d76307e0031a600d027f84110e43e3))
+- *(sui-jsonrpc)* Multi `ObjectArg` getter - ([b7aadad](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/b7aadade63238f672ad16ee2b63cc592382a4f22))
+- *(sui-jsonrpc)* Full object getters - ([be624d6](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/be624d670055f7cc6ee4dcc10d31b7ca60948a1e))
+
+### 📚 Documentation
+
+- *(sui-jsonrpc)* `SuiClient::owned_objects` desc. - ([819bf65](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/819bf65d397b11d430feb2b26dba508a6b7e226f))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(sui-jsonrpc)* Add TODO - ([a70bc31](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/a70bc31996c4d67a78e6bc62476559ef40c8fc58))
+
+
 ## [0.15.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-jsonrpc-v0.15.0...sui-jsonrpc-v0.15.1)
 
 ### ⚙️ Miscellaneous Tasks
