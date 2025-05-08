@@ -772,7 +772,7 @@ impl SuiClient {
         }
     }
 
-    /// Return a stream of coins for the given address.
+    /// Return a stream of objects owned by the given address.
     ///
     /// This simply wraps a paginated query. Use `page_size` to control the inner query's page
     /// size.
