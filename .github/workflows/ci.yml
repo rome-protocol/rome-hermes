@@ -52,7 +52,16 @@ jobs:
       - name: Install cargo-hack
         uses: taiki-e/install-action@cargo-hack
       - name: Check libraries
-        run: cargo +nightly hack --feature-powerset clippy --lib --no-deps -- -D warnings
+        run: >-
+          cargo +nightly
+          hack
+          --feature-powerset
+          --exclude-features default
+          clippy
+          --lib
+          --no-deps
+          --
+          -D warnings
 
   test:
     needs: changes
