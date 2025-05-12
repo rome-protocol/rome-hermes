@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.13](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/switchboard-sui-sdk-v0.0.12...switchboard-sui-sdk-v0.0.13)
+
+### 🚜 Refactor
+
+- Make public dependencies explicit - ([1933554](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/19335540faf2d55827fdfcd04aaa9c130fa306a3))
+
+
 ## [0.0.12](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/switchboard-sui-sdk-v0.0.11...switchboard-sui-sdk-v0.0.12)
 
 ### ⚙️ Miscellaneous Tasks

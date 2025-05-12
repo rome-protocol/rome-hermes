@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.19.14](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-pyth-wrapper-v0.19.13...af-pyth-wrapper-v0.19.14)
+
+### 🚜 Refactor
+
+- Make public dependencies explicit - ([1933554](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/19335540faf2d55827fdfcd04aaa9c130fa306a3))
+
+
 ## [0.19.13](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-pyth-wrapper-v0.19.12...af-pyth-wrapper-v0.19.13)
 
 ### ⚙️ Miscellaneous Tasks

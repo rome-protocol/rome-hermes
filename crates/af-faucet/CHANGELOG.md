@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.12.10](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-faucet-v0.12.9...af-faucet-v0.12.10)
+
+### 🚜 Refactor
+
+- Make public dependencies explicit - ([1933554](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/19335540faf2d55827fdfcd04aaa9c130fa306a3))
+
+
 ## [0.12.9](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-faucet-v0.12.8...af-faucet-v0.12.9)
 
 ### ⚙️ Miscellaneous Tasks

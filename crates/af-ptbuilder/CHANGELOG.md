@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.0.8](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-ptbuilder-v5.0.7...af-ptbuilder-v5.0.8)
+
+### 🚜 Refactor
+
+- Make public dependencies explicit - ([1933554](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/19335540faf2d55827fdfcd04aaa9c130fa306a3))
+
+
 ## [5.0.7](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-ptbuilder-v5.0.6...af-ptbuilder-v5.0.7)
 
 ### ⚙️ Miscellaneous Tasks

@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.4](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/pyth-sui-sdk-v0.18.3...pyth-sui-sdk-v0.18.4)
+
+### 🚜 Refactor
+
+- Make public dependencies explicit - ([1933554](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/19335540faf2d55827fdfcd04aaa9c130fa306a3))
+
+
 ## [0.18.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/pyth-sui-sdk-v0.18.2...pyth-sui-sdk-v0.18.3)
 
 ### ⚙️ Miscellaneous Tasks

@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/pyth-hermes-client-v0.5.0...pyth-hermes-client-v0.5.1)
+
+### 🚜 Refactor
+
+- Make public dependencies explicit - ([1933554](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/19335540faf2d55827fdfcd04aaa9c130fa306a3))
+
+
 ## [0.5.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/pyth-hermes-client-v0.4.0...pyth-hermes-client-v0.5.0)
 
 ### 🐛 Bug Fixes

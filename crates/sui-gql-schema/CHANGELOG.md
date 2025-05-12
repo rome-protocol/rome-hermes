@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.10.8](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-schema-v0.10.7...sui-gql-schema-v0.10.8)
+
+### 🚜 Refactor
+
+- Make public dependencies explicit - ([1933554](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/19335540faf2d55827fdfcd04aaa9c130fa306a3))
+
+
 ## [0.10.7](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-schema-v0.10.6...sui-gql-schema-v0.10.7)
 
 ### ⚙️ Miscellaneous Tasks
