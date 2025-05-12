@@ -27,11 +27,13 @@ workspace = true
 [features]
 default = ["move-type", "mutations", "queries", "reqwest"]
 move-type = ["dep:af-move-type", "dep:bcs", "queries"]
-mutations = ["dep:af-sui-types", "scalars"]
+mutations = ["dep:af-sui-types", "dep:sui-sdk-types", "scalars"]
 queries = [
   "dep:af-sui-types",
   "dep:async-stream",
+  "dep:bimap",
   "dep:futures",
+  "dep:futures-core",
   "dep:graphql-extract",
   "dep:itertools",
   "scalars",
@@ -42,15 +44,27 @@ scalars = ["sui-gql-schema/scalars"]
 
 
 [dependencies]
-graphql-extract = { version = "0.0.7", path = "../graphql-extract", optional = true }
-sui-gql-schema  = { version = "0.10.7", path = "../sui-gql-schema", default-features = false }
+# Public dependencies; a SemVer-breaking bump in one of these must come with a SemVer-breaking bump
+# to this crate
+# https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html
+# FIXME: this is in dire need of refactoring; see
+# https://github.com/AftermathFinance/aftermath-sdk-rust/issues/181
+af-move-type   = { version = "0.9.7", public = true, optional = true, path = "../af-move-type" }
+af-sui-types   = { version = "0.8.7", public = true, path = "../af-sui-types", optional = true }
+bimap          = { version = "0.6", public = true, optional = true }
+cynic          = { version = "3", public = true }
+futures-core   = { version = "0.3", public = true, optional = true }
+reqwest        = { version = "0.12", public = true, default-features = false, optional = true }
+serde          = { version = "1", public = true }
+serde_json     = { version = "1", public = true, optional = true }
+sui-gql-schema = { version = "0.10.7", public = true, default-features = false, path = "../sui-gql-schema" }
+sui-sdk-types  = { version = "0.0.3", public = true, optional = true }
 
-bimap            = "0.6"
+graphql-extract = { version = "0.0.7", path = "../graphql-extract", optional = true }
+
 clap             = { version = "4", features = ["derive"] }
-cynic            = "3"
 derive_more      = { version = "2", features = ["display"] }
 extension-traits = "2"
-serde            = "1"
 tap              = "1"
 thiserror        = "2"
 trait-variant    = "0.1"
@@ -59,25 +73,18 @@ trait-variant    = "0.1"
 async-stream = { version = "0.3", optional = true }
 futures      = { version = "0.3", optional = true }
 
-# Reqwest client (optional)
-reqwest = { version = "0.12", default-features = false, optional = true }
-
 # For pre-made queries (optional)
-af-sui-types = { version = "0.8.7", path = "../af-sui-types", optional = true }
-itertools    = { version = "0.14", optional = true }
+itertools = { version = "0.14", optional = true }
 
 # MoveType compat (optional)
-af-move-type = { version = "0.9.7", path = "../af-move-type", optional = true }
-bcs          = { version = "0.1", optional = true }
+bcs = { version = "0.1", optional = true }
 
-# Raw client (optional)
-serde_json = { version = "1", optional = true }
 
 [build-dependencies.sui-gql-schema]
 default-features = false
 features         = ["build"]
 path             = "../sui-gql-schema"
-version = "0.10.7"
+version          = "0.10.7"
 
 
 [dev-dependencies]

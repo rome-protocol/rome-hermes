@@ -2,8 +2,8 @@ use std::sync::LazyLock;
 
 use af_sui_types::ObjectId;
 use extension_traits::extension;
-use jsonrpsee::core::ClientError;
-use jsonrpsee::types::{ErrorCode, ErrorObject, ErrorObjectOwned};
+use jsonrpsee_core::ClientError;
+use jsonrpsee_types::{ErrorCode, ErrorObject, ErrorObjectOwned};
 
 pub type JsonRpcClientResult<T = ()> = Result<T, JsonRpcClientError>;
 

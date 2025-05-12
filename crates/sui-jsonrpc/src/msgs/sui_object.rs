@@ -342,6 +342,7 @@ impl SuiObjectData {
         Ok(ObjectArg::ImmOrOwnedObject((i, v, d)))
     }
 
+    #[cfg(feature = "client")]
     pub(crate) fn object_arg(&self, mutable: bool) -> Result<ObjectArg, SuiObjectDataError> {
         use Owner as O;
         Ok(match self.owner()? {
@@ -886,6 +887,7 @@ pub enum SuiPastObjectResponseError {
     ObjectDeleted { object_ref: ObjectRef },
 }
 
+#[rustversion::attr(nightly, expect(clippy::large_enum_variant))]
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
 #[serde(tag = "status", content = "details", rename = "ObjectRead")]
 pub enum SuiPastObjectResponse {

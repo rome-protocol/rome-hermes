@@ -120,3 +120,19 @@ access the type of the OTW directly, while to do so with the latter we'd have to
 `StructTag::type_params` is not empty every time.
 
 <!-- cargo-rdme end -->
+
+## Future plans & refactors
+
+### Make `tabled` a private dependency
+
+Currently, `tabled` is a [public dependency] because the macro implements the `Tabled` trait for the generated public structs. The only reason that implementation is there, however, is to leverage it in the `Display` implementations for generated structs.
+
+Therefore, it's possible to remove `tabled` from the public API altogether by:
+1. making the `pub use tabled;` re-export `#[doc(hidden)]`
+1. generating a private `mod $Struct { pub(super) struct DisplayRef<'a> { /* ... */ } }` for each Move struct
+1. implementing `tabled::Tabled` for the private struct
+1. implementing `Display` for the public struct by constructing `DisplayRef<'_>` internally and using its `Tabled` implementation
+1. removing the `move_struct_table_option` function (inline it in the generated code)
+
+
+[public dependency]: https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html

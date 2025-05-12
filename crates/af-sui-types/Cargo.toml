@@ -30,26 +30,28 @@ hash    = ["sui-sdk-types/hash"]
 u256    = ["dep:primitive-types", "dep:rand", "dep:uint"]
 
 [dependencies]
-base64        = "0.22"
-bcs           = "0.1"
-bs58          = "0.5"
+# Public dependencies; a SemVer-breaking bump in one of these must come with a SemVer-breaking bump
+# to this crate
+# https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html
+base64        = { version = "0.22", public = true }
+bcs           = { version = "0.1", public = true }
+bs58          = { version = "0.5", public = true }
+proptest      = { version = "1", public = true, optional = true }
+rand          = { version = "0.9", public = true, optional = true }
+serde         = { version = "1", public = true }
+serde_with    = { version = "3", public = true, features = ["base64"] }
+sui-sdk-types = { version = "0.0.3", public = true, features = ["serde"] }
+
 enum_dispatch = "0.3"
 hex           = "0.4"
 ref-cast      = "1"
-serde         = "1"
-serde_with    = { version = "3", features = ["base64"] }
-sui-sdk-types = { version = "0.0.3", features = ["serde"] }
 thiserror     = "2"
 
 derive_more = { version = "2", features = ["from_str"] }
 
-# for u256 (optional)
+# for u256
 primitive-types = { version = "0.12", features = ["fp-conversion"], optional = true }
-rand            = { version = "0.9", optional = true }
 uint            = { version = "0.9", optional = true }
-
-# for fuzzing tests (optional)
-proptest = { version = "1", optional = true }
 
 [dev-dependencies]
 insta         = "1"

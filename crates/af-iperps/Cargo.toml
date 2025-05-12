@@ -40,20 +40,27 @@ graphql = [
 slo = ["dep:bcs", "dep:fastcrypto"]
 
 [dependencies]
-af-move-type      = { version = "0.9.7", path = "../af-move-type" }
-af-sui-pkg-sdk    = { version = "0.9.8", path = "../af-sui-pkg-sdk" }
-af-sui-types      = { version = "0.8.7", path = "../af-sui-types" }
-af-utilities      = { version = "0.9.7", path = "../af-utilities" }
-move-stdlib-sdk   = { version = "0.10.8", path = "../move-stdlib-sdk" }
-sui-framework-sdk = { version = "0.11.9", path = "../sui-framework-sdk" }
+# Public dependencies; a SemVer-breaking bump in one of these must come with a SemVer-breaking bump
+# to this crate
+# https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html
+af-sui-pkg-sdk    = { version = "0.9.8", public = true, path = "../af-sui-pkg-sdk" }
+af-utilities      = { version = "0.9.7", public = true, path = "../af-utilities" }
+num_enum          = { version = "0.7", public = true }
+strum             = { version = "0.27", public = true, features = ["derive"] }
+sui-framework-sdk = { version = "0.11.9", public = true, path = "../sui-framework-sdk" }
+sui-gql-client    = { version = "0.16", public = true, default-features = false, optional = true, path = "../sui-gql-client" }
+sui-sdk-types     = { version = "0.0.3", public = true }
+# TODO: remove this after using Rust's `Option` (see TODO in `lib.rs`)
+move-stdlib-sdk = { version = "0.10.8", public = true, path = "../move-stdlib-sdk" }
+
+af-move-type = { version = "0.9.7", path = "../af-move-type" }
+af-sui-types = { version = "0.8.7", path = "../af-sui-types" }
 
 clap        = { version = "4", features = ["derive"] }
 derive_more = { version = "2", features = ["display", "from", "is_variant", "try_into"] }
 num-traits  = "0.2"
-num_enum    = "0.7"
 remain      = "0.2"
 serde       = "1"
-strum       = { version = "0.27", features = ["derive"] }
 thiserror   = "2"
 
 # GraphQL RPC (optional)
@@ -62,7 +69,6 @@ cynic           = { version = "3", optional = true }
 enum-as-inner   = { version = "0.6", optional = true }
 futures         = { version = "0.3", optional = true }
 graphql-extract = { version = "0.0.7", path = "../graphql-extract", optional = true }
-sui-gql-client  = { version = "0.16", path = "../sui-gql-client", default-features = false, optional = true }
 
 # SLO
 bcs        = { version = "0.1", optional = true }
@@ -73,7 +79,7 @@ default-features = false
 features         = ["build"]
 optional         = true
 path             = "../sui-gql-schema"
-version = "0.10.7"
+version          = "0.10.7"
 
 
 [dev-dependencies]

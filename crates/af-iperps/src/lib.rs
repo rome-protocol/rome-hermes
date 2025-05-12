@@ -136,6 +136,7 @@ sui_pkg_sdk!(perpetuals {
             min_margin_before: IFixed,
             fills: vector<orderbook::FillReceipt>,
             post: orderbook::PostReceipt,
+            // TODO: Rust's `Option` is perfectly fine here
             liquidation_receipt: move_stdlib_sdk::option::Option<LiquidationReceipt>
         }
 

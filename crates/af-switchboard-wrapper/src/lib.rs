@@ -3,7 +3,7 @@
 //! Move types for Aftermath's `SwitchboardWrapper` package that extends `AfOracle`
 
 use af_sui_pkg_sdk::sui_pkg_sdk;
-use sui_framework_sdk::object::UID;
+use sui_framework_sdk::UID;
 
 #[cfg(feature = "graphql")]
 pub mod graphql;

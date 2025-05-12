@@ -41,12 +41,19 @@ graphql = [
   "sui-gql-schema/build",
 ]
 
+
 [dependencies]
-af-move-type      = { version = "0.9.7", path = "../af-move-type" }
-af-sui-pkg-sdk    = { version = "0.9.8", path = "../af-sui-pkg-sdk" }
-af-sui-types      = { version = "0.8.7", path = "../af-sui-types" }
-af-utilities      = { version = "0.9.7", path = "../af-utilities" }
-sui-framework-sdk = { version = "0.11.9", path = "../sui-framework-sdk" }
+# Public dependencies; a SemVer-breaking bump in one of these must come with a SemVer-breaking bump
+# to this crate
+# https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html
+af-move-type      = { version = "0.9.7", public = true, path = "../af-move-type" }
+af-sui-pkg-sdk    = { version = "0.9.8", public = true, path = "../af-sui-pkg-sdk" }
+sui-framework-sdk = { version = "0.11.9", public = true, path = "../sui-framework-sdk" }
+sui-gql-client    = { version = "0.16.9", public = true, optional = true, default-features = false, path = "../sui-gql-client" }
+sui-sdk-types     = { version = "0.0.3", public = true }
+
+af-sui-types = { version = "0.8.7", path = "../af-sui-types" }
+af-utilities = { version = "0.9.7", path = "../af-utilities" }
 
 derive_more = { version = "2", features = ["display", "from", "is_variant", "try_into"] }
 remain      = "0.2"
@@ -65,19 +72,14 @@ enum-as-inner   = { version = "0.6", optional = true }
 futures         = { version = "0.3", optional = true }
 graphql-extract = { version = "0.0.7", path = "../graphql-extract", optional = true }
 
-[dependencies.sui-gql-client]
-default-features = false
-features         = ["move-type", "queries"]
-optional         = true
-path             = "../sui-gql-client"
-version = "0.16.9"
 
 [build-dependencies.sui-gql-schema]
 default-features = false
 features         = ["build"]
 optional         = true
 path             = "../sui-gql-schema"
-version = "0.10.7"
+version          = "0.10.7"
+
 
 [dev-dependencies]
 clap             = { version = "4", features = ["derive"] }

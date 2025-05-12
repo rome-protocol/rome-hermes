@@ -1,5 +1,5 @@
 use clap::Parser;
-use futures::{StreamExt as _, TryStreamExt as _};
+use futures_util::{StreamExt as _, TryStreamExt as _};
 use pyth_hermes_client::{EncodingType, PriceIdInput, PythClient};
 
 #[derive(Parser)]

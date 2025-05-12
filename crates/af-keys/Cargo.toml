@@ -25,21 +25,31 @@ rustdoc-args = [
 workspace = true
 
 [dependencies]
+# Public dependencies; a SemVer-breaking bump in one of these must come with a SemVer-breaking bump
+# to this crate
+# https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html
+af-sui-types  = { version = "0.8.7", public = true, features = ["hash"], path = "../af-sui-types" }
+eyre          = { version = "0.6", public = true }
+fastcrypto    = { version = "0.1.9", public = true }
+serde         = { version = "1", public = true }
+signature     = { version = "2", public = true }
+sui-sdk-types = { version = "0.0.3", public = true }
+## Because of `fastcrypto`
+blake2  = { version = "0.10", public = true }
+digest  = { version = "0.10", public = true }
+typenum = { version = "1", public = true }
+
 bcs           = "0.1"
 derive_more   = { version = "2", features = ["as_ref", "from"] }
 enum_dispatch = "0.3"
-eyre          = "0.6"
-fastcrypto    = "0.1.9"
 once_cell     = "1"
-serde         = "1"
+rustversion   = "1"
 serde_json    = "1"
 serde_repr    = "0.1"
 serde_with    = "3"
-signature     = "2"
 strum         = { version = "0.27", features = ["derive"] }
 thiserror     = "2"
 
-af-sui-types = { version = "0.8.7", features = ["hash"], path = "../af-sui-types" }
 
 [dev-dependencies]
 tempfile = "3"

@@ -25,11 +25,14 @@ rustdoc-args = [
 workspace = true
 
 [dependencies]
-af-sui-types = { version = "0.8.7", path = "../af-sui-types", features = ["u256"] }
+# Public dependencies; a SemVer-breaking bump in one of these must come with a SemVer-breaking bump
+# to this crate
+# https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html
+af-sui-types = { version = "0.8.7", public = true, features = ["u256"], path = "../af-sui-types" }
+num-traits   = { version = "0.2", public = true }
 
-num-traits = "0.2"
-serde      = "1"
-thiserror  = "2"
+serde     = "1"
+thiserror = "2"
 
 [[example]]
 name = "utilities_types"

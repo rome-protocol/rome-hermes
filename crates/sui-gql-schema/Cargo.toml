@@ -40,15 +40,18 @@ scalars = [
 
 
 [dependencies]
-cynic = "3"
+# Public dependencies; a SemVer-breaking bump in one of these must come with a SemVer-breaking bump
+# to this crate
+# https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html
+af-sui-types = { version = "0.8.7", public = true, optional = true, path = "../af-sui-types" }
+cynic        = { version = "3", public = true }
 
 # For scalars (optional)
-af-sui-types = { version = "0.8.7", path = "../af-sui-types", optional = true }
-base64       = { version = "0.22", optional = true }
-chrono       = { version = "0.4", optional = true }
-serde        = { version = "1", optional = true }
-serde_json   = { version = "1", optional = true }
-serde_with   = { version = "3", optional = true }
+base64     = { version = "0.22", optional = true }
+chrono     = { version = "0.4", optional = true }
+serde      = { version = "1", optional = true }
+serde_json = { version = "1", optional = true }
+serde_with = { version = "3", optional = true }
 
 derive_more = { version = "2", features = [
   "as_ref",

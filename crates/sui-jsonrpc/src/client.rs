@@ -22,9 +22,9 @@ use af_sui_types::{
 };
 use futures_core::Stream;
 use jsonrpsee::core::client::ClientT;
-use jsonrpsee::http_client::{HeaderMap, HeaderValue, HttpClient, HttpClientBuilder};
 use jsonrpsee::rpc_params;
 use jsonrpsee::ws_client::{PingConfig, WsClient, WsClientBuilder};
+use jsonrpsee_http_client::{HeaderMap, HeaderValue, HttpClient, HttpClientBuilder};
 use serde_json::Value;
 
 use super::{CLIENT_SDK_TYPE_HEADER, CLIENT_SDK_VERSION_HEADER, CLIENT_TARGET_API_VERSION_HEADER};
@@ -319,18 +319,24 @@ impl SuiClient {
     }
 
     /// Returns a list of RPC methods supported by the node the client is connected to.
-    #[expect(
-        clippy::missing_const_for_fn,
-        reason = "Not changing the public API right now"
+    #[rustversion::attr(
+        stable,
+        expect(
+            clippy::missing_const_for_fn,
+            reason = "Not changing the public API right now"
+        )
     )]
     pub fn available_rpc_methods(&self) -> &Vec<String> {
         &self.info.rpc_methods
     }
 
     /// Returns a list of streaming/subscription APIs supported by the node the client is connected to.
-    #[expect(
-        clippy::missing_const_for_fn,
-        reason = "Not changing the public API right now"
+    #[rustversion::attr(
+        stable,
+        expect(
+            clippy::missing_const_for_fn,
+            reason = "Not changing the public API right now"
+        )
     )]
     pub fn available_subscriptions(&self) -> &Vec<String> {
         &self.info.subscriptions
@@ -340,9 +346,12 @@ impl SuiClient {
     ///
     /// The format of this string is `<major>.<minor>.<patch>`, e.g., `1.6.0`,
     /// and it is retrieved from the OpenRPC specification via the discover service method.
-    #[expect(
-        clippy::missing_const_for_fn,
-        reason = "Not changing the public API right now"
+    #[rustversion::attr(
+        stable,
+        expect(
+            clippy::missing_const_for_fn,
+            reason = "Not changing the public API right now"
+        )
     )]
     pub fn api_version(&self) -> &str {
         &self.info.version
@@ -362,18 +371,24 @@ impl SuiClient {
     }
 
     /// Returns a reference to the underlying http client.
-    #[expect(
-        clippy::missing_const_for_fn,
-        reason = "Not changing the public API right now"
+    #[rustversion::attr(
+        stable,
+        expect(
+            clippy::missing_const_for_fn,
+            reason = "Not changing the public API right now"
+        )
     )]
     pub fn http(&self) -> &HttpClient {
         &self.http
     }
 
     /// Returns a reference to the underlying WebSocket client, if any.
-    #[expect(
-        clippy::missing_const_for_fn,
-        reason = "Not changing the public API right now"
+    #[rustversion::attr(
+        stable,
+        expect(
+            clippy::missing_const_for_fn,
+            reason = "Not changing the public API right now"
+        )
     )]
     pub fn ws(&self) -> Option<&WsClient> {
         (*self.ws).as_ref()

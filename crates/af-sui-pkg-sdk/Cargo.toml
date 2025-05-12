@@ -26,12 +26,17 @@ rustdoc-args = [
 workspace = true
 
 [dependencies]
-af-move-type = { version = "0.9.7", path = "../af-move-type" }
-af-sui-types = { version = "0.8.7", path = "../af-sui-types", features = ["u256"] }
+# Public dependencies; a SemVer-breaking bump in one of these must come with a SemVer-breaking bump
+# to this crate
+# https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html
+af-move-type = { version = "0.9.7", public = true, path = "../af-move-type" }
+af-sui-types = { version = "0.8.7", public = true, features = ["u256"], path = "../af-sui-types" }
+tabled       = { version = "0.16", public = true }
+# Because of `tabled`
+papergrid = { version = "0.12", public = true }
 
 derive-new = "0.7.0"
 serde      = "1"
-tabled     = "0.16"
 
 [dev-dependencies]
 anyhow      = "1"

@@ -1,5 +1,5 @@
 use eventsource_stream::Eventsource as _;
-use futures::{Stream, StreamExt, TryStreamExt};
+use futures_util::{Stream, StreamExt, TryStreamExt};
 use serde::Serialize;
 
 use crate::{EncodingType, Error, PriceIdInput, PriceUpdate};

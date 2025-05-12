@@ -121,9 +121,12 @@ impl MultiSig {
         &self.multisig_pk
     }
 
-    #[expect(
-        clippy::missing_const_for_fn,
-        reason = "Not changing the public API right now"
+    #[rustversion::attr(
+        stable,
+        expect(
+            clippy::missing_const_for_fn,
+            reason = "Not changing the public API right now"
+        )
     )]
     pub fn get_sigs(&self) -> &[CompressedSignature] {
         &self.sigs
@@ -253,7 +256,7 @@ impl MultiSigPublicKey {
             || threshold == 0
             || pks.len() != weights.len()
             || pks.len() > MAX_SIGNER_IN_MULTISIG
-            || weights.iter().any(|w| *w == 0)
+            || weights.contains(&0)
             || weights
                 .iter()
                 .map(|w| *w as ThresholdUnit)

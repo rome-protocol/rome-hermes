@@ -25,6 +25,9 @@ rustdoc-args = [
 workspace = true
 
 [dependencies]
-af-sui-pkg-sdk = { version = "0.9.8", path = "../af-sui-pkg-sdk" }
+# Public dependencies; a SemVer-breaking bump in one of these must come with a SemVer-breaking bump
+# to this crate
+# https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html
+af-sui-pkg-sdk = { version = "0.9.8", public = true, path = "../af-sui-pkg-sdk" }
 
 thiserror = "2"
