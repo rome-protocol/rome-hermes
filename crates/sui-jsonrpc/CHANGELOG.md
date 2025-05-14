@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.4](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-jsonrpc-v0.15.3...sui-jsonrpc-v0.15.4)
+
+### 🐛 Bug Fixes
+
+- *(sui-jsonrpc)* `SuiTransactionBlockResponse::sui_effects` - ([59aef6c](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/59aef6c114196ff4ba68ee06eb46b24c54cbd498))
+
+
 ## [0.15.3](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-jsonrpc-v0.15.2...sui-jsonrpc-v0.15.3)
 
 ### 🚜 Refactor

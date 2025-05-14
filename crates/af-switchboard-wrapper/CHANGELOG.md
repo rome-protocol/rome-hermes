@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.17](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-switchboard-wrapper-v0.0.16...af-switchboard-wrapper-v0.0.17)
+
+### ⚙️ Miscellaneous Tasks
+
+- Updated the following local packages: sui-gql-client - ([0000000](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/0000000))
+
+
 ## [0.0.16](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-switchboard-wrapper-v0.0.15...af-switchboard-wrapper-v0.0.16)
 
 ### 🚜 Refactor
