@@ -241,11 +241,14 @@ impl SuiTransactionBlockResponse {
     }
 
     /// Transaction effects as a standard Sui type.
+    ///
+    /// Deserialized from the [`Self::raw_effects`] BCS bytes. If those bytes are empty, the result
+    /// is `None`.
     pub fn sui_effects(&self) -> Result<Option<sui_sdk_types::TransactionEffects>, ToEffectsError> {
         self.raw_effects
-            .is_empty()
-            .then_some(&self.raw_effects)
-            .map(|b| bcs::from_bytes(b))
+            .len()
+            .ge(&0)
+            .then_some(bcs::from_bytes(&self.raw_effects))
             .transpose()
             .map_err(From::from)
             .map_err(ToEffectsError::Generic)
