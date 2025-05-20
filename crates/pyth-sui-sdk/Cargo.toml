@@ -1,7 +1,7 @@
 [package]
 description = "SDK for Pyth's Sui package; maintained by Aftermath"
 name        = "pyth-sui-sdk"
-version     = "0.18.5"
+version     = "0.18.6"
 
 authors.workspace      = true
 categories.workspace   = true
@@ -33,7 +33,7 @@ pyth-sdk = ["dep:af-utilities", "dep:pyth-sdk"]
 # Public dependencies; a SemVer-breaking bump in one of these must come with a SemVer-breaking bump
 # to this crate
 # https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html
-af-ptbuilder   = { version = "5.0.8", public = true, optional = true, path = "../af-ptbuilder" }
+af-ptbuilder   = { version = "5.0.9", public = true, optional = true, path = "../af-ptbuilder" }
 af-sui-types   = { version = "0.8.8", public = true, path = "../af-sui-types" }
 af-utilities   = { version = "0.9", public = true, optional = true }
 bcs            = { version = "0.1", public = true }

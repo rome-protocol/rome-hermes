@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.0.9](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-ptbuilder-v5.0.8...af-ptbuilder-v5.0.9)
+
+### 📚 Documentation
+
+- *(af-ptbuilder)* Succint example - ([a4dc2cb](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/a4dc2cb4a26fd52382fe37974b48c4908def1636))
+
+
 ## [5.0.8](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-ptbuilder-v5.0.7...af-ptbuilder-v5.0.8)
 
 ### 🚜 Refactor
