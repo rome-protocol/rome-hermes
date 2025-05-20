@@ -497,28 +497,16 @@ impl Command {
 ///
 /// ```no_run
 /// use af_ptbuilder::ptb;
-/// use af_sui_types::{
-///     IdentStr,
-///     ObjectId,
-///     StructTag,
-///     Address,
-///     TypeTag
-/// };
-/// use af_sui_types::ObjectArg;
+/// use af_sui_types::{address, object_id, ObjectArg, TypeTag};
 ///
-/// let foo = ObjectId::new(rand::random());
-/// let otw = TypeTag::Struct(Box::new(StructTag {
-///     address: "0x2".parse()?,
-///     module: IdentStr::cast("sui").to_owned(),
-///     name: IdentStr::cast("SUI").to_owned(),
-///     type_params: vec![],
-/// }));
+/// let foo = object_id(b"0xbeef");
+/// let otw: TypeTag = "0x2::sui::SUI".parse()?;
 /// let registry = ObjectArg::SharedObject {
-///     id: ObjectId::new(rand::random()),
+///     id: object_id(b"0xdeed"),
 ///     initial_shared_version: 1,
 ///     mutable: true,
 /// };
-/// let sender = Address::new(rand::random());
+/// let sender = address(b"0xabcd");
 ///
 /// ptb!(
 ///     package foo;
