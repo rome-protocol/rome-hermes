@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.16.12](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.16.11...sui-gql-client-v0.16.12)
+
+### ⛰️ Features
+
+- *(sui-gql-client)* Add owner_df_contents_stream query - ([b7f3c18](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/b7f3c18eed01dbe4742c91bedafdc1420f2f0377))
+
+
 ## [0.16.11](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.16.10...sui-gql-client-v0.16.11)
 
 ### ⚙️ Miscellaneous Tasks
