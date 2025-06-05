@@ -44,6 +44,7 @@ mod objects_flat;
 pub mod outputs;
 mod owner_df_content;
 mod owner_df_contents;
+mod owner_df_contents_stream;
 mod owner_dof_content;
 mod package_at_version;
 mod packages_from_original;
@@ -239,6 +240,16 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
         after: Option<String>,
     ) -> Result<(HashMap<RawMoveValue, DynamicField>, Option<String>), Self> {
         owner_df_contents::query(self, address, root_version, first, after)
+    }
+
+    /// **Streamed** map of all keys to dynamic field values: [`RawMoveValue`] -> [`DynamicField`].
+    async fn owner_df_contents_stream(
+        &self,
+        address: SuiAddress,
+        root_version: Option<u64>,
+        page_size: Option<i32>,
+    ) -> impl Stream<Item = Result<(RawMoveValue, DynamicField), Self>> + '_ {
+        owner_df_contents_stream::query(self, address, root_version, page_size)
     }
 
     /// Get the raw Move struct of a dynamic object field's value.
