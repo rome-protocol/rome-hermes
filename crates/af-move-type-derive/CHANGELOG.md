@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.2](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-move-type-derive-v0.3.1...af-move-type-derive-v0.3.2)
+
+### ⚙️ Miscellaneous Tasks
+
+- Update dependencies - ([e1016ef](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/e1016ef1344da5430d48f94a7490f3cd7140b10d))
+
+
 ## [0.3.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-move-type-derive-v0.3.0...af-move-type-derive-v0.3.1)
 
 ### 🚜 Refactor
