@@ -29,12 +29,12 @@ rustdoc-args = [
 workspace = true
 
 [dependencies]
-proc-macro2 = { version = "1.0.70", public = true }
-syn         = { version = "2.0.39", public = true, features = ["full"] }
+proc-macro2 = { version = "1.0", public = true }
+syn         = { version = "2.0", public = true, features = ["full"] }
 
-convert_case = "0.7.1"
-deluxe       = "0.5.0"
-quote        = "1.0.33"
+convert_case = "0.8"
+deluxe       = "0.5"
+quote        = "1.0"
 rustversion  = "1"
 
 [dev-dependencies]

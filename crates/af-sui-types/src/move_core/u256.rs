@@ -316,9 +316,7 @@ impl U256 {
 
     /// U256 to 32 little endian bytes
     pub fn to_le_bytes(self) -> [u8; U256_NUM_BYTES] {
-        let mut bytes = [0u8; U256_NUM_BYTES];
-        self.0.to_little_endian(&mut bytes);
-        bytes
+        self.0.to_little_endian()
     }
 
     /// Leading zeros of the number
