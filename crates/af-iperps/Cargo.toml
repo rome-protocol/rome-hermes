@@ -83,6 +83,7 @@ version          = "0.10.9"
 
 
 [dev-dependencies]
+af-ptbuilder     = { path = "../af-ptbuilder" }
 clap             = { version = "4", features = ["derive"] }
 color-eyre       = "0.6"
 indicatif        = "0.17"
@@ -103,30 +104,55 @@ tokio-test       = "0.4"
 
 [[example]]
 name              = "clearing-house-orders"
-path              = "examples/clearing_house_orders.rs"
+path              = "examples/fetch/clearing_house_orders.rs"
 required-features = ["graphql"]
 
 [[example]]
 name              = "order-maps"
-path              = "examples/order_maps.rs"
+path              = "examples/fetch/order_maps.rs"
 required-features = ["graphql"]
 
 [[example]]
 name              = "map-orders"
-path              = "examples/map_orders.rs"
+path              = "examples/fetch/map_orders.rs"
 required-features = ["graphql"]
 
 [[example]]
 name              = "clearing-house-vault"
-path              = "examples/clearing_house_vault.rs"
+path              = "examples/fetch/clearing_house_vault.rs"
 required-features = ["graphql"]
 
 [[example]]
 name              = "clearing-house-positions"
-path              = "examples/clearing_house_positions.rs"
+path              = "examples/fetch/clearing_house_positions.rs"
 required-features = ["graphql"]
 
 [[example]]
 name              = "all-orders-concurrently"
-path              = "examples/all_orders_concurrently.rs"
+path              = "examples/fetch/all_orders_concurrently.rs"
+required-features = ["graphql"]
+
+[[example]]
+name              = "create-account"
+path              = "examples/ptb/create_account.rs"
+required-features = ["graphql"]
+
+[[example]]
+name              = "deposit-collateral"
+path              = "examples/ptb/deposit_collateral.rs"
+required-features = ["graphql"]
+
+[[example]]
+name              = "withdraw-collateral"
+path              = "examples/ptb/withdraw_collateral.rs"
+required-features = ["graphql"]
+
+[[example]]
+name              = "place-orders"
+path              = "examples/ptb/place_orders.rs"
+required-features = ["graphql"]
+
+[[example]]
+name              = "cancel-orders"
+path              = "examples/ptb/cancel_orders.rs"
 required-features = ["graphql"]
