@@ -8,6 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.28.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.27.6...af-iperps-v0.28.0)
+
+### ⚙️ Miscellaneous Tasks
+
+- *(af-iperps)* Add hash feature for place-orders example - ([a4fe24a](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/a4fe24a080affeb7777d53cd4ced9b19d23de426))
+- *(af-iperps)* Add most used ptbs examples - ([af1e09f](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/af1e09f4e68036727fd12d8e3c494a2cfaa173c6))
+
+
 ## [0.27.6](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.27.5...af-iperps-v0.27.6)
 
 ### ⚙️ Miscellaneous Tasks
