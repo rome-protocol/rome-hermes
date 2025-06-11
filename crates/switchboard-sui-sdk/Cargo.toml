@@ -38,7 +38,7 @@ sui-framework-sdk = { version = "0.11.11", public = true, path = "../sui-framewo
 sui-sdk-types     = { version = "0.0.4", public = true }
 
 af-move-type = { version = "0.9.9", path = "../af-move-type" }
-af-sui-types = { version = "0.9.0", path = "../af-sui-types" }
+af-sui-types = { version = "0.10.0", path = "../af-sui-types" }
 
 bcs       = "0.1"
 hex       = "0.4.3"

@@ -28,7 +28,7 @@ workspace = true
 # Public dependencies; a SemVer-breaking bump in one of these must come with a SemVer-breaking bump
 # to this crate
 # https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html
-af-sui-types  = { version = "0.9.0", public = true, features = ["hash"], path = "../af-sui-types" }
+af-sui-types  = { version = "0.10.0", public = true, features = ["hash"], path = "../af-sui-types" }
 eyre          = { version = "0.6", public = true }
 fastcrypto    = { version = "0.1.9", public = true }
 serde         = { version = "1", public = true }
