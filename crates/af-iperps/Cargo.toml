@@ -51,7 +51,7 @@ sui-framework-sdk = { version = "0.12.0", public = true, path = "../sui-framewor
 sui-gql-client    = { version = "0.17", public = true, default-features = false, optional = true, path = "../sui-gql-client" }
 sui-sdk-types     = { version = "0.0.4", public = true }
 # TODO: remove this after using Rust's `Option` (see TODO in `lib.rs`)
-move-stdlib-sdk = { version = "0.10.11", public = true, path = "../move-stdlib-sdk" }
+move-stdlib-sdk = { version = "0.11.0", public = true, path = "../move-stdlib-sdk" }
 
 af-move-type = { version = "0.10.0", path = "../af-move-type" }
 af-sui-types = { version = "0.10.0", path = "../af-sui-types" }
@@ -79,7 +79,7 @@ default-features = false
 features         = ["build"]
 optional         = true
 path             = "../sui-gql-schema"
-version = "0.11.0"
+version          = "0.11.0"
 
 
 [dev-dependencies]

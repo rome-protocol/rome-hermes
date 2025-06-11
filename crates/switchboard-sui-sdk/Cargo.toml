@@ -33,7 +33,7 @@ ptb = ["bytes/serde", "dep:af-ptbuilder", "dep:bytes", "dep:extension-traits"]
 # https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html
 af-ptbuilder      = { version = "6.0.0", public = true, optional = true, path = "../af-ptbuilder" }
 af-sui-pkg-sdk    = { version = "0.10.0", public = true, path = "../af-sui-pkg-sdk" }
-move-stdlib-sdk   = { version = "0.10.11", public = true, path = "../move-stdlib-sdk" }
+move-stdlib-sdk   = { version = "0.11.0", public = true, path = "../move-stdlib-sdk" }
 sui-framework-sdk = { version = "0.12.0", public = true, path = "../sui-framework-sdk" }
 sui-sdk-types     = { version = "0.0.4", public = true }
 
