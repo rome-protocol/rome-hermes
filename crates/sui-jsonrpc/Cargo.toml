@@ -54,7 +54,7 @@ jsonrpsee-http-client = { version = "0.25", public = true, optional = true }
 jsonrpsee-types       = { version = "0.25", public = true, optional = true }
 serde                 = { version = "1", public = true }
 serde_json            = { version = "1", public = true }
-sui-sdk-types         = { version = "0.0.4", public = true }
+sui-sdk-types         = { git = "https://github.com/MystenLabs/sui-rust-sdk.git", rev = "b64827452de2e3f9e62ee8f3cb456a93c2b66b53", public = true }
 
 bcs           = "0.1"
 colored       = "3"

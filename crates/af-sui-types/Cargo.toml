@@ -33,14 +33,16 @@ u256    = ["dep:primitive-types", "dep:rand", "dep:uint"]
 # Public dependencies; a SemVer-breaking bump in one of these must come with a SemVer-breaking bump
 # to this crate
 # https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html
-base64        = { version = "0.22", public = true }
-bcs           = { version = "0.1", public = true }
-bs58          = { version = "0.5", public = true }
-proptest      = { version = "1", public = true, optional = true }
-rand          = { version = "0.9", public = true, optional = true }
-serde         = { version = "1", public = true }
-serde_with    = { version = "3", public = true, features = ["base64"] }
-sui-sdk-types = { version = "0.0.4", public = true, features = ["serde"] }
+base64 = { version = "0.22", public = true }
+bcs = { version = "0.1", public = true }
+bs58 = { version = "0.5", public = true }
+proptest = { version = "1", public = true, optional = true }
+rand = { version = "0.9", public = true, optional = true }
+serde = { version = "1", public = true }
+serde_with = { version = "3", public = true, features = ["base64"] }
+sui-sdk-types = { git = "https://github.com/MystenLabs/sui-rust-sdk.git", rev = "b64827452de2e3f9e62ee8f3cb456a93c2b66b53", features = [
+  "serde",
+], public = true }
 
 enum_dispatch = "0.3"
 hex           = "0.4"
@@ -54,10 +56,12 @@ primitive-types = { version = "0.13", features = ["fp-conversion"], optional = t
 uint            = { version = "0.10", optional = true }
 
 [dev-dependencies]
-insta         = "1"
-proptest      = "1"
-serde_json    = "1"
-sui-sdk-types = { version = "0.0.4", features = ["proptest"] }
+insta = "1"
+proptest = "1"
+serde_json = "1"
+sui-sdk-types = { git = "https://github.com/MystenLabs/sui-rust-sdk.git", rev = "b64827452de2e3f9e62ee8f3cb456a93c2b66b53", features = [
+  "proptest",
+] }
 test-strategy = "0.4"
 
 [[test]]

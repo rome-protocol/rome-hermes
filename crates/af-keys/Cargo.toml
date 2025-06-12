@@ -33,7 +33,8 @@ eyre          = { version = "0.6", public = true }
 fastcrypto    = { version = "0.1.9", public = true }
 serde         = { version = "1", public = true }
 signature     = { version = "2", public = true }
-sui-sdk-types = { version = "0.0.4", public = true }
+sui-sdk-types = { git = "https://github.com/MystenLabs/sui-rust-sdk.git", rev = "b64827452de2e3f9e62ee8f3cb456a93c2b66b53", public = true }
+
 ## Because of `fastcrypto`
 blake2  = { version = "0.10", public = true }
 digest  = { version = "0.10", public = true }

@@ -25,6 +25,10 @@ impl Object {
             | ConsensusV2 {
                 start_version: initial_shared_version,
                 ..
+            }
+            | ConsensusAddress {
+                start_version: initial_shared_version,
+                ..
             } => ObjectArg::SharedObject {
                 id,
                 initial_shared_version,

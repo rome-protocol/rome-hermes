@@ -147,6 +147,16 @@ pub enum Owner {
         /// The authentication mode of the object
         authenticator: Box<Authenticator>,
     },
+    /// Object is exclusively owned by a single address and sequenced via consensus.
+    ConsensusAddress {
+        /// The version at which the object most recently became a consensus object.
+        /// This serves the same function as `initial_shared_version`, except it may change
+        /// if the object's Owner type changes.
+        start_version: Version,
+
+        /// The owner of the object.
+        owner: Address,
+    },
 }
 
 impl Owner {
@@ -162,11 +172,12 @@ impl Owner {
             Self::Shared { .. }
             | Self::Immutable
             | Self::ObjectOwner(_)
+            | Self::ConsensusAddress { .. }
             | Self::ConsensusV2 { .. } => None,
         }
     }
 
-    /// This function will return address of both [`AddressOwner`] and [`ObjectOwner`],
+    /// This function will return address of [`AddressOwner`], [`ObjectOwner`] and [`ConsensusAddress`],
     ///
     /// Address of [`ObjectOwner`] is converted from object id, even though the type is [`Address`].
     ///
@@ -176,6 +187,7 @@ impl Owner {
         match self {
             Self::AddressOwner(address) => Some(*address),
             Self::ObjectOwner(id) => Some(*id.as_address()),
+            Self::ConsensusAddress { owner, .. } => Some(*owner),
             Self::Shared { .. } | Self::Immutable | Self::ConsensusV2 { .. } => None,
         }
     }
@@ -211,6 +223,7 @@ impl Owner {
                 start_version: version,
                 ..
             } => Some(*version),
+            Self::ConsensusAddress { start_version, .. } => Some(*start_version),
         }
     }
 }
@@ -225,6 +238,13 @@ impl From<sui_sdk_types::Owner> for Owner {
                 initial_shared_version: v,
             },
             Immutable => Self::Immutable,
+            ConsensusAddress {
+                start_version,
+                owner,
+            } => Self::ConsensusAddress {
+                start_version,
+                owner,
+            },
         }
     }
 }
@@ -236,6 +256,7 @@ impl PartialEq<ObjectId> for Owner {
             Self::AddressOwner(_)
             | Self::Shared { .. }
             | Self::Immutable
+            | Self::ConsensusAddress { .. }
             | Self::ConsensusV2 { .. } => false,
         }
     }
@@ -261,6 +282,12 @@ impl std::fmt::Display for Owner {
                 authenticator,
             } => {
                 write!(f, "ConsensusV2( {}, {} )", start_version, authenticator)
+            }
+            Self::ConsensusAddress {
+                start_version,
+                owner,
+            } => {
+                write!(f, "ConsensusAddress( {}, {} )", start_version, owner)
             }
         }
     }

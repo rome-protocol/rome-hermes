@@ -355,6 +355,10 @@ impl SuiObjectData {
             | O::ConsensusV2 {
                 start_version: initial_shared_version,
                 ..
+            }
+            | O::ConsensusAddress {
+                start_version: initial_shared_version,
+                ..
             } => ObjectArg::SharedObject {
                 id: self.object_id,
                 initial_shared_version,

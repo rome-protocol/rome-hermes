@@ -50,7 +50,7 @@ af-move-type      = { version = "0.10.0", public = true, path = "../af-move-type
 af-sui-pkg-sdk    = { version = "0.10.0", public = true, path = "../af-sui-pkg-sdk" }
 sui-framework-sdk = { version = "0.12.0", public = true, path = "../sui-framework-sdk" }
 sui-gql-client    = { version = "0.17.0", public = true, optional = true, default-features = false, path = "../sui-gql-client" }
-sui-sdk-types     = { version = "0.0.4", public = true }
+sui-sdk-types     = { git = "https://github.com/MystenLabs/sui-rust-sdk.git", rev = "b64827452de2e3f9e62ee8f3cb456a93c2b66b53", public = true }
 
 af-sui-types = { version = "0.10.0", path = "../af-sui-types" }
 af-utilities = { version = "0.10.0", path = "../af-utilities" }
@@ -78,7 +78,7 @@ default-features = false
 features         = ["build"]
 optional         = true
 path             = "../sui-gql-schema"
-version = "0.11"
+version          = "0.11"
 
 
 [dev-dependencies]
