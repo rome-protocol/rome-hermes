@@ -38,6 +38,6 @@ derive-where  = "1"
 derive_more   = { version = "2", features = ["deref", "deref_mut", "from", "into"] }
 serde         = "1"
 serde_with    = "3"
-sui-sdk-types = { git = "https://github.com/MystenLabs/sui-rust-sdk.git", rev = "b64827452de2e3f9e62ee8f3cb456a93c2b66b53", public = true }
+sui-sdk-types = { version = "0.0.5", public = true }
 tabled        = "0.16"
 thiserror     = "2"

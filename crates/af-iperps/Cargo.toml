@@ -49,7 +49,7 @@ num_enum          = { version = "0.7", public = true }
 strum             = { version = "0.27", public = true, features = ["derive"] }
 sui-framework-sdk = { version = "0.12.1", public = true, path = "../sui-framework-sdk" }
 sui-gql-client    = { version = "0.18", public = true, default-features = false, optional = true, path = "../sui-gql-client" }
-sui-sdk-types     = { git = "https://github.com/MystenLabs/sui-rust-sdk.git", rev = "b64827452de2e3f9e62ee8f3cb456a93c2b66b53", public = true }
+sui-sdk-types     = { version = "0.0.5", public = true }
 
 # TODO: remove this after using Rust's `Option` (see TODO in `lib.rs`)
 move-stdlib-sdk = { version = "0.11.1", public = true, path = "../move-stdlib-sdk" }
@@ -81,7 +81,7 @@ default-features = false
 features         = ["build"]
 optional         = true
 path             = "../sui-gql-schema"
-version = "0.11.1"
+version          = "0.11.1"
 
 
 [dev-dependencies]

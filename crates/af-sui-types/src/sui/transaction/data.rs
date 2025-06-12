@@ -388,6 +388,7 @@ impl TransactionDataAPI for TransactionDataV1 {
             | TransactionKind::ConsensusCommitPrologueV4(_)
             | TransactionKind::AuthenticatorStateUpdate(_)
             | TransactionKind::RandomnessStateUpdate(_)
+            | TransactionKind::ProgrammableSystemTransaction(_)
             | TransactionKind::EndOfEpoch(_) => true,
             TransactionKind::ProgrammableTransaction(_) => false,
         }

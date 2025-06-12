@@ -35,7 +35,7 @@ af-ptbuilder      = { version = "7.0.0", public = true, optional = true, path = 
 af-sui-pkg-sdk    = { version = "0.10.1", public = true, path = "../af-sui-pkg-sdk" }
 move-stdlib-sdk   = { version = "0.11.1", public = true, path = "../move-stdlib-sdk" }
 sui-framework-sdk = { version = "0.12.1", public = true, path = "../sui-framework-sdk" }
-sui-sdk-types     = { git = "https://github.com/MystenLabs/sui-rust-sdk.git", rev = "b64827452de2e3f9e62ee8f3cb456a93c2b66b53", public = true }
+sui-sdk-types     = { version = "0.0.5", public = true }
 
 af-move-type = { version = "0.11.0", path = "../af-move-type" }
 af-sui-types = { version = "0.11.0", path = "../af-sui-types" }
