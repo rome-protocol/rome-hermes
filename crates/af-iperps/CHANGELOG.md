@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.30.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.29.0...af-iperps-v0.30.0)
+
+### ⛰️ Features
+
+- *(af-iperps)* [**breaking**] Update for latest contracts - ([76d3d41](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/76d3d41c1c9fb48f0a09b2d1858d295bb7841d90))
+
+
 ## [0.28.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.27.6...af-iperps-v0.28.0)
 
 ### ⚙️ Miscellaneous Tasks
