@@ -126,17 +126,19 @@ sui_pkg_sdk!(perpetuals {
         /// Used by clearing house to check margin when placing an order
         struct SessionHotPotato<!phantom T> {
             clearing_house: ClearingHouse<T>,
+            orderbook: orderbook::Orderbook,
             account_id: u64,
             timestamp_ms: u64,
             collateral_price: IFixed,
             index_price: IFixed,
-            book_price: IFixed,
             margin_before: IFixed,
             min_margin_before: IFixed,
-            fills: vector<orderbook::FillReceipt>,
-            post: orderbook::PostReceipt,
-            // TODO: Rust's `Option` is perfectly fine here
-            liquidation_receipt: move_stdlib_sdk::option::Option<LiquidationReceipt>
+            position_base_before: IFixed,
+            total_open_interest: IFixed,
+            total_fees: IFixed,
+            maker_events: vector<events::FilledMakerOrder>,
+            liquidation_receipt: Option<LiquidationReceipt>,
+            session_summary: SessionSummary
         }
 
         struct LiquidationReceipt has drop, store {
@@ -154,6 +156,7 @@ sui_pkg_sdk!(perpetuals {
             quote_filled_bid: IFixed,
             base_posted_ask: IFixed,
             base_posted_bid: IFixed,
+            posted_orders: u64,
             base_liquidated: IFixed,
             quote_liquidated: IFixed,
             is_liqee_long: bool,
@@ -384,6 +387,7 @@ sui_pkg_sdk!(perpetuals {
             order_id: u128,
             filled_size: u64,
             remaining_size: u64,
+            canceled_size: u64,
             pnl: IFixed,
             fees: IFixed,
         }
@@ -399,11 +403,13 @@ sui_pkg_sdk!(perpetuals {
             quote_asset_delta_bid: IFixed,
         }
 
-        struct OrderbookPostReceipt has copy, drop {
+        struct PostedOrder has copy, drop {
             ch_id: ID,
             account_id: u64,
             order_id: u128,
             order_size: u64,
+            reduce_only: bool,
+            expiration_timestamp_ms: Option<u64>
         }
 
         struct CanceledOrder has copy, drop {
@@ -796,7 +802,11 @@ sui_pkg_sdk!(perpetuals {
             /// User's account id
             account_id: u64,
             /// Amount of lots to be filled
-            size: u64
+            size: u64,
+            /// Optional reduce-only requirement for this order.
+            reduce_only: bool,
+            /// Optional expiration time for the order
+            expiration_timestamp_ms: Option<u64>
         }
 
         /// The orderbook doesn't know the types of tokens traded, it assumes a correct
@@ -805,29 +815,6 @@ sui_pkg_sdk!(perpetuals {
             id: UID,
             /// Number of limit orders placed on book, monotonically increases
             counter: u64,
-        }
-
-        // -----------------------------------------------------------------------------
-        //        Result Structures
-        // -----------------------------------------------------------------------------
-
-        struct FillReceipt has drop, store {
-            account_id: u64,
-            order_id: u128,
-            size: u64,
-            final_size: u64,
-        }
-
-        struct PostReceipt has drop, store {
-            base_ask: u64,
-            base_bid: u64,
-            pending_orders: u64
-        }
-
-        /// Order info data structure that is returned by `inspect_orders` function.
-        struct OrderInfo has copy, drop, store {
-            price: u64,
-            size: u64,
         }
     }
 

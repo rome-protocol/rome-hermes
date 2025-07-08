@@ -38,10 +38,13 @@ module perpetuals::errors {
 
     /// Cannot deposit/withdraw zero coins to/from the account's collateral.
     const DepositOrWithdrawAmountZero: u64 = 0;
-    /// Orderbook size or price are invalid values
-    const InvalidSizeOrPrice: u64 = 1;
+    /// Size to place is 0. Raised also when there is no open position and
+    /// an order with `reduce_only` is passed.
+    const SizeOrPositionZero: u64 = 1;
     /// Index price returned from oracle is 0 or invalid value
     const BadIndexPrice: u64 = 2;
+    /// Price is either 0 or greater than 0x8000_0000_0000_0000
+    const InvalidPrice: u64 = 3;
     /// Order value in USD is too low
     const OrderUsdValueTooLow: u64 = 4;
     /// Passed a vector of invalid order ids to perform force cancellation
@@ -79,8 +82,8 @@ module perpetuals::errors {
     const InvalidCollateralPriceFeedStorage: u64 = 21;
     /// Fees accrued are negative
     const NegativeFeesAccrued: u64 = 22;
-    /// Reduce only conditions are not respected for stop order execution
-    const NotReduceOnlyStopOrder: u64 = 23;
+    /// Passed a timestamp older than current Clock's one
+    const InvalidExpirationTimestamp: u64 = 23;
     /// Stop order gas cost provided is not enough
     const NotEnoughGasForStopOrder: u64 = 24;
     /// Invalid account trying to perform an action on a StopOrderTicket

@@ -7,6 +7,8 @@ pub struct OrderDetails {
     pub account_id: u64,
     pub price: u64,
     pub size: u64,
+    pub reduce_only: bool,
+    pub expiration_timestamp_ms: Option<u64>,
 }
 
 #[derive(Clone, Copy, Debug, clap::ValueEnum, Serialize, Deserialize, Eq, PartialEq)]

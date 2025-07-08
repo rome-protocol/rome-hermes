@@ -27,15 +27,22 @@ pub trait Orderbook {
     fn reduce_order_size(&mut self, order_id: u128, size_to_sub: u64);
 }
 
-impl<T: Orderbook> Apply<T> for events::OrderbookPostReceipt {
+impl<T: Orderbook> Apply<T> for events::PostedOrder {
     fn apply(&self, target: &mut T) {
         let Self {
             order_id,
             order_size: size,
             account_id,
+            reduce_only,
+            expiration_timestamp_ms,
             ..
         } = *self;
-        let order = Order { account_id, size };
+        let order = Order {
+            account_id,
+            size,
+            reduce_only,
+            expiration_timestamp_ms,
+        };
         target.insert_order(order_id, order);
     }
 }
