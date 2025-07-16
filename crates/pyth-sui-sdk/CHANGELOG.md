@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.21.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/pyth-sui-sdk-v0.20.0...pyth-sui-sdk-v0.21.0)
+
+### ⛰️ Features
+
+- *(deps)* [**breaking**] Update to sui-sdk-types 0.0.6 - ([4f80be3](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/4f80be3cf395982d362fd2f368bd2b0538b89181))
+
+
 ## [0.18.7](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/pyth-sui-sdk-v0.18.6...pyth-sui-sdk-v0.18.7)
 
 ### ⚙️ Miscellaneous Tasks

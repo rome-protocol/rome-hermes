@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-jsonrpc-v0.17.0...sui-jsonrpc-v0.18.0)
+
+### ⛰️ Features
+
+- *(deps)* [**breaking**] Update to sui-sdk-types 0.0.6 - ([4f80be3](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/4f80be3cf395982d362fd2f368bd2b0538b89181))
+
+
 ## [0.15.5](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-jsonrpc-v0.15.4...sui-jsonrpc-v0.15.5)
 
 ### ⚙️ Miscellaneous Tasks
