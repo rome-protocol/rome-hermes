@@ -37,6 +37,7 @@ pub use sui_sdk_types::{
     CheckpointCommitment,
     CheckpointContents,
     CheckpointContentsDigest,
+    CheckpointData,
     CheckpointDigest,
     CheckpointSequenceNumber,
     CheckpointSummary,
@@ -103,7 +104,7 @@ pub use self::sui::chain_identifier::ChainIdentifier;
 #[doc(inline)]
 pub use self::sui::effects::TransactionEffectsAPI;
 #[doc(inline)]
-pub use self::sui::full_checkpoint_content::{CheckpointData, CheckpointTransaction};
+pub use self::sui::full_checkpoint_content::CheckpointTransaction;
 #[doc(inline)]
 pub use self::sui::move_object_type::MoveObjectType;
 #[doc(inline)]
