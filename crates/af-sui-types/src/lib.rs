@@ -42,6 +42,7 @@ pub use sui_sdk_types::{
     CheckpointSequenceNumber,
     CheckpointSummary,
     CheckpointTimestamp,
+    CheckpointTransaction,
     Command,
     ConsensusCommitDigest,
     Digest,
@@ -103,8 +104,6 @@ pub use self::move_core::u256::{self, U256};
 pub use self::sui::chain_identifier::ChainIdentifier;
 #[doc(inline)]
 pub use self::sui::effects::TransactionEffectsAPI;
-#[doc(inline)]
-pub use self::sui::full_checkpoint_content::CheckpointTransaction;
 #[doc(inline)]
 pub use self::sui::move_object_type::MoveObjectType;
 #[doc(inline)]
