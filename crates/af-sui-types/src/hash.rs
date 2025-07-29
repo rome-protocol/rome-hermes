@@ -1,42 +1,7 @@
 use sui_sdk_types::hash::Hasher;
 use sui_sdk_types::{Intent, IntentAppId, IntentScope, IntentVersion, SigningDigest};
 
-use crate::sui::transaction::ObjectArg;
-use crate::{Digest, Object, ObjectDigest, Owner, TransactionData, TransactionDigest};
-
-impl Object {
-    pub fn digest(&self) -> ObjectDigest {
-        const SALT: &str = "Object::";
-        let digest = type_digest(SALT, self);
-        ObjectDigest::new(digest.into_inner())
-    }
-
-    /// Input for transactions that interact with this object.
-    pub fn object_arg(&self, mutable: bool) -> ObjectArg {
-        use Owner::*;
-        let id = self.id();
-        match self.owner {
-            AddressOwner(_) | ObjectOwner(_) | Immutable => {
-                ObjectArg::ImmOrOwnedObject((id, self.version(), self.digest()))
-            }
-            Shared {
-                initial_shared_version,
-            }
-            | ConsensusV2 {
-                start_version: initial_shared_version,
-                ..
-            }
-            | ConsensusAddress {
-                start_version: initial_shared_version,
-                ..
-            } => ObjectArg::SharedObject {
-                id,
-                initial_shared_version,
-                mutable,
-            },
-        }
-    }
-}
+use crate::{Digest, TransactionData, TransactionDigest};
 
 impl TransactionData {
     pub fn digest(&self) -> TransactionDigest {

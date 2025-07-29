@@ -59,10 +59,12 @@ pub use sui_sdk_types::{
     JwkId,
     MoveCall,
     MovePackage,
+    Object,
     ObjectDigest,
     ObjectId,
     ObjectIn,
     ObjectOut,
+    Owner,
     ProgrammableTransaction,
     ProtocolVersion,
     SignedTransaction,
@@ -106,8 +108,6 @@ pub use self::sui::chain_identifier::ChainIdentifier;
 pub use self::sui::effects::TransactionEffectsAPI;
 #[doc(inline)]
 pub use self::sui::move_object_type::MoveObjectType;
-#[doc(inline)]
-pub use self::sui::object::{MoveObject, Object, Owner};
 #[doc(inline)]
 pub use self::sui::transaction::{
     GasData,

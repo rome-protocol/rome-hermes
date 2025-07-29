@@ -1,5 +1,5 @@
-use af_sui_types::{Object, ObjectId, decode_base64_default, hex_address_bytes};
-use sui_sdk_types::Transaction;
+use af_sui_types::{ObjectId, decode_base64_default, hex_address_bytes};
+use sui_sdk_types::{Object, Transaction};
 
 /// This showcases how to obtain a DOF's object ID from its wrapper `Field`'s BCS bytes.
 ///
@@ -31,8 +31,8 @@ NB4i8B6YCC9BXLQAAAAAA";
 
     let bytes = decode_base64_default(BASE64_BCS).unwrap();
     let wrapper: Object = bcs::from_bytes(&bytes).unwrap();
-    let move_object = wrapper.as_move().expect("Not a Move object");
-    let contents = &move_object.contents;
+    let move_object = wrapper.as_struct().expect("Not a Move object");
+    let contents = &move_object.contents();
     println!("{wrapper:#?}");
 
     let id = ObjectId::new(contents[(contents.len() - 32)..].try_into().unwrap());
@@ -79,7 +79,7 @@ fn object_deser() {
 
     let bytes = decode_base64_default(BASE64_BCS).unwrap();
     let obj: Object = bcs::from_bytes(&bytes).unwrap();
-    insta::assert_snapshot!(obj.id(), @"0x26a965f75a0bfde46e106e0d860fd656ce9ced5f61e6ad1dcfe80295a40d0a73");
+    insta::assert_snapshot!(obj.object_id(), @"0x26a965f75a0bfde46e106e0d860fd656ce9ced5f61e6ad1dcfe80295a40d0a73");
     assert_eq!(obj.version(), 25232856);
     insta::assert_snapshot!(obj.digest().to_base58(), @"F8wHxvPV3CuKLm25wb7B4xL64stTGChfjJpj8RYSyWHX");
 }

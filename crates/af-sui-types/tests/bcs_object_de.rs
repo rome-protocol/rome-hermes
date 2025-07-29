@@ -1,5 +1,5 @@
-use af_sui_types::{Object, ObjectId, decode_base64_default, hex_address_bytes};
-
+use af_sui_types::{ObjectId, decode_base64_default, hex_address_bytes};
+use sui_sdk_types::Object;
 // query Transactions($tx_cursor: String) {
 //   transactionBlocks(
 //     filter: {
@@ -82,7 +82,7 @@ fn object_deser() {
     let bytes = decode_base64_default(BASE64_BCS).unwrap();
     let obj: Object = bcs::from_bytes(&bytes).unwrap();
     assert_eq!(
-        obj.id(),
+        obj.object_id(),
         ObjectId::new(hex_address_bytes(
             b"26a965f75a0bfde46e106e0d860fd656ce9ced5f61e6ad1dcfe80295a40d0a73"
         ))
