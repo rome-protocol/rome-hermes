@@ -5,6 +5,7 @@ use af_iperps::math::OrderBookUnits;
 use af_iperps::order_helpers::{OrderType, Side};
 use af_move_type::ObjectExt;
 use af_ptbuilder::ptb;
+use af_sui_types::sui::object::ObjectHelpers as _;
 use af_sui_types::{ObjectArg, ObjectId};
 use af_utilities::IFixed;
 use clap::Parser;

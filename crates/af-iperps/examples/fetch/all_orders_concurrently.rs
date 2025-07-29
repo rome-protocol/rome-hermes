@@ -42,16 +42,18 @@ async fn main() -> Result<()> {
     let client = ReqwestClient::new(reqwest::Client::default(), rpc.to_owned());
 
     let ch_obj = client.full_object(ch, None).await?;
-    let ch_struct = ch_obj.as_move().ok_or_eyre("Not a Move struct")?;
-    let OrderMaps { asks, bids, .. } = client.order_maps(ch_struct.type_.address(), ch).await?;
+    let ch_struct = ch_obj.as_struct().ok_or_eyre("Not a Move struct")?;
+    let OrderMaps { asks, bids, .. } = client
+        .order_maps(ch_struct.object_type().address, ch)
+        .await?;
     let ch_inst = MoveInstance::<ClearingHouse>::from_raw_struct(
-        ch_struct.type_.clone().into(),
-        &ch_struct.contents,
+        ch_struct.object_type().clone().into(),
+        &ch_struct.contents(),
     )?;
 
     tokio::pin!(
-        let asks_stream = client.map_orders(asks, Some(ch_struct.version));
-        let bids_stream = client.map_orders(bids, Some(ch_struct.version));
+        let asks_stream = client.map_orders(asks, Some(ch_struct.version()));
+        let bids_stream = client.map_orders(bids, Some(ch_struct.version()));
     );
     let mut stream = stream_select!(asks_stream, bids_stream);
 
