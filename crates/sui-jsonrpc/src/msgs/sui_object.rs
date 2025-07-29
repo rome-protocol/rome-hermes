@@ -10,14 +10,12 @@ use std::str::FromStr;
 use af_sui_types::{
     Address as SuiAddress,
     Identifier,
-    MoveObject,
     MoveObjectType,
     Object,
     ObjectArg,
     ObjectDigest,
     ObjectId,
     ObjectRef,
-    Owner,
     StructTag,
     TransactionDigest,
     TypeOrigin,
@@ -28,7 +26,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use serde_with::base64::Base64;
 use serde_with::{DisplayFromStr, serde_as};
-use sui_sdk_types::Version;
+use sui_sdk_types::{Owner, Version};
 
 use super::{Page, SuiMoveStruct, SuiMoveValue};
 use crate::serde::BigInt;
@@ -102,7 +100,7 @@ impl SuiObjectResponse {
 
     pub fn owner(&self) -> Option<Owner> {
         if let Some(data) = &self.data {
-            return data.owner.clone();
+            return data.owner;
         }
         None
     }
@@ -320,10 +318,7 @@ impl SuiObjectData {
     }
 
     pub fn shared_object_arg(&self, mutable: bool) -> Result<ObjectArg, SuiObjectDataError> {
-        let Owner::Shared {
-            initial_shared_version,
-        } = self.owner()?
-        else {
+        let Owner::Shared(initial_shared_version) = self.owner()? else {
             return Err(SuiObjectDataError::NotShared);
         };
         Ok(ObjectArg::SharedObject {
@@ -335,7 +330,7 @@ impl SuiObjectData {
 
     pub fn imm_or_owned_object_arg(&self) -> Result<ObjectArg, SuiObjectDataError> {
         use Owner::*;
-        if !matches!(self.owner()?, AddressOwner(_) | ObjectOwner(_) | Immutable) {
+        if !matches!(self.owner()?, Address(_) | Object(_) | Immutable) {
             return Err(SuiObjectDataError::NotImmOrOwned);
         };
         let (i, v, d) = self.object_ref();
@@ -346,16 +341,10 @@ impl SuiObjectData {
     pub(crate) fn object_arg(&self, mutable: bool) -> Result<ObjectArg, SuiObjectDataError> {
         use Owner as O;
         Ok(match self.owner()? {
-            O::AddressOwner(_) | O::ObjectOwner(_) | O::Immutable => {
+            O::Address(_) | O::Object(_) | O::Immutable => {
                 ObjectArg::ImmOrOwnedObject(self.object_ref())
             }
-            O::Shared {
-                initial_shared_version,
-            }
-            | O::ConsensusV2 {
-                start_version: initial_shared_version,
-                ..
-            }
+            O::Shared(initial_shared_version)
             | O::ConsensusAddress {
                 start_version: initial_shared_version,
                 ..
@@ -368,7 +357,7 @@ impl SuiObjectData {
     }
 
     pub fn owner(&self) -> Result<Owner, SuiObjectDataError> {
-        self.owner.clone().ok_or(SuiObjectDataError::MissingOwner)
+        self.owner.ok_or(SuiObjectDataError::MissingOwner)
     }
 
     /// Create a standard Sui [`Object`] if there's enough information.
@@ -409,23 +398,23 @@ impl SuiObjectData {
                     type_origin_table: p.type_origin_table,
                     linkage_table: p.linkage_table,
                 };
-                Ok(Object::new_package(
-                    inner,
+                Ok(Object::new(
+                    sui_sdk_types::ObjectData::Package(inner),
                     owner,
                     previous_transaction,
                     storage_rebate,
                 ))
             }
             SuiRawData::MoveObject(raw_struct) => {
-                let struct_ = MoveObject::new(
+                let inner = sui_sdk_types::MoveStruct::new(
                     raw_struct.type_,
                     raw_struct.has_public_transfer,
                     raw_struct.version,
                     raw_struct.bcs_bytes,
                 )
                 .ok_or(FullObjectDataError::InvalidBcs)?;
-                Ok(Object::new_struct(
-                    struct_,
+                Ok(Object::new(
+                    sui_sdk_types::ObjectData::Struct(inner),
                     owner,
                     previous_transaction,
                     storage_rebate,
@@ -449,7 +438,7 @@ impl Display for SuiObjectData {
             format!("----- {type_} ({}[{}]) -----", self.object_id, self.version).bold()
         )?;
         if let Some(ref owner) = self.owner {
-            writeln!(writer, "{}: {}", "Owner".bold().bright_black(), owner)?;
+            writeln!(writer, "{}: {:?}", "Owner".bold().bright_black(), owner)?;
         }
 
         writeln!(

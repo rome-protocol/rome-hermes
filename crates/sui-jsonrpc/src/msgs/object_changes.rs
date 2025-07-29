@@ -10,12 +10,11 @@ use af_sui_types::{
     ObjectDigest,
     ObjectId,
     ObjectRef,
-    Owner,
     StructTag,
 };
 use serde::{Deserialize, Serialize};
 use serde_with::{DisplayFromStr, serde_as};
-use sui_sdk_types::Version;
+use sui_sdk_types::{Owner, Version};
 
 use crate::serde::BigInt;
 
@@ -174,7 +173,7 @@ impl Display for ObjectChange {
             } => {
                 write!(
                     f,
-                    " ┌──\n │ ObjectId: {}\n │ Sender: {} \n │ Recipient: {}\n │ ObjectType: {} \n │ Version: {}\n │ Digest: {}\n └──",
+                    " ┌──\n │ ObjectId: {}\n │ Sender: {} \n │ Recipient: {:?}\n │ ObjectType: {} \n │ Version: {}\n │ Digest: {}\n └──",
                     object_id, sender, recipient, object_type, version, digest
                 )
             }
@@ -189,7 +188,7 @@ impl Display for ObjectChange {
             } => {
                 write!(
                     f,
-                    " ┌──\n │ ObjectId: {}\n │ Sender: {} \n │ Owner: {}\n │ ObjectType: {} \n │ Version: {}\n │ Digest: {}\n └──",
+                    " ┌──\n │ ObjectId: {}\n │ Sender: {} \n │ Owner: {:?}\n │ ObjectType: {} \n │ Version: {}\n │ Digest: {}\n └──",
                     object_id, sender, owner, object_type, version, digest
                 )
             }
@@ -227,7 +226,7 @@ impl Display for ObjectChange {
             } => {
                 write!(
                     f,
-                    " ┌──\n │ ObjectId: {}\n │ Sender: {} \n │ Owner: {}\n │ ObjectType: {} \n │ Version: {}\n │ Digest: {}\n └──",
+                    " ┌──\n │ ObjectId: {}\n │ Sender: {} \n │ Owner: {:?}\n │ ObjectType: {} \n │ Version: {}\n │ Digest: {}\n └──",
                     object_id, sender, owner, object_type, version, digest
                 )
             }

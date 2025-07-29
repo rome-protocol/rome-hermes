@@ -4,9 +4,9 @@
 use std::fmt::Display;
 
 use af_sui_types::TypeTag;
-use af_sui_types::sui::object::Owner;
 use serde::{Deserialize, Serialize};
 use serde_with::{DisplayFromStr, serde_as};
+use sui_sdk_types::Owner;
 
 #[serde_as]
 #[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq)]
@@ -27,7 +27,7 @@ impl Display for BalanceChange {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(
             f,
-            " ┌──\n │ Owner: {} \n │ CoinType: {} \n │ Amount: {}\n └──",
+            " ┌──\n │ Owner: {:?} \n │ CoinType: {} \n │ Amount: {}\n └──",
             self.owner, self.coin_type, self.amount
         )
     }

@@ -14,7 +14,6 @@ use af_sui_types::{
     ObjectDigest,
     ObjectId,
     ObjectRef,
-    Owner,
     SUI_FRAMEWORK_ADDRESS,
     StructTag,
     TransactionDigest,
@@ -25,7 +24,13 @@ use enum_dispatch::enum_dispatch;
 use serde::{Deserialize, Serialize};
 use serde_with::base64::Base64;
 use serde_with::{DeserializeAs, DisplayFromStr, IfIsHumanReadable, SerializeAs, serde_as};
-use sui_sdk_types::{ConsensusDeterminedVersionAssignments, MoveLocation, UserSignature, Version};
+use sui_sdk_types::{
+    ConsensusDeterminedVersionAssignments,
+    MoveLocation,
+    Owner,
+    UserSignature,
+    Version,
+};
 use tabled::builder::Builder as TableBuilder;
 use tabled::settings::style::HorizontalLine;
 use tabled::settings::{Panel as TablePanel, Style as TableStyle};
@@ -476,7 +481,7 @@ pub fn get_new_package_upgrade_cap_from_response(
             .iter()
             .find(|change| {
                 matches!(change, ObjectChange::Created {
-                    owner: Owner::AddressOwner(_),
+                    owner: Owner::Address(_),
                     object_type: StructTag {
                         address: SUI_FRAMEWORK_ADDRESS,
                         module,
@@ -836,7 +841,7 @@ impl SuiTransactionBlockEffectsAPI for SuiTransactionBlockEffectsV1 {
 
 fn owned_objref_string(obj: &OwnedObjectRef) -> String {
     format!(
-        " ┌──\n │ ID: {} \n │ Owner: {} \n │ Version: {} \n │ Digest: {}\n └──",
+        " ┌──\n │ ID: {} \n │ Owner: {:?} \n │ Version: {} \n │ Digest: {}\n └──",
         obj.reference.object_id, obj.owner, obj.reference.version, obj.reference.digest
     )
 }
