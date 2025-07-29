@@ -17,6 +17,9 @@ todo                  = "warn"
 uninlined_format_args = "allow"
 unwrap_used           = "warn"
 
+[workspace.lints.rust]
+exported_private_dependencies = "allow"
+
 # https://github.com/eyre-rs/color-eyre?tab=readme-ov-file#improving-perf-on-debug-builds
 [profile.dev.package.backtrace]
 opt-level = 3
