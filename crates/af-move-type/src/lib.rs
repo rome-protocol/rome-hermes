@@ -327,14 +327,6 @@ pub trait ObjectExt {
     fn struct_instance<T: MoveStruct>(&self) -> Result<MoveInstance<T>, ObjectError>;
 }
 
-impl ObjectExt for af_sui_types::Object {
-    fn struct_instance<T: MoveStruct>(&self) -> Result<MoveInstance<T>, ObjectError> {
-        let _struct = self.as_move().ok_or(ObjectError::NotStruct)?;
-        MoveInstance::from_raw_struct(_struct.type_.clone().into(), &_struct.contents)
-            .map_err(From::from)
-    }
-}
-
 impl ObjectExt for sui_sdk_types::Object {
     fn struct_instance<T: MoveStruct>(&self) -> Result<MoveInstance<T>, ObjectError> {
         let sui_sdk_types::ObjectData::Struct(s) = self.data() else {
