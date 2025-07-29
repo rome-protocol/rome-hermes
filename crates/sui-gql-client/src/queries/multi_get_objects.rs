@@ -37,7 +37,7 @@ pub(super) async fn query<C: GraphQlClient>(
         .inspect(|o| {
             object_keys
                 .iter()
-                .position(|k| k.object_id == o.id() && k.version == o.version())
+                .position(|k| k.object_id == o.object_id() && k.version == o.version())
                 .map(|p| object_keys.swap_remove(p));
         })
         .collect_vec();

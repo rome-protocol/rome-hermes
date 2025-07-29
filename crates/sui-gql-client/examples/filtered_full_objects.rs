@@ -39,7 +39,7 @@ async fn main() -> Result<()> {
         if summary {
             spinner.tick();
         } else {
-            println!("Object ID: {:?}", obj.id());
+            println!("Object ID: {:?}", obj.object_id());
             println!("Object: {obj:?}");
         }
     }

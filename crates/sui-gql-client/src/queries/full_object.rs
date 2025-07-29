@@ -1,5 +1,4 @@
-use af_sui_types::ObjectId;
-use af_sui_types::sui::object::Object;
+use af_sui_types::{Object, ObjectId};
 use cynic::{QueryFragment, QueryVariables};
 use graphql_extract::extract;
 
