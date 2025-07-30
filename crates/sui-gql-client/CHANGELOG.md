@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [0.20.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.19.0...sui-gql-client-v0.20.0)
+
+### ⛰️ Features
+
+- *(sui-gql-client)* [**breaking**] Remove Object - ([556b3ff](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/556b3ff0f68270ca2f969499b22655db07124eb5))
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
 
 ## [Unreleased]
 

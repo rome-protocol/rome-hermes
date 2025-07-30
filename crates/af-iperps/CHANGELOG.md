@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [0.32.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.32.0...af-iperps-v0.32.1)
+
+### 🧪 Testing
+
+- *(af-iperps)* Temporarily remove public_api test - ([36ea27f](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/36ea27f06629149bf021b22065e1309135bd197f))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(af-iperps)* Fix example - ([ba748a5](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/ba748a51309be3bde467d0c79c11ecddba2e4a1c))
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
 
 ## [Unreleased]
 

@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [0.22.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-pyth-wrapper-v0.22.0...af-pyth-wrapper-v0.22.1)
+
+### ⚙️ Miscellaneous Tasks
+
+- Updated the following local packages: af-sui-types, af-move-type, sui-gql-client, af-sui-pkg-sdk, sui-framework-sdk, af-ptbuilder - ([0000000](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/0000000))
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
 
 ## [Unreleased]
 

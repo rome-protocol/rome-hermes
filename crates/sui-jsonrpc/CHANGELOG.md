@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [0.19.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-jsonrpc-v0.18.0...sui-jsonrpc-v0.19.0)
+
+### ⛰️ Features
+
+- *(sui-json-rpc)* [**breaking**] Remove Object - ([28e2c28](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/28e2c28731f26f6b259266af4a04eee42e6e5390))
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
 
 ## [Unreleased]
 

@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [0.13.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-sui-types-v0.12.0...af-sui-types-v0.13.0)
+
+### ⛰️ Features
+
+- *(af-sui-types)* Add helpers traits - ([29d2525](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/29d25258dd46c0f817e1506fdd0e012fb860b054))
+- *(af-sui-types)* Remove Object - ([8784b26](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/8784b264ab2f095a0228a0ae295c8e4b8e980236))
+- *(af-sui-types)* Remove CheckpointTransaction - ([e160875](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/e1608755f75eff2e8bfb8c3a84df0ec8b8ba866f))
+- *(af-sui-types)* [**breaking**] Remove CheckpointData - ([6d2f3f3](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/6d2f3f300b9cd30300e54395cb021a67a2f22bb8))
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
 
 ## [Unreleased]
 

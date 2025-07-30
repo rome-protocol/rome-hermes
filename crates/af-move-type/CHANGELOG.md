@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [0.13.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-move-type-v0.12.0...af-move-type-v0.13.0)
+
+### ⛰️ Features
+
+- *(af-move-type)* [**breaking**] Remove Object - ([18b01d4](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/18b01d48348e69defbdcf3680ba9942427890d4e))
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
 
 ## [Unreleased]
 
