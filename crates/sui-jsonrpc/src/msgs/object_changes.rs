@@ -14,8 +14,9 @@ use af_sui_types::{
 };
 use serde::{Deserialize, Serialize};
 use serde_with::{DisplayFromStr, serde_as};
-use sui_sdk_types::{Owner, Version};
+use sui_sdk_types::Version;
 
+use crate::msgs::Owner;
 use crate::serde::BigInt;
 
 /// ObjectChange are derived from the object mutations in the TransactionEffect to provide richer object information.

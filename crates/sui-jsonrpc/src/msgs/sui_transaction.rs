@@ -24,13 +24,7 @@ use enum_dispatch::enum_dispatch;
 use serde::{Deserialize, Serialize};
 use serde_with::base64::Base64;
 use serde_with::{DeserializeAs, DisplayFromStr, IfIsHumanReadable, SerializeAs, serde_as};
-use sui_sdk_types::{
-    ConsensusDeterminedVersionAssignments,
-    MoveLocation,
-    Owner,
-    UserSignature,
-    Version,
-};
+use sui_sdk_types::{ConsensusDeterminedVersionAssignments, MoveLocation, UserSignature, Version};
 use tabled::builder::Builder as TableBuilder;
 use tabled::settings::style::HorizontalLine;
 use tabled::settings::{Panel as TablePanel, Style as TableStyle};
@@ -38,6 +32,7 @@ use tabled::settings::{Panel as TablePanel, Style as TableStyle};
 use super::balance_changes::BalanceChange;
 use super::object_changes::ObjectChange;
 use super::{Page, SuiEvent, SuiObjectRef};
+use crate::msgs::Owner;
 use crate::serde::BigInt;
 
 /// similar to EpochId of sui-types but BigInt
@@ -481,7 +476,7 @@ pub fn get_new_package_upgrade_cap_from_response(
             .iter()
             .find(|change| {
                 matches!(change, ObjectChange::Created {
-                    owner: Owner::Address(_),
+                    owner: Owner::AddressOwner(_),
                     object_type: StructTag {
                         address: SUI_FRAMEWORK_ADDRESS,
                         module,

@@ -26,7 +26,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use serde_with::base64::Base64;
 use serde_with::{DisplayFromStr, serde_as};
-use sui_sdk_types::{Owner, Version};
+use sui_sdk_types::Version;
 
 use super::{Page, SuiMoveStruct, SuiMoveValue};
 use crate::serde::BigInt;
@@ -100,7 +100,7 @@ impl SuiObjectResponse {
 
     pub fn owner(&self) -> Option<Owner> {
         if let Some(data) = &self.data {
-            return data.owner;
+            return data.owner.clone();
         }
         None
     }
@@ -318,7 +318,10 @@ impl SuiObjectData {
     }
 
     pub fn shared_object_arg(&self, mutable: bool) -> Result<ObjectArg, SuiObjectDataError> {
-        let Owner::Shared(initial_shared_version) = self.owner()? else {
+        let Owner::Shared {
+            initial_shared_version,
+        } = self.owner()?
+        else {
             return Err(SuiObjectDataError::NotShared);
         };
         Ok(ObjectArg::SharedObject {
@@ -330,7 +333,7 @@ impl SuiObjectData {
 
     pub fn imm_or_owned_object_arg(&self) -> Result<ObjectArg, SuiObjectDataError> {
         use Owner::*;
-        if !matches!(self.owner()?, Address(_) | Object(_) | Immutable) {
+        if !matches!(self.owner()?, AddressOwner(_) | ObjectOwner(_) | Immutable) {
             return Err(SuiObjectDataError::NotImmOrOwned);
         };
         let (i, v, d) = self.object_ref();
@@ -341,11 +344,13 @@ impl SuiObjectData {
     pub(crate) fn object_arg(&self, mutable: bool) -> Result<ObjectArg, SuiObjectDataError> {
         use Owner as O;
         Ok(match self.owner()? {
-            O::Address(_) | O::Object(_) | O::Immutable => {
+            O::AddressOwner(_) | O::ObjectOwner(_) | O::Immutable => {
                 ObjectArg::ImmOrOwnedObject(self.object_ref())
             }
-            O::Shared(initial_shared_version)
-            | O::ConsensusAddress {
+            O::Shared {
+                initial_shared_version,
+            }
+            | O::ConsensusAddressOwner {
                 start_version: initial_shared_version,
                 ..
             } => ObjectArg::SharedObject {
@@ -357,7 +362,7 @@ impl SuiObjectData {
     }
 
     pub fn owner(&self) -> Result<Owner, SuiObjectDataError> {
-        self.owner.ok_or(SuiObjectDataError::MissingOwner)
+        self.owner.clone().ok_or(SuiObjectDataError::MissingOwner)
     }
 
     /// Create a standard Sui [`Object`] if there's enough information.
@@ -400,7 +405,7 @@ impl SuiObjectData {
                 };
                 Ok(Object::new(
                     sui_sdk_types::ObjectData::Package(inner),
-                    owner,
+                    owner.into(),
                     previous_transaction,
                     storage_rebate,
                 ))
@@ -415,7 +420,7 @@ impl SuiObjectData {
                 .ok_or(FullObjectDataError::InvalidBcs)?;
                 Ok(Object::new(
                     sui_sdk_types::ObjectData::Struct(inner),
-                    owner,
+                    owner.into(),
                     previous_transaction,
                     storage_rebate,
                 ))
@@ -473,6 +478,50 @@ impl Display for SuiObjectData {
     }
 }
 
+#[derive(Eq, PartialEq, Debug, Clone, Deserialize, Serialize, Hash, Ord, PartialOrd)]
+pub enum Owner {
+    /// Object is exclusively owned by a single address, and is mutable.
+    AddressOwner(SuiAddress),
+    /// Object is exclusively owned by a single object, and is mutable.
+    /// The object ID is converted to SuiAddress as SuiAddress is universal.
+    ObjectOwner(SuiAddress),
+    /// Object is shared, can be used by any address, and is mutable.
+    Shared {
+        /// The version at which the object became shared
+        initial_shared_version: Version,
+    },
+    /// Object is immutable, and hence ownership doesn't matter.
+    Immutable,
+    /// Object is exclusively owned by a single address and sequenced via consensus.
+    ConsensusAddressOwner {
+        /// The version at which the object most recently became a consensus object.
+        /// This serves the same function as `initial_shared_version`, except it may change
+        /// if the object's Owner type changes.
+        start_version: Version,
+        // The owner of the object.
+        owner: SuiAddress,
+    },
+}
+
+impl From<Owner> for sui_sdk_types::Owner {
+    fn from(value: Owner) -> sui_sdk_types::Owner {
+        match value {
+            Owner::AddressOwner(a) => sui_sdk_types::Owner::Address(a),
+            Owner::ObjectOwner(o) => sui_sdk_types::Owner::Object(o.into()),
+            Owner::Shared {
+                initial_shared_version,
+            } => sui_sdk_types::Owner::Shared(initial_shared_version),
+            Owner::Immutable => sui_sdk_types::Owner::Immutable,
+            Owner::ConsensusAddressOwner {
+                start_version,
+                owner,
+            } => sui_sdk_types::Owner::ConsensusAddress {
+                start_version,
+                owner,
+            },
+        }
+    }
+}
 // =============================================================================
 //  ObjectType
 // =============================================================================
