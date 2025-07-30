@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.20.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-jsonrpc-v0.19.0...sui-jsonrpc-v0.20.0)
+
+### 🐛 Bug Fixes
+
+- *(sui-jsonrpc)* [**breaking**] Add Owner type for messages - ([b29a778](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/b29a7787158890b21b1eb0a03d3312930372eb3e))
+
+
 ## [0.19.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-jsonrpc-v0.18.0...sui-jsonrpc-v0.19.0)
 
 ### ⛰️ Features
