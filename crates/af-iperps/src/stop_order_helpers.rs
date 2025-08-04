@@ -27,10 +27,11 @@ pub struct SLTPDetails {
     pub expire_timestamp: Option<u64>,
     /// `true` if limit order, `false` if market order
     pub is_limit_order: bool,
-    pub stop_index_price: IFixed,
-    /// `true` if stop loss order, `false` if take profit order
-    pub is_stop_loss: bool,
-    /// - position_is_ask: `true` if position is short, `false` if position is long
+    /// Optional stop loss price
+    pub stop_loss_price: Option<IFixed>,
+    /// Optional take profit price
+    pub take_profit_price: Option<IFixed>,
+    /// `true` if position is short, `false` if position is long
     pub position_is_ask: bool,
     pub size: u64,
     /// Can be set at random value if `is_limit_order` is false
@@ -50,8 +51,8 @@ pub struct StandaloneDetails {
     /// `true` if limit order, `false` if market order
     pub is_limit_order: bool,
     pub stop_index_price: IFixed,
-    /// `true` means the order can be placed when oracle index price is >= than chosen
-    /// `stop_index_price`
+    /// `true` if the order can be placed when oracle index price is >= than
+    /// chosen `stop_index_price`
     pub ge_stop_index_price: bool,
     pub side: Side,
     pub size: u64,
