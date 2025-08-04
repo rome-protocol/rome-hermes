@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.33.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.32.1...af-iperps-v0.33.0)
+
+### ⛰️ Features
+
+- *(af-iperps)* [**breaking**] Add oco sltp - ([5221355](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/52213558e86c4b6d8f331091b1aa293c752275d4))
+
+
 ## [0.32.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-iperps-v0.32.0...af-iperps-v0.32.1)
 
 ### 🧪 Testing
