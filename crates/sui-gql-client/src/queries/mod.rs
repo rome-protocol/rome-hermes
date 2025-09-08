@@ -16,8 +16,10 @@ pub use bimap::BiMap;
 use futures::Stream;
 use outputs::{DynamicField, ObjectKey, RawMoveStruct, RawMoveValue};
 
+use crate::queries::coin_metadata::CoinMetadataResponse;
 use crate::{GraphQlClient, GraphQlErrors};
 
+mod coin_metadata;
 mod current_epoch_id;
 mod epoch_final_checkpoint_num;
 mod events_backward;
@@ -331,6 +333,11 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
     /// Struct type of an object given its ID.
     async fn object_type(&self, id: ObjectId) -> Result<StructTag, Self> {
         object_type::query(self, id)
+    }
+
+    /// Fetches metadata for the given coin type
+    async fn coin_metadata(&self, type_: &str) -> Result<CoinMetadataResponse, Self> {
+        coin_metadata::query(self, type_)
     }
 }
 
