@@ -16,7 +16,6 @@ pub use bimap::BiMap;
 use futures::Stream;
 use outputs::{DynamicField, ObjectKey, RawMoveStruct, RawMoveValue};
 
-use crate::queries::coin_metadata::CoinMetadataResponse;
 use crate::{GraphQlClient, GraphQlErrors};
 
 mod coin_metadata;
@@ -336,7 +335,12 @@ pub trait GraphQlClientExt: GraphQlClient + Sized {
     }
 
     /// Fetches metadata for the given coin type
-    async fn coin_metadata(&self, type_: &str) -> Result<CoinMetadataResponse, Self> {
+    ///
+    /// Returns a tuple containing (decimals, name, symbol)
+    async fn coin_metadata(
+        &self,
+        type_: &str,
+    ) -> Result<(Option<u8>, Option<String>, Option<String>), Self> {
         coin_metadata::query(self, type_)
     }
 }

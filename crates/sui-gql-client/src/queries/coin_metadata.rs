@@ -4,7 +4,7 @@ use crate::{GraphQlClient, GraphQlResponseExt, schema};
 pub async fn query<C: GraphQlClient>(
     client: &C,
     type_: impl AsRef<str>,
-) -> Result<CoinMetadataResponse, Error<C::Error>> {
+) -> Result<(Option<u8>, Option<String>, Option<String>), Error<C::Error>> {
     let data = client
         .query::<Query, _>(QueryVariables {
             coin_type: type_.as_ref(),
@@ -14,16 +14,12 @@ pub async fn query<C: GraphQlClient>(
         .try_into_data()?;
     graphql_extract::extract!(data => {
         coin_metadata? {
-            decimals?
+            decimals
             name
             symbol
         }
     });
-    Ok(CoinMetadataResponse {
-        decimals: decimals as u8,
-        name,
-        symbol,
-    })
+    Ok((decimals.map(|d| d as u8), name, symbol))
 }
 
 #[cfg(test)]
@@ -64,13 +60,4 @@ struct CoinMetadata {
     decimals: Option<i32>,
     name: Option<String>,
     symbol: Option<String>,
-}
-
-#[derive(Debug)]
-pub struct CoinMetadataResponse {
-    pub decimals: u8,
-    /// Full, official name of the token. Equivalent to CCXT's currency name.
-    pub name: Option<String>,
-    /// The token's identifying abbreviation. Equivalent to CCXT's currency code.
-    pub symbol: Option<String>,
 }
