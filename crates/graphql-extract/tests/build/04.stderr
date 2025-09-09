@@ -1,4 +1,4 @@
-error: Empty braces; must have at least one node
+error: Empty braces. Must have at least one node
   --> tests/build/04.rs:16:18
    |
 16 |         address? {}
