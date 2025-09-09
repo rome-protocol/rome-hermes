@@ -267,7 +267,7 @@ impl Node {
         if nodes.is_empty() {
             return Err(Error::new(
                 brace.span.span(),
-                "Empty braces; must have at least one node",
+                "Empty braces. Must have at least one node",
             ));
         }
         Ok(nodes)
