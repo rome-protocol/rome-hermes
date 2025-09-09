@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.21.2](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-oracle-v0.21.1...af-oracle-v0.21.2)
+
+### ⚙️ Miscellaneous Tasks
+
+- Updated the following local packages: graphql-extract, sui-gql-client - ([0000000](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/0000000))
+
+
 ## [0.21.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-oracle-v0.21.0...af-oracle-v0.21.1)
 
 ### ⚙️ Miscellaneous Tasks

@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [0.0.9](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/graphql-extract-v0.0.8...graphql-extract-v0.0.9)
+
+### 🐛 Bug Fixes
+
+- *(graphql-extract)* Fix err messages in tests due to new rust version - ([75e7649](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/75e7649f8d923c0b248d78a8280cb7a5a6318f57))
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
 
 ## [Unreleased]
 

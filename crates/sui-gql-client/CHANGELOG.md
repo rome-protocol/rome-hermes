@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.20.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.20.0...sui-gql-client-v0.20.1)
+
+### ⛰️ Features
+
+- *(sui-gql-client)* Coinmetadata returns a tuple - ([975e5dd](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/975e5dd37586878115c75a7ea9dabd27de337c3c))
+- *(sui-gql-client)* Add coin metadata query - ([dc93fbe](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/dc93fbef83c432dd2d124f217731f3656a0edcd9))
+
+
 ## [0.20.0](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/sui-gql-client-v0.19.0...sui-gql-client-v0.20.0)
 
 ### ⛰️ Features

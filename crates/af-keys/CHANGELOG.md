@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.11.2](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-keys-v0.11.1...af-keys-v0.11.2)
+
+### 🐛 Bug Fixes
+
+- *(af-keys)* Clippy CI derive default - ([2b30c42](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/2b30c421aebb6ea3c509f0f115b5bfef8a5ed38d))
+
+
 ## [0.11.1](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/af-keys-v0.11.0...af-keys-v0.11.1)
 
 ### ⚙️ Miscellaneous Tasks
