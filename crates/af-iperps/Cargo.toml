@@ -70,7 +70,7 @@ async-stream    = { version = "0.3", optional = true }
 cynic           = { version = "3", optional = true }
 enum-as-inner   = { version = "0.6", optional = true }
 futures         = { version = "0.3", optional = true }
-graphql-extract = { version = "0.0.9", path = "../graphql-extract", optional = true }
+graphql-extract = { version = "0.0.10", path = "../graphql-extract", optional = true }
 
 # Stop Orders
 bcs        = { version = "0.1", optional = true }

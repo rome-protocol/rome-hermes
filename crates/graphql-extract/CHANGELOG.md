@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.10](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/graphql-extract-v0.0.9...graphql-extract-v0.0.10)
+
+### 🐛 Bug Fixes
+
+- *(graphql-extract)* Tests err message - ([e30fb26](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/e30fb268c37ddac3cee03c1eecd3bf8640e22ee3))
+- *(graphql-extract)* Commit for the auto version bump - ([9d8f09e](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/9d8f09e135ef49d3289a3f3ea3204310136a6b39))
+- *(graphql-extract)* Manual version bump - ([01bf702](https://github.com/AftermathFinance/aftermath-sdk-rust/commit/01bf702a160a92c3438d5b8cd7fe8d9cf4028946))
+
+
 ## [0.0.9](https://github.com/AftermathFinance/aftermath-sdk-rust/compare/graphql-extract-v0.0.8...graphql-extract-v0.0.9)
 
 ### 🐛 Bug Fixes
