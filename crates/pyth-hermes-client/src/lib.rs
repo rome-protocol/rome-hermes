@@ -101,9 +101,18 @@ impl PythClient {
     }
 
     fn endpoint(&self, path: &str) -> url::Url {
-        self.url
-            .join(path.trim_start_matches('/'))
-            .expect("static endpoint paths must be valid")
+        let mut url = self.url.clone();
+        let path_to_append = path.trim_start_matches('/');
+        
+        // If the base URL already has a path, append to it instead of replacing
+        if !url.path().is_empty() && url.path() != "/" {
+            let existing_path = url.path().trim_end_matches('/');
+            url.set_path(&format!("{}/{}", existing_path, path_to_append));
+        } else {
+            url.set_path(&format!("/{}", path_to_append));
+        }
+        
+        url
     }
 
     /// Get the set of price feeds.
