@@ -35,8 +35,7 @@ impl crate::PythClient {
             benchmarks_only: Option<bool>,
         }
 
-        let mut url = self.url.clone();
-        url.set_path("/v2/updates/price/stream");
+        let url = self.endpoint("/v2/updates/price/stream");
 
         let mut builder = self.client.get(url);
         for id in ids {

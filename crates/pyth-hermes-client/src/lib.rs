@@ -6,6 +6,7 @@
 //! [`reqwest`]: https://docs.rs/reqwest/latest/reqwest/
 use std::collections::HashMap;
 
+use reqwest::header::{HeaderMap, HeaderName, HeaderValue};
 use serde::{Deserialize, Serialize};
 
 #[cfg(feature = "stream")]
@@ -53,6 +54,58 @@ impl PythClient {
         Self { client, url }
     }
 
+    /// Build a client from [`PythClientConfig`].
+    pub fn from_config(config: PythClientConfig) -> Result<Self, ConfigError> {
+        let url = config.base_url_as_url()?;
+
+        let mut headers = HeaderMap::new();
+        if let Some(api_key) = config.api_key {
+            let header_name = HeaderName::from_bytes(
+                config
+                    .api_key_header
+                    .unwrap_or_else(|| "X-API-KEY".to_string())
+                    .as_bytes(),
+            )
+            .map_err(|e| ConfigError::InvalidHeaderName(e.to_string()))?;
+
+            let value_str = if header_name.as_str().eq_ignore_ascii_case("authorization")
+                && !api_key
+                    .trim_start()
+                    .to_ascii_lowercase()
+                    .starts_with("bearer ")
+            {
+                format!("Bearer {api_key}")
+            } else {
+                api_key
+            };
+            let header_value = HeaderValue::from_str(&value_str)
+                .map_err(|e| ConfigError::InvalidHeaderValue(e.to_string()))?;
+            headers.insert(header_name, header_value);
+        }
+
+        let client = reqwest::Client::builder()
+            .default_headers(headers)
+            .build()
+            .map_err(ConfigError::ClientBuild)?;
+
+        Ok(Self::new_with_client(client, url))
+    }
+
+    /// Build a client from environment variables.
+    ///
+    /// - `PYTH_HERMES_BASE_URL` (optional): Base Hermes URL. Defaults to `https://hermes.pyth.network/`.
+    /// - `PYTH_HERMES_API_KEY` (optional): If set, appended as a path segment to the base URL
+    pub fn from_env() -> Result<Self, ConfigError> {
+        let config = PythClientConfig::from_env()?;
+        Self::from_config(config)
+    }
+
+    fn endpoint(&self, path: &str) -> url::Url {
+        self.url
+            .join(path.trim_start_matches('/'))
+            .expect("static endpoint paths must be valid")
+    }
+
     /// Get the set of price feeds.
     ///
     /// This endpoint fetches all price feeds from the Pyth network. It can be filtered by asset
@@ -75,8 +128,7 @@ impl PythClient {
             asset_type: Option<String>,
         }
 
-        let mut url = self.url.clone();
-        url.set_path("/v2/price_feeds");
+        let url = self.endpoint("/v2/price_feeds");
         let request = self
             .client
             .get(url)
@@ -124,8 +176,7 @@ impl PythClient {
             parsed: Option<bool>,
         }
 
-        let mut url = self.url.clone();
-        url.set_path("/v2/updates/price/latest");
+        let url = self.endpoint("/v2/updates/price/latest");
 
         let mut builder = self.client.get(url);
         for id in ids {
@@ -179,8 +230,7 @@ impl PythClient {
             parsed: Option<bool>,
         }
 
-        let mut url = self.url.clone();
-        url.set_path(&format!("/v2/updates/price/{publish_time}"));
+        let url = self.endpoint(&format!("/v2/updates/price/{publish_time}"));
 
         let mut builder = self.client.get(url);
         for id in ids {
@@ -333,6 +383,61 @@ pub enum BinaryPriceUpdateError {
     HexDecode(#[from] hex::FromHexError),
     #[error("Decoding base64 payload: {0}")]
     Base64Decode(#[from] base64::DecodeError),
+}
+
+// =================================================================================================
+//  Configuration
+// =================================================================================================
+
+/// Configuration for constructing a [`PythClient`].
+#[derive(Clone, Debug, Default)]
+pub struct PythClientConfig {
+    pub base_url: Option<String>,
+    /// Optional API key to be sent as an HTTP header.
+    pub api_key: Option<String>,
+    /// Optional header name to carry the API key. Defaults to `X-API-KEY` if unset.
+    pub api_key_header: Option<String>,
+}
+
+impl PythClientConfig {
+    /// Load configuration from environment.
+    ///
+    /// - `PYTH_HERMES_BASE_URL` (optional)
+    /// - `PYTH_HERMES_API_KEY` (optional)
+    /// - `PYTH_HERMES_API_KEY_HEADER` (optional, defaults to `X-API-KEY`)
+    pub fn from_env() -> Result<Self, ConfigError> {
+        let base_url = std::env::var("PYTH_HERMES_BASE_URL").ok();
+        let api_key = std::env::var("PYTH_HERMES_API_KEY").ok();
+        let api_key_header = std::env::var("PYTH_HERMES_API_KEY_HEADER").ok();
+        Ok(Self {
+            base_url,
+            api_key,
+            api_key_header,
+        })
+    }
+
+    /// Parse the base URL.
+    fn base_url_as_url(&self) -> Result<url::Url, ConfigError> {
+        let url = url::Url::parse(
+            self.base_url
+                .as_deref()
+                .unwrap_or("https://hermes.pyth.network/"),
+        )
+        .map_err(ConfigError::InvalidUrl)?;
+        Ok(url)
+    }
+}
+
+#[derive(thiserror::Error, Debug)]
+pub enum ConfigError {
+    #[error("Invalid base URL: {0}")]
+    InvalidUrl(#[from] url::ParseError),
+    #[error("Failed to build HTTP client: {0}")]
+    ClientBuild(#[from] reqwest::Error),
+    #[error("Invalid header name: {0}")]
+    InvalidHeaderName(String),
+    #[error("Invalid header value: {0}")]
+    InvalidHeaderValue(String),
 }
 
 #[cfg(test)]
