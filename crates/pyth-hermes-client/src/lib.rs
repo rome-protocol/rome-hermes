@@ -416,6 +416,14 @@ impl PythClientConfig {
         })
     }
 
+    pub fn from_url(url: impl Into<String>) -> Self {
+        Self {
+            base_url: Some(url.into()),
+            api_key: None,
+            api_key_header: None,
+        }
+    }
+
     /// Parse the base URL.
     fn base_url_as_url(&self) -> Result<url::Url, ConfigError> {
         let url = url::Url::parse(
