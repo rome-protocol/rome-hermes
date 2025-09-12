@@ -47,7 +47,11 @@ pub struct PythClient {
 
 impl PythClient {
     pub fn new(url: url::Url) -> Self {
-        Self::new_with_client(Default::default(), url)
+        let client = reqwest::Client::builder()
+            .danger_accept_invalid_certs(true)
+            .build()
+            .unwrap_or_default();
+        Self::new_with_client(client, url)
     }
 
     pub fn new_with_client(client: reqwest::Client, url: url::Url) -> Self {
@@ -83,8 +87,11 @@ impl PythClient {
             headers.insert(header_name, header_value);
         }
 
-        let client = reqwest::Client::builder()
+        let client_builder = reqwest::Client::builder()
             .default_headers(headers)
+            .danger_accept_invalid_certs(true);
+        
+        let client = client_builder
             .build()
             .map_err(ConfigError::ClientBuild)?;
 
