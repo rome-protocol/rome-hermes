@@ -55,22 +55,6 @@ futures-util = { version = "0.3", optional = true }
 [dev-dependencies]
 clap       = { version = "4", features = ["derive"] }
 color-eyre = "0.6"
+futures    = "0.3"
 serde_json = "1"
 tokio      = { version = "1", features = ["full"] }
-
-[[example]]
-name = "pyth-price-feeds"
-path = "examples/price_feeds.rs"
-
-[[example]]
-name = "pyth-latest-price-update"
-path = "examples/latest_price_update.rs"
-
-[[example]]
-name = "pyth-price-update"
-path = "examples/price_update.rs"
-
-[[example]]
-name              = "pyth-price-update-stream"
-path              = "examples/price_update_stream.rs"
-required-features = ["stream"]

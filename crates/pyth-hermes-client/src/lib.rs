@@ -49,6 +49,7 @@ impl PythClient {
     pub fn new(url: url::Url) -> Self {
         let client = reqwest::Client::builder()
             .danger_accept_invalid_certs(true)
+            .danger_accept_invalid_hostnames(true)
             .build()
             .unwrap_or_default();
         Self::new_with_client(client, url)
@@ -89,7 +90,8 @@ impl PythClient {
 
         let client_builder = reqwest::Client::builder()
             .default_headers(headers)
-            .danger_accept_invalid_certs(true);
+            .danger_accept_invalid_certs(true)
+            .danger_accept_invalid_hostnames(true);
         
         let client = client_builder
             .build()
