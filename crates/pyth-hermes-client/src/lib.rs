@@ -49,11 +49,10 @@ impl PythClient {
     pub fn new(url: url::Url) -> Self {
         let client = reqwest::Client::builder()
             .danger_accept_invalid_certs(true)
-            .pool_max_idle_per_host(1)  
-            .pool_idle_timeout(std::time::Duration::from_secs(10))
+            .pool_max_idle_per_host(10)  // Increased from 2 to 10
+            .pool_idle_timeout(std::time::Duration::from_secs(30))
             .timeout(std::time::Duration::from_secs(30))
             .connect_timeout(std::time::Duration::from_secs(10))
-            .user_agent("pyth-hermes-client/0.5.2")
             .build()
             .unwrap_or_default();
         Self::new_with_client(client, url)
@@ -95,8 +94,8 @@ impl PythClient {
         let client_builder = reqwest::Client::builder()
             .default_headers(headers)
             .danger_accept_invalid_certs(true)
-            .pool_max_idle_per_host(1)  
-            .pool_idle_timeout(std::time::Duration::from_secs(10))
+            .pool_max_idle_per_host(10)  
+            .pool_idle_timeout(std::time::Duration::from_secs(30))
             .timeout(std::time::Duration::from_secs(30))
             .connect_timeout(std::time::Duration::from_secs(10));
         
