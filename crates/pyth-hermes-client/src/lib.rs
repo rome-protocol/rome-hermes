@@ -50,6 +50,8 @@ impl PythClient {
         let client = reqwest::Client::builder()
             .danger_accept_invalid_certs(true)
             .danger_accept_invalid_hostnames(true)
+            .pool_max_idle_per_host(10)
+            .pool_idle_timeout(std::time::Duration::from_secs(30))
             .build()
             .unwrap_or_default();
         Self::new_with_client(client, url)
@@ -90,7 +92,9 @@ impl PythClient {
 
         let client_builder = reqwest::Client::builder()
             .default_headers(headers)
-            .danger_accept_invalid_certs(true);
+            .danger_accept_invalid_certs(true)
+            .pool_max_idle_per_host(10)
+            .pool_idle_timeout(std::time::Duration::from_secs(30));
         
         let client = client_builder
             .build()
