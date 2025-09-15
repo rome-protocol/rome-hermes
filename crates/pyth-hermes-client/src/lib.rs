@@ -90,8 +90,7 @@ impl PythClient {
 
         let client_builder = reqwest::Client::builder()
             .default_headers(headers)
-            .danger_accept_invalid_certs(true)
-            .danger_accept_invalid_hostnames(true);
+            .danger_accept_invalid_certs(true);
         
         let client = client_builder
             .build()
